@@ -1,0 +1,19 @@
+# Field Notes from the Alder Street Flood Drill
+
+At 08:10, six volunteers met outside the fictional Alder Street community hall for a flood drill. Rain was light, and no real property was at risk. Our goal was to test how quickly a mixed team could protect the archive room after a simulated pipe break. I served as recorder. I kept the timeline, photographed each section, and told the team when an action needed a written explanation.
+
+The exercise began with a card placed beside the north stairwell: “Water is entering under this door.” We did not release water. Blue tape showed its imagined edge, and the controller moved the tape every five minutes. The first reaction was fast. Two volunteers carried document boxes to a large table, while another tried to shut the fictional valve. Their arrangement looked efficient, but it created a narrow passage beside the stairs.
+
+At 08:18, the safety observer stopped movement through that passage. The main issue was obvious: people carrying boxes could not see anyone coming around the corner. We changed the route and used the south corridor. That choice increased each trip by about twenty seconds, yet it lowered collision risk. The outcome was a slower transfer with a stronger safety margin, which matched the exercise aim.
+
+The archive labels caused the next problem. Several boxes had a room number but no priority label. Volunteers could determine where a box belonged, but they could not select which box to move first. An attentive coordinator created three temporary categories on blank sheets: vital records, replaceable copies, and supplies. The team then had enough information to choose an order without opening any container.
+
+Communication worked well in the room and poorly at the entrance. The radio operator frequently heard only a fragment of a message because the hall door closed between speakers. At 08:31, we began repeating every instruction and requiring a verbatim answer. The pattern was basic: sender gives one instruction, receiver provides the same wording, sender confirms. This method reduced missed tasks, although it added several seconds.
+
+One useful surprise came from @AlderDrill, a synthetic account printed on the exercise board. Participants were asked to post no real updates, so the tag was a reminder rather than a live channel. The team used #AlderPractice on paper forms only. This protected the scenario from accidental public reports and helped us retain a firm boundary between the drill and an actual emergency.
+
+At 08:45, the controller introduced a second fictional leak beside the designated exit. The team had to alter its plan while carrying the last boxes. Nobody attempted to rush. One volunteer checked the alternate door, another moved the sign, and the coordinator informed everyone of the new route. The transition finished in four minutes. The main bottleneck was uncertainty about who could authorize the route, not the physical move itself.
+
+We ended at 09:00 and reviewed the record in the dry meeting room. The drill produced three significant findings. The corridor layout required a dedicated lookout. Archive boxes required visible priority labels. Radio messages required confirmation whenever a door separated the speakers. These were obvious improvements, and each had an owner in the fictional hall team. The debrief used a simple method to establish one unambiguous resolution for each problem.
+
+The exercise did not reveal how the group would behave in cold water, darkness, or a large public event. It also did not verify the building's real valve map. Those questions need a separate test with qualified staff. This report has a smaller purpose: display what happened during one controlled hour, explain each revision, and design the next conservative test. A final review could verify that this simple method could assist new volunteers and provide sufficient context. On that limited measure, the drill was a useful result.

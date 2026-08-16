@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "fixtureVersion": "synthetic-preflight-v1",
+  "verifiedAt": "2026-08-16",
+  "methodology": "Deterministic synthetic text used only to verify activation density, exact detection, unmarked behavior, and wrong-key false positives before authoring the article corpus. It is not evidence about transformation quality or a production watermark.",
+  "sources": [
+    {
+      "title": "Experiment methodology",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    }
+  ],
+  "generator": {
+    "documentCount": 20,
+    "repetitionsPerDocument": 10,
+    "eligibleWords": ["big", "small", "start", "help", "method", "result"]
+  }
+}

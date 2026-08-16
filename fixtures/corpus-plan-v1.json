@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "corpusVersion": "article-corpus-v1",
+  "verifiedAt": "2026-08-16",
+  "methodology": "Twenty original English documents written for this experiment before inspecting any keyed activation or favored-token decisions. The corpus is fixed before transformation calls and is designed to support paired document-level comparisons.",
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    }
+  ],
+  "documentContract": {
+    "count": 20,
+    "minWords": 600,
+    "maxWords": 1000,
+    "minEligiblePositionsPerDocument": 15
+  },
+  "documents": [
+    {"documentId": "doc-01", "path": "corpus/original/doc-01.md", "genre": "personal essay"},
+    {"documentId": "doc-02", "path": "corpus/original/doc-02.md", "genre": "technical explainer"},
+    {"documentId": "doc-03", "path": "corpus/original/doc-03.md", "genre": "field report"},
+    {"documentId": "doc-04", "path": "corpus/original/doc-04.md", "genre": "product memo"},
+    {"documentId": "doc-05", "path": "corpus/original/doc-05.md", "genre": "how-to guide"},
+    {"documentId": "doc-06", "path": "corpus/original/doc-06.md", "genre": "travel note"},
+    {"documentId": "doc-07", "path": "corpus/original/doc-07.md", "genre": "fictional incident postmortem"},
+    {"documentId": "doc-08", "path": "corpus/original/doc-08.md", "genre": "review"},
+    {"documentId": "doc-09", "path": "corpus/original/doc-09.md", "genre": "policy note"},
+    {"documentId": "doc-10", "path": "corpus/original/doc-10.md", "genre": "letter"},
+    {"documentId": "doc-11", "path": "corpus/original/doc-11.md", "genre": "fictional case study"},
+    {"documentId": "doc-12", "path": "corpus/original/doc-12.md", "genre": "lab notebook"},
+    {"documentId": "doc-13", "path": "corpus/original/doc-13.md", "genre": "editorial"},
+    {"documentId": "doc-14", "path": "corpus/original/doc-14.md", "genre": "FAQ-style explainer"},
+    {"documentId": "doc-15", "path": "corpus/original/doc-15.md", "genre": "fictional interview notes"},
+    {"documentId": "doc-16", "path": "corpus/original/doc-16.md", "genre": "workshop plan"},
+    {"documentId": "doc-17", "path": "corpus/original/doc-17.md", "genre": "comparison essay"},
+    {"documentId": "doc-18", "path": "corpus/original/doc-18.md", "genre": "operations guide"},
+    {"documentId": "doc-19", "path": "corpus/original/doc-19.md", "genre": "fictional launch retrospective"},
+    {"documentId": "doc-20", "path": "corpus/original/doc-20.md", "genre": "decision memo"}
+  ]
+}
