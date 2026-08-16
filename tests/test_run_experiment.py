@@ -97,6 +97,33 @@ class FakeClient:
         )
 
 
+class CurrentMetadataClient(FakeClient):
+    """Mirror the compact routing metadata returned by OpenRouter in production."""
+
+    def complete(self, prompt: str, *, model: str) -> ChatCompletion:
+        good = super().complete(prompt, model=model)
+        metadata = dict(good.openrouter_metadata)
+        metadata.pop("attempts")
+        metadata.update(
+            {
+                "is_byok": False,
+                "region": "LHR",
+                "requested": model,
+                "summary": "available=1, selected=DeepInfra",
+            }
+        )
+        return ChatCompletion(
+            content=good.content,
+            finish_reason=good.finish_reason,
+            model=good.model,
+            openrouter_metadata=metadata,
+            provider=good.provider,
+            response_id=good.response_id,
+            system_fingerprint=good.system_fingerprint,
+            usage=good.usage,
+        )
+
+
 class ForbiddenClient:
     def complete(self, prompt: str, *, model: str) -> ChatCompletion:
         raise AssertionError("provider must not be called")
@@ -1162,6 +1189,25 @@ class LiveExperimentTests(unittest.TestCase):
                         )
                     state = json.loads(checkpoint.read_text(encoding="utf-8"))
                     self.assertEqual(len(state["calls"]), 1)
+
+    def test_current_compact_openrouter_metadata_is_accepted(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            fixture = ExperimentFixture(root, bootstrap_replicates=10)
+            config, corpus = fixture.load()
+            checkpoint = root / "current-metadata.json"
+            client = CurrentMetadataClient()
+            with self.assertRaises(CallLimitReached) as paused:
+                run_live(
+                    config,
+                    corpus,
+                    client=client,
+                    max_provider_cost_credits=Decimal("1"),
+                    checkpoint_path=checkpoint,
+                    max_new_calls=1,
+                )
+            self.assertEqual(paused.exception.completed_calls, 1)
+            self.assertEqual(len(client.calls), 1)
 
     def test_budget_is_required_before_calls_and_checkpoint_is_bound(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

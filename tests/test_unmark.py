@@ -295,6 +295,51 @@ class OpenRouterClientTests(unittest.TestCase):
             {"completion": 0.15, "prompt": 0.10},
         )
 
+    def test_optional_response_format_is_sent_without_mutation(self) -> None:
+        transport = QueueTransport([response('{"reviews": []}')])
+        response_format = {"type": "json_object"}
+        client = OpenRouterClient(
+            "secret",
+            transport=transport,
+            response_format=response_format,
+        )
+        client.complete("Return JSON", model="test/model")
+        self.assertEqual(
+            transport.calls[0]["body"]["response_format"],
+            {"type": "json_object"},
+        )
+        self.assertEqual(response_format, {"type": "json_object"})
+
+    def test_optional_temperature_can_be_omitted_for_a_pinned_endpoint(self) -> None:
+        transport = QueueTransport([response("Done.")])
+        client = OpenRouterClient(
+            "secret",
+            transport=transport,
+            temperature=None,
+        )
+        client.complete("Prompt", model="test/model")
+        self.assertNotIn("temperature", transport.calls[0]["body"])
+
+    def test_reasoning_effort_can_be_frozen_for_a_reasoning_model(self) -> None:
+        transport = QueueTransport([response("Done.")])
+        client = OpenRouterClient(
+            "secret",
+            transport=transport,
+            reasoning_effort="low",
+        )
+        client.complete("Prompt", model="test/model")
+        self.assertEqual(
+            transport.calls[0]["body"]["reasoning"],
+            {"effort": "low"},
+        )
+
+        with self.assertRaisesRegex(ConfigurationError, "reasoning_effort"):
+            OpenRouterClient(
+                "secret",
+                transport=transport,
+                reasoning_effort="automatic",
+            )
+
     def test_finish_reason_is_preserved_but_product_transform_rejects_partials(self) -> None:
         truncated = response("Partial output.")
         truncated["choices"][0]["finish_reason"] = "length"

@@ -1506,24 +1506,25 @@ class _CheckpointManager:
         if top_level_selected is not None and top_level_selected != completion.provider:
             raise ResponseContractError("router top-level selected provider mismatch")
         attempts = metadata.get("attempts")
-        if not isinstance(attempts, list) or len(attempts) != 1:
-            raise ResponseContractError("router attempts must contain exactly one item")
-        if not isinstance(attempts[0], Mapping):
-            raise ResponseContractError("router attempt must be an object")
-        attempt = attempts[0]
-        attempt_provider = _first_present(
-            attempt,
-            "provider",
-            "provider_name",
-            "providerName",
-        )
-        attempt_model = _first_present(attempt, "model", "model_id", "modelId")
-        if attempt_provider != selected_provider:
-            raise ResponseContractError("router attempt provider metadata mismatch")
-        if attempt_model != selected_model:
-            raise ResponseContractError("router attempt model metadata mismatch")
-        if attempt.get("status") != 200 or isinstance(attempt.get("status"), bool):
-            raise ResponseContractError("router attempt status must be HTTP 200")
+        if attempts is not None:
+            if not isinstance(attempts, list) or len(attempts) != 1:
+                raise ResponseContractError("router attempts must contain exactly one item")
+            if not isinstance(attempts[0], Mapping):
+                raise ResponseContractError("router attempt must be an object")
+            attempt = attempts[0]
+            attempt_provider = _first_present(
+                attempt,
+                "provider",
+                "provider_name",
+                "providerName",
+            )
+            attempt_model = _first_present(attempt, "model", "model_id", "modelId")
+            if attempt_provider != selected_provider:
+                raise ResponseContractError("router attempt provider metadata mismatch")
+            if attempt_model != selected_model:
+                raise ResponseContractError("router attempt model metadata mismatch")
+            if attempt.get("status") != 200 or isinstance(attempt.get("status"), bool):
+                raise ResponseContractError("router attempt status must be HTTP 200")
         usage = completion.usage
         if usage.total_tokens != usage.prompt_tokens + usage.completion_tokens:
             raise ResponseContractError("response token totals are inconsistent")

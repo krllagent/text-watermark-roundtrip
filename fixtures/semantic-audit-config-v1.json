@@ -1,0 +1,63 @@
+{
+  "audit": {
+    "batchSize": 4,
+    "closeReadingPlanPath": "fixtures/semantic-audit-plan-v1.json",
+    "closeReadingPlanSha256": "37a01cd99072159e848076ec54f5b653d687fa1b5aa59a56e08c9af2b1ed3858",
+    "pairOrderSeed": "exp002-semantic-audit-v1",
+    "structuredPairCount": 80
+  },
+  "billing": {
+    "creditBaseCurrency": "USD",
+    "creditUsdBaseUnit": "1",
+    "promptTokenOverheadReserve": 2048
+  },
+  "judge": {
+    "allowFallbacks": false,
+    "dataCollection": "deny",
+    "endpointSnapshotPath": "fixtures/semantic-audit-endpoint-snapshot-v1.json",
+    "endpointSnapshotSha256": "2adb61707a3912b692605ef8151f0fdc32c410371c3739747b902e8e11975b0f",
+    "expectedResponseModels": [
+      "google/gemini-3.7-flash",
+      "google/gemini-3.7-flash-20260813"
+    ],
+    "expectedResponseProviders": [
+      "Google"
+    ],
+    "maxPriceUsdPerMillionTokens": {
+      "completion": 1.875,
+      "prompt": 0.375
+    },
+    "maxTokens": 4096,
+    "model": "google/gemini-3.7-flash",
+    "providerOrder": [
+      "google-vertex/global"
+    ],
+    "reasoningEffort": "low",
+    "requireParameters": true,
+    "seed": 20260816,
+    "temperature": null,
+    "timeoutSeconds": 180,
+    "zdr": true
+  },
+  "methodology": "Freeze the independent judge model, exact provider endpoint, prices, batching, pair ordering, source artifact, and output contract after transformations are complete but before any semantic-audit call. Present only opaque pair IDs plus source and candidate text to the judge. Hide method, detector, cost, latency, and automatic validation results. Derive protected-token failure separately from the frozen text contract, then publish the opaque mapping after review.",
+  "schemaVersion": 1,
+  "sourceArtifact": {
+    "path": "results/experiment-raw-v1.json",
+    "sha256": "7cbebefa7e871032e9ac80125cd95d0a9cb2a733c99324f150640ab26744e723"
+  },
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    },
+    {
+      "title": "OpenRouter Gemini 3.7 Flash model page",
+      "url": "https://openrouter.ai/google/gemini-3.7-flash"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    }
+  ],
+  "verifiedAt": "2026-08-16"
+}

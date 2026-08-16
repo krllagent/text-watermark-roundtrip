@@ -25,6 +25,9 @@ DEFAULT_OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 DEFAULT_MODEL = "qwen/qwen3.5-9b"
 SUPPORTED_METHODS = frozenset({"none", "synonyms", "roundtrip", "paraphrase"})
 SUPPORTED_PIVOTS = frozenset({"de", "zh"})
+SUPPORTED_REASONING_EFFORTS = frozenset(
+    {"none", "minimal", "low", "medium", "high", "xhigh", "max"}
+)
 
 _PLACEHOLDER_RE = re.compile(r"⟦T([1-9][0-9]*)⟧")
 _BRACKET_TOKEN_RE = re.compile(r"⟦[^\n⟦⟧]*⟧")
@@ -373,11 +376,13 @@ class OpenRouterClient:
         provider_order: Sequence[str] = (),
         allow_fallbacks: bool = False,
         require_parameters: bool = True,
-        temperature: float = 0.0,
+        reasoning_effort: str = "none",
+        temperature: float | None = 0.0,
         max_tokens: int = 4_096,
         seed: int | None = None,
         max_prompt_price: float | None = None,
         max_completion_price: float | None = None,
+        response_format: Mapping[str, Any] | None = None,
     ) -> None:
         if not isinstance(api_key, str) or not api_key.strip():
             raise ConfigurationError("OPENROUTER_API_KEY must be nonempty")
@@ -405,9 +410,17 @@ class OpenRouterClient:
             raise ConfigurationError("allow_fallbacks must be boolean")
         if not isinstance(require_parameters, bool):
             raise ConfigurationError("require_parameters must be boolean")
-        if not isinstance(temperature, (int, float)) or isinstance(temperature, bool):
-            raise ConfigurationError("temperature must be numeric")
-        if not 0 <= temperature <= 2:
+        if reasoning_effort not in SUPPORTED_REASONING_EFFORTS:
+            raise ConfigurationError(
+                "reasoning_effort must be one of none, minimal, low, medium, high, "
+                "xhigh, or max"
+            )
+        if temperature is not None and (
+            not isinstance(temperature, (int, float))
+            or isinstance(temperature, bool)
+        ):
+            raise ConfigurationError("temperature must be numeric or null")
+        if temperature is not None and not 0 <= temperature <= 2:
             raise ConfigurationError("temperature must be between 0 and 2")
         if not isinstance(max_tokens, int) or isinstance(max_tokens, bool) or max_tokens <= 0:
             raise ConfigurationError("max_tokens must be a positive integer")
@@ -427,6 +440,14 @@ class OpenRouterClient:
                 or price < 0
             ):
                 raise ConfigurationError(f"{label} must be a nonnegative number or null")
+        normalized_response_format: dict[str, Any] | None = None
+        if response_format is not None:
+            if not isinstance(response_format, Mapping) or not response_format:
+                raise ConfigurationError("response_format must be a nonempty object or null")
+            normalized = json_safe_value(response_format)
+            if not isinstance(normalized, dict):
+                raise ConfigurationError("response_format must normalize to an object")
+            normalized_response_format = normalized
 
         self._api_key = api_key
         self.endpoint = resolve_chat_completions_url(base_url)
@@ -435,7 +456,8 @@ class OpenRouterClient:
         self.provider_order = tuple(normalized_providers)
         self.allow_fallbacks = allow_fallbacks
         self.require_parameters = require_parameters
-        self.temperature = float(temperature)
+        self.reasoning_effort = reasoning_effort
+        self.temperature = None if temperature is None else float(temperature)
         self.max_tokens = max_tokens
         self.seed = seed
         self.max_prompt_price = (
@@ -444,6 +466,7 @@ class OpenRouterClient:
         self.max_completion_price = (
             None if max_completion_price is None else float(max_completion_price)
         )
+        self.response_format = normalized_response_format
 
     @classmethod
     def from_env(
@@ -455,11 +478,13 @@ class OpenRouterClient:
         provider_order: Sequence[str] = (),
         allow_fallbacks: bool = False,
         require_parameters: bool = True,
-        temperature: float = 0.0,
+        reasoning_effort: str = "none",
+        temperature: float | None = 0.0,
         max_tokens: int = 4_096,
         seed: int | None = None,
         max_prompt_price: float | None = None,
         max_completion_price: float | None = None,
+        response_format: Mapping[str, Any] | None = None,
     ) -> "OpenRouterClient":
         source = os.environ if environ is None else environ
         api_key = source.get("OPENROUTER_API_KEY")
@@ -474,11 +499,13 @@ class OpenRouterClient:
             provider_order=provider_order,
             allow_fallbacks=allow_fallbacks,
             require_parameters=require_parameters,
+            reasoning_effort=reasoning_effort,
             temperature=temperature,
             max_tokens=max_tokens,
             seed=seed,
             max_prompt_price=max_prompt_price,
             max_completion_price=max_completion_price,
+            response_format=response_format,
         )
 
     def complete(self, prompt: str, *, model: str) -> ChatCompletion:
@@ -494,10 +521,11 @@ class OpenRouterClient:
                 "require_parameters": self.require_parameters,
                 "zdr": True,
             },
-            "reasoning": {"effort": "none"},
+            "reasoning": {"effort": self.reasoning_effort},
             "stream": False,
-            "temperature": self.temperature,
         }
+        if self.temperature is not None:
+            payload["temperature"] = self.temperature
         if self.provider_order:
             payload["provider"]["order"] = list(self.provider_order)
         if self.max_prompt_price is not None:
@@ -508,6 +536,8 @@ class OpenRouterClient:
             }
         if self.seed is not None:
             payload["seed"] = self.seed
+        if self.response_format is not None:
+            payload["response_format"] = dict(self.response_format)
         body = json.dumps(
             payload,
             ensure_ascii=False,
