@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "snapshotVersion": "openrouter-qwen35-9b-deepinfra-2026-08-16",
+  "verifiedAt": "2026-08-16",
+  "methodology": "Fetched the public OpenRouter model endpoint catalog before any paid experiment call, selected the exact DeepInfra BF16 endpoint tag, and omitted volatile uptime and latency fields from the frozen contract.",
+  "sources": [
+    {
+      "title": "OpenRouter endpoint catalog for Qwen3.5-9B",
+      "url": "https://openrouter.ai/api/v1/models/qwen/qwen3.5-9b/endpoints"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    }
+  ],
+  "requestedModelId": "qwen/qwen3.5-9b",
+  "catalogModelId": "qwen/qwen3.5-9b",
+  "endpoint": {
+    "contextLength": 262144,
+    "maxCompletionTokens": 81920,
+    "name": "DeepInfra | qwen/qwen3.5-9b-20260310",
+    "pricingUsdPerToken": {
+      "completion": "0.00000015",
+      "prompt": "0.0000001"
+    },
+    "providerName": "DeepInfra",
+    "quantization": "bf16",
+    "supportedParameters": [
+      "frequency_penalty",
+      "include_reasoning",
+      "logit_bias",
+      "max_tokens",
+      "min_p",
+      "presence_penalty",
+      "reasoning",
+      "repetition_penalty",
+      "response_format",
+      "seed",
+      "stop",
+      "structured_outputs",
+      "temperature",
+      "tool_choice",
+      "tools",
+      "top_k",
+      "top_p"
+    ],
+    "tag": "deepinfra/bf16"
+  }
+}

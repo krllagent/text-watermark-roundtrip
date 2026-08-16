@@ -1,0 +1,56 @@
+{
+  "catalogModelId": "google/gemini-3.7-flash",
+  "endpoint": {
+    "contextLength": 1048576,
+    "name": "Google | google/gemini-3.7-flash-20260813",
+    "pricingUsdPerToken": {
+      "completion": "0.000001875",
+      "prompt": "0.000000375"
+    },
+    "providerName": "Google",
+    "quantization": "unknown",
+    "supportedParameters": [
+      "reasoning",
+      "include_reasoning",
+      "max_tokens",
+      "seed",
+      "stop",
+      "response_format",
+      "structured_outputs",
+      "tool_choice",
+      "tools",
+      "reasoning_effort"
+    ],
+    "tag": "google-vertex/global"
+  },
+  "methodology": "Fetched the public OpenRouter model and endpoint catalogs after the transformation artifact was complete but before any successful semantic-audit call. The first canary proved that the Google AI Studio route was incompatible with the frozen ZDR request and returned an uncharged HTTP 404. A second uncharged canary reached Google Vertex but returned HTTP 400 because the request disabled reasoning while this model requires it. Selected the documented low reasoning effort, kept the Google Vertex global endpoint for the independent blinded judge, and omitted volatile uptime and latency fields.",
+  "modelReasoning": {
+    "defaultEffort": "medium",
+    "defaultEnabled": true,
+    "mandatory": true,
+    "selectedEffort": "low",
+    "supportedEfforts": [
+      "high",
+      "medium",
+      "low"
+    ]
+  },
+  "requestedModelId": "google/gemini-3.7-flash",
+  "schemaVersion": 1,
+  "snapshotVersion": "openrouter-gemini37-flash-google-vertex-2026-08-16",
+  "sources": [
+    {
+      "title": "OpenRouter endpoint catalog for Gemini 3.7 Flash",
+      "url": "https://openrouter.ai/api/v1/models/google/gemini-3.7-flash/endpoints"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "title": "OpenRouter reasoning token documentation",
+      "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens"
+    }
+  ],
+  "verifiedAt": "2026-08-16"
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "experimentVersion": "text-watermark-roundtrip-v1",
+  "verifiedAt": "2026-08-16",
+  "methodology": "Freeze the reviewed 20-document corpus, public toy key, detector parameters, transformation call graph, model endpoint, and analysis settings before any paid model call. Mark only the main 10 percent eligible-position condition for transformation. Use the 5 and 20 percent settings as local detector controls without extra model calls.",
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "title": "OpenRouter Qwen3.5-9B model page",
+      "url": "https://openrouter.ai/qwen/qwen3.5-9b"
+    },
+    {
+      "title": "OpenRouter billing and credits FAQ",
+      "url": "https://openrouter.ai/docs/faq"
+    }
+  ],
+  "corpus": {
+    "documentCount": 20,
+    "planPath": "fixtures/corpus-plan-v1.json",
+    "manifestPath": "corpus/manifest-v1.json",
+    "manifestSha256": "ab632b42c49b97850e7c50bc21a54015cceedee43a029584e8b43a75f361702c",
+    "inventoryPath": "corpus/context-inventory-v1.json",
+    "inventorySha256": "57792563e6be40e1e35bd3094145297f1cb1b7d51ab0fa2f8c4c023a2377c836",
+    "reviewsDirectory": "corpus/reviews",
+    "reviews": [
+      {
+        "path": "corpus/reviews/review-docs-01-10-v1.json",
+        "sha256": "4b3ef529c0c4d78e0f9f629a5560a0f3aceb1a412e0564bd1888edf59108f097"
+      },
+      {
+        "path": "corpus/reviews/review-docs-11-20-v1.json",
+        "sha256": "107ba26bcc8af63f610a6431fb1b012e0c6d8b2c394363e2edec90365493570b"
+      }
+    ]
+  },
+  "lexicon": {
+    "path": "fixtures/synonym_pairs-v1.json",
+    "sha256": "c548a86a3a3d101a3db58ad82e58a648b6a4eb9b428ac1c0b5f8c7538b3229b3"
+  },
+  "marker": {
+    "contextWidth": 4,
+    "densitiesBps": [500, 1000, 2000],
+    "keyHex": "00112233445566778899aabbccddeeff102132435465768798a9babbdcddedef",
+    "mainDensityBps": 1000,
+    "minActivePositions": 20,
+    "wrongKeyCount": 1000,
+    "wrongKeySeedHex": "6578703030322d61727469636c652d77726f6e672d6b6579732d7631"
+  },
+  "billing": {
+    "creditBaseCurrency": "USD",
+    "creditUsdBaseUnit": "1",
+    "inferencePricingMarkupPercent": 0,
+    "promptTokenOverheadReserve": 2048,
+    "purchaseFeeExcluded": true
+  },
+  "transforms": {
+    "allowFallbacks": false,
+    "dataCollection": "deny",
+    "endpointSnapshotPath": "fixtures/openrouter-endpoint-snapshot-v1.json",
+    "endpointSnapshotSha256": "34ada2f3d3d9bda5e41b067fd92a44b38d59ad435ca85cc29edb68c67acf7555",
+    "expectedResponseModels": [
+      "qwen/qwen3.5-9b",
+      "qwen/qwen3.5-9b-20260310"
+    ],
+    "expectedResponseProviders": ["DeepInfra"],
+    "maxTokens": 4096,
+    "maxPriceUsdPerMillionTokens": {
+      "completion": 0.15,
+      "prompt": 0.10
+    },
+    "methods": [
+      {"id": "none", "pivot": null},
+      {"id": "synonyms", "pivot": null},
+      {"id": "roundtrip-de", "method": "roundtrip", "pivot": "de"},
+      {"id": "roundtrip-zh", "method": "roundtrip", "pivot": "zh"},
+      {"id": "paraphrase", "pivot": null}
+    ],
+    "modelBackward": "qwen/qwen3.5-9b",
+    "modelForward": "qwen/qwen3.5-9b",
+    "pricingUsdPerMillionTokens": {
+      "completion": "0.15",
+      "prompt": "0.10"
+    },
+    "providerOrder": ["deepinfra/bf16"],
+    "reasoningEffort": "none",
+    "requireParameters": true,
+    "seed": 20260816,
+    "temperature": 0,
+    "timeoutSeconds": 180,
+    "zdr": true
+  },
+  "analysis": {
+    "bootstrapReplicates": 10000,
+    "bootstrapSeed": 20260816,
+    "primaryScoringUnit": "pooled_corpus",
+    "qualityMetric": "normalized_word_levenshtein",
+    "resamplingUnit": "document_id",
+    "semanticAuditPlanPath": "fixtures/semantic-audit-plan-v1.json",
+    "semanticAuditPlanSha256": "37a01cd99072159e848076ec54f5b653d687fa1b5aa59a56e08c9af2b1ed3858"
+  }
+}

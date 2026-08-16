@@ -1,0 +1,214 @@
+{
+  "aggregates": [
+    {
+      "documentCount": 3,
+      "fidelityFailureCount": 0,
+      "fidelityFailureRate": 0,
+      "methodId": "synonyms"
+    },
+    {
+      "documentCount": 3,
+      "fidelityFailureCount": 3,
+      "fidelityFailureRate": 1,
+      "methodId": "roundtrip-de"
+    },
+    {
+      "documentCount": 3,
+      "fidelityFailureCount": 3,
+      "fidelityFailureRate": 1,
+      "methodId": "roundtrip-zh"
+    },
+    {
+      "documentCount": 3,
+      "fidelityFailureCount": 0,
+      "fidelityFailureRate": 0,
+      "methodId": "paraphrase"
+    }
+  ],
+  "agreementWithStructuredJudge": {
+    "agreementCount": 9,
+    "agreementRate": 0.75,
+    "disagreementCount": 3,
+    "disagreementPairIds": [
+      "pair-1a69a5ced55d4d4e",
+      "pair-5a864c563942773d",
+      "pair-13f42ccbf0d1a1d2"
+    ],
+    "pairCount": 12
+  },
+  "auditArtifact": {
+    "path": "results/semantic-audit-v1.json",
+    "sha256": "5143583fc30e790b6211432d925e3fd806c08931db87f22bccbaeebab5f42ea6"
+  },
+  "findings": [
+    {
+      "documentId": "doc-05",
+      "fidelityFailure": true,
+      "methodId": "roundtrip-de",
+      "notes": [
+        "Matching bulb colors became matching filament colors, which is a different lighting property.",
+        "The visible-defect example changed from chips to cracks."
+      ],
+      "pairId": "pair-1a69a5ced55d4d4e",
+      "structuredJudgeFidelityFailure": false,
+      "voiceDrift": "minor"
+    },
+    {
+      "documentId": "doc-04",
+      "fidelityFailure": false,
+      "methodId": "synonyms",
+      "notes": [
+        "Only narrow wording substitutions were present; claims, thresholds, caveats, and examples remained intact."
+      ],
+      "pairId": "pair-d32ac2c75df4c2bd",
+      "structuredJudgeFidelityFailure": false,
+      "voiceDrift": "none"
+    },
+    {
+      "documentId": "doc-08",
+      "fidelityFailure": false,
+      "methodId": "synonyms",
+      "notes": [
+        "The few lexical substitutions preserved the review observations and all measured details."
+      ],
+      "pairId": "pair-3354f7d7be3223de",
+      "structuredJudgeFidelityFailure": false,
+      "voiceDrift": "none"
+    },
+    {
+      "documentId": "doc-04",
+      "fidelityFailure": true,
+      "methodId": "roundtrip-zh",
+      "notes": [
+        "Two independent statements about omitting free text and using a synthetic contact became a causal claim that research uses synthetic contacts as the reason no free text is required.",
+        "A recurring window was rendered as a looping window, weakening the precise feature definition."
+      ],
+      "pairId": "pair-5a864c563942773d",
+      "structuredJudgeFidelityFailure": false,
+      "voiceDrift": "minor"
+    },
+    {
+      "documentId": "doc-09",
+      "fidelityFailure": false,
+      "methodId": "paraphrase",
+      "notes": [
+        "The rewrite was broader than synonym substitution but retained every rule, threshold, exception, and example."
+      ],
+      "pairId": "pair-4bc7fd305943922a",
+      "structuredJudgeFidelityFailure": false,
+      "voiceDrift": "minor"
+    },
+    {
+      "documentId": "doc-19",
+      "fidelityFailure": false,
+      "methodId": "paraphrase",
+      "notes": [
+        "The rewrite preserved the experiment sequence, all numeric results, cost boundary, caveats, and next question."
+      ],
+      "pairId": "pair-878f1e7af7f66522",
+      "structuredJudgeFidelityFailure": false,
+      "voiceDrift": "minor"
+    },
+    {
+      "documentId": "doc-14",
+      "fidelityFailure": true,
+      "methodId": "roundtrip-de",
+      "notes": [
+        "One member reserving a tool at a time became a member reserving tools simultaneously, reversing the exclusivity rule.",
+        "Kiln became oven, the fan staying off became the fan stopping, and the hashtag example was corrupted."
+      ],
+      "pairId": "pair-ca57d015ba748ba8",
+      "structuredJudgeFidelityFailure": true,
+      "voiceDrift": "minor"
+    },
+    {
+      "documentId": "doc-03",
+      "fidelityFailure": true,
+      "methodId": "roundtrip-de",
+      "notes": [
+        "A scenario card became a map.",
+        "The statement that no water was released became a claim that the team prevented water ingress.",
+        "A possible future verification became a present confirmation that the method assists volunteers."
+      ],
+      "pairId": "pair-31923c4d346d2e8f",
+      "structuredJudgeFidelityFailure": true,
+      "voiceDrift": "minor"
+    },
+    {
+      "documentId": "doc-05",
+      "fidelityFailure": false,
+      "methodId": "synonyms",
+      "notes": [
+        "The candidate was byte-identical to the source."
+      ],
+      "pairId": "pair-84845646f31d0f11",
+      "structuredJudgeFidelityFailure": false,
+      "voiceDrift": "none"
+    },
+    {
+      "documentId": "doc-01",
+      "fidelityFailure": true,
+      "methodId": "roundtrip-zh",
+      "notes": [
+        "A coin that looked likely to damage the screw slot became the asserted source of an already damaged slot, reversing the causal timing."
+      ],
+      "pairId": "pair-13f42ccbf0d1a1d2",
+      "structuredJudgeFidelityFailure": false,
+      "voiceDrift": "minor"
+    },
+    {
+      "documentId": "doc-05",
+      "fidelityFailure": false,
+      "methodId": "paraphrase",
+      "notes": [
+        "The broader rewrite retained every instruction, warning, archive rule, and example."
+      ],
+      "pairId": "pair-f44ca8b7c8037a9d",
+      "structuredJudgeFidelityFailure": false,
+      "voiceDrift": "minor"
+    },
+    {
+      "documentId": "doc-14",
+      "fidelityFailure": true,
+      "methodId": "roundtrip-zh",
+      "notes": [
+        "The one-extension limit was dropped.",
+        "The hashtag changed from #machine-slot to #machine slots, and abandoned slots became wasted slots."
+      ],
+      "pairId": "pair-bfcadc8fdac08254",
+      "structuredJudgeFidelityFailure": true,
+      "voiceDrift": "minor"
+    }
+  ],
+  "methodology": "A separate close-reading pass reviewed the twelve source-candidate pairs selected by the frozen semantic-audit plan. Pair order was deterministically shuffled. The reviewer saw only opaque pair IDs plus source and candidate text, and recorded fidelity and voice findings before revealing method IDs, detector results, latency, cost, or the structured judge verdict. Method mappings and structured-judge agreement were added only after all twelve manual verdicts were frozen.",
+  "planArtifact": {
+    "path": "fixtures/semantic-audit-plan-v1.json",
+    "sha256": "37a01cd99072159e848076ec54f5b653d687fa1b5aa59a56e08c9af2b1ed3858"
+  },
+  "reviewOrder": [
+    "pair-1a69a5ced55d4d4e",
+    "pair-d32ac2c75df4c2bd",
+    "pair-3354f7d7be3223de",
+    "pair-5a864c563942773d",
+    "pair-4bc7fd305943922a",
+    "pair-878f1e7af7f66522",
+    "pair-ca57d015ba748ba8",
+    "pair-31923c4d346d2e8f",
+    "pair-84845646f31d0f11",
+    "pair-13f42ccbf0d1a1d2",
+    "pair-f44ca8b7c8037a9d",
+    "pair-bfcadc8fdac08254"
+  ],
+  "schemaVersion": 1,
+  "sourceArtifact": {
+    "path": "results/experiment-raw-v1.json",
+    "sha256": "7cbebefa7e871032e9ac80125cd95d0a9cb2a733c99324f150640ab26744e723"
+  },
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    }
+  ],
+  "verifiedAt": "2026-08-16"
+}

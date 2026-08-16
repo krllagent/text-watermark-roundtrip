@@ -1,0 +1,48 @@
+{
+  "attempts": [
+    {
+      "auditConfigSha256": "1d4b8128484c8a1e234ce626badea9d1c0ad296e2729cde3f141d33616c2f53f",
+      "batchId": "batch-01-4643e0e20686",
+      "callsRecorded": 0,
+      "endpointSnapshotSha256": "0345fd7afbd2745211c9a099c6f1e95316b261e1629a8f54febf6d837eb2f665",
+      "failure": "The selected endpoint was incompatible with the frozen ZDR request.",
+      "httpStatus": 404,
+      "providerEndpoint": "google-ai-studio",
+      "requestDispatched": true
+    },
+    {
+      "auditConfigSha256": "64e913051096c068159b29e5dedfc844806a9d8a27a92084794b15800ba2399b",
+      "batchId": "batch-01-4643e0e20686",
+      "callsRecorded": 0,
+      "endpointSnapshotSha256": "68afc08c69817647760f2ba098bd232efd842d798b0d720e4a8a4679b36e37e5",
+      "failure": "The model requires reasoning, but this request explicitly selected reasoning effort none.",
+      "httpStatus": 400,
+      "providerEndpoint": "google-vertex/global",
+      "requestDispatched": true
+    }
+  ],
+  "billingCheck": {
+    "auditAttemptChargedUsd": 0,
+    "experimentTransformCostUsd": 0.02596105,
+    "externalUsageBaselineUsd": 0.005135792,
+    "openRouterDailyUsageAfterAttemptUsd": 0.031096842,
+    "reconciliation": "0.031096842 = 0.02596105 + 0.005135792"
+  },
+  "methodology": "The first blinded-audit route canary targeted Google AI Studio and failed with HTTP 404 before a response was recorded. The second reached Google Vertex but failed with HTTP 400 because the request disabled mandatory reasoning. OpenRouter current-key daily usage was checked after both failures and reconciled exactly to the pre-existing external baseline plus the completed transformation experiment. Both failed batches were therefore treated as uncharged; each stale in-flight checkpoint was retired before changing the frozen route contract.",
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "title": "OpenRouter current API key metadata",
+      "url": "https://openrouter.ai/docs/api/api-reference/api-keys/get-current-key"
+    },
+    {
+      "title": "OpenRouter provider routing",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    }
+  ],
+  "verifiedAt": "2026-08-16"
+}

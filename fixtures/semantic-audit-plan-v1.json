@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "auditVersion": "exp002-semantic-audit-v1",
+  "verifiedAt": "2026-08-16",
+  "methodology": "Freeze the semantic and voice review protocol before any transformation output exists. Reviewers see source-output pairs under opaque IDs without method, detector score, latency, or cost. A structured reviewer assesses every transformed document; a separate close-reading pass covers three deterministically selected documents per method.",
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    }
+  ],
+  "scope": {
+    "documentCountPerMethod": 20,
+    "methods": [
+      "synonyms",
+      "roundtrip-de",
+      "roundtrip-zh",
+      "paraphrase"
+    ],
+    "structuredPairCount": 80
+  },
+  "blinding": {
+    "hideCost": true,
+    "hideDetectorResults": true,
+    "hideLatency": true,
+    "hideMethodId": true,
+    "pairOrder": "source_then_candidate",
+    "reviewerReceivesOpaquePairId": true
+  },
+  "structuredFields": [
+    "lostClaims",
+    "addedClaims",
+    "changedClaims",
+    "lostOrChangedExamples",
+    "stanceDrift",
+    "certaintyDrift",
+    "caveatDrift",
+    "paragraphRoleOrOrderDrift",
+    "voiceDrift",
+    "evidenceNotes"
+  ],
+  "decisionRule": {
+    "fidelityFailureIfAny": [
+      "lostClaims",
+      "addedClaims",
+      "changedClaims",
+      "lostOrChangedExamples",
+      "stanceDrift",
+      "certaintyDrift",
+      "caveatDrift",
+      "paragraphRoleOrOrderDrift",
+      "protectedTokenFailure"
+    ],
+    "voiceDriftLevels": [
+      "none",
+      "minor",
+      "material"
+    ],
+    "voiceDriftIsReportedSeparately": true
+  },
+  "closeReadingSample": {
+    "documentsPerMethod": 3,
+    "selectionAlgorithm": "For each method, sort doc-01 through doc-20 by raw SHA-256 bytes of UTF-8 seed + NUL + methodId + NUL + documentId; take the first three.",
+    "seed": "exp002-semantic-audit-v1",
+    "selected": {
+      "synonyms": [
+        "doc-05",
+        "doc-08",
+        "doc-04"
+      ],
+      "roundtrip-de": [
+        "doc-03",
+        "doc-14",
+        "doc-05"
+      ],
+      "roundtrip-zh": [
+        "doc-14",
+        "doc-01",
+        "doc-04"
+      ],
+      "paraphrase": [
+        "doc-09",
+        "doc-05",
+        "doc-19"
+      ]
+    }
+  },
+  "reporting": {
+    "publishEveryStructuredFinding": true,
+    "publishOpaqueIdMappingAfterReview": true,
+    "reportFailureCountAndRatePerMethod": true,
+    "reportVoiceDriftCountsPerMethod": true,
+    "winnerIsNotSelectedAutomatically": true
+  }
+}

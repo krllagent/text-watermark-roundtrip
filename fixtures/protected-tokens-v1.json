@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "fixtureVersion": "protected-tokens-v1",
+  "verifiedAt": "2026-08-16",
+  "methodology": "Exact fixtures for deterministic masking and byte-for-byte restoration. Protected ranges come from text_contract.find_protected_spans; existing placeholder-shaped text is protected as a collision case.",
+  "sources": [
+    {
+      "title": "Experiment methodology",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    }
+  ],
+  "cases": [
+    {
+      "name": "quote_url_money_mention",
+      "input": "Kirill said \"keep https://example.com/a?x=1 unchanged\", paid £1,250.50, and tagged @agent.",
+      "masked": "Kirill said ⟦T1⟧, paid ⟦T2⟧, and tagged ⟦T3⟧.",
+      "map": [
+        ["⟦T1⟧", "\"keep https://example.com/a?x=1 unchanged\""],
+        ["⟦T2⟧", "£1,250.50"],
+        ["⟦T3⟧", "@agent"]
+      ]
+    },
+    {
+      "name": "overlap_smart_quote",
+      "input": "She wrote “keep 'alpha', @name, and https://example.net exact” before leaving.",
+      "masked": "She wrote ⟦T1⟧ before leaving.",
+      "map": [
+        ["⟦T1⟧", "“keep 'alpha', @name, and https://example.net exact”"]
+      ]
+    },
+    {
+      "name": "unicode_email_hashtag_www",
+      "input": "Café ‘naïve’: email me@example.org, see www.example.org/über, then keep #resume.",
+    "masked": "Café ⟦T1⟧: email ⟦T2⟧, see ⟦T3⟧, then keep ⟦T4⟧.",
+      "map": [
+        ["⟦T1⟧", "‘naïve’"],
+        ["⟦T2⟧", "me@example.org"],
+      ["⟦T3⟧", "www.example.org/über"],
+        ["⟦T4⟧", "#resume"]
+      ]
+    },
+    {
+      "name": "existing_placeholder_collision",
+      "input": "Literal ⟦T1⟧, URL https://example.org, and 42% stay exact.",
+    "masked": "Literal ⟦T2⟧, URL ⟦T3⟧, and ⟦T4⟧ stay exact.",
+      "map": [
+        ["⟦T2⟧", "⟦T1⟧"],
+      ["⟦T3⟧", "https://example.org"],
+        ["⟦T4⟧", "42%"]
+      ]
+    },
+    {
+      "name": "dates_and_plain_numbers_are_not_protected",
+      "input": "On 2026-08-16, version 42 cost €9 and rose 15%.",
+      "masked": "On 2026-08-16, version 42 cost ⟦T1⟧ and rose ⟦T2⟧.",
+      "map": [
+        ["⟦T1⟧", "€9"],
+        ["⟦T2⟧", "15%"]
+      ]
+    }
+  ]
+}

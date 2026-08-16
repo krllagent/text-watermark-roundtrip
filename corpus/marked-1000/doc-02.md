@@ -1,0 +1,19 @@
+# Why a Job Queue Needs an Idempotency Key
+
+A job queue can render a compact service more reliable, but it can also introduce a subtle problem. A worker may receive a job twice. The duplicate can appear after a timeout, a restart, or a lost acknowledgement. A basic queue usually promises that a job will arrive at least once. That approach is robust because the queue can retry work, yet the application must detect repeated delivery and select a safe action.
+
+Consider a fictional poster shop. Its web form creates a print job, and a worker sends the file to a printer. If the worker finishes the print but fails before it records the outcome, the queue may start the job again. Two posters come out, while the customer expected one. The main problem is not that the retry was incorrect. The issue is that the operation lacked a stable identity.
+
+An idempotency key gives each intended operation one durable identifier, such as `order-1847-poster-1`. The producer stores that identifier with the job. Before the worker begins, it checks a completion table for the same key. A completed record tells the worker to retain the earlier answer. An absent record tells it to attempt the operation. This simple method turns duplicate delivery into a lookup with an unambiguous response.
+
+The record needs enough detail to support recovery. A useful section contains the key, input digest, status, output reference, and timestamps. The input digest is essential because two different requests should never share one key. If a key exists with a distinct digest, the worker should stop and display a plain error. Silently keeping the first record would hide a caller problem and trigger confusing behavior.
+
+The hard case is the gap between an external effect and the database update. Suppose the printer accepts a file, but the worker crashes before it can mark the job complete. A local transaction cannot alter the printer and the database as one unit. The service may require an operation identifier that the printer also understands. If the printer can recognize the identifier, a repeated submission returns the original outcome instead of creating another poster.
+
+When the external system offers no such feature, the design must limit its guarantee. The worker can set a guarded state such as `printing_unknown`, inform an operator, and avoid a fast retry. A human can verify the tray before selecting the next action. This is slower, though it reduces the chance of a second irreversible effect. A queue should help recovery; it cannot eliminate uncertainty that the downstream system does not expose.
+
+Testing should include more than the routine path. Start one job twice, interrupt a worker after the effect, alter the input while keeping the key, and run two workers simultaneously. Each trial should demonstrate whether the result is stable. The likely source of many failures is a tiny timing window, so repeated tests improve confidence. A test endpoint such as https://queue.invalid/examples can label the synthetic scenario without pointing at a live service.
+
+Metrics also need precise names. “Jobs received” and “operations produced” address distinct questions. The first count may grow during retries while the second stays fixed. An informative dashboard should show both, plus conflicts and unknown outcomes. That distinction helps an operator locate the primary source of a spike quickly. It also prevents a widespread mistake: treating every queue delivery as fresh business work.
+
+The goal is not exactly-once delivery as a slogan. The practical aim is one visible effect for one intended operation, with a dependable log when the system cannot prove what happened. An idempotency key is only one component of that design, but it provides the stable principle that the other checks require. With it, retries become a controlled recovery method. Without it, a fast retry can deliver a large and expensive surprise.
