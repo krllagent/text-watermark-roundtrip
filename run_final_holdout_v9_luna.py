@@ -778,6 +778,78 @@ def build_blind_packet(checkpoint: Path, output: Path) -> dict[str, object]:
     return packet
 
 
+def recompute_analysis(path: Path, note: str) -> dict[str, object]:
+    """Rescore stored responses after a scoring defect, without new requests.
+
+    Every paid response is one-pass and can never be re-sent, so a defect in
+    local scoring has to be repaired by rescoring what is already stored. This
+    refuses to touch anything except the analysis: the request, the wire bytes,
+    the response, and the route must all still validate first, and the reason
+    and the resulting change are recorded in the checkpoint itself.
+    """
+    if not note.strip():
+        raise CanaryError("recomputation requires a written reason")
+    protocol = load_protocol()
+    state = load_json(path, "final holdout checkpoint")
+    calls = state.get("calls")
+    if not isinstance(calls, list) or not calls:
+        raise CanaryError("recomputation requires at least one completed call")
+    sources = require_mapping(protocol.get("sources"), "protocol sources")
+    hashes = require_mapping(state.get("requestSha256s"), "request hashes")
+    changes: list[dict[str, object]] = []
+    for index, value in enumerate(calls):
+        row = require_mapping(value, "completed call")
+        document_id = DOCUMENT_IDS[index]
+        source = str(sources[document_id])
+        payload = CANDIDATE.expected_payload(request_for(source))
+        wire = require_mapping(row.get("wireRequest"), "wire request")
+        if (
+            row.get("documentId") != document_id
+            or row.get("sourceText") != source
+            or row.get("requestBody") != payload
+            or row.get("requestSha256") != hashes[document_id]
+            or wire.get("body") != payload
+        ):
+            raise CanaryError("stored request evidence changed; refusing to rescore")
+        CANDIDATE.validate_route_record(row.get("routePreflight"))
+        completion = require_mapping(row.get("completion"), "completion")
+        validate_stored_completion(completion)
+        previous = require_mapping(row.get("analysis"), "analysis")
+        updated = analyze_output(
+            protocol, document_id, source, str(completion.get("content", ""))
+        )
+        if json_safe_value(updated) == json_safe_value(previous):
+            continue
+        row["analysis"] = updated
+        row["recordSha256"] = record_sha256(row)
+        changes.append(
+            {
+                "documentId": document_id,
+                "newIssues": updated.get("pipelineIssues"),
+                "previousIssues": previous.get("pipelineIssues"),
+            }
+        )
+    history = state.get("analysisRecomputations")
+    entries = list(history) if isinstance(history, list) else []
+    previous_runner = state.get("runnerSha256")
+    current_runner = sha256_file(Path(__file__))
+    state["runnerSha256"] = current_runner
+    entries.append(
+        {
+            "changedDocuments": changes,
+            "previousRunnerSha256": previous_runner,
+            "reason": note,
+            "runnerSha256": current_runner,
+        }
+    )
+    state["analysisRecomputations"] = entries
+    # Validate the candidate state before it reaches disk: a rescoring that
+    # cannot validate must leave the stored checkpoint untouched.
+    validate_checkpoint(state, protocol)
+    atomic_write(path, state)
+    return {"changed": len(changes), "checkpoint": str(path)}
+
+
 def require_committed(path: Path, label: str) -> None:
     """Refuse to proceed unless the file is committed exactly as it is on disk.
 

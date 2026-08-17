@@ -66,14 +66,35 @@ def request_for(source: str):
     return build_visible_locked_request(protect_visible_anchors(source).masked)
 
 
+def restored_anchor_issues(protected, content: str) -> list[dict[str, str]]:
+    """Compare anchors per sentence with placeholders restored on both sides.
+
+    Masking hides sentence terminators that live inside a protected string, for
+    example a quoted sentence, so a masked source can hold fewer sentence pieces
+    than the document it came from. Comparing a masked source against a raw
+    response therefore reports a misalignment when the model punctuated
+    correctly. Restoring placeholders on both sides compares like with like. If
+    the response violates the placeholder contract, restoring is impossible and
+    the marker-level comparison stands; the placeholder failure is recorded
+    separately by the caller.
+    """
+    anchored_source = unmark.restore_tokens(protected.masked, protected.tokens)
+    try:
+        anchored_output = unmark.restore_tokens(
+            unmark.canonicalize_placeholders(content, protected.tokens),
+            protected.tokens,
+        )
+    except Exception:
+        return anchor_alignment_issues(protected.masked, content)
+    return anchor_alignment_issues(anchored_source, anchored_output)
+
+
 def analyze_output(
     protocol: Mapping[str, object], document_id: str, source: str, content: str
 ) -> dict[str, object]:
     """Score one response with the v2 anchor contract and the v9 holdout key."""
     protected = protect_visible_anchors(source)
-    issues: list[dict[str, str]] = list(
-        anchor_alignment_issues(protected.masked, content)
-    )
+    issues: list[dict[str, str]] = list(restored_anchor_issues(protected, content))
     stripped_masked = strip_markers(protected.masked)
     normalized = strip_markers(content)
     restored: str | None = None
@@ -217,6 +238,8 @@ def build_parser() -> argparse.ArgumentParser:
     modes.add_argument("--aggregate", action="store_true")
     modes.add_argument("--blind-packet", action="store_true")
     modes.add_argument("--finalize-review", action="store_true")
+    modes.add_argument("--recompute-analysis", action="store_true")
+    parser.add_argument("--note")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     parser.add_argument("--aggregate-output", type=Path, default=DEFAULT_AGGREGATE)
     parser.add_argument("--packet", type=Path, default=DEFAULT_PACKET)
@@ -235,6 +258,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         result["method"] = "visible_anchor_sentence_aligned_v2"
         result["runnerSha256"] = base.sha256_file(Path(__file__))
         print(canonical_json_bytes(result).decode("utf-8"), end="")
+        return 0
+    if args.recompute_analysis:
+        if not args.note:
+            raise SystemExit("--recompute-analysis requires --note")
+        print(
+            json.dumps(
+                base.recompute_analysis(args.checkpoint, args.note), sort_keys=True
+            )
+        )
         return 0
     if args.aggregate:
         result = base.write_aggregate(args.checkpoint, args.aggregate_output)
