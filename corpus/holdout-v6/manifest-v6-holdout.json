@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "corpusVersion": "holdout-corpus-v6",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Twenty English documents were authored directly from a blank page in one isolated task. No corpus v2-v5 transformations, outputs, audits, results, current article, or repair-design materials were opened or read; only the v1 corpus metadata structure and fixtures/synonym_pairs-v1.json were inspected for schema and lexical coverage. The texts were not derived from or paraphrased from existing documents, were not submitted to a model transformation pipeline, and used no external provider calls. Every scenario and claim is fictional. Counts and hashes were produced locally after authorship without changing the source texts.",
+  "sources": [
+    {
+      "title": "Original holdout corpus files in the experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip",
+      "note": "Repository-local authorship provenance only; no external factual source material was used."
+    }
+  ],
+  "documentCount": 20,
+  "wordCount": 7194,
+  "eligiblePositions": 427,
+  "countingMethodology": {
+    "wordPattern": "ASCII letter sequences with optional internal apostrophe, curly apostrophe, or hyphen",
+    "eligiblePattern": "case-insensitive whole-word equality with either member of every pair in fixtures/synonym_pairs-v1.json",
+    "protectedSpanCount": "number of required exact-string categories declared for each document in the corpus plan"
+  },
+  "hashAlgorithm": "SHA-256 over exact UTF-8 file bytes",
+  "lexiconSha256": "c548a86a3a3d101a3db58ad82e58a648b6a4eb9b428ac1c0b5f8c7538b3229b3",
+  "planSha256": "b811fb35798fd3a5a74060acebc51b9b14b510e6041b7b602c8f729a8c50a30e",
+  "documents": [
+    {
+      "documentId": "holdout-01",
+      "path": "corpus/holdout-v6/original/holdout-01.md",
+      "genre": "personal post",
+      "title": "The 14-Day Rule That Changed My Fictional Side Project",
+      "wordCount": 358,
+      "eligiblePositions": 34,
+      "protectedSpanCount": 7,
+      "sha256": "1159b69f2d38cf10f9b3c2dcd5b56b7a5e234fd61f62732e893ff7f06391ad16"
+    },
+    {
+      "documentId": "holdout-02",
+      "path": "corpus/holdout-v6/original/holdout-02.md",
+      "genre": "incident note",
+      "title": "Incident Note: Opal Relay Sent the Same Alert 186 Times",
+      "wordCount": 350,
+      "eligiblePositions": 19,
+      "protectedSpanCount": 7,
+      "sha256": "bd794f9ac3a04249724324290ec0de6b19e0ed81ab676e22e1c1b39a6fdc8c21"
+    },
+    {
+      "documentId": "holdout-03",
+      "path": "corpus/holdout-v6/original/holdout-03.md",
+      "genre": "technical explainer",
+      "title": "Why a Fictional Job Runner Uses a Receipt Before It Uses a Retry",
+      "wordCount": 379,
+      "eligiblePositions": 34,
+      "protectedSpanCount": 7,
+      "sha256": "15a3ddbba7437316b2fe48ab13d4788033f4409ddbf0d6d2b68f151e6c68c08e"
+    },
+    {
+      "documentId": "holdout-04",
+      "path": "corpus/holdout-v6/original/holdout-04.md",
+      "genre": "decision memo",
+      "title": "Decision Memo: Keep Two Routes for the Fictional Paper Kite Trial",
+      "wordCount": 371,
+      "eligiblePositions": 25,
+      "protectedSpanCount": 7,
+      "sha256": "61c8ff915d4165d3c87616fc78202ce4e367a8abcef9359542990cca588de315"
+    },
+    {
+      "documentId": "holdout-05",
+      "path": "corpus/holdout-v6/original/holdout-05.md",
+      "genre": "product retrospective",
+      "title": "Retrospective: We Removed the Most Requested Button",
+      "wordCount": 353,
+      "eligiblePositions": 22,
+      "protectedSpanCount": 7,
+      "sha256": "65a7b58d2b7ac27582bebb3aacee1620a519b0b6b1c3d8c2bee9cd0f671c2ada"
+    },
+    {
+      "documentId": "holdout-06",
+      "path": "corpus/holdout-v6/original/holdout-06.md",
+      "genre": "laboratory note",
+      "title": "Lab Note: The Speckled Coating Dried Faster, but That May Not Be Why It Held",
+      "wordCount": 359,
+      "eligiblePositions": 20,
+      "protectedSpanCount": 7,
+      "sha256": "ded313376797a891f1c40b555f38dace1ae9173d87460c9d32da96a00a2e97e1"
+    },
+    {
+      "documentId": "holdout-07",
+      "path": "corpus/holdout-v6/original/holdout-07.md",
+      "genre": "policy note",
+      "title": "Policy Note: When Fictional Parcel Notes May Be Machine-Translated",
+      "wordCount": 366,
+      "eligiblePositions": 20,
+      "protectedSpanCount": 7,
+      "sha256": "7dad878ed1c50b427b711ec92f600f68f791a3326e118f004e55dec530a3a52e"
+    },
+    {
+      "documentId": "holdout-08",
+      "path": "corpus/holdout-v6/original/holdout-08.md",
+      "genre": "customer interview synthesis",
+      "title": "Interview Synthesis: Riders Wanted Certainty More Than More Scooters",
+      "wordCount": 358,
+      "eligiblePositions": 26,
+      "protectedSpanCount": 7,
+      "sha256": "ed5a57fc0fc76caf6f2c388c710564d79d19aeea9686b14d3d8149472439570e"
+    },
+    {
+      "documentId": "holdout-09",
+      "path": "corpus/holdout-v6/original/holdout-09.md",
+      "genre": "field report",
+      "title": "Field Report from a Fictional Repair Van’s Rainy Thursday",
+      "wordCount": 359,
+      "eligiblePositions": 15,
+      "protectedSpanCount": 7,
+      "sha256": "409ec68502123d844d516524872c909dc5e054cdf7c41625406c0627b3ffe295"
+    },
+    {
+      "documentId": "holdout-10",
+      "path": "corpus/holdout-v6/original/holdout-10.md",
+      "genre": "founder letter",
+      "title": "A Fictional Founder’s Note After the Higher Price Failed",
+      "wordCount": 340,
+      "eligiblePositions": 16,
+      "protectedSpanCount": 7,
+      "sha256": "dd0741638b04b1034311217fd826cf1804950bd9fc6599baea2d08592a7a780a"
+    },
+    {
+      "documentId": "holdout-11",
+      "path": "corpus/holdout-v6/original/holdout-11.md",
+      "genre": "experiment diary",
+      "title": "Experiment Diary: The Referral Prompt Worked Only After the Work Was Done",
+      "wordCount": 359,
+      "eligiblePositions": 21,
+      "protectedSpanCount": 7,
+      "sha256": "c0d00b55a31a7b070cbc41ce5a2fe700fc6da4d72851bef290b3d844045e1133"
+    },
+    {
+      "documentId": "holdout-12",
+      "path": "corpus/holdout-v6/original/holdout-12.md",
+      "genre": "operations handoff",
+      "title": "Operations Handoff for the Fictional North Room Performance",
+      "wordCount": 354,
+      "eligiblePositions": 19,
+      "protectedSpanCount": 7,
+      "sha256": "aa99a18cfa2937142d057c9d598b9fae399cc1e655693eee95443a51d8a726e5"
+    },
+    {
+      "documentId": "holdout-13",
+      "path": "corpus/holdout-v6/original/holdout-13.md",
+      "genre": "design critique",
+      "title": "Design Critique: The Waveform Looked Precise and Explained Too Little",
+      "wordCount": 367,
+      "eligiblePositions": 23,
+      "protectedSpanCount": 7,
+      "sha256": "40437d3680ff4b4fb5bff42b6f879b1665f0bd5929f762034f99dfe6c3cd85e4"
+    },
+    {
+      "documentId": "holdout-14",
+      "path": "corpus/holdout-v6/original/holdout-14.md",
+      "genre": "procurement brief",
+      "title": "Procurement Brief: Rent the Fictional Label Printer Before Buying It",
+      "wordCount": 349,
+      "eligiblePositions": 16,
+      "protectedSpanCount": 7,
+      "sha256": "08019cace03cb33f6e64d86f015ed8c8d5405fe8584283c825237c7b1e00ee0e"
+    },
+    {
+      "documentId": "holdout-15",
+      "path": "corpus/holdout-v6/original/holdout-15.md",
+      "genre": "teaching note",
+      "title": "Teaching Note: Let Students Predict the Result Before Showing the Graph",
+      "wordCount": 350,
+      "eligiblePositions": 22,
+      "protectedSpanCount": 7,
+      "sha256": "4626f4e69f6b7439a304a1d3d1c21afaf24d06ce055334f4fbe5ec022d91db62"
+    },
+    {
+      "documentId": "holdout-16",
+      "path": "corpus/holdout-v6/original/holdout-16.md",
+      "genre": "risk note",
+      "title": "Risk Note: Do Not Turn Fictional Meeting Summaries into Attendance Scores",
+      "wordCount": 370,
+      "eligiblePositions": 17,
+      "protectedSpanCount": 7,
+      "sha256": "ff490f9bc55b909a5e23386efd5b1a6d9c74f9d62cefe7b4dcffe8b75ddc5e94"
+    },
+    {
+      "documentId": "holdout-17",
+      "path": "corpus/holdout-v6/original/holdout-17.md",
+      "genre": "case study",
+      "title": "Case Study: A Smaller Fictional Menu Reduced Waste and Hid a Capacity Limit",
+      "wordCount": 372,
+      "eligiblePositions": 17,
+      "protectedSpanCount": 7,
+      "sha256": "763feaa78db1e0afb4d4ce3fbcdddba4a45fc02605985a19ed00f21451ee5a8d"
+    },
+    {
+      "documentId": "holdout-18",
+      "path": "corpus/holdout-v6/original/holdout-18.md",
+      "genre": "usability research log",
+      "title": "Usability Log: The Fictional Kiosk Was Easier After We Removed “Easy Mode”",
+      "wordCount": 355,
+      "eligiblePositions": 20,
+      "protectedSpanCount": 7,
+      "sha256": "9b77343335df7f4d8986d07980234a179923449088e996a77743512b6afa7976"
+    },
+    {
+      "documentId": "holdout-19",
+      "path": "corpus/holdout-v6/original/holdout-19.md",
+      "genre": "launch note",
+      "title": "Launch Note: The Fictional Status Page Is Deliberately Boring",
+      "wordCount": 363,
+      "eligiblePositions": 22,
+      "protectedSpanCount": 7,
+      "sha256": "8487e473e37585c3af4c9f6694c9d60b81270aaa3048429c6b2d100f6aba277c"
+    },
+    {
+      "documentId": "holdout-20",
+      "path": "corpus/holdout-v6/original/holdout-20.md",
+      "genre": "board update",
+      "title": "Board Update: Pause the Fictional Expansion, Continue the Evidence Work",
+      "wordCount": 362,
+      "eligiblePositions": 19,
+      "protectedSpanCount": 7,
+      "sha256": "bdfc6d0bc3399cb892bbdfda7f2509bab57c74cf5bd53dfa063214a82fcac81f"
+    }
+  ]
+}

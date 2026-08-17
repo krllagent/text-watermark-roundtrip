@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 1,
+  "corpusVersion": "holdout-corpus-v6",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Twenty English documents were authored directly from a blank page in one isolated task. No corpus v2-v5 transformations, outputs, audits, results, current article, or repair-design materials were opened or read; only the v1 corpus metadata structure and fixtures/synonym_pairs-v1.json were inspected for schema and lexical coverage. The texts were not derived from or paraphrased from existing documents, were not submitted to a model transformation pipeline, and used no external provider calls. Every scenario, entity, quotation, address, identifier, measurement, and outcome is fictional and original to this holdout.",
+  "sources": [
+    {
+      "title": "Original holdout corpus files in the experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip",
+      "note": "Repository-local authorship provenance only; no external factual source material was used."
+    }
+  ],
+  "authorship": {
+    "mode": "direct original composition",
+    "derivedFromExistingText": false,
+    "modelTransformationHistory": [],
+    "providerCalls": 0
+  },
+  "documentContract": {
+    "count": 20,
+    "language": "English",
+    "format": "LinkedIn-sized Markdown document",
+    "minWords": 300,
+    "maxWords": 450,
+    "minEligiblePositionsPerDocument": 15,
+    "eligibilityLexicon": "fixtures/synonym_pairs-v1.json",
+    "scenarioStatus": "fictional and original",
+    "requiredSemanticElementsPerDocument": [
+      "several precise claims, numbers, or named fictional entities",
+      "an explicit causal account",
+      "at least one negation, caveat, or scope qualifier",
+      "a concrete example",
+      "at least one deliberately nuanced or ambiguous relation"
+    ],
+    "requiredExactStringCategoriesPerDocument": [
+      "url",
+      "ascii_email",
+      "one_line_quote",
+      "money",
+      "percentage",
+      "handle_or_tag",
+      "code_token"
+    ]
+  },
+  "documents": [
+    {
+      "documentId": "holdout-01",
+      "path": "corpus/holdout-v6/original/holdout-01.md",
+      "genre": "personal post",
+      "title": "The 14-Day Rule That Changed My Fictional Side Project",
+      "exactStrings": {
+        "url": "https://cedarbench.example/pilot-brief",
+        "ascii_email": "hello@cedarbench.example",
+        "one_line_quote": "\"A useful draft can be plain without being careless.\"",
+        "money": "$1,240",
+        "percentage": "18%",
+        "handle_or_tag": "@MaraQuill",
+        "code_token": "trial_window=14"
+      }
+    },
+    {
+      "documentId": "holdout-02",
+      "path": "corpus/holdout-v6/original/holdout-02.md",
+      "genre": "incident note",
+      "title": "Incident Note: Opal Relay Sent the Same Alert 186 Times",
+      "exactStrings": {
+        "url": "https://opalrelay.example/incidents/INC-204",
+        "ascii_email": "ops@opalrelay.example",
+        "one_line_quote": "\"Timeout does not mean the work did not happen.\"",
+        "money": "$860",
+        "percentage": "37%",
+        "handle_or_tag": "@OpalRelay",
+        "code_token": "ALERT-7C"
+      }
+    },
+    {
+      "documentId": "holdout-03",
+      "path": "corpus/holdout-v6/original/holdout-03.md",
+      "genre": "technical explainer",
+      "title": "Why a Fictional Job Runner Uses a Receipt Before It Uses a Retry",
+      "exactStrings": {
+        "url": "https://bramblegrid.example/idempotency",
+        "ascii_email": "docs@bramblegrid.example",
+        "one_line_quote": "\"A retry asks again; a receipt remembers why.\"",
+        "money": "$0.004",
+        "percentage": "94.5%",
+        "handle_or_tag": "#BrambleNotes",
+        "code_token": "job_key"
+      }
+    },
+    {
+      "documentId": "holdout-04",
+      "path": "corpus/holdout-v6/original/holdout-04.md",
+      "genre": "decision memo",
+      "title": "Decision Memo: Keep Two Routes for the Fictional Paper Kite Trial",
+      "exactStrings": {
+        "url": "https://paperkite.example/memos/routes",
+        "ascii_email": "memo@paperkite.example",
+        "one_line_quote": "\"Choose the next test, not the most impressive diagram.\"",
+        "money": "$6,800",
+        "percentage": "93.0%",
+        "handle_or_tag": "@PaperKiteOps",
+        "code_token": "route=B"
+      }
+    },
+    {
+      "documentId": "holdout-05",
+      "path": "corpus/holdout-v6/original/holdout-05.md",
+      "genre": "product retrospective",
+      "title": "Retrospective: We Removed the Most Requested Button",
+      "exactStrings": {
+        "url": "https://mosslight.example/retrospective",
+        "ascii_email": "garden@mosslight.example",
+        "one_line_quote": "\"A button can be accurate and still describe the wrong decision.\"",
+        "money": "$2,750",
+        "percentage": "26.5%",
+        "handle_or_tag": "@MosslightLab",
+        "code_token": "claim_plot()"
+      }
+    },
+    {
+      "documentId": "holdout-06",
+      "path": "corpus/holdout-v6/original/holdout-06.md",
+      "genre": "laboratory note",
+      "title": "Lab Note: The Speckled Coating Dried Faster, but That May Not Be Why It Held",
+      "exactStrings": {
+        "url": "https://junipermaterials.example/lab/JM-18",
+        "ascii_email": "lab@junipermaterials.example",
+        "one_line_quote": "\"A visible difference is a clue, not yet a cause.\"",
+        "money": "$74.60",
+        "percentage": "83.3%",
+        "handle_or_tag": "@JuniperBench",
+        "code_token": "COAT-S"
+      }
+    },
+    {
+      "documentId": "holdout-07",
+      "path": "corpus/holdout-v6/original/holdout-07.md",
+      "genre": "policy note",
+      "title": "Policy Note: When Fictional Parcel Notes May Be Machine-Translated",
+      "exactStrings": {
+        "url": "https://lanternpost.example/policies/translation",
+        "ascii_email": "policy@lanternpost.example",
+        "one_line_quote": "\"Faster reading is useful only when the route to correction stays open.\"",
+        "money": "$420",
+        "percentage": "95%",
+        "handle_or_tag": "#LanternReview",
+        "code_token": "MT_UNVERIFIED"
+      }
+    },
+    {
+      "documentId": "holdout-08",
+      "path": "corpus/holdout-v6/original/holdout-08.md",
+      "genre": "customer interview synthesis",
+      "title": "Interview Synthesis: Riders Wanted Certainty More Than More Scooters",
+      "exactStrings": {
+        "url": "https://wrenwheel.example/research/charge",
+        "ascii_email": "rides@wrenwheel.example",
+        "one_line_quote": "\"I do not need more choices; I need one honest choice.\"",
+        "money": "$960",
+        "percentage": "25%",
+        "handle_or_tag": "@WrenwheelResearch",
+        "code_token": "ready_after=80"
+      }
+    },
+    {
+      "documentId": "holdout-09",
+      "path": "corpus/holdout-v6/original/holdout-09.md",
+      "genre": "field report",
+      "title": "Field Report from a Fictional Repair Van’s Rainy Thursday",
+      "exactStrings": {
+        "url": "https://ashacre.example/field/rain-04",
+        "ascii_email": "van@ashacre.example",
+        "one_line_quote": "\"The queue formed where decisions were made, not where tools were used.\"",
+        "money": "$1,530",
+        "percentage": "41.7%",
+        "handle_or_tag": "@AshAcreField",
+        "code_token": "FAST-CHECK"
+      }
+    },
+    {
+      "documentId": "holdout-10",
+      "path": "corpus/holdout-v6/original/holdout-10.md",
+      "genre": "founder letter",
+      "title": "A Fictional Founder’s Note After the Higher Price Failed",
+      "exactStrings": {
+        "url": "https://valethread.example/tests/price-03",
+        "ascii_email": "pricing@valethread.example",
+        "one_line_quote": "\"Praise is not a purchase, and a test is not a verdict.\"",
+        "money": "$24",
+        "percentage": "42%",
+        "handle_or_tag": "@ValeThreadTeam",
+        "code_token": "PRICE_BASELINE"
+      }
+    },
+    {
+      "documentId": "holdout-11",
+      "path": "corpus/holdout-v6/original/holdout-11.md",
+      "genre": "experiment diary",
+      "title": "Experiment Diary: The Referral Prompt Worked Only After the Work Was Done",
+      "exactStrings": {
+        "url": "https://pebbleledger.example/experiments/referral",
+        "ascii_email": "growth@pebbleledger.example",
+        "one_line_quote": "\"Ask for trust after delivering evidence of value.\"",
+        "money": "£5",
+        "percentage": "11.7%",
+        "handle_or_tag": "#PebbleTrials",
+        "code_token": "REF-A"
+      }
+    },
+    {
+      "documentId": "holdout-12",
+      "path": "corpus/holdout-v6/original/holdout-12.md",
+      "genre": "operations handoff",
+      "title": "Operations Handoff for the Fictional North Room Performance",
+      "exactStrings": {
+        "url": "https://sabledoor.example/ops/north-room",
+        "ascii_email": "house@sabledoor.example",
+        "one_line_quote": "\"A backup is useful only if someone knows when to use it.\"",
+        "money": "£240",
+        "percentage": "92.7%",
+        "handle_or_tag": "@SableDoorOps",
+        "code_token": "SCAN-E2"
+      }
+    },
+    {
+      "documentId": "holdout-13",
+      "path": "corpus/holdout-v6/original/holdout-13.md",
+      "genre": "design critique",
+      "title": "Design Critique: The Waveform Looked Precise and Explained Too Little",
+      "exactStrings": {
+        "url": "https://hushnote.example/design/waveform",
+        "ascii_email": "design@hushnote.example",
+        "one_line_quote": "\"Precision in appearance is not the same as precision in meaning.\"",
+        "money": "$3,600",
+        "percentage": "68%",
+        "handle_or_tag": "@HushnoteUX",
+        "code_token": "OMISSION_FLAG"
+      }
+    },
+    {
+      "documentId": "holdout-14",
+      "path": "corpus/holdout-v6/original/holdout-14.md",
+      "genre": "procurement brief",
+      "title": "Procurement Brief: Rent the Fictional Label Printer Before Buying It",
+      "exactStrings": {
+        "url": "https://kestrelpantry.example/procurement/labels",
+        "ascii_email": "buying@kestrelpantry.example",
+        "one_line_quote": "\"A lower unit cost matters only if the new routine survives a busy day.\"",
+        "money": "$6,900",
+        "percentage": "99.5%",
+        "handle_or_tag": "@KestrelOps",
+        "code_token": "KP-JAR-2"
+      }
+    },
+    {
+      "documentId": "holdout-15",
+      "path": "corpus/holdout-v6/original/holdout-15.md",
+      "genre": "teaching note",
+      "title": "Teaching Note: Let Students Predict the Result Before Showing the Graph",
+      "exactStrings": {
+        "url": "https://alderwick.example/teaching/predict-first",
+        "ascii_email": "stats@alderwick.example",
+        "one_line_quote": "\"A prediction is a bookmark for your earlier thinking.\"",
+        "money": "$96",
+        "percentage": "71.9%",
+        "handle_or_tag": "#AlderwickLab",
+        "code_token": "PLOT_04"
+      }
+    },
+    {
+      "documentId": "holdout-16",
+      "path": "corpus/holdout-v6/original/holdout-16.md",
+      "genre": "risk note",
+      "title": "Risk Note: Do Not Turn Fictional Meeting Summaries into Attendance Scores",
+      "exactStrings": {
+        "url": "https://meridianloom.example/risk/summaries",
+        "ascii_email": "ethics@meridianloom.example",
+        "one_line_quote": "\"Missing from a transcript is not the same as absent from the work.\"",
+        "money": "$0.62",
+        "percentage": "88%",
+        "handle_or_tag": "@MeridianReview",
+        "code_token": "SPEAKER_UNKNOWN"
+      }
+    },
+    {
+      "documentId": "holdout-17",
+      "path": "corpus/holdout-v6/original/holdout-17.md",
+      "genre": "case study",
+      "title": "Case Study: A Smaller Fictional Menu Reduced Waste and Hid a Capacity Limit",
+      "exactStrings": {
+        "url": "https://fernflour.example/cases/menu-11",
+        "ascii_email": "kitchen@fernflour.example",
+        "one_line_quote": "\"A cleaner average can conceal the hour when the shelf went empty.\"",
+        "money": "$8,420",
+        "percentage": "41.3%",
+        "handle_or_tag": "#FernFlourTest",
+        "code_token": "MENU-11"
+      }
+    },
+    {
+      "documentId": "holdout-18",
+      "path": "corpus/holdout-v6/original/holdout-18.md",
+      "genre": "usability research log",
+      "title": "Usability Log: The Fictional Kiosk Was Easier After We Removed “Easy Mode”",
+      "exactStrings": {
+        "url": "https://blueheron.example/research/kiosk",
+        "ascii_email": "access@blueheron.example",
+        "one_line_quote": "\"An accessible choice should describe the interface, not the person.\"",
+        "money": "$2,400",
+        "percentage": "26.6%",
+        "handle_or_tag": "@BlueHeronUX",
+        "code_token": "TEXT_SIZE"
+      }
+    },
+    {
+      "documentId": "holdout-19",
+      "path": "corpus/holdout-v6/original/holdout-19.md",
+      "genre": "launch note",
+      "title": "Launch Note: The Fictional Status Page Is Deliberately Boring",
+      "exactStrings": {
+        "url": "https://status.cloudberrydesk.example",
+        "ascii_email": "status@cloudberrydesk.example",
+        "one_line_quote": "\"A status page should reduce uncertainty, not advertise reliability.\"",
+        "money": "$4,800",
+        "percentage": "82.4%",
+        "handle_or_tag": "@CloudberryOnCall",
+        "code_token": "STATUS_V1"
+      }
+    },
+    {
+      "documentId": "holdout-20",
+      "path": "corpus/holdout-v6/original/holdout-20.md",
+      "genre": "board update",
+      "title": "Board Update: Pause the Fictional Expansion, Continue the Evidence Work",
+      "exactStrings": {
+        "url": "https://rivermark.example/board/evening",
+        "ascii_email": "board@rivermark.example",
+        "one_line_quote": "\"Growth is not the same decision as learning where demand lives.\"",
+        "money": "$118,000",
+        "percentage": "71%",
+        "handle_or_tag": "@RivermarkNumbers",
+        "code_token": "EVENING-8"
+      }
+    }
+  ]
+}
