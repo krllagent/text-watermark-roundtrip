@@ -49,6 +49,10 @@ from watermark_toy import Document, score_corpus, score_text
 
 ROOT = Path(__file__).resolve().parent
 SCRIPT_VERSION = "model-canary-luna-v1"
+CANDIDATE_LABEL = "luna"
+LUNA_EXECUTION_RUNNER_SHA256 = (
+    "08c2a730d664e3e1214380308e98001bade6126573c865046719c3a754171b7e"
+)
 MODEL = "openai/gpt-5.6-luna"
 EXPECTED_MODELS = (MODEL, f"{MODEL}-20260709")
 PROVIDER = "Azure"
@@ -514,7 +518,6 @@ def validate_checkpoint(
         "documentIds",
         "model",
         "route",
-        "runnerSha256",
         "schemaVersion",
         "scriptVersion",
         "sourceScore",
@@ -524,6 +527,11 @@ def validate_checkpoint(
     ):
         if state.get(field) != expected[field]:
             raise CanaryError(f"checkpoint binding changed: {field}")
+    allowed_runner_sha256s = {expected["runnerSha256"]}
+    if MODEL == "openai/gpt-5.6-luna":
+        allowed_runner_sha256s.add(LUNA_EXECUTION_RUNNER_SHA256)
+    if state.get("runnerSha256") not in allowed_runner_sha256s:
+        raise CanaryError("checkpoint binding changed: runnerSha256")
     calls = state.get("calls")
     if not isinstance(calls, list):
         raise CanaryError("checkpoint calls must be a list")
@@ -533,7 +541,7 @@ def validate_checkpoint(
         if not isinstance(row_value, dict):
             raise CanaryError("checkpoint completed call must be an object")
         document_id = DOCUMENT_IDS[index]
-        call_id = f"luna:{document_id}"
+        call_id = f"{CANDIDATE_LABEL}:{document_id}"
         source = sources[document_id]
         request = build_v4_draft_request(protect_tokens(source).masked)
         payload = expected_payload(request)
@@ -658,7 +666,7 @@ def run_live(path: Path, budget: Decimal, max_new_calls: int) -> dict[str, objec
         raise CanaryError(f"budget {budget} is below conservative reserve {required}")
     spent = Decimal(0)
     for document_id, source, request, reserve in requests:
-        call_id = f"luna:{document_id}"
+        call_id = f"{CANDIDATE_LABEL}:{document_id}"
         payload = expected_payload(request)
         payload_sha256 = object_sha256(payload)
         if payload_sha256 != PAYLOAD_SHA256S[document_id]:
