@@ -48,6 +48,8 @@ from watermark_toy import Document, score_corpus, score_text
 
 
 ROOT = Path(__file__).resolve().parent
+EXECUTION_ENGINE_PATH = Path(__file__).resolve()
+PREREQUISITE_BINDINGS: dict[str, object] = {}
 SCRIPT_VERSION = "model-canary-luna-v1"
 CANDIDATE_LABEL = "luna"
 LUNA_EXECUTION_RUNNER_SHA256 = (
@@ -490,8 +492,10 @@ def initial_checkpoint(
         "blindMapping": None,
         "calls": [],
         "documentIds": list(DOCUMENT_IDS),
+        "executionEngineSha256": sha256_file(EXECUTION_ENGINE_PATH),
         "inFlight": None,
         "model": MODEL,
+        "prerequisiteBindings": dict(PREREQUISITE_BINDINGS),
         "route": PROVIDER_TAG,
         "runnerSha256": sha256_file(Path(__file__)),
         "schemaVersion": 1,
@@ -532,6 +536,18 @@ def validate_checkpoint(
         allowed_runner_sha256s.add(LUNA_EXECUTION_RUNNER_SHA256)
     if state.get("runnerSha256") not in allowed_runner_sha256s:
         raise CanaryError("checkpoint binding changed: runnerSha256")
+    legacy_luna_checkpoint = (
+        MODEL == "openai/gpt-5.6-luna"
+        and state.get("runnerSha256") == LUNA_EXECUTION_RUNNER_SHA256
+    )
+    if state.get("executionEngineSha256") != expected["executionEngineSha256"] and not (
+        legacy_luna_checkpoint and state.get("executionEngineSha256") is None
+    ):
+        raise CanaryError("checkpoint binding changed: executionEngineSha256")
+    if state.get("prerequisiteBindings") != expected["prerequisiteBindings"] and not (
+        legacy_luna_checkpoint and state.get("prerequisiteBindings") is None
+    ):
+        raise CanaryError("checkpoint binding changed: prerequisiteBindings")
     calls = state.get("calls")
     if not isinstance(calls, list):
         raise CanaryError("checkpoint calls must be a list")
@@ -943,10 +959,12 @@ def dry_run() -> dict[str, object]:
             "f",
         ),
         "model": MODEL,
+        "prerequisiteBindings": dict(PREREQUISITE_BINDINGS),
         "payloadSha256s": payload_hashes,
         "route": PROVIDER_TAG,
         "runnerSha256": sha256_file(Path(__file__)),
         "sourceScore": score_sources(sources),
+        "executionEngineSha256": sha256_file(EXECUTION_ENGINE_PATH),
         "unmarkClientSha256": sha256_file(ROOT / "unmark.py"),
         "v9Binding": validate_v9(),
     }

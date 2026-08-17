@@ -35,10 +35,13 @@ ROOT = Path(__file__).resolve().parent
 DEFAULT_CHECKPOINT = ROOT / "results" / "model-canary-terra-checkpoint-v1.json"
 DEFAULT_PACKET = ROOT / "results" / "model-canary-terra-blind-v1.json"
 DEFAULT_FINAL = ROOT / "results" / "model-canary-terra-final-v1.json"
+LUNA_FINAL = ROOT / "results" / "model-canary-luna-final-v1.json"
+LUNA_FINAL_SHA256 = "dd551d96e9fc7a0caff550bc732e76e21ba7a25b1151bf93b3bde711bc537056"
 ORIGINAL_FINALIZE_REVIEW = engine.finalize_review
 
 
 def configure_engine() -> None:
+    luna_binding = validate_luna_rejection()
     engine.__file__ = __file__
     engine.SCRIPT_VERSION = "model-canary-terra-v1"
     engine.CANDIDATE_LABEL = "terra"
@@ -49,12 +52,32 @@ def configure_engine() -> None:
     engine.CACHE_READ_PRICE = CACHE_READ_PRICE
     engine.CACHE_WRITE_PRICE = CACHE_WRITE_PRICE
     engine.PAYLOAD_SHA256S = PAYLOAD_SHA256S
+    engine.PREREQUISITE_BINDINGS = luna_binding
     engine.DEFAULT_CHECKPOINT = DEFAULT_CHECKPOINT
     engine.DEFAULT_PACKET = DEFAULT_PACKET
     engine.DEFAULT_FINAL = DEFAULT_FINAL
     engine.fetch_catalog = fetch_catalog
     engine.validate_route_record = validate_route_record
     engine.finalize_review = finalize_review
+
+
+def validate_luna_rejection() -> dict[str, object]:
+    if engine.sha256_file(LUNA_FINAL) != LUNA_FINAL_SHA256:
+        raise engine.CanaryError("Luna rejection artifact hash changed")
+    result = engine.load_json(LUNA_FINAL, "Luna rejection artifact")
+    selection = engine.require_mapping(result.get("selection"), "Luna selection")
+    if (
+        selection.get("lunaPassed") is not False
+        or selection.get("nextStep") != "run_terra_development_gate"
+        or selection.get("selectedModel") is not None
+    ):
+        raise engine.CanaryError("Luna rejection no longer authorizes Terra")
+    return {
+        "lunaFinalPath": "results/model-canary-luna-final-v1.json",
+        "lunaFinalSha256": LUNA_FINAL_SHA256,
+        "lunaPassed": False,
+        "nextStep": "run_terra_development_gate",
+    }
 
 
 def fetch_catalog() -> dict[str, object]:
