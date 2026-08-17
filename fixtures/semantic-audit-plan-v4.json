@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "auditVersion": "exp002-verified-paraphrase-semantic-audit-v4",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Freeze one independent blinded review of all 20 v4 outputs after transformation outputs are immutable and before the judge is called. The judge sees only opaque source-candidate pairs and does not control transformation or repair. Doc-01 is reported as the development canary. Headline semantic-fidelity failures use only the 19 holdout documents doc-02 through doc-20. Protected exact-value and pipeline failures are computed separately by code.",
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    }
+  ],
+  "scope": {
+    "documentCountPerMethod": 20,
+    "methods": [
+      "paraphrase-verified-v4"
+    ],
+    "structuredPairCount": 20,
+    "developmentDocumentIds": [
+      "doc-01"
+    ],
+    "holdoutDocumentIds": [
+      "doc-02",
+      "doc-03",
+      "doc-04",
+      "doc-05",
+      "doc-06",
+      "doc-07",
+      "doc-08",
+      "doc-09",
+      "doc-10",
+      "doc-11",
+      "doc-12",
+      "doc-13",
+      "doc-14",
+      "doc-15",
+      "doc-16",
+      "doc-17",
+      "doc-18",
+      "doc-19",
+      "doc-20"
+    ],
+    "headlineFailureCohort": "holdout"
+  },
+  "blinding": {
+    "hideCost": true,
+    "hideDetectorResults": true,
+    "hideLatency": true,
+    "hideMethodId": true,
+    "reviewerReceivesOpaquePairId": true
+  },
+  "structuredFields": [
+    "lostClaims",
+    "addedClaims",
+    "changedClaims",
+    "lostOrChangedExamples",
+    "stanceDrift",
+    "certaintyDrift",
+    "caveatDrift",
+    "paragraphRoleOrOrderDrift",
+    "voiceDrift",
+    "evidenceNotes"
+  ],
+  "decisionRule": {
+    "fidelityFailureIfAny": [
+      "lostClaims",
+      "addedClaims",
+      "changedClaims",
+      "lostOrChangedExamples",
+      "stanceDrift",
+      "certaintyDrift",
+      "caveatDrift",
+      "paragraphRoleOrOrderDrift",
+      "protectedTokenFailure"
+    ],
+    "voiceDriftIsReportedSeparately": true
+  },
+  "reporting": {
+    "publishEveryStructuredFinding": true,
+    "publishOpaqueIdMappingAfterReview": true,
+    "reportDevelopmentSeparately": true,
+    "reportHoldoutFailureCountAndRate": true,
+    "retuneAfterResults": false
+  }
+}

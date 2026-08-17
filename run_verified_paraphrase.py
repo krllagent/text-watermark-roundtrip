@@ -1,7 +1,7 @@
-"""Run the frozen two-pass verified-paraphrase follow-up experiment.
+"""Run the frozen verified-paraphrase follow-up experiments.
 
-Dry-run reads only frozen local evidence. Live mode makes exactly two calls per
-document on one pinned OpenRouter endpoint, checkpoints every paid response,
+Dry-run reads only frozen local evidence. Live mode follows the exact frozen
+call graph on one pinned OpenRouter endpoint, checkpoints every paid response,
 and never retries a request whose charge status is unknown.
 """
 
@@ -34,17 +34,37 @@ from unmark import (
     OpenRouterClient,
     PlaceholderError,
     ProviderResponseError,
+    SEMANTIC_AUDIT_CATEGORIES,
+    SEMANTIC_AUDIT_DRAFT_QUOTE_MAX_CHARS,
+    SEMANTIC_AUDIT_DRAFT_QUOTE_MIN_CHARS,
+    SEMANTIC_AUDIT_MAX_CANONICAL_CHARS,
+    SEMANTIC_AUDIT_MAX_CORRECTIONS,
+    SEMANTIC_AUDIT_REQUIRED_CHANGE_MAX_CHARS,
+    SEMANTIC_AUDIT_RESPONSE_FORMAT_NAME,
+    SEMANTIC_AUDIT_SOURCE_NGRAM_WORDS,
+    SemanticAuditContractError,
+    StageRequest,
+    V4_STAGE_PAYLOAD_FIELDS,
+    V4_SYSTEM_INSTRUCTIONS,
     build_audit_guided_repair_prompt,
     build_fidelity_audit_prompt,
     build_fidelity_repair_prompt,
     build_paraphrase_prompt,
+    build_semantic_audit_request,
+    build_semantic_repair_request,
+    build_v4_draft_request,
     canonicalize_placeholders,
     json_safe_value,
+    parse_semantic_audit,
     protect_tokens,
     result_validation_issues,
+    request_messages,
+    request_utf8_size,
     restore_tokens,
+    semantic_audit_repair_issues,
+    semantic_audit_response_format,
 )
-from watermark_toy import encode_text, score_text
+from watermark_toy import Document, encode_text, score_corpus, score_text
 
 
 CONFIG_SCHEMA_VERSION = 2
@@ -56,6 +76,12 @@ V3_METHOD_ID = "paraphrase-verified-v3"
 V3_CALL_GRAPH = (
     "paraphrase-draft",
     "fidelity-audit",
+    "fidelity-repair",
+)
+V4_METHOD_ID = "paraphrase-verified-v4"
+V4_CALL_GRAPH = (
+    "paraphrase-draft",
+    "semantic-audit",
     "fidelity-repair",
 )
 
@@ -76,6 +102,10 @@ class VerifiedResponseContractError(VerifiedExperimentError):
     """Raised after preserving a paid response that violates the frozen route."""
 
 
+class VerifiedCanaryGateError(VerifiedExperimentError):
+    """Raised before holdout dispatch when the v4 development canary fails."""
+
+
 class VerifiedCallLimitReached(VerifiedExperimentError):
     """Intentional pause after a requested number of new calls."""
 
@@ -89,7 +119,14 @@ class VerifiedCallLimitReached(VerifiedExperimentError):
 
 
 class CompletionClient(Protocol):
-    def complete(self, prompt: str, *, model: str) -> ChatCompletion: ...
+    def complete(
+        self,
+        request: str | StageRequest,
+        *,
+        model: str,
+        max_tokens: int | None = None,
+        response_format: Mapping[str, object] | None = None,
+    ) -> ChatCompletion: ...
 
 
 @dataclass(frozen=True)
@@ -124,6 +161,10 @@ class VerifiedParaphraseConfig:
     reasoning_effort: str
     temperature: float
     max_tokens: int
+    stage_max_tokens: Mapping[str, int]
+    audit_max_corrections: int
+    parity_fixture_path: Path | None
+    parity_fixture_sha256: str | None
     seed: int
     timeout_seconds: float
     prompt_price_usd_per_million: Decimal
@@ -131,6 +172,14 @@ class VerifiedParaphraseConfig:
     prompt_token_overhead_reserve: int
     bootstrap_replicates: int
     bootstrap_seed: int
+    development_document_ids: tuple[str, ...]
+    holdout_document_ids: tuple[str, ...]
+    development_canary_exact_call_count: int
+    canary_min_final_normalized_word_distance: float
+    canary_min_final_to_draft_word_distance_ratio: float
+    article_demo_maximum_total_final_failures: int
+    article_demo_maximum_pipeline_defects: int
+    article_demo_minimum_mean_normalized_word_distance: float
     separate_final_audit: bool
     final_audit_model: str
     success_target: object
@@ -192,9 +241,94 @@ def load_verified_paraphrase_config(
         and transform.get("repairGrounding") == ["draft", "fidelity_audit"]
         and transform.get("finalRepairSeesSource") is False
     )
-    if not (is_v2 or is_v3):
+    is_v4 = (
+        method_id == V4_METHOD_ID
+        and transform.get("method") == V4_METHOD_ID
+        and call_graph == V4_CALL_GRAPH
+        and transform.get("auditPolicy") == "always_once"
+        and transform.get("repairPolicy") == "always_once"
+        and always_run_audit
+        and always_run_repair is True
+        and transform.get("auditGrounding") == ["masked_source", "draft"]
+        and transform.get("repairGrounding")
+        == ["draft", "validated_canonical_semantic_audit"]
+        and transform.get("finalRepairReceivesRawSource") is False
+        and transform.get("finalRepairReceivesRawAudit") is False
+        and transform.get("invalidAuditRepairInput") == "canonical_empty_corrections"
+        and transform.get("postRepairValidation")
+        == {
+            "eachAcceptedDraftQuoteMustBeChangedOrAbsent": True,
+            "failureCode": "semantic_audit_correction_unapplied",
+        }
+    )
+    if not (is_v2 or is_v3 or is_v4):
         raise ValueError("verified paraphrase must freeze a supported exact call graph")
-    if is_v3:
+    audit_max_corrections = 0
+    parity_fixture_path: Path | None = None
+    parity_fixture_sha256: str | None = None
+    if is_v4:
+        audit_contract = _mapping(
+            transform.get("auditContract"), "transform.auditContract"
+        )
+        expected_audit_contract = {
+            "categories": list(SEMANTIC_AUDIT_CATEGORIES),
+            "draftQuoteMaxChars": SEMANTIC_AUDIT_DRAFT_QUOTE_MAX_CHARS,
+            "draftQuoteMinChars": SEMANTIC_AUDIT_DRAFT_QUOTE_MIN_CHARS,
+            "maxCanonicalChars": SEMANTIC_AUDIT_MAX_CANONICAL_CHARS,
+            "maxCorrections": SEMANTIC_AUDIT_MAX_CORRECTIONS,
+            "requiredChangeMaxChars": SEMANTIC_AUDIT_REQUIRED_CHANGE_MAX_CHARS,
+            "responseFormatName": SEMANTIC_AUDIT_RESPONSE_FORMAT_NAME,
+            "sourceNgramWords": SEMANTIC_AUDIT_SOURCE_NGRAM_WORDS,
+            "strictJsonSchema": True,
+        }
+        if dict(audit_contract) != expected_audit_contract:
+            raise ValueError("v4 semantic audit contract differs from frozen code")
+        audit_max_corrections = SEMANTIC_AUDIT_MAX_CORRECTIONS
+        request_boundary = _mapping(
+            transform.get("requestBoundary"), "transform.requestBoundary"
+        )
+        expected_request_boundary = {
+            "instructionRole": "system",
+            "messageCount": 2,
+            "stagePayloadFields": {
+                stage: list(fields) for stage, fields in V4_STAGE_PAYLOAD_FIELDS.items()
+            },
+            "systemInstructionSha256": {
+                stage: hashlib.sha256(instruction.encode("utf-8")).hexdigest()
+                for stage, instruction in V4_SYSTEM_INSTRUCTIONS.items()
+            },
+            "untrustedPayloadRole": "user",
+            "userPayloadEncoding": "canonical_json_utf8",
+        }
+        boundary_without_parity = {
+            key: value
+            for key, value in request_boundary.items()
+            if key not in {"parityFixturePath", "parityFixtureSha256"}
+        }
+        if boundary_without_parity != expected_request_boundary:
+            raise ValueError("v4 request message boundary differs from frozen code")
+        parity_fixture_path = _safe_path(
+            root_path,
+            request_boundary.get("parityFixturePath"),
+            "transform.requestBoundary.parityFixturePath",
+        )
+        parity_fixture_sha256 = _sha256(
+            request_boundary.get("parityFixtureSha256"),
+            "transform.requestBoundary.parityFixtureSha256",
+        )
+        _require_sha(
+            parity_fixture_path,
+            parity_fixture_sha256,
+            "v4 request parity fixture",
+        )
+        parity_fixture = _json_object(
+            parity_fixture_path.read_bytes(), "v4 request parity fixture"
+        )
+        if parity_fixture.get("schemaVersion") != 1:
+            raise ValueError("v4 request parity fixture schemaVersion differs")
+        _validate_evidence(parity_fixture, "v4 request parity fixture")
+
+    if is_v3 or is_v4:
         pilot = _mapping(raw.get("priorPilot"), "priorPilot")
         pilot_config_path = _safe_path(
             root_path, pilot.get("configPath"), "prior pilot config"
@@ -214,12 +348,18 @@ def load_verified_paraphrase_config(
             pilot_checkpoint_sha,
             "prior pilot checkpoint",
         )
-        if (
-            pilot.get("completedCalls") != 2
-            or pilot.get("decision")
-            != "abort_before_full_matrix_source_copy_collapse"
+        if is_v3:
+            if (
+                pilot.get("completedCalls") != 2
+                or pilot.get("decision")
+                != "abort_before_full_matrix_source_copy_collapse"
+            ):
+                raise ValueError("v3 must bind the exact aborted v2 pilot")
+        elif (
+            pilot.get("completedCalls") != 3
+            or pilot.get("decision") != "abort_source_copy_via_audit"
         ):
-            raise ValueError("v3 must bind the exact aborted v2 pilot")
+            raise ValueError("v4 must bind the exact aborted v3 pilot")
 
     provider = _mapping(raw.get("provider"), "provider")
     if provider.get("transport") != "openrouter":
@@ -242,7 +382,9 @@ def load_verified_paraphrase_config(
     if allow_fallbacks is not False:
         raise ValueError("verified paraphrase fallbacks must be disabled")
     if data_collection != "deny" or zdr is not True:
-        raise ValueError("verified paraphrase must deny data collection and require ZDR")
+        raise ValueError(
+            "verified paraphrase must deny data collection and require ZDR"
+        )
     if require_parameters is not True:
         raise ValueError("verified paraphrase must require endpoint parameters")
     reasoning_effort = _text(
@@ -254,6 +396,29 @@ def load_verified_paraphrase_config(
     if temperature_value != 0 or isinstance(temperature_value, bool):
         raise ValueError("verified paraphrase temperature must be zero")
     max_tokens = _positive_int(provider.get("maxTokens"), "provider.maxTokens")
+    if is_v4:
+        raw_stage_max_tokens = _mapping(
+            provider.get("stageMaxTokens"), "provider.stageMaxTokens"
+        )
+        if set(raw_stage_max_tokens) != set(V4_CALL_GRAPH):
+            raise ValueError("v4 stageMaxTokens must match the exact call graph")
+        stage_max_tokens = {
+            stage: _positive_int(
+                raw_stage_max_tokens.get(stage), f"provider.stageMaxTokens.{stage}"
+            )
+            for stage in V4_CALL_GRAPH
+        }
+        if any(value > max_tokens for value in stage_max_tokens.values()):
+            raise ValueError("v4 stage output cap exceeds provider.maxTokens")
+        if not (
+            stage_max_tokens["semantic-audit"] < stage_max_tokens["paraphrase-draft"]
+            and stage_max_tokens["semantic-audit"] < stage_max_tokens["fidelity-repair"]
+        ):
+            raise ValueError("v4 semantic-audit output cap must be the smallest")
+    else:
+        if "stageMaxTokens" in provider:
+            raise ValueError("stageMaxTokens is only valid for v4")
+        stage_max_tokens = {stage: max_tokens for stage in call_graph}
     seed = _nonnegative_int(provider.get("seed"), "provider.seed")
     timeout_seconds = _positive_number(
         provider.get("timeoutSeconds"), "provider.timeoutSeconds"
@@ -263,9 +428,7 @@ def load_verified_paraphrase_config(
         "provider.pricingUsdPerMillionTokens",
     )
     prompt_price = _decimal(prices.get("prompt"), "provider prompt price")
-    completion_price = _decimal(
-        prices.get("completion"), "provider completion price"
-    )
+    completion_price = _decimal(prices.get("completion"), "provider completion price")
     max_prices = _mapping(
         provider.get("maxPriceUsdPerMillionTokens"),
         "provider.maxPriceUsdPerMillionTokens",
@@ -273,9 +436,7 @@ def load_verified_paraphrase_config(
     if (
         _decimal(max_prices.get("prompt"), "provider maximum prompt price")
         != prompt_price
-        or _decimal(
-            max_prices.get("completion"), "provider maximum completion price"
-        )
+        or _decimal(max_prices.get("completion"), "provider maximum completion price")
         != completion_price
     ):
         raise ValueError("provider price ceiling must equal the frozen endpoint price")
@@ -313,7 +474,10 @@ def load_verified_paraphrase_config(
         != completion_price
     ):
         raise ValueError("provider endpoint price binding mismatch")
-    if _positive_int(endpoint.get("maxCompletionTokens"), "endpoint maximum") < max_tokens:
+    if (
+        _positive_int(endpoint.get("maxCompletionTokens"), "endpoint maximum")
+        < max_tokens
+    ):
         raise ValueError("provider endpoint maximum is below configured maxTokens")
 
     billing = _mapping(raw.get("billing"), "billing")
@@ -331,8 +495,64 @@ def load_verified_paraphrase_config(
     analysis = _mapping(raw.get("analysis"), "analysis")
     if analysis.get("documentCount") != document_count:
         raise ValueError("analysis document count mismatch")
-    if analysis.get("primaryScoringUnit") != "pooled_corpus":
-        raise ValueError("analysis scoring unit must be pooled_corpus")
+    if analysis.get("qualityMetric") != "normalized_word_levenshtein":
+        raise ValueError("analysis quality metric is not frozen")
+    if analysis.get("resamplingUnit") != "document_id":
+        raise ValueError("analysis resampling unit is not frozen")
+    if is_v4:
+        development_document_ids = _string_tuple(
+            analysis.get("developmentDocumentIds"),
+            "analysis.developmentDocumentIds",
+        )
+        holdout_document_ids = _string_tuple(
+            analysis.get("holdoutDocumentIds"),
+            "analysis.holdoutDocumentIds",
+        )
+        if development_document_ids != ("doc-01",):
+            raise ValueError("v4 development cohort must be exactly doc-01")
+        if holdout_document_ids != EXPECTED_DOCUMENT_IDS[1:]:
+            raise ValueError("v4 holdout cohort must be exactly doc-02 through doc-20")
+        if set(development_document_ids) & set(holdout_document_ids):
+            raise ValueError("v4 development and holdout cohorts overlap")
+        if development_document_ids + holdout_document_ids != EXPECTED_DOCUMENT_IDS:
+            raise ValueError("v4 cohorts do not partition the frozen corpus")
+        if (
+            analysis.get("primaryDocumentCount") != 19
+            or analysis.get("primaryScoringUnit") != "holdout_pooled_corpus"
+            or analysis.get("secondaryScoringUnit") != "all_20_documents"
+            or analysis.get("headlineFidelityCohort") != "holdout"
+            or analysis.get("finalAuditScope")
+            != "all_20_documents_with_holdout_headline"
+        ):
+            raise ValueError("v4 primary holdout analysis contract differs")
+        canary_gate = _mapping(
+            raw.get("developmentCanaryGate"), "developmentCanaryGate"
+        )
+        expected_canary_gate = {
+            "developmentOnlyNotProductSuccessTarget": True,
+            "documentId": "doc-01",
+            "exactCallCount": 3,
+            "minFinalNormalizedWordDistance": 0.15,
+            "minFinalToDraftWordDistanceRatio": 0.60,
+            "onFail": "abort_v4_before_holdout",
+            "onPass": "resume_exact_same_v4_without_changes",
+            "requireNoPipelineIssues": True,
+            "requireRouteFinishAndUsageContracts": True,
+            "requireSemanticAuditValidationStatus": "accepted",
+        }
+        if dict(canary_gate) != expected_canary_gate:
+            raise ValueError("v4 development canary gate differs from frozen contract")
+        development_canary_exact_call_count = 3
+        canary_min_final_normalized_word_distance = 0.15
+        canary_min_final_to_draft_word_distance_ratio = 0.60
+    else:
+        if analysis.get("primaryScoringUnit") != "pooled_corpus":
+            raise ValueError("analysis scoring unit must be pooled_corpus")
+        development_document_ids = ()
+        holdout_document_ids = EXPECTED_DOCUMENT_IDS
+        development_canary_exact_call_count = 0
+        canary_min_final_normalized_word_distance = 0.0
+        canary_min_final_to_draft_word_distance_ratio = 0.0
     bootstrap_replicates = _positive_int(
         analysis.get("bootstrapReplicates"), "analysis.bootstrapReplicates"
     )
@@ -351,6 +571,41 @@ def load_verified_paraphrase_config(
     ):
         raise ValueError("final semantic audit must be independent and cover 20 pairs")
     final_audit_model = _text(final_audit.get("model"), "finalAudit.model")
+    final_audit_provider_order = _string_tuple(
+        final_audit.get("providerOrder"), "finalAudit.providerOrder"
+    )
+    final_audit_endpoint_path = _safe_path(
+        root_path,
+        final_audit.get("endpointSnapshotPath"),
+        "finalAudit.endpointSnapshotPath",
+    )
+    final_audit_endpoint_sha = _sha256(
+        final_audit.get("endpointSnapshotSha256"),
+        "finalAudit.endpointSnapshotSha256",
+    )
+    _require_sha(
+        final_audit_endpoint_path,
+        final_audit_endpoint_sha,
+        "final audit endpoint snapshot",
+    )
+    final_audit_endpoint_snapshot = _json_object(
+        final_audit_endpoint_path.read_bytes(), "final audit endpoint snapshot"
+    )
+    final_audit_endpoint = _mapping(
+        final_audit_endpoint_snapshot.get("endpoint"), "final audit endpoint"
+    )
+    if final_audit_endpoint_snapshot.get("requestedModelId") != final_audit_model:
+        raise ValueError("final audit endpoint model binding mismatch")
+    if final_audit_endpoint.get("tag") not in final_audit_provider_order:
+        raise ValueError("final audit endpoint provider binding mismatch")
+    if is_v4:
+        final_audit_plan_path = _safe_path(
+            root_path, final_audit.get("planPath"), "finalAudit.planPath"
+        )
+        final_audit_plan_sha = _sha256(
+            final_audit.get("planSha256"), "finalAudit.planSha256"
+        )
+        _require_sha(final_audit_plan_path, final_audit_plan_sha, "final audit plan")
 
     decision = _mapping(raw.get("decisionPolicy"), "decisionPolicy")
     success_target = decision.get("successTarget")
@@ -359,6 +614,38 @@ def load_verified_paraphrase_config(
         raise ValueError("v2 cannot freeze a success target or retune after results")
     if decision.get("publishAllOutputs") is not True:
         raise ValueError("v2 must publish every output")
+    if is_v4:
+        article_demo_gate = _mapping(
+            decision.get("articleDemoGate"), "decisionPolicy.articleDemoGate"
+        )
+        expected_article_demo_gate = {
+            "cohort": "holdout",
+            "costAndLatency": "always_publish_without_pass_threshold",
+            "documentCount": 19,
+            "enableDemoOnlyIf": {
+                "maximumPipelineDefects": 0,
+                "maximumTotalFinalFailures": 1,
+                "minimumMeanNormalizedWordDistance": 0.15,
+                "pooledDetectorStatus": "not_detected",
+            },
+            "onFail": (
+                "publish_advanced_result_as_negative_or_mixed_and_keep_demo_off"
+            ),
+            "onPass": "publish_article_with_best_only_demo_enabled",
+        }
+        if dict(article_demo_gate) != expected_article_demo_gate:
+            raise ValueError(
+                "v4 article/demo decision gate differs from frozen contract"
+            )
+        article_demo_maximum_total_final_failures = 1
+        article_demo_maximum_pipeline_defects = 0
+        article_demo_minimum_mean_normalized_word_distance = 0.15
+    else:
+        if "articleDemoGate" in decision:
+            raise ValueError("articleDemoGate is only valid for v4")
+        article_demo_maximum_total_final_failures = 0
+        article_demo_maximum_pipeline_defects = 0
+        article_demo_minimum_mean_normalized_word_distance = 0.0
 
     return VerifiedParaphraseConfig(
         path=config_path,
@@ -391,6 +678,10 @@ def load_verified_paraphrase_config(
         reasoning_effort=reasoning_effort,
         temperature=0.0,
         max_tokens=max_tokens,
+        stage_max_tokens=stage_max_tokens,
+        audit_max_corrections=audit_max_corrections,
+        parity_fixture_path=parity_fixture_path,
+        parity_fixture_sha256=parity_fixture_sha256,
         seed=seed,
         timeout_seconds=timeout_seconds,
         prompt_price_usd_per_million=prompt_price,
@@ -398,6 +689,22 @@ def load_verified_paraphrase_config(
         prompt_token_overhead_reserve=overhead,
         bootstrap_replicates=bootstrap_replicates,
         bootstrap_seed=bootstrap_seed,
+        development_document_ids=development_document_ids,
+        holdout_document_ids=holdout_document_ids,
+        development_canary_exact_call_count=development_canary_exact_call_count,
+        canary_min_final_normalized_word_distance=(
+            canary_min_final_normalized_word_distance
+        ),
+        canary_min_final_to_draft_word_distance_ratio=(
+            canary_min_final_to_draft_word_distance_ratio
+        ),
+        article_demo_maximum_total_final_failures=(
+            article_demo_maximum_total_final_failures
+        ),
+        article_demo_maximum_pipeline_defects=(article_demo_maximum_pipeline_defects),
+        article_demo_minimum_mean_normalized_word_distance=(
+            article_demo_minimum_mean_normalized_word_distance
+        ),
         separate_final_audit=separate_final_audit,
         final_audit_model=final_audit_model,
         success_target=success_target,
@@ -408,7 +715,7 @@ def load_verified_paraphrase_config(
 def expected_verified_call_ids(
     config: VerifiedParaphraseConfig,
 ) -> tuple[str, ...]:
-    """Return the exact 40-call alternating matrix."""
+    """Return the exact document-major call matrix for the frozen version."""
     return tuple(
         f"{document_id}:{config.method_id}:{stage}"
         for document_id in EXPECTED_DOCUMENT_IDS
@@ -422,13 +729,29 @@ def build_verified_dry_run(
     """Build a conservative local planning estimate without reading credentials."""
     marked = _load_frozen_marked_documents(config)
     prompt_estimate = 0
-    draft_completion_estimate = config.max_tokens * 4
+    draft_completion_estimate = config.stage_max_tokens["paraphrase-draft"] * 4
     for document_id in EXPECTED_DOCUMENT_IDS:
         protected = protect_tokens(marked[document_id])
-        draft_prompt = build_paraphrase_prompt(protected.masked)
-        prompt_estimate += len(draft_prompt.encode("utf-8"))
+        draft_prompt: str | StageRequest = (
+            build_v4_draft_request(protected.masked)
+            if config.method_id == V4_METHOD_ID
+            else build_paraphrase_prompt(protected.masked)
+        )
+        prompt_estimate += request_utf8_size(draft_prompt)
         estimated_draft = "x" * draft_completion_estimate
-        if config.always_run_audit:
+        if config.method_id == V4_METHOD_ID:
+            audit_prompt = build_semantic_audit_request(
+                protected.masked,
+                estimated_draft,
+            )
+            repair_prompt = build_semantic_repair_request(
+                estimated_draft,
+                '{"corrections":[]}',
+            )
+            prompt_estimate += request_utf8_size(audit_prompt)
+            prompt_estimate += request_utf8_size(repair_prompt)
+            prompt_estimate += SEMANTIC_AUDIT_MAX_CANONICAL_CHARS
+        elif config.always_run_audit:
             audit_prompt = build_fidelity_audit_prompt(
                 protected.masked,
                 estimated_draft,
@@ -437,17 +760,19 @@ def build_verified_dry_run(
                 estimated_draft,
                 "x" * draft_completion_estimate,
             )
-            prompt_estimate += len(audit_prompt.encode("utf-8"))
-            prompt_estimate += len(repair_prompt.encode("utf-8"))
+            prompt_estimate += request_utf8_size(audit_prompt)
+            prompt_estimate += request_utf8_size(repair_prompt)
         else:
             repair_prompt = build_fidelity_repair_prompt(
                 protected.masked,
                 estimated_draft,
             )
-            prompt_estimate += len(repair_prompt.encode("utf-8"))
+            prompt_estimate += request_utf8_size(repair_prompt)
     call_count = config.document_count * len(config.call_graph)
     prompt_estimate += call_count * config.prompt_token_overhead_reserve
-    completion_estimate = call_count * config.max_tokens
+    completion_estimate = config.document_count * sum(
+        config.stage_max_tokens[stage] for stage in config.call_graph
+    )
     return {
         "callCount": call_count,
         "callsByStage": {
@@ -455,6 +780,8 @@ def build_verified_dry_run(
         },
         "configSha256": config.sha256,
         "documentCount": config.document_count,
+        "developmentDocumentIds": list(config.development_document_ids),
+        "holdoutDocumentIds": list(config.holdout_document_ids),
         "experimentVersion": config.experiment_version,
         "methodology": (
             "Local-only conservative planning estimate. UTF-8 prompt bytes stand in "
@@ -485,7 +812,7 @@ def run_verified_live(
     confirm_not_charged_call_id: str | None = None,
     clock: Callable[[], float] = time.perf_counter,
 ) -> dict[str, object]:
-    """Run or resume the frozen two-pass matrix and return its raw artifact."""
+    """Run or resume the frozen matrix and return its raw artifact."""
     budget = _required_budget(max_provider_cost_credits)
     if max_new_calls is not None and (
         not isinstance(max_new_calls, int)
@@ -509,6 +836,26 @@ def run_verified_live(
         confirm_not_charged_call_id=confirm_not_charged_call_id,
         clock=clock,
     )
+    canary_gate_report: dict[str, object] | None = None
+    if config.method_id == V4_METHOD_ID:
+        completed = len(manager.calls)
+        required = config.development_canary_exact_call_count
+        if completed < required:
+            remaining = required - completed
+            if max_new_calls != remaining:
+                raise VerifiedCanaryGateError(
+                    "v4 must checkpoint exactly the remaining development canary "
+                    f"calls before any holdout dispatch; use max_new_calls={remaining}"
+                )
+        else:
+            canary_gate_report = build_v4_canary_gate(
+                config,
+                checkpoint_path=checkpoint_path,
+            )
+            if canary_gate_report.get("status") != "go":
+                raise VerifiedCanaryGateError(
+                    "v4 development canary failed; holdout dispatch is disabled"
+                )
 
     rows: list[dict[str, object]] = []
     scores = []
@@ -537,13 +884,22 @@ def run_verified_live(
 
         protected = protect_tokens(marked_text)
         issues: list[dict[str, str]] = []
-        draft_prompt = build_paraphrase_prompt(protected.masked)
+        draft_prompt: str | StageRequest = (
+            build_v4_draft_request(protected.masked)
+            if config.method_id == V4_METHOD_ID
+            else build_paraphrase_prompt(protected.masked)
+        )
         draft, draft_record = manager.complete(
             call_id=f"{document.document_id}:{config.method_id}:paraphrase-draft",
             document_id=document.document_id,
             stage="paraphrase-draft",
             input_text=protected.masked,
             prompt=draft_prompt,
+            max_tokens=(
+                config.stage_max_tokens["paraphrase-draft"]
+                if config.method_id == V4_METHOD_ID
+                else None
+            ),
         )
         if draft.finish_reason != "stop":
             issues.append(
@@ -556,7 +912,58 @@ def run_verified_live(
 
         fidelity_audit: ChatCompletion | None = None
         audit_record: dict[str, object] | None = None
-        if config.always_run_audit:
+        validated_semantic_audit: str | None = None
+        parsed_semantic_audit = None
+        semantic_audit_status: str | None = None
+        if config.method_id == V4_METHOD_ID:
+            audit_prompt = build_semantic_audit_request(
+                protected.masked,
+                draft.content,
+            )
+            fidelity_audit, audit_record = manager.complete(
+                call_id=f"{document.document_id}:{config.method_id}:semantic-audit",
+                document_id=document.document_id,
+                stage="semantic-audit",
+                input_text=draft.content,
+                prompt=audit_prompt,
+                max_tokens=config.stage_max_tokens["semantic-audit"],
+                response_format=semantic_audit_response_format(),
+            )
+            if fidelity_audit.finish_reason != "stop":
+                issues.append(
+                    {
+                        "code": "finish_reason_contract",
+                        "message": (
+                            "semantic audit finish reason was "
+                            f"{fidelity_audit.finish_reason!r}"
+                        ),
+                        "stage": "semantic-audit",
+                    }
+                )
+            try:
+                parsed_audit = parse_semantic_audit(
+                    fidelity_audit.content,
+                    source_masked=protected.masked,
+                    draft_masked=draft.content,
+                )
+                validated_semantic_audit = parsed_audit.canonical_json
+                parsed_semantic_audit = parsed_audit
+                semantic_audit_status = "accepted"
+            except SemanticAuditContractError as error:
+                validated_semantic_audit = '{"corrections":[]}'
+                semantic_audit_status = "validation_failure_empty_fallback"
+                issues.append(
+                    {
+                        "code": "semantic_audit_contract",
+                        "message": str(error),
+                        "stage": "semantic-audit",
+                    }
+                )
+            repair_prompt = build_semantic_repair_request(
+                draft.content,
+                validated_semantic_audit,
+            )
+        elif config.always_run_audit:
             audit_prompt = build_fidelity_audit_prompt(
                 protected.masked,
                 draft.content,
@@ -594,6 +1001,11 @@ def run_verified_live(
             stage="fidelity-repair",
             input_text=draft.content,
             prompt=repair_prompt,
+            max_tokens=(
+                config.stage_max_tokens["fidelity-repair"]
+                if config.method_id == V4_METHOD_ID
+                else None
+            ),
         )
         if repair.finish_reason != "stop":
             issues.append(
@@ -610,6 +1022,12 @@ def run_verified_live(
             canonical = canonicalize_placeholders(final_masked, protected.tokens)
             for issue in result_validation_issues(protected.masked, canonical, None):
                 issues.append({"stage": "final", **issue})
+            if parsed_semantic_audit is not None:
+                for issue in semantic_audit_repair_issues(
+                    parsed_semantic_audit,
+                    canonical,
+                ):
+                    issues.append({"stage": "final", **issue})
             output = restore_tokens(canonical, protected.tokens)
             final_masked = canonical
         except PlaceholderError as error:
@@ -658,10 +1076,10 @@ def run_verified_live(
                     "issues": issues,
                     "rawDraftMaskedText": draft.content,
                     "rawFidelityAuditText": (
-                        fidelity_audit.content
-                        if fidelity_audit is not None
-                        else None
+                        fidelity_audit.content if fidelity_audit is not None else None
                     ),
+                    "semanticAuditValidationStatus": semantic_audit_status,
+                    "validatedCanonicalSemanticAudit": validated_semantic_audit,
                     "rawFinalMaskedText": repair.content,
                     "restorationMode": restoration_mode,
                     "status": "validation_failure" if issues else "accepted",
@@ -671,19 +1089,59 @@ def run_verified_live(
 
     method = {
         "aggregate": _aggregate_method(rows, scores),
+        "aggregateScope": "all_20_documents_secondary"
+        if config.method_id == V4_METHOD_ID
+        else "all_20_documents",
         "documents": rows,
         "method": config.method_id,
         "methodId": config.method_id,
         "pivot": None,
     }
+    analysis_cohorts: dict[str, object] | None = None
+    if config.method_id == V4_METHOD_ID:
+        analysis_cohorts = {
+            "development": _build_verified_cohort(
+                rows,
+                config.development_document_ids,
+                key=base_config.key,
+                density_bps=base_config.density_bps,
+                lexicon=corpus.lexicon,
+                context_width=base_config.context_width,
+                min_active_positions=base_config.min_active_positions,
+            ),
+            "holdoutPrimary": _build_verified_cohort(
+                rows,
+                config.holdout_document_ids,
+                key=base_config.key,
+                density_bps=base_config.density_bps,
+                lexicon=corpus.lexicon,
+                context_width=base_config.context_width,
+                min_active_positions=base_config.min_active_positions,
+            ),
+        }
     artifact = {
+        **(
+            {"analysisCohorts": analysis_cohorts}
+            if analysis_cohorts is not None
+            else {}
+        ),
         "baseExperimentConfigSha256": config.base_config_sha256,
         "baseExperimentResultSha256": config.base_result_sha256,
         "configSha256": config.sha256,
         "documentCount": config.document_count,
+        **(
+            {"developmentCanaryGate": canary_gate_report}
+            if canary_gate_report is not None
+            else {}
+        ),
         "endpointSnapshotSha256": config.endpoint_snapshot_sha256,
         "experimentVersion": config.experiment_version,
         "finalAudit": {
+            "developmentDocumentIds": list(config.development_document_ids),
+            "headlineFailureCohort": (
+                "holdout" if config.method_id == V4_METHOD_ID else "all_documents"
+            ),
+            "holdoutDocumentIds": list(config.holdout_document_ids),
             "model": config.final_audit_model,
             "required": True,
             "separateFromRepair": config.separate_final_audit,
@@ -692,6 +1150,14 @@ def run_verified_live(
         "methodology": config.methodology,
         "methods": [method],
         "schemaVersion": ARTIFACT_SCHEMA_VERSION,
+        "decisionPolicy": {
+            "articleDemoGate": {
+                "criteria": config.raw["decisionPolicy"]["articleDemoGate"],
+                "status": "pending_final_audit",
+            }
+        }
+        if config.method_id == V4_METHOD_ID
+        else {"publishAllOutputs": True},
         "sources": list(config.sources),
         "usage": {
             **aggregate_call_usage(manager.calls),
@@ -701,6 +1167,137 @@ def run_verified_live(
     }
     canonical_json_bytes(artifact)
     return artifact
+
+
+def _build_verified_cohort(
+    rows: Sequence[Mapping[str, object]],
+    document_ids: Sequence[str],
+    *,
+    key: bytes,
+    density_bps: int,
+    lexicon: object,
+    context_width: int,
+    min_active_positions: int,
+) -> dict[str, object]:
+    """Aggregate one preregistered cohort without folding development into holdout."""
+    by_id = {_text(row.get("documentId"), "cohort documentId"): row for row in rows}
+    if len(by_id) != len(rows):
+        raise ValueError("cohort source rows contain duplicate document IDs")
+    selected: list[Mapping[str, object]] = []
+    for document_id in document_ids:
+        if document_id not in by_id:
+            raise ValueError(f"cohort source row is missing: {document_id}")
+        selected.append(by_id[document_id])
+    if not selected:
+        raise ValueError("verified cohort must not be empty")
+
+    detector = score_corpus(
+        tuple(
+            Document(
+                document_id=_text(row.get("documentId"), "cohort documentId"),
+                text=_text(row.get("outputText"), "cohort outputText"),
+            )
+            for row in selected
+        ),
+        key=key,
+        density_bps=density_bps,
+        lexicon=lexicon,  # type: ignore[arg-type]
+        context_width=context_width,
+        min_active_positions=min_active_positions,
+    ).to_dict()
+    calls = [
+        call
+        for row in selected
+        for call in _mapping_list(row.get("calls"), "cohort calls")
+    ]
+    usage = aggregate_call_usage(calls)
+    total_cost = _decimal(usage["providerCostCredits"], "cohort provider cost")
+    fidelities = [_mapping(row.get("fidelity"), "cohort fidelity") for row in selected]
+    word_metrics = [
+        _mapping(fidelity.get("wordLevenshtein"), "cohort wordLevenshtein")
+        for fidelity in fidelities
+    ]
+    length_metrics = [
+        _mapping(fidelity.get("length"), "cohort length") for fidelity in fidelities
+    ]
+    paragraph_metrics = [
+        _mapping(fidelity.get("paragraphs"), "cohort paragraphs")
+        for fidelity in fidelities
+    ]
+    protected_metrics = [
+        _mapping(fidelity.get("protectedTokens"), "cohort protectedTokens")
+        for fidelity in fidelities
+    ]
+    fingerprints = [
+        _mapping(row.get("fingerprints"), "cohort fingerprints") for row in selected
+    ]
+    input_words = sum(
+        _nonnegative_int(metric.get("originalWordCount"), "originalWordCount")
+        for metric in word_metrics
+    )
+    transformation_failures = sum(
+        fidelity.get("failure") is True for fidelity in fidelities
+    )
+    audit_contract_failures = sum(
+        "semantic_audit_contract"
+        in _string_list(fidelity.get("failureReasons"), "failureReasons")
+        for fidelity in fidelities
+    )
+    usage.update(
+        {
+            "providerCostCreditsPer1000Documents": _decimal_text(
+                total_cost * Decimal(1000) / len(selected)
+            ),
+            "providerCostCreditsPer1000MarkedInputWords": (
+                _decimal_text(total_cost * Decimal(1000) / input_words)
+                if input_words
+                else None
+            ),
+            "totalInputWordCount": input_words,
+        }
+    )
+    fingerprint_totals = {
+        field: sum(_nonnegative_int(item.get(field), field) for item in fingerprints)
+        for field in (
+            "baselineActive",
+            "lostActive",
+            "newActive",
+            "outputActive",
+            "survivingActive",
+        )
+    }
+    return {
+        "aggregate": {
+            "detector": detector,
+            "fidelity": {
+                "allProtectedTokensExactlyRestored": all(
+                    metric.get("exactlyRestored") is True
+                    for metric in protected_metrics
+                ),
+                "meanLengthRatio": sum(
+                    float(metric["outputPerInput"]) for metric in length_metrics
+                )
+                / len(selected),
+                "meanNormalizedWordDistance": sum(
+                    float(metric["normalizedDistance"]) for metric in word_metrics
+                )
+                / len(selected),
+                "meanParagraphRatio": sum(
+                    float(metric["outputPerInput"]) for metric in paragraph_metrics
+                )
+                / len(selected),
+                "semanticAuditContractFailureCount": audit_contract_failures,
+                "transformationValidationFailureCount": transformation_failures,
+                "transformationValidationFailureRate": (
+                    transformation_failures / len(selected)
+                ),
+            },
+            "fingerprints": fingerprint_totals,
+            "usage": usage,
+        },
+        "documentIds": list(document_ids),
+        "documentCount": len(selected),
+    }
 
 
 class _VerifiedCheckpointManager:
@@ -746,9 +1343,13 @@ class _VerifiedCheckpointManager:
                     "checking provider activity"
                 )
             if len(self.calls) >= len(expected_call_ids):
-                raise VerifiedCheckpointError("in-flight call follows a complete matrix")
+                raise VerifiedCheckpointError(
+                    "in-flight call follows a complete matrix"
+                )
             if tombstone.get("callId") != expected_call_ids[len(self.calls)]:
-                raise VerifiedCheckpointError("in-flight call is not the next matrix call")
+                raise VerifiedCheckpointError(
+                    "in-flight call is not the next matrix call"
+                )
 
     def complete(
         self,
@@ -757,8 +1358,35 @@ class _VerifiedCheckpointManager:
         document_id: str,
         stage: str,
         input_text: str,
-        prompt: str,
+        prompt: str | StageRequest,
+        max_tokens: int | None = None,
+        response_format: Mapping[str, object] | None = None,
     ) -> tuple[ChatCompletion, dict[str, object]]:
+        if self.config.method_id == V4_METHOD_ID:
+            if not isinstance(prompt, StageRequest) or prompt.stage != stage:
+                raise VerifiedCheckpointError(
+                    "v4 call must use the exact stage-bound message request"
+                )
+        elif isinstance(prompt, StageRequest):
+            raise VerifiedCheckpointError("stage requests are only valid for v4")
+        effective_max_tokens = (
+            self.config.max_tokens if max_tokens is None else max_tokens
+        )
+        if (
+            not isinstance(effective_max_tokens, int)
+            or isinstance(effective_max_tokens, bool)
+            or effective_max_tokens <= 0
+            or effective_max_tokens > self.config.max_tokens
+        ):
+            raise VerifiedCheckpointError(
+                "call max_tokens differs from the frozen contract"
+            )
+        normalized_response_format: dict[str, object] | None = None
+        if response_format is not None:
+            normalized = json_safe_value(response_format)
+            if not isinstance(normalized, dict) or not normalized:
+                raise VerifiedCheckpointError("call response_format is invalid")
+            normalized_response_format = normalized
         try:
             expected_index = self.expected_call_ids.index(call_id)
         except ValueError as error:
@@ -772,9 +1400,19 @@ class _VerifiedCheckpointManager:
                 stage=stage,
                 input_text=input_text,
                 prompt=prompt,
+                max_tokens=max_tokens,
+                response_format=normalized_response_format,
             )
+            if record.get("recordStatus") != "accepted_response":
+                raise VerifiedResponseContractError(
+                    "saved provider response failed its contract and will not be reissued"
+                )
             completion = _completion_from_record(record)
-            self._validate_response(completion, prompt)
+            self._validate_response(
+                completion,
+                prompt,
+                max_tokens=effective_max_tokens,
+            )
             return completion, record
         if expected_index != len(self.calls):
             raise VerifiedCheckpointError("attempted to skip an uncheckpointed call")
@@ -785,8 +1423,8 @@ class _VerifiedCheckpointManager:
 
         spent = _checkpoint_cost(self.calls)
         reserve = _routing_cost(
-            len(prompt.encode("utf-8")) + self.config.prompt_token_overhead_reserve,
-            self.config.max_tokens,
+            request_utf8_size(prompt) + self.config.prompt_token_overhead_reserve,
+            effective_max_tokens,
             self.config,
         )
         if spent >= self.budget or self.budget - spent < reserve:
@@ -801,6 +1439,8 @@ class _VerifiedCheckpointManager:
             input_text=input_text,
             prompt=prompt,
             model=self.config.model,
+            max_tokens=max_tokens,
+            response_format=normalized_response_format,
         )
         existing_tombstone = self.state.get("inFlightCall")
         if existing_tombstone is not None:
@@ -821,7 +1461,15 @@ class _VerifiedCheckpointManager:
         self._save()
         started = self.clock()
         try:
-            completion = self.client.complete(prompt, model=self.config.model)
+            if max_tokens is None and normalized_response_format is None:
+                completion = self.client.complete(prompt, model=self.config.model)
+            else:
+                completion = self.client.complete(
+                    prompt,
+                    model=self.config.model,
+                    max_tokens=effective_max_tokens,
+                    response_format=normalized_response_format,
+                )
         except ProviderResponseError as error:
             raw = json_safe_value(error.raw_response)
             if not isinstance(raw, dict):
@@ -834,11 +1482,16 @@ class _VerifiedCheckpointManager:
                 "latencyMs": round((self.clock() - started) * 1000, 3),
                 "methodId": self.config.method_id,
                 "outputText": None,
-                "prompt": prompt,
+                **_request_record_fields(prompt),
                 "providerError": str(error),
                 "rawResponse": raw,
                 "recordStatus": "provider_response_invalid",
-                "request": {"model": self.config.model},
+                "requestSha256": request_sha,
+                "request": _checkpoint_request(
+                    self.config.model,
+                    max_tokens=max_tokens,
+                    response_format=normalized_response_format,
+                ),
                 "stage": stage,
             }
             self.calls.append(record)
@@ -857,9 +1510,14 @@ class _VerifiedCheckpointManager:
             "latencyMs": round((self.clock() - started) * 1000, 3),
             "methodId": self.config.method_id,
             "outputText": completion.content,
-            "prompt": prompt,
+            **_request_record_fields(prompt),
             "recordStatus": "accepted_response",
-            "request": {"model": self.config.model},
+            "requestSha256": request_sha,
+            "request": _checkpoint_request(
+                self.config.model,
+                max_tokens=max_tokens,
+                response_format=normalized_response_format,
+            ),
             "response": completion.to_dict(),
             "routingCostEstimateUsd": _decimal_text(
                 _routing_cost(
@@ -870,11 +1528,23 @@ class _VerifiedCheckpointManager:
             ),
             "stage": stage,
         }
+        try:
+            self._validate_response(
+                completion,
+                prompt,
+                max_tokens=effective_max_tokens,
+            )
+        except VerifiedResponseContractError:
+            record["recordStatus"] = "response_contract_failure"
+            self.calls.append(record)
+            self.state["inFlightCall"] = None
+            self._save()
+            self.new_calls += 1
+            raise
         self.calls.append(record)
         self.state["inFlightCall"] = None
         self._save()
         self.new_calls += 1
-        self._validate_response(completion, prompt)
         if _checkpoint_cost(self.calls) > self.budget:
             raise VerifiedBudgetError("checkpointed provider cost exceeded the budget")
         return completion, record
@@ -903,24 +1573,58 @@ class _VerifiedCheckpointManager:
         document_id: str,
         stage: str,
         input_text: str,
-        prompt: str,
+        prompt: str | StageRequest,
+        max_tokens: int | None,
+        response_format: Mapping[str, object] | None,
     ) -> None:
         expected = {
             "callId": call_id,
             "documentId": document_id,
             "inputText": input_text,
             "methodId": self.config.method_id,
-            "prompt": prompt,
             "stage": stage,
         }
         for field, value in expected.items():
             if record.get(field) != value:
                 raise VerifiedCheckpointError(f"saved request mismatch: {field}")
+        expected_request_content = _request_record_fields(prompt)
+        for field in ("prompt", "messages"):
+            if field in expected_request_content:
+                if record.get(field) != expected_request_content[field]:
+                    raise VerifiedCheckpointError(f"saved request mismatch: {field}")
+            elif field in record:
+                raise VerifiedCheckpointError(
+                    f"saved request has unexpected content field: {field}"
+                )
         request = _mapping(record.get("request"), "saved request")
-        if request.get("model") != self.config.model:
-            raise VerifiedCheckpointError("saved request model mismatch")
+        expected_request = _checkpoint_request(
+            self.config.model,
+            max_tokens=max_tokens,
+            response_format=response_format,
+        )
+        if dict(request) != expected_request:
+            raise VerifiedCheckpointError("saved request options mismatch")
+        if self.config.method_id == V4_METHOD_ID:
+            expected_sha = _request_sha256(
+                call_id=call_id,
+                document_id=document_id,
+                stage=stage,
+                input_text=input_text,
+                prompt=prompt,
+                model=self.config.model,
+                max_tokens=max_tokens,
+                response_format=response_format,
+            )
+            if record.get("requestSha256") != expected_sha:
+                raise VerifiedCheckpointError("saved v4 request hash mismatch")
 
-    def _validate_response(self, completion: ChatCompletion, prompt: str) -> None:
+    def _validate_response(
+        self,
+        completion: ChatCompletion,
+        prompt: str | StageRequest,
+        *,
+        max_tokens: int,
+    ) -> None:
         if completion.model not in self.config.expected_response_models:
             raise VerifiedResponseContractError(
                 f"unexpected response model: {completion.model}"
@@ -931,11 +1635,17 @@ class _VerifiedCheckpointManager:
             )
         metadata = completion.openrouter_metadata
         if not isinstance(metadata, Mapping):
-            raise VerifiedResponseContractError("OpenRouter routing metadata is required")
+            raise VerifiedResponseContractError(
+                "OpenRouter routing metadata is required"
+            )
         if metadata.get("strategy") != "direct" or metadata.get("attempt") != 1:
-            raise VerifiedResponseContractError("OpenRouter must use one direct attempt")
+            raise VerifiedResponseContractError(
+                "OpenRouter must use one direct attempt"
+            )
         if metadata.get("pipeline") not in (None, []):
-            raise VerifiedResponseContractError("OpenRouter routing pipeline must be empty")
+            raise VerifiedResponseContractError(
+                "OpenRouter routing pipeline must be empty"
+            )
         endpoints = _mapping(metadata.get("endpoints"), "router endpoints")
         available = endpoints.get("available")
         if not isinstance(available, list) or any(
@@ -944,8 +1654,12 @@ class _VerifiedCheckpointManager:
             raise VerifiedResponseContractError("router endpoint metadata is invalid")
         selected = [item for item in available if item.get("selected") is True]
         if len(selected) != 1:
-            raise VerifiedResponseContractError("router must select exactly one endpoint")
-        provider = _first_present(selected[0], "provider", "provider_name", "providerName")
+            raise VerifiedResponseContractError(
+                "router must select exactly one endpoint"
+            )
+        provider = _first_present(
+            selected[0], "provider", "provider_name", "providerName"
+        )
         model = _first_present(selected[0], "model", "model_id", "modelId")
         if provider != completion.provider:
             raise VerifiedResponseContractError("router selected provider mismatch")
@@ -954,11 +1668,14 @@ class _VerifiedCheckpointManager:
         attempts = metadata.get("attempts")
         if attempts is not None:
             if not isinstance(attempts, list) or len(attempts) != 1:
-                raise VerifiedResponseContractError("router attempts must contain one item")
+                raise VerifiedResponseContractError(
+                    "router attempts must contain one item"
+                )
             attempt = _mapping(attempts[0], "router attempt")
-            if _first_present(
-                attempt, "provider", "provider_name", "providerName"
-            ) != completion.provider:
+            if (
+                _first_present(attempt, "provider", "provider_name", "providerName")
+                != completion.provider
+            ):
                 raise VerifiedResponseContractError("router attempt provider mismatch")
             if _first_present(attempt, "model", "model_id", "modelId") not in (
                 self.config.expected_response_models
@@ -967,15 +1684,284 @@ class _VerifiedCheckpointManager:
             if attempt.get("status") != 200 or isinstance(attempt.get("status"), bool):
                 raise VerifiedResponseContractError("router attempt status must be 200")
         if completion.usage.prompt_tokens > (
-            len(prompt.encode("utf-8")) + self.config.prompt_token_overhead_reserve
+            request_utf8_size(prompt) + self.config.prompt_token_overhead_reserve
         ):
             raise VerifiedResponseContractError("prompt usage exceeds frozen reserve")
-        if completion.usage.completion_tokens > self.config.max_tokens:
+        if (
+            completion.usage.total_tokens
+            != completion.usage.prompt_tokens + completion.usage.completion_tokens
+        ):
+            raise VerifiedResponseContractError(
+                "response token totals are inconsistent"
+            )
+        if completion.usage.completion_tokens > max_tokens:
             raise VerifiedResponseContractError("completion usage exceeds maxTokens")
+        expected_cost = _routing_cost(
+            completion.usage.prompt_tokens,
+            completion.usage.completion_tokens,
+            self.config,
+        )
+        if completion.usage.cost != expected_cost:
+            raise VerifiedResponseContractError(
+                "provider cost differs from frozen endpoint pricing"
+            )
 
     def _save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         _atomic_write(self.path, canonical_json_bytes(self.state))
+
+
+class _CanaryNoCallClient:
+    def complete(
+        self,
+        request: str | StageRequest,
+        *,
+        model: str,
+        max_tokens: int | None = None,
+        response_format: Mapping[str, object] | None = None,
+    ) -> ChatCompletion:
+        raise AssertionError("canary gate is local-only and must not call a provider")
+
+
+def build_v4_canary_gate(
+    config: VerifiedParaphraseConfig,
+    *,
+    checkpoint_path: str | Path,
+) -> dict[str, object]:
+    """Evaluate the frozen doc-01 gate from checkpointed responses, without network."""
+    if config.method_id != V4_METHOD_ID:
+        raise ValueError("development canary gate is only defined for v4")
+    path = Path(checkpoint_path).resolve()
+    manager = _VerifiedCheckpointManager(
+        config=config,
+        client=_CanaryNoCallClient(),
+        checkpoint_path=path,
+        expected_call_ids=expected_verified_call_ids(config),
+        budget=Decimal("1"),
+        max_new_calls=0,
+        confirm_not_charged_call_id=None,
+        clock=time.perf_counter,
+    )
+    expected_count = config.development_canary_exact_call_count
+    development_calls = [
+        call for call in manager.calls if call.get("documentId") == "doc-01"
+    ]
+    exact_calls_pass = (
+        len(development_calls) == expected_count
+        and manager.calls[:expected_count] == development_calls
+    )
+    checks: dict[str, dict[str, object]] = {
+        "exactDevelopmentCallCount": {
+            "observed": len(development_calls),
+            "passed": exact_calls_pass,
+            "required": expected_count,
+        }
+    }
+    checkpoint_sha = (
+        hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else None
+    )
+    if not exact_calls_pass:
+        report = {
+            "checks": checks,
+            "checkpointCallCount": len(manager.calls),
+            "checkpointSha256": checkpoint_sha,
+            "configSha256": config.sha256,
+            "documentId": "doc-01",
+            "issues": [
+                "development canary does not contain exactly three prefix calls"
+            ],
+            "schemaVersion": 1,
+            "status": "incomplete"
+            if len(development_calls) < expected_count
+            else "no_go",
+        }
+        canonical_json_bytes(report)
+        return report
+
+    marked = _load_frozen_marked_documents(config)["doc-01"]
+    protected = protect_tokens(marked)
+    issues: list[str] = []
+    route_finish_usage_pass = True
+
+    def accepted_completion(
+        index: int,
+        *,
+        stage: str,
+        input_text: str,
+        request: StageRequest,
+        max_tokens: int,
+        response_format: Mapping[str, object] | None = None,
+    ) -> ChatCompletion:
+        nonlocal route_finish_usage_pass
+        record = development_calls[index]
+        try:
+            manager._validate_saved_request(
+                record,
+                call_id=f"doc-01:{config.method_id}:{stage}",
+                document_id="doc-01",
+                stage=stage,
+                input_text=input_text,
+                prompt=request,
+                max_tokens=max_tokens,
+                response_format=response_format,
+            )
+            if record.get("recordStatus") != "accepted_response":
+                raise VerifiedResponseContractError(
+                    f"{stage} checkpoint record is not accepted"
+                )
+            completion = _completion_from_record(record)
+            manager._validate_response(
+                completion,
+                request,
+                max_tokens=max_tokens,
+            )
+            if completion.finish_reason != "stop":
+                raise VerifiedResponseContractError(
+                    f"{stage} finish reason is not stop"
+                )
+            return completion
+        except (ValueError, VerifiedExperimentError) as error:
+            route_finish_usage_pass = False
+            issues.append(f"{stage}: {error}")
+            raise
+
+    draft_request = build_v4_draft_request(protected.masked)
+    try:
+        draft = accepted_completion(
+            0,
+            stage="paraphrase-draft",
+            input_text=protected.masked,
+            request=draft_request,
+            max_tokens=config.stage_max_tokens["paraphrase-draft"],
+        )
+    except (ValueError, VerifiedExperimentError):
+        draft = _completion_from_record(development_calls[0])
+
+    audit_request = build_semantic_audit_request(protected.masked, draft.content)
+    audit_format = semantic_audit_response_format()
+    try:
+        audit = accepted_completion(
+            1,
+            stage="semantic-audit",
+            input_text=draft.content,
+            request=audit_request,
+            max_tokens=config.stage_max_tokens["semantic-audit"],
+            response_format=audit_format,
+        )
+    except (ValueError, VerifiedExperimentError):
+        audit = _completion_from_record(development_calls[1])
+
+    parsed_audit = None
+    semantic_audit_status = "accepted"
+    try:
+        parsed_audit = parse_semantic_audit(
+            audit.content,
+            source_masked=protected.masked,
+            draft_masked=draft.content,
+        )
+        canonical_audit = parsed_audit.canonical_json
+    except SemanticAuditContractError as error:
+        semantic_audit_status = "validation_failure_empty_fallback"
+        canonical_audit = '{"corrections":[]}'
+        issues.append(f"semantic-audit: {error}")
+
+    repair_request = build_semantic_repair_request(draft.content, canonical_audit)
+    try:
+        repair = accepted_completion(
+            2,
+            stage="fidelity-repair",
+            input_text=draft.content,
+            request=repair_request,
+            max_tokens=config.stage_max_tokens["fidelity-repair"],
+        )
+    except (ValueError, VerifiedExperimentError):
+        repair = _completion_from_record(development_calls[2])
+
+    try:
+        canonical_draft = canonicalize_placeholders(draft.content, protected.tokens)
+        draft_text = restore_tokens(canonical_draft, protected.tokens)
+    except PlaceholderError as error:
+        issues.append(f"draft placeholder contract: {error}")
+        draft_text = _best_effort_restore(draft.content, protected.tokens)
+
+    try:
+        canonical_final = canonicalize_placeholders(repair.content, protected.tokens)
+        for issue in result_validation_issues(protected.masked, canonical_final, None):
+            issues.append(f"final {issue['code']}: {issue['message']}")
+        if parsed_audit is not None:
+            for issue in semantic_audit_repair_issues(parsed_audit, canonical_final):
+                issues.append(f"final {issue['code']}: {issue['message']}")
+        final_text = restore_tokens(canonical_final, protected.tokens)
+    except PlaceholderError as error:
+        issues.append(f"final placeholder contract: {error}")
+        final_text = _best_effort_restore(repair.content, protected.tokens)
+
+    draft_distance = float(
+        _mapping(
+            fidelity_metrics(marked, draft_text).get("wordLevenshtein"),
+            "canary draft word distance",
+        )["normalizedDistance"]
+    )
+    final_distance = float(
+        _mapping(
+            fidelity_metrics(marked, final_text).get("wordLevenshtein"),
+            "canary final word distance",
+        )["normalizedDistance"]
+    )
+    distance_ratio = final_distance / draft_distance if draft_distance > 0 else 0.0
+    checks.update(
+        {
+            "routeFinishAndUsageContracts": {
+                "passed": route_finish_usage_pass,
+                "required": True,
+            },
+            "semanticAuditAccepted": {
+                "observed": semantic_audit_status,
+                "passed": semantic_audit_status == "accepted",
+                "required": "accepted",
+            },
+            "noPipelineIssues": {
+                "observedIssueCount": len(issues),
+                "passed": not issues,
+                "requiredIssueCount": 0,
+            },
+            "minimumFinalWordDistance": {
+                "observed": final_distance,
+                "passed": (
+                    final_distance >= config.canary_min_final_normalized_word_distance
+                ),
+                "requiredMinimum": config.canary_min_final_normalized_word_distance,
+            },
+            "minimumFinalToDraftWordDistanceRatio": {
+                "observed": distance_ratio,
+                "passed": (
+                    distance_ratio
+                    >= config.canary_min_final_to_draft_word_distance_ratio
+                ),
+                "requiredMinimum": (
+                    config.canary_min_final_to_draft_word_distance_ratio
+                ),
+            },
+        }
+    )
+    passed = all(check.get("passed") is True for check in checks.values())
+    report = {
+        "checks": checks,
+        "checkpointCallCount": len(manager.calls),
+        "checkpointSha256": checkpoint_sha,
+        "configSha256": config.sha256,
+        "documentId": "doc-01",
+        "issues": issues,
+        "observed": {
+            "draftNormalizedWordDistance": draft_distance,
+            "finalNormalizedWordDistance": final_distance,
+            "finalToDraftWordDistanceRatio": distance_ratio,
+        },
+        "schemaVersion": 1,
+        "status": "go" if passed else "no_go",
+    }
+    canonical_json_bytes(report)
+    return report
 
 
 def _load_frozen_marked_documents(
@@ -1082,21 +2068,62 @@ def _request_sha256(
     document_id: str,
     stage: str,
     input_text: str,
-    prompt: str,
+    prompt: str | StageRequest,
     model: str,
+    max_tokens: int | None,
+    response_format: Mapping[str, object] | None,
 ) -> str:
+    hashed_content = (
+        {
+            "messagesSha256": hashlib.sha256(
+                canonical_json_bytes(list(request_messages(prompt)))
+            ).hexdigest()
+        }
+        if isinstance(prompt, StageRequest)
+        else {"promptSha256": hashlib.sha256(prompt.encode()).hexdigest()}
+    )
     return hashlib.sha256(
         canonical_json_bytes(
             {
                 "callId": call_id,
                 "documentId": document_id,
+                **hashed_content,
                 "inputSha256": hashlib.sha256(input_text.encode()).hexdigest(),
                 "model": model,
-                "promptSha256": hashlib.sha256(prompt.encode()).hexdigest(),
+                "requestOptions": _checkpoint_request(
+                    model,
+                    max_tokens=max_tokens,
+                    response_format=response_format,
+                ),
                 "stage": stage,
             }
         )
     ).hexdigest()
+
+
+def _request_record_fields(
+    request: str | StageRequest,
+) -> dict[str, object]:
+    if isinstance(request, StageRequest):
+        return {"messages": list(request_messages(request))}
+    return {"prompt": request}
+
+
+def _checkpoint_request(
+    model: str,
+    *,
+    max_tokens: int | None,
+    response_format: Mapping[str, object] | None,
+) -> dict[str, object]:
+    request: dict[str, object] = {"model": model}
+    if max_tokens is not None:
+        request["maxTokens"] = max_tokens
+    if response_format is not None:
+        normalized = json_safe_value(response_format)
+        if not isinstance(normalized, dict):
+            raise VerifiedCheckpointError("checkpoint response format is invalid")
+        request["responseFormat"] = normalized
+    return request
 
 
 def _routing_cost(
@@ -1161,7 +2188,9 @@ def _require_sha(path: Path, expected: str, label: str) -> None:
 
 def _sha256(value: object, label: str) -> str:
     text = _text(value, label)
-    if len(text) != 64 or any(character not in "0123456789abcdef" for character in text):
+    if len(text) != 64 or any(
+        character not in "0123456789abcdef" for character in text
+    ):
         raise ValueError(f"{label} must be a lowercase SHA-256")
     return text
 
@@ -1169,6 +2198,20 @@ def _sha256(value: object, label: str) -> str:
 def _mapping(value: object, label: str) -> Mapping[str, object]:
     if not isinstance(value, Mapping):
         raise ValueError(f"{label} must be an object")
+    return value
+
+
+def _mapping_list(value: object, label: str) -> list[Mapping[str, object]]:
+    if not isinstance(value, list) or any(
+        not isinstance(item, Mapping) for item in value
+    ):
+        raise ValueError(f"{label} must be a list of objects")
+    return value
+
+
+def _string_list(value: object, label: str) -> list[str]:
+    if not isinstance(value, list) or any(not isinstance(item, str) for item in value):
+        raise ValueError(f"{label} must be a list of strings")
     return value
 
 
@@ -1189,8 +2232,10 @@ def _text(value: object, label: str) -> str:
 
 
 def _string_tuple(value: object, label: str) -> tuple[str, ...]:
-    if not isinstance(value, list) or not value or any(
-        not isinstance(item, str) or not item for item in value
+    if (
+        not isinstance(value, list)
+        or not value
+        or any(not isinstance(item, str) or not item for item in value)
     ):
         raise ValueError(f"{label} must be a nonempty string list")
     return tuple(value)
@@ -1261,6 +2306,7 @@ def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--dry-run", action="store_true")
+    mode.add_argument("--canary-gate", action="store_true")
     mode.add_argument("--live", action="store_true")
     parser.add_argument(
         "--config",
@@ -1283,6 +2329,23 @@ def _build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     config = load_verified_paraphrase_config(args.config)
+    if args.canary_gate:
+        if (
+            args.max_provider_cost_credits is not None
+            or args.max_new_calls is not None
+            or args.confirm_not_charged_call_id is not None
+        ):
+            raise SystemExit("canary gate is local-only and accepts no live controls")
+        print(
+            canonical_json_bytes(
+                build_v4_canary_gate(
+                    config,
+                    checkpoint_path=args.checkpoint,
+                )
+            ).decode(),
+            end="",
+        )
+        return 0
     if args.dry_run:
         if (
             args.max_provider_cost_credits is not None

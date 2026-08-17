@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 2,
+  "experimentVersion": "text-watermark-roundtrip-verified-paraphrase-v4",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Freeze a new 20-document follow-up after the three-call v3 canary showed that an unconstrained audit can relay source wording into the final repair. For every marked source document, make exactly three calls on one pinned Qwen endpoint: a full paraphrase draft; a strict structured semantic audit; and an unconditional minimal repair. The audit may report at most twelve fact-level corrections, each anchored to an exact draft quote. Local validation rejects malformed, oversized, stylistic, synonym-only, unanchored, or source-like audit data. The repair receives only the draft and canonical validated audit JSON, never the raw audit response or source text. If audit validation fails, the repair still runs once with an empty canonical correction list and the document remains a recorded validation failure. No v4 output is inspected before this protocol is frozen. Doc-01 may then be inspected as an operational development canary, but it is excluded from the primary result. Continue the same v4 protocol across the 19 holdout documents only without retuning; any protocol change requires a new version. Headline detector, fidelity, and cost metrics use doc-02 through doc-20. After all v4 outputs are immutable, audit all 20 independently with the pinned Gemini route while reporting doc-01 separately and headline failures on the 19 holdouts. Publish every prior pilot call, every v4 output, every failure, and every billed call.",
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    },
+    {
+      "title": "OpenRouter structured outputs documentation",
+      "url": "https://openrouter.ai/docs/features/structured-outputs"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "title": "OpenRouter privacy and logging documentation",
+      "url": "https://openrouter.ai/docs/features/privacy-and-logging"
+    }
+  ],
+  "priorPilot": {
+    "configPath": "fixtures/verified-paraphrase-config-v3.json",
+    "configSha256": "432a867aca84eb9c3edfe9e0ad308fbe9d8bc335801cd01bacb8d8deb62607e8",
+    "checkpointPath": "results/verified-paraphrase-checkpoint-v3.json",
+    "checkpointSha256": "84ee92dec5c3e92e82400d0732e6ce7c305a0e9c651d8e12c45fc529869a2255",
+    "completedCalls": 3,
+    "decision": "abort_source_copy_via_audit"
+  },
+  "baseExperiment": {
+    "configPath": "fixtures/experiment-config-v1.json",
+    "configSha256": "60f9bd952129b6c9b6acd4fd4994156e81a523deaebf375974561e67ec930ba6",
+    "resultPath": "results/experiment-raw-v1.json",
+    "resultSha256": "7cbebefa7e871032e9ac80125cd95d0a9cb2a733c99324f150640ab26744e723",
+    "sourceSelection": "baseline.documents[].markedText",
+    "documentCount": 20
+  },
+  "transform": {
+    "id": "paraphrase-verified-v4",
+    "method": "paraphrase-verified-v4",
+    "callGraph": [
+      "paraphrase-draft",
+      "semantic-audit",
+      "fidelity-repair"
+    ],
+    "auditPolicy": "always_once",
+    "repairPolicy": "always_once",
+    "alwaysRunAudit": true,
+    "alwaysRunRepair": true,
+    "auditGrounding": [
+      "masked_source",
+      "draft"
+    ],
+    "repairGrounding": [
+      "draft",
+      "validated_canonical_semantic_audit"
+    ],
+    "finalRepairReceivesRawSource": false,
+    "finalRepairReceivesRawAudit": false,
+    "invalidAuditRepairInput": "canonical_empty_corrections",
+    "postRepairValidation": {
+      "eachAcceptedDraftQuoteMustBeChangedOrAbsent": true,
+      "failureCode": "semantic_audit_correction_unapplied"
+    },
+    "auditContract": {
+      "responseFormatName": "semantic_fidelity_audit_v4",
+      "strictJsonSchema": true,
+      "maxCorrections": 12,
+      "draftQuoteMinChars": 8,
+      "draftQuoteMaxChars": 180,
+      "requiredChangeMaxChars": 240,
+      "maxCanonicalChars": 6144,
+      "sourceNgramWords": 8,
+      "categories": [
+        "lost_claim",
+        "added_claim",
+        "changed_claim",
+        "number",
+        "causality",
+        "negation",
+        "scope",
+        "certainty",
+        "entity",
+        "example",
+        "caveat"
+      ]
+    },
+    "requestBoundary": {
+      "instructionRole": "system",
+      "untrustedPayloadRole": "user",
+      "userPayloadEncoding": "canonical_json_utf8",
+      "messageCount": 2,
+      "stagePayloadFields": {
+        "paraphrase-draft": [
+          "sourceText"
+        ],
+        "semantic-audit": [
+          "authoritativeSourceText",
+          "draftText"
+        ],
+        "fidelity-repair": [
+          "draftText",
+          "validatedCorrections"
+        ]
+      },
+      "systemInstructionSha256": {
+        "paraphrase-draft": "4e781df580b5b040ec025e0612ef0e17a563bb537a7d5ef0c2f4128846ce35d3",
+        "semantic-audit": "804c0a7496c3b3244f864e21c1d72b102aa13ec721098c14065757b18b9162a1",
+        "fidelity-repair": "d76ebcac566cf2e60e7200d2bc3a0b80f9bf8d119c9ce45cf2d9b1dbd3ca06f8"
+      },
+      "parityFixturePath": "fixtures/verified-paraphrase-parity-v4.json",
+      "parityFixtureSha256": "09065a5abb2ada8523144a2ab1dd77759d57630578002a66925531beaf3b42ca"
+    }
+  },
+  "provider": {
+    "transport": "openrouter",
+    "model": "qwen/qwen3.6-35b-a3b",
+    "providerOrder": [
+      "deepinfra/fp8"
+    ],
+    "endpointSnapshotPath": "fixtures/openrouter-endpoint-snapshot-qwen36-v2.json",
+    "endpointSnapshotSha256": "f9c025e2ee6ab16fdb592db67ba7a5e6333dbcde9cc0f9fb9f020b2049d94da3",
+    "expectedResponseModels": [
+      "qwen/qwen3.6-35b-a3b",
+      "qwen/qwen3.6-35b-a3b-20260415"
+    ],
+    "expectedResponseProviders": [
+      "DeepInfra"
+    ],
+    "allowFallbacks": false,
+    "dataCollection": "deny",
+    "zdr": true,
+    "requireParameters": true,
+    "reasoningEffort": "none",
+    "temperature": 0,
+    "maxTokens": 4096,
+    "stageMaxTokens": {
+      "paraphrase-draft": 4096,
+      "semantic-audit": 1536,
+      "fidelity-repair": 4096
+    },
+    "seed": 20260817,
+    "timeoutSeconds": 180,
+    "pricingUsdPerMillionTokens": {
+      "prompt": "0.10",
+      "completion": "0.95"
+    },
+    "maxPriceUsdPerMillionTokens": {
+      "prompt": 0.10,
+      "completion": 0.95
+    }
+  },
+  "billing": {
+    "creditBaseCurrency": "USD",
+    "creditUsdBaseUnit": "1",
+    "inferencePricingMarkupPercent": 0,
+    "promptTokenOverheadReserve": 2048,
+    "purchaseFeeExcluded": true
+  },
+  "analysis": {
+    "documentCount": 20,
+    "developmentDocumentIds": [
+      "doc-01"
+    ],
+    "holdoutDocumentIds": [
+      "doc-02",
+      "doc-03",
+      "doc-04",
+      "doc-05",
+      "doc-06",
+      "doc-07",
+      "doc-08",
+      "doc-09",
+      "doc-10",
+      "doc-11",
+      "doc-12",
+      "doc-13",
+      "doc-14",
+      "doc-15",
+      "doc-16",
+      "doc-17",
+      "doc-18",
+      "doc-19",
+      "doc-20"
+    ],
+    "primaryDocumentCount": 19,
+    "bootstrapReplicates": 10000,
+    "bootstrapSeed": 20260817,
+    "primaryScoringUnit": "holdout_pooled_corpus",
+    "secondaryScoringUnit": "all_20_documents",
+    "headlineFidelityCohort": "holdout",
+    "finalAuditScope": "all_20_documents_with_holdout_headline",
+    "qualityMetric": "normalized_word_levenshtein",
+    "resamplingUnit": "document_id"
+  },
+  "developmentCanaryGate": {
+    "documentId": "doc-01",
+    "exactCallCount": 3,
+    "requireRouteFinishAndUsageContracts": true,
+    "requireSemanticAuditValidationStatus": "accepted",
+    "requireNoPipelineIssues": true,
+    "minFinalNormalizedWordDistance": 0.15,
+    "minFinalToDraftWordDistanceRatio": 0.60,
+    "onPass": "resume_exact_same_v4_without_changes",
+    "onFail": "abort_v4_before_holdout",
+    "developmentOnlyNotProductSuccessTarget": true
+  },
+  "finalAudit": {
+    "required": true,
+    "separateFromRepair": true,
+    "judgeDoesNotControlRepair": true,
+    "freezeAfterTransformResult": true,
+    "structuredPairCount": 20,
+    "planPath": "fixtures/semantic-audit-plan-v4.json",
+    "planSha256": "a82d89d65772a33b332990803b1deca7446ef51f4848a0695060b2e14e616029",
+    "model": "google/gemini-3.7-flash",
+    "providerOrder": [
+      "google-vertex/global"
+    ],
+    "endpointSnapshotPath": "fixtures/semantic-audit-endpoint-snapshot-v1.json",
+    "endpointSnapshotSha256": "2adb61707a3912b692605ef8151f0fdc32c410371c3739747b902e8e11975b0f"
+  },
+  "decisionPolicy": {
+    "successTarget": null,
+    "retuningAfterResults": false,
+    "publishAllOutputs": true,
+    "articleDemoGate": {
+      "cohort": "holdout",
+      "documentCount": 19,
+      "enableDemoOnlyIf": {
+        "pooledDetectorStatus": "not_detected",
+        "maximumTotalFinalFailures": 1,
+        "maximumPipelineDefects": 0,
+        "minimumMeanNormalizedWordDistance": 0.15
+      },
+      "costAndLatency": "always_publish_without_pass_threshold",
+      "onPass": "publish_article_with_best_only_demo_enabled",
+      "onFail": "publish_advanced_result_as_negative_or_mixed_and_keep_demo_off"
+    }
+  }
+}
