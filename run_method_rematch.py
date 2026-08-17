@@ -26,6 +26,7 @@ import urllib.request
 from run_experiment import fidelity_metrics
 import run_model_canary_luna as engine
 import run_model_canary_terra_locked as anchors_v1
+import run_model_canary_terra_locked_v2 as locked_v2
 import unmark
 from watermark_toy import Document, score_corpus, score_text
 
@@ -35,6 +36,7 @@ DEFAULT_OUTPUT = ROOT / "results" / "method-rematch-v1.json"
 DEFAULT_MODEL = "minimax/minimax-m3"
 MAX_COMPLETION_TOKENS = 32_768
 METHODS = ("paraphrase", "roundtrip-de", "roundtrip-zh")
+MODELS = (DEFAULT_MODEL,)
 
 
 def base_url() -> str:
@@ -50,10 +52,13 @@ def api_key() -> str:
     return key
 
 
-def call(model: str, prompt: str) -> dict[str, object]:
+def call(model: str, prompt) -> dict[str, object]:
+    messages = (
+        prompt if isinstance(prompt, list) else [{"role": "user", "content": prompt}]
+    )
     body = {
         "model": model,
-        "messages": [{"role": "user", "content": prompt}],
+        "messages": messages,
         "max_tokens": MAX_COMPLETION_TOKENS,
         "stream": False,
         "reasoning": {"effort": "medium"},
@@ -119,7 +124,14 @@ def run_document(model: str, method: str, document_id: str, source: str) -> dict
     protected = unmark.protect_tokens(source)
     calls: list[dict[str, object]] = []
     spent = Decimal(0)
-    if method == "paraphrase":
+    if method == "paraphrase-anchored":
+        # The v2 arm: anchors stay visible in copy-verbatim markers, and the
+        # markers are stripped before scoring so the comparison is like for like.
+        protected = locked_v2.protect_visible_anchors(source)
+        request = locked_v2.build_visible_locked_request(protected.masked)
+        # One request carrying both messages, not one request per message.
+        prompts = [[dict(row) for row in locked_v2.locked_request_messages(request)]]
+    elif method == "paraphrase":
         prompts = [unmark.build_paraphrase_prompt(protected.masked)]
     else:
         pivot = "de" if method.endswith("de") else "zh"
@@ -163,6 +175,20 @@ def run_document(model: str, method: str, document_id: str, source: str) -> dict
         text = str(response["content"])
     issues: list[dict[str, str]] = []
     restored: str | None = None
+    if method == "paraphrase-anchored":
+        issues.extend(
+            locked_v2.anchor_alignment_issues(
+                unmark.restore_tokens(protected.masked, protected.tokens),
+                locked_v2.strip_markers(text)
+                if "\u27ea" not in text
+                else unmark.restore_tokens(
+                    unmark.canonicalize_placeholders(text, protected.tokens),
+                    protected.tokens,
+                ),
+            )
+        )
+        text = locked_v2.strip_markers(text)
+        protected = unmark.protect_tokens(source)
     try:
         normalized = unmark.canonicalize_placeholders(text, protected.tokens)
         issues.extend(
@@ -218,7 +244,7 @@ def run_document(model: str, method: str, document_id: str, source: str) -> dict
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--model", default=DEFAULT_MODEL)
+    parser.add_argument("--models", nargs="*", default=list(MODELS))
     parser.add_argument("--methods", nargs="*", default=list(METHODS))
     parser.add_argument("--workers", type=int, default=6)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
@@ -226,30 +252,31 @@ def main(argv: list[str] | None = None) -> int:
 
     sources = engine.load_sources()
     jobs = [
-        (method, document_id)
+        (f"{model}::{method}", model, method, document_id)
+        for model in args.models
         for method in args.methods
         for document_id in engine.DOCUMENT_IDS
     ]
     print(json.dumps({"event": "start", "calls": len(jobs)}), flush=True)
-    collected: dict[str, list[dict]] = {method: [] for method in args.methods}
+    collected: dict[str, list[dict]] = {key: [] for key, _, _, _ in jobs}
     with futures.ThreadPoolExecutor(max_workers=args.workers) as pool:
         pending = {
             pool.submit(
-                run_document, args.model, method, document_id, sources[document_id]
-            ): (method, document_id)
-            for method, document_id in jobs
+                run_document, model, method, document_id, sources[document_id]
+            ): (key, document_id)
+            for key, model, method, document_id in jobs
         }
         done = 0
         for future in futures.as_completed(pending):
-            method, document_id = pending[future]
+            key, document_id = pending[future]
             row = future.result()
-            collected[method].append(row)
+            collected[key].append(row)
             done += 1
             print(
                 json.dumps(
                     {
                         "done": f"{done}/{len(jobs)}",
-                        "method": method,
+                        "method": key,
                         "document": document_id,
                         "outcome": row.get("outcome"),
                     },
@@ -320,7 +347,7 @@ def main(argv: list[str] | None = None) -> int:
         args.output,
         {
             "methods": summary,
-            "model": args.model,
+            "models": list(args.models),
             "note": "Plain frozen prompts, no anchor protection, one strong model.",
             "schemaVersion": 1,
         },

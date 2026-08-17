@@ -40,6 +40,7 @@ JUDGES = (
     "openai/gpt-5.6-sol",
     "anthropic/claude-fable-5",
     "x-ai/grok-4.6",
+    "google/gemini-3.1-pro-preview",
 )
 MAX_COMPLETION_TOKENS = 8_192
 
@@ -103,10 +104,18 @@ def extract_json(text: str) -> dict[str, object] | None:
     return value if isinstance(value, dict) else None
 
 
-def judge_one(judge: str, source: str, candidate: str) -> dict[str, object]:
+def judge_one(
+    judge: str, source: str, candidate: str, *, strict_retry: bool = False
+) -> dict[str, object]:
+    prompt = build_prompt(source, candidate)
+    if strict_retry:
+        prompt += (
+            "\n\nYour previous answer could not be parsed. Reply with the JSON "
+            "object and nothing else: no preamble, no explanation, no code fence."
+        )
     body = {
         "model": judge,
-        "messages": [{"role": "user", "content": build_prompt(source, candidate)}],
+        "messages": [{"role": "user", "content": prompt}],
         "max_tokens": MAX_COMPLETION_TOKENS,
         "stream": False,
         "provider": {"allow_fallbacks": True, "data_collection": "deny"},
@@ -140,6 +149,15 @@ def judge_one(judge: str, source: str, candidate: str) -> dict[str, object]:
     usage = payload.get("usage") or {}
     parsed = extract_json(str(choice["message"].get("content") or ""))
     if parsed is None or not isinstance(parsed.get("grossErrorCount"), int):
+        # One judge dropped a third of its verdicts this way. A missing verdict
+        # silently changes what the median is taken over, so ask once more.
+        if not strict_retry:
+            again = judge_one(judge, source, candidate, strict_retry=True)
+            again["costCredits"] = str(
+                Decimal(str(again.get("costCredits", "0")))
+                + Decimal(str(usage.get("cost", "0")))
+            )
+            return again
         return {
             "error": "judge did not return the required JSON",
             "costCredits": str(usage.get("cost", "0")),
