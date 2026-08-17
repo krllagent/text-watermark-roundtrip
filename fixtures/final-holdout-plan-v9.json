@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "experimentVersion": "text-watermark-final-holdout-v9-prospective-key",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Use commit 559a1d2749a1f0468f12bf3a51d81eca644164fe as phase A: it immutably froze the untouched v6 corpus, all 411 context decisions, the 275-occurrence encoder-only allowlist, density 1000, and every final gate. Classify that commit's old-key controls as developmental because the old public key predated review. Only after phase A, draw and publish exactly one new 32-byte operating-system CSPRNG key, with no redraw for any outcome. Use that key to encode approved source contexts, leave the full detector unchanged, and freeze marked inputs plus 1000 local wrong-key controls before any provider call.",
+  "sources": [
+    {
+      "title": "Experiment repository and prospective-key holdout protocol",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    }
+  ],
+  "phaseA": {
+    "commit": "559a1d2749a1f0468f12bf3a51d81eca644164fe",
+    "plan": {
+      "path": "fixtures/final-holdout-plan-v8.json",
+      "sha256": "ef79dd19985ce8daab9bd14413b4bfb0085a85f8b94a3155720b9e7982c40e4a"
+    },
+    "inventory": {
+      "path": "corpus/holdout-v6/reviewed-encoder-v8/context-inventory-v8.json",
+      "sha256": "8ae8b353c57240a7a4366bb9f3d7d11498c39e33cbae3bab8cae95cb9c45c813"
+    },
+    "review": {
+      "path": "corpus/holdout-v6/reviewed-encoder-v8/context-review-v8.json",
+      "sha256": "fdf6cf271e12ee28ed3a9f45a5a1dd6332a6fa2ee9d4e395b3f393c8d3e78f64"
+    },
+    "allowlist": {
+      "path": "corpus/holdout-v6/reviewed-encoder-v8/encoder-allowlist-v8.json",
+      "sha256": "0c0bb11c4df5ff7335b33037db889e69f07fbcdc3f90ce5a2b31f24fbed8efb6"
+    },
+    "developmentalControls": {
+      "path": "results/final-holdout-controls-v8.json",
+      "sha256": "5932b46cea9c870d7264b31fb2b834bbfb9196af91b963a6203aed7a06568152",
+      "classification": "developmental_not_confirmatory"
+    }
+  },
+  "keyArtifact": {
+    "path": "fixtures/final-holdout-key-v9.json",
+    "sha256": "bb7a9fc7f3385249be542bdd7205cf805280fcaf117b1c46a4e4facd107fef66"
+  },
+  "prepaidControls": {
+    "densityBps": 1000,
+    "contextWidth": 4,
+    "minActivePositions": 20,
+    "wrongKeyCount": 1000,
+    "wrongKeySeedHex": "66696e616c2d686f6c646f75742d76382d77726f6e672d6b657973"
+  },
+  "expectedBaselineAfterFirstDraw": {
+    "approvedActiveOpportunities": 29,
+    "approvedActiveFavored": 29,
+    "rejectedActiveSkipped": 13,
+    "physicalChanges": 14,
+    "unmarked": {"activePositions": 42, "hits": 24, "status": "not_detected"},
+    "marked": {"activePositions": 42, "hits": 38, "status": "detected"}
+  },
+  "providerExecution": {
+    "status": "blocked_pending_committed_v7_winner_binding",
+    "callsBeforeWinnerBinding": 0,
+    "requiredAtomicRevision": [
+      "winner result path, SHA-256, and commit",
+      "exact model and provider endpoint snapshot",
+      "exact one-pass request parity for all 20 documents"
+    ]
+  },
+  "finalConfirmationGate": {
+    "sourcePath": "fixtures/final-holdout-plan-v8.json",
+    "sourceSha256": "ef79dd19985ce8daab9bd14413b4bfb0085a85f8b94a3155720b9e7982c40e4a",
+    "jsonPointer": "/finalConfirmationGate",
+    "unchanged": true
+  }
+}
