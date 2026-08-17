@@ -149,7 +149,7 @@ def run_document(model: str, method: str, document_id: str, source: str) -> dict
         spent += Decimal(str(response["cost"]))
         calls.append({"provider": response.get("provider"), "stage": index})
         text = str(response["content"])
-    if method != "paraphrase":
+    if method.startswith("roundtrip"):
         pivot = "de" if method.endswith("de") else "zh"
         try:
             unmark.validate_intermediate(text, pivot, protected.tokens)
