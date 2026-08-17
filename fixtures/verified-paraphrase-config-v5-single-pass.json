@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "experimentVersion": "text-watermark-roundtrip-paraphrase-v5-single-pass-derived",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Derive a one-call paraphrase method after all v4 transformation and independent blind-audit results were frozen. This is a post-hoc simplification, not a pre-registered holdout experiment. Keep only each exact paid paraphrase-draft call from v4 after proving for all 20 documents that its output equals both rawDraftMaskedText and rawFinalMaskedText byte for byte. Canonicalize placeholders, restore protected values, and recompute detector and fidelity metrics locally. Transfer each blind semantic-audit verdict only because the audit binds the exact v4 result artifact and the derived candidate text is byte-identical to the reviewed v4 output. Report doc-01 as development and doc-02 through doc-20 as a descriptive holdout cohort. Cost and latency use only the 20 actual draft calls; p95 uses nearest rank. This derivation makes zero provider calls and does not claim a new confirmatory holdout result.",
+  "sources": [
+    {
+      "title": "Frozen v4 transformation and independent audit branch",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip/commit/032fd1691e895acef071a9c4e1b19fbefa447b93"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "title": "OpenRouter privacy and logging documentation",
+      "url": "https://openrouter.ai/docs/features/privacy-and-logging"
+    }
+  ],
+  "sourceArtifacts": {
+    "v4Config": {
+      "path": "fixtures/verified-paraphrase-config-v4.json",
+      "sha256": "f1575a361e47ec8c4275da62113a845998a5e9257d5053afb01203417aa6f32c"
+    },
+    "v4Checkpoint": {
+      "path": "results/verified-paraphrase-checkpoint-v4.json",
+      "sha256": "cf91563b92f9736ef5f367c609ffae3467e08a1d3b243d5f7ccd31c3b94a5b9e"
+    },
+    "v4Result": {
+      "path": "results/verified-paraphrase-raw-v4.json",
+      "sha256": "68d488111b069ff8aff46ccc171dca6eb732b23453d5f488c506d7c1c1e9aac4"
+    },
+    "auditConfig": {
+      "path": "fixtures/semantic-audit-config-v4.json",
+      "sha256": "887b92d0d53f5cec14204be01c1ee5047c7c37ab6b7c77f5aaa559bffd63bcd4"
+    },
+    "auditResult": {
+      "path": "results/semantic-audit-v4.json",
+      "sha256": "39935e61134814762ac45885cf975285fda2990486e9e23fa42a50f6622d7ebb"
+    },
+    "independentAuditCommit": "032fd1691e895acef071a9c4e1b19fbefa447b93"
+  },
+  "derivation": {
+    "methodId": "paraphrase-v5-single-pass",
+    "callGraph": [
+      "paraphrase-draft"
+    ],
+    "postHocSimplification": true,
+    "preRegisteredHoldout": false,
+    "holdoutInterpretation": "descriptive_only",
+    "providerCalls": 0,
+    "draftSource": "v4.documents[].transformationOutcome.rawDraftMaskedText",
+    "exactDraftCallSource": "v4Checkpoint.calls[stage=paraphrase-draft]",
+    "proofRequirements": [
+      "draft_call_output_equals_raw_draft_masked_text",
+      "raw_draft_masked_text_equals_v4_raw_final_masked_text",
+      "canonicalized_restored_draft_equals_v4_output_text",
+      "blind_audit_source_artifact_equals_exact_v4_result"
+    ]
+  },
+  "provider": {
+    "transport": "openrouter",
+    "model": "qwen/qwen3.6-35b-a3b",
+    "providerOrder": [
+      "deepinfra/fp8"
+    ],
+    "expectedResponseModels": [
+      "qwen/qwen3.6-35b-a3b",
+      "qwen/qwen3.6-35b-a3b-20260415"
+    ],
+    "expectedResponseProviders": [
+      "DeepInfra"
+    ],
+    "allowFallbacks": false,
+    "dataCollection": "deny",
+    "zdr": true,
+    "requireParameters": true,
+    "reasoningEffort": "none",
+    "temperature": 0,
+    "maxTokens": 4096,
+    "seed": 20260817,
+    "maxPriceUsdPerMillionTokens": {
+      "prompt": "0.10",
+      "completion": "0.95"
+    }
+  },
+  "parityFixture": {
+    "path": "fixtures/verified-paraphrase-parity-v5-single-pass.json",
+    "sha256": "b888a050f9f67f54d3125b06b432cf9970f4b9fb4d7db7295945867898686929"
+  },
+  "analysis": {
+    "developmentDocumentIds": [
+      "doc-01"
+    ],
+    "holdoutDocumentIds": [
+      "doc-02",
+      "doc-03",
+      "doc-04",
+      "doc-05",
+      "doc-06",
+      "doc-07",
+      "doc-08",
+      "doc-09",
+      "doc-10",
+      "doc-11",
+      "doc-12",
+      "doc-13",
+      "doc-14",
+      "doc-15",
+      "doc-16",
+      "doc-17",
+      "doc-18",
+      "doc-19",
+      "doc-20"
+    ],
+    "holdoutInterpretation": "descriptive_only",
+    "wordDistanceMetric": "normalized_word_levenshtein",
+    "costScope": "paraphrase_draft_calls_only",
+    "latencyP95Method": "nearest_rank_ceiling_0.95"
+  },
+  "decisionPolicy": {
+    "classification": "exploratory_post_hoc",
+    "confirmatoryHoldoutClaimAllowed": false,
+    "publishEveryDerivedDocument": true,
+    "publishCostAndLatencyRegardless": true,
+    "demoGate": {
+      "pooledHoldoutDetectorStatus": "not_detected",
+      "maximumTotalFailures": 1,
+      "maximumPipelineFailures": 0,
+      "minimumMeanNormalizedWordDistance": 0.15,
+      "requireAllDraftFinalIdentityProofs": true,
+      "requireAllProtectedTokensRestored": true,
+      "requireTransferredBlindReviewCount": 20
+    },
+    "onPass": "single_best_method_demo_may_use_exact_single_stage_contract",
+    "onFail": "keep_demo_off_and_publish_negative_or_mixed_result"
+  }
+}
