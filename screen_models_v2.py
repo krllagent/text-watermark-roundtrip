@@ -301,10 +301,11 @@ def summarize_model(
         if row.get("provider"):
             providers.add(str(row["provider"]))
         if row.get("outcome") == "completed":
+            # Keep the text in the artifact: a later blind reading must judge
+            # exactly the output that produced these automatic scores.
             outputs.append(
-                Document(str(row["documentId"]), str(row.pop("evaluatedOutputText")))
+                Document(str(row["documentId"]), str(row["evaluatedOutputText"]))
             )
-        row.pop("evaluatedOutputText", None)
     pooled = None
     if len(outputs) == len(engine.DOCUMENT_IDS):
         base, corpus = engine.load_detector()
