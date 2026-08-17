@@ -1,0 +1,601 @@
+{
+  "schemaVersion": "codex-close-reading-v5/1.0",
+  "verifiedAt": "2026-08-17T11:10:39Z",
+  "methodology": {
+    "reviewType": "independent manual blind close-reading",
+    "reviewer": "Codex",
+    "planPath": "fixtures/codex-close-reading-plan-v5.json",
+    "planSha256": "217fdd8e394580497b4436a2e320892f0305b2f26296b4ccc6d9b4c31d9988ea",
+    "comparisonFields": [
+      "markedInputText",
+      "outputText"
+    ],
+    "deterministicOpaqueOrderApplied": true,
+    "allVerdictsWrittenBeforeDocumentIdReveal": true,
+    "verdictsChangedAfterDocumentIdReveal": false,
+    "providerCalls": 0,
+    "forbiddenArtifactsInspected": false,
+    "note": "Wording alone was not treated as an error; findings apply the criteria locked in the plan."
+  },
+  "sources": [
+    {
+      "path": "results/verified-paraphrase-raw-v4.json",
+      "sha256": "68d488111b069ff8aff46ccc171dca6eb732b23453d5f488c506d7c1c1e9aac4",
+      "role": "sole text-pair and post-commitment documentId source",
+      "fieldsInspected": [
+        "markedInputText",
+        "outputText",
+        "documentId"
+      ],
+      "pairCount": 20
+    },
+    {
+      "path": "fixtures/codex-close-reading-plan-v5.json",
+      "sha256": "217fdd8e394580497b4436a2e320892f0305b2f26296b4ccc6d9b4c31d9988ea",
+      "role": "criteria and blind-protocol contract locked before text review"
+    }
+  ],
+  "commitments": {
+    "preRevealArtifactSha256": "cdca6a266051128c414621b87c3a460b08a5814516ff6aaf331bf14d15044732",
+    "preRevealArtifactSchemaVersion": "codex-close-reading-v5-pre-reveal/1.0",
+    "committedAt": "2026-08-17T11:07:42Z",
+    "committedReviewCount": 20,
+    "committedVerdictCounts": {
+      "pass": 8,
+      "minor": 8,
+      "major": 4
+    }
+  },
+  "mapping": [
+    {
+      "opaqueId": "CRV5-01",
+      "sourceOrdinal": 8,
+      "permutationKey": "009b9f6ee81856bc54226d8835ac596aa81106689cf5356500a16f4fb35ca4f2",
+      "documentId": "doc-09"
+    },
+    {
+      "opaqueId": "CRV5-02",
+      "sourceOrdinal": 2,
+      "permutationKey": "12189d696759f538d172a7a6f8850813e35c9aa8daf83e246fd2f5952919ce76",
+      "documentId": "doc-03"
+    },
+    {
+      "opaqueId": "CRV5-03",
+      "sourceOrdinal": 1,
+      "permutationKey": "167e68a23b55fb759a9fd624bb1e2bf1379f3bdd79b2926b1b6f6eb64ee0bc6a",
+      "documentId": "doc-02"
+    },
+    {
+      "opaqueId": "CRV5-04",
+      "sourceOrdinal": 7,
+      "permutationKey": "2404f42d278f57704830cab4ddc7aef067a8b03fc849ce9b1f73a99c21814bf4",
+      "documentId": "doc-08"
+    },
+    {
+      "opaqueId": "CRV5-05",
+      "sourceOrdinal": 3,
+      "permutationKey": "257fe3b419bf2c4b2013a590262a7cdf25140b2f6ced6ae217ed9ccf2ddac948",
+      "documentId": "doc-04"
+    },
+    {
+      "opaqueId": "CRV5-06",
+      "sourceOrdinal": 19,
+      "permutationKey": "273ea29d58589d71f367499471593cc23420b3386d610aecb0a75a752d97ab09",
+      "documentId": "doc-20"
+    },
+    {
+      "opaqueId": "CRV5-07",
+      "sourceOrdinal": 10,
+      "permutationKey": "2d6de018f31d815efdbeabace7f3ffd4b4fbac84d3134fb130ad66436f860613",
+      "documentId": "doc-11"
+    },
+    {
+      "opaqueId": "CRV5-08",
+      "sourceOrdinal": 12,
+      "permutationKey": "3e3af49d9d1b67cec19f96589541923d7c05ce54c95c7ce3c5872b8abbe5c660",
+      "documentId": "doc-13"
+    },
+    {
+      "opaqueId": "CRV5-09",
+      "sourceOrdinal": 11,
+      "permutationKey": "43ff98e8c5400cc58d154115159610f158aafb409fa0f0247eed42e9b7302a9c",
+      "documentId": "doc-12"
+    },
+    {
+      "opaqueId": "CRV5-10",
+      "sourceOrdinal": 0,
+      "permutationKey": "6917ba389115ac12007b41036566ffc1073567dd1ea4d32b1935451b18bc03f4",
+      "documentId": "doc-01"
+    },
+    {
+      "opaqueId": "CRV5-11",
+      "sourceOrdinal": 5,
+      "permutationKey": "9dfaeea42359d81be22eea3ae05a43626c93417bd656612f2fa0357659d29af7",
+      "documentId": "doc-06"
+    },
+    {
+      "opaqueId": "CRV5-12",
+      "sourceOrdinal": 16,
+      "permutationKey": "aab33e5bc45ea3cddd16d53e417a7d68551501afd825832a533b4ecf2d85f66d",
+      "documentId": "doc-17"
+    },
+    {
+      "opaqueId": "CRV5-13",
+      "sourceOrdinal": 9,
+      "permutationKey": "ab159750ad8d00595c9c44e33c05a7885692836276e437a27c0a5291300fbfa3",
+      "documentId": "doc-10"
+    },
+    {
+      "opaqueId": "CRV5-14",
+      "sourceOrdinal": 4,
+      "permutationKey": "c9b449e906270c157431ee701b16e4ce14cda096b1dcd98d06aad230082d4700",
+      "documentId": "doc-05"
+    },
+    {
+      "opaqueId": "CRV5-15",
+      "sourceOrdinal": 18,
+      "permutationKey": "d0963d60150ceb828b8ba2b811d4ff947c6bf82f845b993651410fd0948babab",
+      "documentId": "doc-19"
+    },
+    {
+      "opaqueId": "CRV5-16",
+      "sourceOrdinal": 14,
+      "permutationKey": "e5d74c7cf62b2024963b754c63c31aafcbb202b5fa06188770a04c523d6af24f",
+      "documentId": "doc-15"
+    },
+    {
+      "opaqueId": "CRV5-17",
+      "sourceOrdinal": 13,
+      "permutationKey": "ea222db21faaa4489e3117ad68ec61a31173e2f3292a001df9a82787a771cd32",
+      "documentId": "doc-14"
+    },
+    {
+      "opaqueId": "CRV5-18",
+      "sourceOrdinal": 17,
+      "permutationKey": "ebd016eab4b8b213f5a2b189c39f425b4a1a5b20af7f66a74eb798a138a8a1ed",
+      "documentId": "doc-18"
+    },
+    {
+      "opaqueId": "CRV5-19",
+      "sourceOrdinal": 6,
+      "permutationKey": "ee60f10735d11f965b756f9a90104cf20a4b72c48a3d9d6d9fb89c53e8df0d81",
+      "documentId": "doc-07"
+    },
+    {
+      "opaqueId": "CRV5-20",
+      "sourceOrdinal": 15,
+      "permutationKey": "f0e4add9358b4d5b030439306d84477975484a073740c6c3599ec12cad3ea130",
+      "documentId": "doc-16"
+    }
+  ],
+  "reviews": [
+    {
+      "opaqueId": "CRV5-01",
+      "verdict": "pass",
+      "findings": [],
+      "assessment": "Claims, constraints, numbers, exact strings, paragraph functions, and policy voice are substantively preserved.",
+      "documentId": "doc-09"
+    },
+    {
+      "opaqueId": "CRV5-02",
+      "verdict": "minor",
+      "findings": [
+        {
+          "severity": "minor",
+          "criterion": "numbersEntitiesExamples",
+          "markedQuote": "@AlderDrill, a synthetic account printed on the exercise board",
+          "outputQuote": "@AlderDrill, a synthetic notice printed on the exercise board",
+          "assessment": "The output changes the described type of @AlderDrill from an account to a notice, even though it preserves the reminder function."
+        },
+        {
+          "severity": "minor",
+          "criterion": "scopeCertaintyCaveats",
+          "markedQuote": "Participants were asked to post no real updates",
+          "outputQuote": "Participants were instructed not to post real-time updates",
+          "assessment": "The output narrows a ban on real updates generally to real-time updates."
+        }
+      ],
+      "assessment": "The drill and its findings remain intact, but two secondary details change.",
+      "documentId": "doc-03"
+    },
+    {
+      "opaqueId": "CRV5-03",
+      "verdict": "minor",
+      "findings": [
+        {
+          "severity": "minor",
+          "criterion": "changedClaims",
+          "markedQuote": "the worker should stop and display a plain error",
+          "outputQuote": "the worker should halt and present a generic error",
+          "assessment": "A plain error and a generic error specify different error qualities; genericity is not supported by the input."
+        },
+        {
+          "severity": "minor",
+          "criterion": "scopeCertaintyCaveats",
+          "markedQuote": "The likely source of many failures is a tiny timing window",
+          "outputQuote": "Since many failures stem from minor timing windows",
+          "assessment": "The output removes the likelihood hedge and states the causal generalization directly."
+        }
+      ],
+      "assessment": "The idempotency mechanism and practical guidance remain correct, with localized changes to error semantics and certainty.",
+      "documentId": "doc-02"
+    },
+    {
+      "opaqueId": "CRV5-04",
+      "verdict": "minor",
+      "findings": [
+        {
+          "severity": "minor",
+          "criterion": "changedClaims",
+          "markedQuote": "so I would not use the timer beside a full sink",
+          "outputQuote": "so I avoided using the timer near a full sink",
+          "assessment": "The output turns a prospective caution into a claim about what the reviewer actually did."
+        }
+      ],
+      "assessment": "The product observations and recommendation are otherwise preserved.",
+      "documentId": "doc-08"
+    },
+    {
+      "opaqueId": "CRV5-05",
+      "verdict": "minor",
+      "findings": [
+        {
+          "severity": "minor",
+          "criterion": "scopeCertaintyCaveats",
+          "markedQuote": "The pilot should begin with twelve volunteers from two internal teams.",
+          "outputQuote": "The pilot will commence with twelve volunteers drawn from two internal teams.",
+          "assessment": "The output changes a proposal/recommendation into a definite commitment."
+        },
+        {
+          "severity": "minor",
+          "criterion": "scopeCertaintyCaveats",
+          "markedQuote": "The pilot should pause if any participant misses a genuine incident because of the feature.",
+          "outputQuote": "The pilot must be paused if any participant misses a genuine incident due to the feature.",
+          "assessment": "The output strengthens should to must; the triggering condition is retained but its normative force changes."
+        }
+      ],
+      "assessment": "The pilot design is preserved, but proposal modality is strengthened in multiple places.",
+      "documentId": "doc-04"
+    },
+    {
+      "opaqueId": "CRV5-06",
+      "verdict": "major",
+      "findings": [
+        {
+          "severity": "major",
+          "criterion": "changedClaims",
+          "markedQuote": "The coordinator will check responses once per week and record the number invited.",
+          "outputQuote": "The coordinator will review responses once a week and record the number of participants.",
+          "assessment": "The output replaces the invitation denominator with a participant count. Those are not interchangeable, and the input explicitly relies on the invited count to prevent a vocal subset from standing in for the whole trial."
+        }
+      ],
+      "assessment": "The central recommendation survives, but a material survey-denominator instruction is changed.",
+      "documentId": "doc-20"
+    },
+    {
+      "opaqueId": "CRV5-07",
+      "verdict": "major",
+      "findings": [
+        {
+          "severity": "major",
+          "criterion": "changedClaims",
+          "markedQuote": "record the exact time of each stop",
+          "outputQuote": "document the precise timing of each step",
+          "assessment": "The investigation's central logging instruction changes from recording stoppages to timing every process step, a different measurement plan."
+        },
+        {
+          "severity": "minor",
+          "criterion": "changedClaims",
+          "markedQuote": "The fastest fix came from making the hidden wait clear",
+          "outputQuote": "The most effective solution emerged from making the hidden wait visible",
+          "assessment": "The conclusion changes the asserted basis of the solution from speed to effectiveness."
+        }
+      ],
+      "assessment": "Most events and all key quantities remain, but the central observation method is materially altered.",
+      "documentId": "doc-11"
+    },
+    {
+      "opaqueId": "CRV5-08",
+      "verdict": "pass",
+      "findings": [],
+      "assessment": "The argument, examples, uncertainty, pilot design, privacy details, figures, and first-person stance are substantively preserved.",
+      "documentId": "doc-13"
+    },
+    {
+      "opaqueId": "CRV5-09",
+      "verdict": "major",
+      "findings": [
+        {
+          "severity": "major",
+          "criterion": "scopeCertaintyCaveats",
+          "markedQuote": "I would inspect each tile every thirty minutes",
+          "outputQuote": "I examined each tile at thirty-minute intervals",
+          "assessment": "The output turns the stated inspection protocol into an assertion that the interval was actually maintained. That epistemic change matters to a lab record, especially because the later timestamps are not uniformly thirty minutes apart."
+        }
+      ],
+      "assessment": "The observations, counts, limitations, and conclusion remain, but the claimed execution of the measurement schedule is materially strengthened.",
+      "documentId": "doc-12"
+    },
+    {
+      "opaqueId": "CRV5-10",
+      "verdict": "pass",
+      "findings": [],
+      "assessment": "The repair sequence, failures, safety caveat, exact tokens, reflective lesson, and first-person voice are substantively preserved.",
+      "documentId": "doc-01"
+    },
+    {
+      "opaqueId": "CRV5-11",
+      "verdict": "minor",
+      "findings": [
+        {
+          "severity": "minor",
+          "criterion": "numbersEntitiesExamples",
+          "markedQuote": "its bus stop faces a row of low brick shops",
+          "outputQuote": "its bus terminal overlooks a line of low-rise brick storefronts",
+          "assessment": "A bus stop is changed to a bus terminal, altering a concrete feature of the setting."
+        }
+      ],
+      "assessment": "The route, encounters, exact strings, narrative sequence, and lesson are otherwise preserved.",
+      "documentId": "doc-06"
+    },
+    {
+      "opaqueId": "CRV5-12",
+      "verdict": "pass",
+      "findings": [],
+      "assessment": "The paper/digital comparison, costs, transition trial, recovery drill, caveats, and recommendation are substantively preserved.",
+      "documentId": "doc-17"
+    },
+    {
+      "opaqueId": "CRV5-13",
+      "verdict": "minor",
+      "findings": [
+        {
+          "severity": "minor",
+          "criterion": "numbersEntitiesExamples",
+          "markedQuote": "during my first month",
+          "outputQuote": "during my initial thirty days",
+          "assessment": "A calendar month is replaced with an exact thirty-day duration."
+        },
+        {
+          "severity": "minor",
+          "criterion": "changedClaims",
+          "markedQuote": "A methodologically sound sample is sufficient.",
+          "outputQuote": "A statistically valid sample is adequate.",
+          "assessment": "The output substitutes the narrower and stronger claim of statistical validity for methodological soundness."
+        }
+      ],
+      "assessment": "The operational advice and exact protected wording remain, with two localized precision changes.",
+      "documentId": "doc-10"
+    },
+    {
+      "opaqueId": "CRV5-14",
+      "verdict": "pass",
+      "findings": [],
+      "assessment": "The procedure, safety warning, file/archive rules, exact identifiers, limitations, and instructional voice are substantively preserved.",
+      "documentId": "doc-05"
+    },
+    {
+      "opaqueId": "CRV5-15",
+      "verdict": "minor",
+      "findings": [
+        {
+          "severity": "minor",
+          "criterion": "scopeCertaintyCaveats",
+          "markedQuote": "Ready orders met the target frequently",
+          "outputQuote": "Orders that were ready met the target consistently",
+          "assessment": "Consistently is stronger than frequently and overstates the reported success frequency."
+        }
+      ],
+      "assessment": "The pilot sequence, metrics, costs, limitations, and next question remain intact apart from a localized overstatement.",
+      "documentId": "doc-19"
+    },
+    {
+      "opaqueId": "CRV5-16",
+      "verdict": "major",
+      "findings": [
+        {
+          "severity": "major",
+          "criterion": "scopeCertaintyCaveats",
+          "markedQuote": "The card can show that an inspection was recorded. It cannot establish whether the inspection was thorough.",
+          "outputQuote": "While the form documents that an inspection took place, it cannot guarantee the thoroughness of that inspection.",
+          "assessment": "The input carefully limits the card's evidence to the existence of a record; the output upgrades that to evidence that the inspection itself occurred. This weakens a central epistemic caveat about checklist records."
+        }
+      ],
+      "assessment": "The ferry procedure is otherwise preserved, but a central distinction between recording and occurrence is materially changed.",
+      "documentId": "doc-15"
+    },
+    {
+      "opaqueId": "CRV5-17",
+      "verdict": "minor",
+      "findings": [
+        {
+          "severity": "minor",
+          "criterion": "changedClaims",
+          "markedQuote": "If it is open, you can increase the duration once.",
+          "outputQuote": "If it is free, you may extend your duration by one increment.",
+          "assessment": "The input limits how many times duration may be increased; the output substitutes an undefined increment-size rule."
+        }
+      ],
+      "assessment": "The FAQ's booking, safety, privacy, trial, and retention rules otherwise remain intact.",
+      "documentId": "doc-14"
+    },
+    {
+      "opaqueId": "CRV5-18",
+      "verdict": "pass",
+      "findings": [],
+      "assessment": "The storage/retrieval procedure, safety conditions, exact strings, drill, figures, and scope limitations are substantively preserved.",
+      "documentId": "doc-18"
+    },
+    {
+      "opaqueId": "CRV5-19",
+      "verdict": "pass",
+      "findings": [],
+      "assessment": "The incident chronology, causal mechanism, containment, recovery, controls, exact strings, quantities, and caveats are substantively preserved.",
+      "documentId": "doc-07"
+    },
+    {
+      "opaqueId": "CRV5-20",
+      "verdict": "pass",
+      "findings": [],
+      "assessment": "The workshop design, assignment mechanism, observer rules, success thresholds, caveats, exact strings, and experimental progression are substantively preserved.",
+      "documentId": "doc-16"
+    }
+  ],
+  "summaries": {
+    "all20": {
+      "scope": "all 20 documents",
+      "includedDocumentIds": [
+        "doc-01",
+        "doc-02",
+        "doc-03",
+        "doc-04",
+        "doc-05",
+        "doc-06",
+        "doc-07",
+        "doc-08",
+        "doc-09",
+        "doc-10",
+        "doc-11",
+        "doc-12",
+        "doc-13",
+        "doc-14",
+        "doc-15",
+        "doc-16",
+        "doc-17",
+        "doc-18",
+        "doc-19",
+        "doc-20"
+      ],
+      "excludedDocumentIds": [],
+      "totalDocuments": 20,
+      "aggregateVerdict": "major_fidelity_issues_found",
+      "verdictCounts": {
+        "pass": 8,
+        "minor": 8,
+        "major": 4
+      },
+      "verdictRatesPct": {
+        "pass": 40,
+        "minor": 40,
+        "major": 20,
+        "anyIssue": 60
+      },
+      "documentsByVerdict": {
+        "pass": [
+          "doc-01",
+          "doc-05",
+          "doc-07",
+          "doc-09",
+          "doc-13",
+          "doc-16",
+          "doc-17",
+          "doc-18"
+        ],
+        "minor": [
+          "doc-02",
+          "doc-03",
+          "doc-04",
+          "doc-06",
+          "doc-08",
+          "doc-10",
+          "doc-14",
+          "doc-19"
+        ],
+        "major": [
+          "doc-11",
+          "doc-12",
+          "doc-15",
+          "doc-20"
+        ]
+      },
+      "findingCount": 17,
+      "findingSeverityCounts": {
+        "minor": 13,
+        "major": 4
+      },
+      "findingCriterionCounts": {
+        "changedClaims": 7,
+        "numbersEntitiesExamples": 3,
+        "scopeCertaintyCaveats": 7
+      }
+    },
+    "holdoutDoc02To20": {
+      "scope": "documentId doc-02 through doc-20; doc-01 excluded",
+      "includedDocumentIds": [
+        "doc-02",
+        "doc-03",
+        "doc-04",
+        "doc-05",
+        "doc-06",
+        "doc-07",
+        "doc-08",
+        "doc-09",
+        "doc-10",
+        "doc-11",
+        "doc-12",
+        "doc-13",
+        "doc-14",
+        "doc-15",
+        "doc-16",
+        "doc-17",
+        "doc-18",
+        "doc-19",
+        "doc-20"
+      ],
+      "excludedDocumentIds": [
+        "doc-01"
+      ],
+      "totalDocuments": 19,
+      "aggregateVerdict": "major_fidelity_issues_found",
+      "verdictCounts": {
+        "pass": 7,
+        "minor": 8,
+        "major": 4
+      },
+      "verdictRatesPct": {
+        "pass": 36.8421,
+        "minor": 42.1053,
+        "major": 21.0526,
+        "anyIssue": 63.1579
+      },
+      "documentsByVerdict": {
+        "pass": [
+          "doc-05",
+          "doc-07",
+          "doc-09",
+          "doc-13",
+          "doc-16",
+          "doc-17",
+          "doc-18"
+        ],
+        "minor": [
+          "doc-02",
+          "doc-03",
+          "doc-04",
+          "doc-06",
+          "doc-08",
+          "doc-10",
+          "doc-14",
+          "doc-19"
+        ],
+        "major": [
+          "doc-11",
+          "doc-12",
+          "doc-15",
+          "doc-20"
+        ]
+      },
+      "findingCount": 17,
+      "findingSeverityCounts": {
+        "minor": 13,
+        "major": 4
+      },
+      "findingCriterionCounts": {
+        "changedClaims": 7,
+        "numbersEntitiesExamples": 3,
+        "scopeCertaintyCaveats": 7
+      },
+      "note": "The excluded doc-01 received pass, so all finding counts are unchanged from all20."
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "codex-close-reading-plan-v5/1.0",
+  "verifiedAt": "2026-08-17T11:02:38Z",
+  "methodology": {
+    "reviewType": "independent manual blind close-reading",
+    "reviewer": "Codex",
+    "unitOfReview": "one markedInputText/outputText pair",
+    "allowedSourceFieldsBeforeVerdictCommitment": [
+      "markedInputText",
+      "outputText"
+    ],
+    "blindConditions": [
+      "Do not inspect transformationOutcome, internal audit, semantic-audit-v4, detector, cost, method, or other-agent assessments.",
+      "Do not inspect documentId until every opaque pair has a written verdict and finding list.",
+      "Do not make provider calls."
+    ],
+    "deterministicOpaqueOrder": {
+      "sourceOrdinalDefinition": "zero-based order returned by recursive traversal of source objects containing both allowed fields",
+      "permutationKey": "SHA-256 of UTF-8 string codex-close-reading-v5|68d488111b069ff8aff46ccc171dca6eb732b23453d5f488c506d7c1c1e9aac4|NN, where NN is the zero-padded source ordinal",
+      "ordering": "ascending lowercase hexadecimal permutationKey",
+      "opaqueIdAssignment": "assign CRV5-01 through CRV5-20 in sorted order",
+      "identityReveal": "after the pre-reveal verdict artifact is complete and SHA-256 committed, read only documentId from each reviewed source object and attach the mapping"
+    },
+    "comparisonCriteria": {
+      "lostClaims": "Flag a proposition, qualification, instruction, conclusion, or rhetorical commitment present in markedInputText but absent from outputText.",
+      "addedClaims": "Flag a proposition, qualification, rationale, implication, or recommendation introduced by outputText without support in markedInputText.",
+      "changedClaims": "Flag altered predicates, relationships, conditions, comparisons, definitions, temporal claims, or conclusions.",
+      "numbersEntitiesExamples": "Check every number, unit, date, named entity, role, quotation, example, list member, and concrete detail for preservation and correct attachment.",
+      "causality": "Check that causes, mechanisms, evidence, consequences, and correlations are neither substituted nor strengthened/weakened.",
+      "negation": "Check explicit and implicit negation, exceptions, exclusions, contrasts, and reversals.",
+      "scopeCertaintyCaveats": "Check quantifier scope, actor/object scope, modality, likelihood, confidence, hedging, limitations, conditions, and caveats.",
+      "paragraphRoleOrder": "Check whether each paragraph still performs its original discourse role and whether reordering changes reference, emphasis, progression, or logic.",
+      "exactStrings": "Check strings whose exact surface form matters, including quoted phrases, commands, identifiers, labels, filenames, URLs, code, symbols, and deliberately repeated wording.",
+      "voice": "Check speaker identity, stance, register, point of view, directness, and intentional rhetorical texture. Mere wording change, normal compression, or stylistic polish is not an error when meaning and voice remain equivalent."
+    },
+    "verdictScale": {
+      "pass": "No substantive fidelity issue under the fixed criteria; harmless wording, syntax, or paragraph-boundary changes may remain.",
+      "minor": "At least one localized fidelity issue that changes a secondary detail, nuance, caveat, emphasis, exact string, or voice without materially changing the central message or practical takeaway.",
+      "major": "A material claim, conclusion, instruction, causal relationship, polarity, scope, key entity/number/example, paragraph function, or practical takeaway is lost, added, contradicted, or substantially changed."
+    },
+    "findingRules": [
+      "Each non-pass verdict must cite paired verbatim snippets from markedInputText and outputText and name one fixed criterion.",
+      "A pass may include checked observations but must not manufacture findings from wording alone.",
+      "Each pair receives one overall verdict determined by its highest-severity finding.",
+      "Verdicts are committed for all 20 opaque pairs before documentId reveal.",
+      "The all20 summary covers all mapped documents; the holdout summary covers documentId doc02 through doc20 and excludes doc01."
+    ]
+  },
+  "sources": [
+    {
+      "path": "results/verified-paraphrase-raw-v4.json",
+      "sha256": "68d488111b069ff8aff46ccc171dca6eb732b23453d5f488c506d7c1c1e9aac4",
+      "role": "sole comparison source",
+      "allowedFieldsBeforeVerdictCommitment": [
+        "markedInputText",
+        "outputText"
+      ],
+      "pairCount": 20
+    }
+  ],
+  "status": "locked-before-text-review"
+}
