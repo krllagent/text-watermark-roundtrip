@@ -1,0 +1,66 @@
+{
+  "audit": {
+    "batchSize": 4,
+    "closeReadingPlanPath": "fixtures/semantic-audit-plan-v4.json",
+    "closeReadingPlanSha256": "a82d89d65772a33b332990803b1deca7446ef51f4848a0695060b2e14e616029",
+    "methodIds": [
+      "paraphrase-verified-v4"
+    ],
+    "pairOrderSeed": "exp002-verified-paraphrase-semantic-audit-v4",
+    "structuredPairCount": 20
+  },
+  "billing": {
+    "creditBaseCurrency": "USD",
+    "creditUsdBaseUnit": "1",
+    "promptTokenOverheadReserve": 2048
+  },
+  "judge": {
+    "allowFallbacks": false,
+    "dataCollection": "deny",
+    "endpointSnapshotPath": "fixtures/semantic-audit-endpoint-snapshot-v1.json",
+    "endpointSnapshotSha256": "2adb61707a3912b692605ef8151f0fdc32c410371c3739747b902e8e11975b0f",
+    "expectedResponseModels": [
+      "google/gemini-3.7-flash",
+      "google/gemini-3.7-flash-20260813"
+    ],
+    "expectedResponseProviders": [
+      "Google"
+    ],
+    "maxPriceUsdPerMillionTokens": {
+      "completion": 1.875,
+      "prompt": 0.375
+    },
+    "maxTokens": 4096,
+    "model": "google/gemini-3.7-flash",
+    "providerOrder": [
+      "google-vertex/global"
+    ],
+    "reasoningEffort": "low",
+    "requireParameters": true,
+    "seed": 20260817,
+    "temperature": null,
+    "timeoutSeconds": 180,
+    "zdr": true
+  },
+  "methodology": "Freeze one independent blinded semantic review of the immutable verified-paraphrase-v4 transformation artifact. Present only opaque source-candidate pairs to the pinned Gemini judge, hide the method and every detector, cost, latency, and pipeline result, and keep doc-01 separate as the development canary. Report semantic failures on the 19 untouched holdout documents. Derive protected exact-value failures separately in code and publish every structured finding and billed call without retuning v4.",
+  "schemaVersion": 1,
+  "sourceArtifact": {
+    "path": "results/verified-paraphrase-raw-v4.json",
+    "sha256": "68d488111b069ff8aff46ccc171dca6eb732b23453d5f488c506d7c1c1e9aac4"
+  },
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    },
+    {
+      "title": "OpenRouter Gemini 3.7 Flash model page",
+      "url": "https://openrouter.ai/google/gemini-3.7-flash"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    }
+  ],
+  "verifiedAt": "2026-08-17"
+}
