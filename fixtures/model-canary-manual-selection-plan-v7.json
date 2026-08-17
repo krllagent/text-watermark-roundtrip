@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "model-canary-manual-selection-plan-v7/1.0",
+  "planVersion": "exp002-model-canary-v7-development",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Freeze the human close-reading and winner-selection rules before any GPT-5.6 candidate call. Review all twelve new source-candidate pairs under opaque identifiers, with candidate model, document identity, detector result, route, latency, and price hidden until a canonical review artifact containing every verdict and cited finding is committed to git. Only that committed artifact may be finalized and revealed. This is a deliberately difficult six-document development canary selected from the already-frozen Codex review of the Qwen reference, not a new holdout and not confirmatory evidence.",
+  "sources": [
+    {
+      "title": "Frozen Codex close-reading plan for the Qwen reference",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip/blob/b642f42/fixtures/codex-close-reading-plan-v5.json"
+    },
+    {
+      "title": "Frozen Codex close-reading result used only to choose difficult development cases",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip/blob/b642f42/results/codex-close-reading-v5.json"
+    }
+  ],
+  "scope": {
+    "classification": "development_only",
+    "confirmatoryClaimAllowed": false,
+    "candidateModels": [
+      "openai/gpt-5.6-luna",
+      "openai/gpt-5.6-terra"
+    ],
+    "documentIdsInExecutionOrder": [
+      "doc-11",
+      "doc-12",
+      "doc-15",
+      "doc-20",
+      "doc-03",
+      "doc-19"
+    ],
+    "selectionRationale": {
+      "firstFour": "all four documents classified major in the frozen Qwen close reading",
+      "lastTwo": "the two minor documents deterministically selected before this plan: doc-03 and doc-19"
+    },
+    "newPairCount": 12,
+    "qwenReferenceIsNotRecalledOrSelectable": true
+  },
+  "blinding": {
+    "reviewerReceivesOnly": [
+      "opaquePairId",
+      "sourceText",
+      "candidateText"
+    ],
+    "hideCandidateModel": true,
+    "hideDocumentId": true,
+    "hideCost": true,
+    "hideDetectorResults": true,
+    "hideLatency": true,
+    "hideProviderAndRoute": true,
+    "commitEveryVerdictBeforeReveal": true,
+    "opaquePairOrder": "Sort SHA-256 of UTF-8 model-canary-v7|candidateModel|documentId, then assign MCV7-01 through MCV7-12. The runner validates and later reveals the mapping.",
+    "preRevealCommitmentRequired": true,
+    "committedReviewArtifactStatus": "committed-before-reveal"
+  },
+  "comparisonCriteria": {
+    "lostClaims": "Flag a proposition, qualification, instruction, conclusion, or rhetorical commitment present in the source but absent from the candidate.",
+    "addedClaims": "Flag a proposition, rationale, implication, recommendation, or qualification introduced without source support.",
+    "changedClaims": "Flag altered predicates, relationships, conditions, comparisons, definitions, temporal claims, or conclusions.",
+    "numbersEntitiesExamples": "Check every number, unit, date, named entity, role, quotation, example, list member, and concrete detail for preservation and correct attachment.",
+    "causality": "Check that causes, mechanisms, evidence, consequences, and correlations are neither substituted nor strengthened or weakened.",
+    "negation": "Check explicit and implicit negation, exceptions, exclusions, contrasts, and reversals.",
+    "scopeCertaintyCaveats": "Check quantifier and actor scope, modality, likelihood, confidence, hedging, limitations, conditions, and caveats.",
+    "paragraphRoleOrder": "Check whether each paragraph still performs its source role and whether reordering changes reference, emphasis, progression, or logic.",
+    "exactStrings": "Check strings whose exact surface form matters, including quotations, commands, identifiers, labels, filenames, URLs, code, symbols, and deliberate repetition.",
+    "voice": "Check speaker identity, stance, register, point of view, directness, and intentional rhetorical texture."
+  },
+  "verdictScale": {
+    "pass": "No material fidelity issue. Wording, syntax, ordinary compression, and style changes are not errors when meaning, exact-value obligations, and voice remain equivalent.",
+    "minor": "At least one localized material fidelity issue changes a secondary detail, nuance, caveat, emphasis, exact string, or voice without changing the central message or practical takeaway.",
+    "major": "A material claim, conclusion, instruction, causal relationship, polarity, scope, key entity, number, example, paragraph function, or practical takeaway is lost, added, contradicted, or substantially changed."
+  },
+  "findingRules": [
+    "Every non-pass verdict must identify a fixed comparison criterion and cite paired source and candidate evidence.",
+    "Each sourceQuote must be an exact nonempty substring of that opaque pair's sourceText and each candidateQuote must be an exact nonempty substring of its candidateText.",
+    "Pass verdicts must have an empty findings list; non-pass verdicts must have at least one finding.",
+    "Mere wording or style change is never a finding by itself.",
+    "Each pair receives one overall verdict equal to its highest-severity material finding.",
+    "Pipeline failures are computed by code and are not silently repaired during review.",
+    "All twelve opaque verdicts must be committed before model and document mapping is revealed."
+  ],
+  "committedReviewArtifact": {
+    "schemaVersion": "model-canary-manual-review-v7/1.0",
+    "requiredTopLevelFields": [
+      "schemaVersion",
+      "artifactSha256",
+      "manualPlanSha256",
+      "blindPacketSha256",
+      "preRevealCommitment",
+      "reviews"
+    ],
+    "preRevealCommitment": {
+      "status": "committed-before-reveal",
+      "reviewArtifactSha256": "SHA-256 of the canonical review object with this field omitted; the committed file must match it byte-for-byte when canonicalized"
+    },
+    "findingFields": [
+      "criterion",
+      "sourceQuote",
+      "candidateQuote"
+    ]
+  },
+  "selectionRule": {
+    "candidatePassesOnlyIf": {
+      "majorMaterialFindingCountMaximum": 0,
+      "minorMaterialFindingCountMaximum": 0,
+      "pipelineFailureCountMaximum": 0,
+      "meanNormalizedWordLevenshteinDistanceMinimum": 0.15,
+      "perDocumentNormalizedWordLevenshteinDistanceMinimum": 0.15,
+      "sourceBaselineDetectorStatus": "detected",
+      "sourceBaselineActivePositionsMinimum": 20,
+      "sourceBaselineAllActivePositionsMustHit": true,
+      "candidateOutputDetectorRole": "descriptive only; never used to select or reject a six-document canary candidate",
+      "candidateOutputRemovalClaimAllowed": false,
+      "requiredReviewedDocumentCount": 6
+    },
+    "ifBothPass": "select the candidate with lower actual provider cost; if exact Decimal cost ties, select lower total measured latency",
+    "ifOnePasses": "select the passing candidate",
+    "ifNeitherPasses": "stop without selecting a model and do not build the demo from this canary",
+    "qwenReferenceSelectable": false
+  },
+  "reporting": {
+    "publishAllAutomaticMetrics": true,
+    "publishEveryManualVerdictAndFinding": true,
+    "publishOpaqueMappingAfterReview": true,
+    "publishCandidateFailuresWithoutRetuning": true,
+    "retuneAfterCanary": false
+  },
+  "status": "locked-before-provider-calls"
+}

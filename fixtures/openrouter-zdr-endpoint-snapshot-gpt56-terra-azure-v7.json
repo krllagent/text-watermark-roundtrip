@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "snapshotVersion": "openrouter-zdr-gpt56-terra-azure-eu-2026-08-17",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Fetched OpenRouter's public ZDR endpoint catalog before any v7 provider call, selected the exact Azure EU tag, and froze only the route, capability, context, and pricing fields needed for mandatory request preflight. Volatile status and uptime are deliberately excluded from this snapshot and must pass a fresh read-only catalog check before every inference session.",
+  "sources": [
+    {
+      "title": "OpenRouter public ZDR endpoint catalog",
+      "url": "https://openrouter.ai/api/v1/endpoints/zdr"
+    },
+    {
+      "title": "OpenRouter Zero Data Retention documentation",
+      "url": "https://openrouter.ai/docs/guides/features/zdr"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    }
+  ],
+  "catalogUrl": "https://openrouter.ai/api/v1/endpoints/zdr",
+  "requestedModelId": "openai/gpt-5.6-terra",
+  "catalogModelId": "openai/gpt-5.6-terra",
+  "officialWorkloadClassification": "balance of intelligence and cost",
+  "endpoint": {
+    "contextLength": 1050000,
+    "maxCompletionTokens": 128000,
+    "maxPromptTokens": 922000,
+    "name": "Azure | openai/gpt-5.6-terra-20260709",
+    "pricingUsdPerToken": {
+      "completion": "0.0000132",
+      "inputCacheRead": "0.00000022",
+      "inputCacheWrite": "0.00000275",
+      "prompt": "0.0000022"
+    },
+    "providerName": "Azure",
+    "quantization": "unknown",
+    "supportedParameters": [
+      "max_completion_tokens",
+      "reasoning",
+      "include_reasoning",
+      "seed",
+      "response_format",
+      "structured_outputs",
+      "tools",
+      "tool_choice",
+      "reasoning_effort"
+    ],
+    "tag": "azure/eu"
+  },
+  "pricingOverrideOutsideCanary": {
+    "minimumPromptTokens": 272000,
+    "completionUsdPerToken": "0.0000198",
+    "promptUsdPerToken": "0.0000044"
+  }
+}

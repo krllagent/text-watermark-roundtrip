@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "experimentVersion": "text-watermark-roundtrip-model-canary-v7-development",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Freeze a corrected Azure ZDR route for the same difficult six-document development canary after preserving the pre-generation v6 route failure. Reuse the exact marked inputs and hardened v4 draft request boundary, make no Qwen provider calls, and later issue exactly one call per candidate and document. The four Qwen major cases and two deterministically preselected Qwen minor cases are development data because their outcomes were already inspected. Candidate outputs are automatically checked for route, finish, usage, placeholders, pipeline contracts, detector score, and word distance, then require a canonical fully blinded manual fidelity review committed before reveal. This package makes no provider calls and cannot support a confirmatory claim.",
+  "sources": [
+    {
+      "title": "Frozen source, Qwen reference, and Codex close reading",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip/commit/b642f42"
+    },
+    {
+      "title": "OpenRouter Zero Data Retention documentation",
+      "url": "https://openrouter.ai/docs/guides/features/zdr"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "title": "OpenRouter errors and debugging documentation",
+      "url": "https://openrouter.ai/docs/api/reference/errors-and-debugging"
+    }
+  ],
+  "sourceArtifacts": {
+    "sourceCommit": "b642f42",
+    "reservedHoldoutCommit": "19ea51e",
+    "v4Config": {
+      "path": "fixtures/verified-paraphrase-config-v4.json",
+      "sha256": "f1575a361e47ec8c4275da62113a845998a5e9257d5053afb01203417aa6f32c"
+    },
+    "v4Result": {
+      "path": "results/verified-paraphrase-raw-v4.json",
+      "sha256": "68d488111b069ff8aff46ccc171dca6eb732b23453d5f488c506d7c1c1e9aac4"
+    },
+    "v5Config": {
+      "path": "fixtures/verified-paraphrase-config-v5-single-pass.json",
+      "sha256": "1fe50548e334debca41737e06ebaa2bba92807a939944932df5a8099059df1e7"
+    },
+    "v5Result": {
+      "path": "results/verified-paraphrase-derived-v5-single-pass.json",
+      "sha256": "ac15e8c2bf753870cddd63ff42cabc81a3f14a8662a608bb913df5567861f7ff"
+    },
+    "codexPlan": {
+      "path": "fixtures/codex-close-reading-plan-v5.json",
+      "sha256": "217fdd8e394580497b4436a2e320892f0305b2f26296b4ccc6d9b4c31d9988ea"
+    },
+    "codexResult": {
+      "path": "results/codex-close-reading-v5.json",
+      "sha256": "13e241d222c63a720896bc879b53443b42224e1ebe9ac255ed4e20429ff390db"
+    },
+    "reservedHoldoutPlan": {
+      "path": "fixtures/corpus-plan-v6-holdout.json",
+      "sha256": "b811fb35798fd3a5a74060acebc51b9b14b510e6041b7b602c8f729a8c50a30e"
+    },
+    "reservedHoldoutManifest": {
+      "path": "corpus/holdout-v6/manifest-v6-holdout.json",
+      "sha256": "d22cb3ed43bd075b6c572e386583c3d35a18c8d65fe0a28a0925f9cc691b0c3d"
+    },
+    "v6Checkpoint": {
+      "path": "results/model-canary-checkpoint-v6.json",
+      "sha256": "284ec8b351f448a88ff8a6f96183e1c3b2285d9f2a614442de4354a8a0487f4e"
+    },
+    "v6RouteFailure": {
+      "path": "results/model-canary-route-failure-v6.json",
+      "sha256": "5a0ebb57609af0964ab9176cb549ec6382760d426866fa56844303d97157c7db"
+    }
+  },
+  "developmentCases": {
+    "classification": "development_only",
+    "documentIds": [
+      "doc-11",
+      "doc-12",
+      "doc-15",
+      "doc-20",
+      "doc-03",
+      "doc-19"
+    ],
+    "selectionFrozenFromCodexResult": {
+      "majorDocumentIds": [
+        "doc-11",
+        "doc-12",
+        "doc-15",
+        "doc-20"
+      ],
+      "deterministicMinorDocumentIds": [
+        "doc-03",
+        "doc-19"
+      ]
+    },
+    "sourceSelection": "v4.methods[0].documents[].markedInputText",
+    "qwenReferenceSelection": "v5.documents[].outputText"
+  },
+  "candidates": [
+    {
+      "model": "openai/gpt-5.6-luna",
+      "officialWorkloadClassification": "efficient, high-volume workloads",
+      "endpointSnapshot": {
+        "path": "fixtures/openrouter-zdr-endpoint-snapshot-gpt56-luna-azure-v7.json",
+        "sha256": "b5f54641765c168c3ef0329a17ee7b05c796361f31b8992893a2d5a4e0b0b729"
+      },
+      "expectedResponseModels": [
+        "openai/gpt-5.6-luna",
+        "openai/gpt-5.6-luna-20260709"
+      ],
+      "pricingUsdPerMillionTokens": {
+        "prompt": "0.20",
+        "completion": "1.20",
+        "inputCacheRead": "0.02",
+        "inputCacheWrite": "0.25"
+      },
+      "maxPriceUsdPerMillionTokens": {
+        "prompt": 0.20,
+        "completion": 1.20
+      }
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "officialWorkloadClassification": "balance of intelligence and cost",
+      "endpointSnapshot": {
+        "path": "fixtures/openrouter-zdr-endpoint-snapshot-gpt56-terra-azure-v7.json",
+        "sha256": "146e5f1064eeb44d8a69fc932f17359a2468f04e5b526525a153bcbb8b32ffb4"
+      },
+      "expectedResponseModels": [
+        "openai/gpt-5.6-terra",
+        "openai/gpt-5.6-terra-20260709"
+      ],
+      "pricingUsdPerMillionTokens": {
+        "prompt": "2.00",
+        "completion": "12.00",
+        "inputCacheRead": "0.20",
+        "inputCacheWrite": "2.50"
+      },
+      "maxPriceUsdPerMillionTokens": {
+        "prompt": 2.00,
+        "completion": 12.00
+      }
+    }
+  ],
+  "routing": {
+    "transport": "openrouter",
+    "providerOrder": [
+      "azure"
+    ],
+    "expectedResponseProviders": [
+      "Azure"
+    ],
+    "allowFallbacks": false,
+    "dataCollection": "deny",
+    "zdr": true,
+    "requireParameters": true,
+    "requireDirectStrategy": true,
+    "requireSingleAttempt": true,
+    "requireEmptyPipeline": true
+  },
+  "request": {
+    "stage": "paraphrase-draft",
+    "callGraph": [
+      "paraphrase-draft"
+    ],
+    "instructionRole": "system",
+    "untrustedPayloadRole": "user",
+    "userPayloadEncoding": "canonical_json_utf8",
+    "userPayloadFields": [
+      "sourceText"
+    ],
+    "messageCount": 2,
+    "systemInstructionSource": "unmark.V4_SYSTEM_INSTRUCTIONS[paraphrase-draft]",
+    "systemInstructionSha256": "4e781df580b5b040ec025e0612ef0e17a563bb537a7d5ef0c2f4128846ce35d3",
+    "reasoningEffort": "medium",
+    "tokenCapField": "max_completion_tokens",
+    "tokenCap": 4096,
+    "seed": 20260817,
+    "temperaturePolicy": "omit_unsupported_parameter",
+    "responseFormat": null
+  },
+  "execution": {
+    "order": "candidate_major_then_document_order",
+    "callsPerCandidate": 6,
+    "totalProviderCalls": 12,
+    "retryPolicy": "never",
+    "fallbackPolicy": "never",
+    "checkpointEveryPaidResponse": true,
+    "unknownChargePolicy": "leave_in_flight_tombstone_and_require_explicit_confirm_not_charged",
+    "timeoutSeconds": 180,
+    "futureOneCallCommand": "python run_model_canary_v7.py --live --max-new-calls 1 --max-provider-cost-credits 0.01",
+    "futureRemainingCallsCommand": "python run_model_canary_v7.py --live --max-new-calls 11 --max-provider-cost-credits 0.50"
+  },
+  "billing": {
+    "creditBaseCurrency": "USD",
+    "creditUsdBaseUnit": "1",
+    "inferencePricingMarkupPercent": 0,
+    "promptTokenOverheadReserve": 2048,
+    "purchaseFeeExcluded": true,
+    "reserveFullMaxCompletionForEveryNextCall": true
+  },
+  "qwenReference": {
+    "model": "qwen/qwen3.6-35b-a3b",
+    "providerCalls": 0,
+    "outputSource": "v5.documents[].outputText",
+    "manualVerdictSource": "codexResult.summaries.all20.documentsByVerdict",
+    "selectable": false
+  },
+  "manualSelectionPlan": {
+    "path": "fixtures/model-canary-manual-selection-plan-v7.json",
+    "sha256": "3650852d6dd7c735e1b43d85b6c736b334dc8af053aec16532847e2f9470f1d0"
+  },
+  "parityFixture": {
+    "path": "fixtures/model-canary-parity-v7.json",
+    "sha256": "291ffe4bb2dbfafa25bcfc058f1d9d5637b7dae06e6dd8fd5b310e356fb94aac"
+  },
+  "analysis": {
+    "detector": "frozen toy-lexical-v1 detector from the v4 base experiment",
+    "candidateOutputDetectorRole": "descriptive_only_not_used_for_selection",
+    "candidateOutputRemovalClaimAllowed": false,
+    "finalHoldoutDetectorGateIsSeparate": true,
+    "wordDistanceMetric": "normalized_word_levenshtein",
+    "pipelineChecks": [
+      "finish_reason_stop",
+      "placeholder_canonicalization",
+      "placeholder_exact_once_and_ordered",
+      "protected_value_exact_restoration",
+      "nonempty_length_paragraph_and_changed_output_contracts"
+    ],
+    "publishPerDocumentRawMaskedAndRestoredOutputs": true,
+    "publishActualCostAndLatency": true
+  },
+  "decisionPolicy": {
+    "classification": "development_only",
+    "confirmatoryClaimAllowed": false,
+    "candidatePassesOnlyIf": {
+      "maximumMajorMaterialFindings": 0,
+      "maximumMinorMaterialFindings": 0,
+      "maximumPipelineFailures": 0,
+      "minimumMeanNormalizedWordDistance": 0.15,
+      "minimumPerDocumentNormalizedWordDistance": 0.15,
+      "sourceBaselineDetectorStatus": "detected",
+      "sourceBaselineMinimumActivePositions": 20,
+      "sourceBaselineRequireAllActiveHits": true,
+      "candidateOutputDetectorRole": "descriptive_only_not_used_for_selection",
+      "candidateOutputRemovalClaimAllowed": false,
+      "requiredReviewedDocumentCount": 6
+    },
+    "ifBothPass": "lower_actual_provider_cost_then_lower_total_latency",
+    "ifOnePasses": "select_passing_candidate",
+    "ifNeitherPasses": "stop_without_demo_candidate",
+    "retuningAfterResults": false,
+    "qwenReferenceSelectable": false
+  }
+}

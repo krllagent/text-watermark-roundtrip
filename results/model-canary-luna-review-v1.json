@@ -1,0 +1,76 @@
+{
+  "packetSha256": "55b4a881cf8d2d2a3c77cf118157314e18769b2501983f031a0f770a38886bc8",
+  "reviews": [
+    {
+      "pairId": "pair-77803b01b91bcb21",
+      "verdict": "minor",
+      "findings": [
+        {
+          "category": "scope_or_certainty",
+          "sourceFact": "The source says staff reported that the printer was slow.",
+          "candidateIssue": "The candidate says everyone repeated that explanation.",
+          "whyItChangesMeaning": "The universal claim about everyone is stronger than the source's non-universal reference to staff."
+        }
+      ]
+    },
+    {
+      "pairId": "pair-5ceeaf88f648d1eb",
+      "verdict": "minor",
+      "findings": [
+        {
+          "category": "scope_or_certainty",
+          "sourceFact": "The source calls faster moisture loss at the exposed edge the likely cause, while stressing that it was not observed fact.",
+          "candidateIssue": "The candidate calls it only a plausible cause.",
+          "whyItChangesMeaning": "Plausibility is weaker than likelihood, so the candidate lowers the stated confidence in the causal hypothesis."
+        }
+      ]
+    },
+    {
+      "pairId": "pair-d81c29665de26f08",
+      "verdict": "minor",
+      "findings": [
+        {
+          "category": "changed_claim",
+          "sourceFact": "When the cause is known, the source requires the crew to state the observed cause before giving the next update time.",
+          "candidateIssue": "The candidate requires the crew only to state what they observed, even when the cause is known.",
+          "whyItChangesMeaning": "Reporting an observation does not necessarily identify the cause, so the required content of the passenger message changes."
+        },
+        {
+          "category": "scope_or_certainty",
+          "sourceFact": "The interview's main question covers operating the ferry after sunset.",
+          "candidateIssue": "The candidate recasts the period as after dark.",
+          "whyItChangesMeaning": "The period after sunset can include twilight before darkness, so the candidate narrows the stated operating context."
+        }
+      ]
+    },
+    {
+      "pairId": "pair-383c5f6963655e2f",
+      "verdict": "major",
+      "findings": [
+        {
+          "category": "scope_or_certainty",
+          "sourceFact": "The source applies the 95% threshold only to recording departures; exposing no prior visitor entry and recovering within three minutes are separate unconditional success requirements.",
+          "candidateIssue": "The candidate fronts 'For at least 95% of visits' over all three coordinated requirements.",
+          "whyItChangesMeaning": "This can permit privacy exposure or failed restart recovery in up to 5% of visits, materially weakening central acceptance criteria that the source states without that allowance."
+        }
+      ]
+    },
+    {
+      "pairId": "pair-beae4e82b0d808b8",
+      "verdict": "minor",
+      "findings": [
+        {
+          "category": "scope_or_certainty",
+          "sourceFact": "The source says a final review could verify that the method could assist new volunteers and provide sufficient context.",
+          "candidateIssue": "The candidate says the review would determine whether the method might help and offer adequate context.",
+          "whyItChangesMeaning": "The candidate turns verification of a stated potential capability into an open question and reduces the source's level of commitment."
+        }
+      ]
+    },
+    {
+      "pairId": "pair-2764cc364ea049a5",
+      "verdict": "pass",
+      "findings": []
+    }
+  ]
+}
