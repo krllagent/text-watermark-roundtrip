@@ -55,6 +55,17 @@ class TextContractTests(unittest.TestCase):
             ["https://example.com/path", "www.example.org/demo"],
         )
 
+    def test_money_and_percent_trailing_punctuation_stays_outside_spans(self) -> None:
+        text = (
+            "Budgets were $450, £20, and € 1,250; tolerances were 15%, 95%, "
+            "and 2.5%."
+        )
+        spans = find_protected_spans(text)
+        self.assertEqual(
+            [text[span.start : span.end] for span in spans],
+            ["$450", "£20", "€ 1,250", "15%", "95%", "2.5%"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

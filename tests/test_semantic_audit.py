@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from decimal import Decimal
 import json
 from pathlib import Path
@@ -99,6 +100,34 @@ class SemanticAuditTests(unittest.TestCase):
         self.assertIn("sourceText", prompt)
         self.assertIn("candidateText", prompt)
 
+    def test_follow_up_audit_can_freeze_one_method_and_twenty_pairs(self) -> None:
+        base_config = load_audit_config(CONFIG_PATH)
+        source = load_audit_source(base_config)
+        original_method = next(
+            method
+            for method in source["methods"]
+            if method["methodId"] == "paraphrase"
+        )
+        follow_up_source = {
+            "methods": [
+                {
+                    **original_method,
+                    "methodId": "paraphrase-verified",
+                }
+            ]
+        }
+        follow_up_config = replace(
+            base_config,
+            method_ids=("paraphrase-verified",),
+            pair_order_seed="exp002-semantic-audit-v2",
+            structured_pair_count=20,
+        )
+
+        pairs = build_blinded_pairs(follow_up_config, follow_up_source)
+
+        self.assertEqual(len(pairs), 20)
+        self.assertEqual({pair.method_id for pair in pairs}, {"paraphrase-verified"})
+
     def test_parse_response_requires_exact_pair_ids_and_fields(self) -> None:
         pair_ids = ("pair-a", "pair-b")
         review = {
@@ -135,9 +164,20 @@ class SemanticAuditTests(unittest.TestCase):
         )
         self.assertFalse(protected_token_failure(source, added_quote)["failed"])
         doubled = 'Keep `CODE-1`, send to a@example.com, and spend $18,, today.'
-        self.assertTrue(protected_token_failure(source, doubled)["failed"])
+        self.assertFalse(protected_token_failure(source, doubled)["failed"])
         missing = 'Keep `CODE-1`, and spend $18, today.'
         self.assertTrue(protected_token_failure(source, missing)["failed"])
+
+    def test_protected_token_check_does_not_cascade_after_first_missing_token(self) -> None:
+        source = "Spend $18, email a@example.com, and keep 15%."
+        candidate = "Spend $19, email a@example.com, and keep 15%."
+
+        evidence = protected_token_failure(source, candidate)
+
+        self.assertTrue(evidence["failed"])
+        self.assertEqual(evidence["missing"], ["$18"])
+        self.assertEqual(evidence["expectedCount"], 3)
+        self.assertEqual(evidence["observedCount"], 3)
 
     def test_checkpointed_batches_resume_without_repeating_paid_work(self) -> None:
         config = load_audit_config(CONFIG_PATH)

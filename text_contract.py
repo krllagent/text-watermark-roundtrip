@@ -26,7 +26,13 @@ _PROTECTED_PATTERNS = (
     re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"),
     re.compile(r"(?<![A-Za-z0-9_])@[A-Za-z0-9_]+"),
     re.compile(r"(?<![A-Za-z0-9_])#[A-Za-z0-9_]+"),
-    re.compile(r"(?:[$£€]\s?\d[\d,]*(?:\.\d+)?|\d[\d,]*(?:\.\d+)?\s?%)"),
+    re.compile(
+        r"(?:"
+        r"[$£€]\s?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?"
+        r"|"
+        r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?\s?%"
+        r")"
+    ),
 )
 
 

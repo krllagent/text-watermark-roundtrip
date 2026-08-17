@@ -23,7 +23,9 @@ from text_contract import Span, find_protected_spans
 
 DEFAULT_OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 DEFAULT_MODEL = "qwen/qwen3.5-9b"
-SUPPORTED_METHODS = frozenset({"none", "synonyms", "roundtrip", "paraphrase"})
+SUPPORTED_METHODS = frozenset(
+    {"none", "synonyms", "roundtrip", "paraphrase", "paraphrase-verified"}
+)
 SUPPORTED_PIVOTS = frozenset({"de", "zh"})
 SUPPORTED_REASONING_EFFORTS = frozenset(
     {"none", "minimal", "low", "medium", "high", "xhigh", "max"}
@@ -31,6 +33,9 @@ SUPPORTED_REASONING_EFFORTS = frozenset(
 
 _PLACEHOLDER_RE = re.compile(r"⟦T([1-9][0-9]*)⟧")
 _BRACKET_TOKEN_RE = re.compile(r"⟦[^\n⟦⟧]*⟧")
+_PLACEHOLDER_VARIANT_RE = re.compile(
+    r"(?P<open>⟦|\[)\s*T(?P<number>[1-9][0-9]*)\s*(?P<close>⟧|\])"
+)
 _WORD_RE = re.compile(r"[A-Za-zÄÖÜäöüß]+")
 _GERMAN_MARKERS = frozenset(
     {
@@ -175,6 +180,11 @@ def protect_tokens(text: str) -> ProtectedText:
 
     spans = list(find_protected_spans(text))
     spans.extend(Span(match.start(), match.end()) for match in _BRACKET_TOKEN_RE.finditer(text))
+    spans.extend(
+        Span(match.start(), match.end())
+        for match in _PLACEHOLDER_VARIANT_RE.finditer(text)
+        if _matching_placeholder_brackets(match)
+    )
     merged = _merge_spans(spans)
     occupied_numbers = {int(match.group(1)) for match in _PLACEHOLDER_RE.finditer(text)}
 
@@ -201,6 +211,40 @@ def protect_tokens(text: str) -> ProtectedText:
     return ProtectedText(masked=masked, tokens=tuple(tokens))
 
 
+def canonicalize_placeholders(
+    text: str,
+    tokens: Sequence[ProtectedToken],
+) -> str:
+    """Normalize only obvious variants of known placeholders, then validate.
+
+    Models occasionally rewrite ``⟦T1⟧`` as ``[T1]`` or add whitespace inside
+    the brackets. Source text with those shapes is masked by :func:`protect_tokens`,
+    so an alias that remains in model output must refer to the current protected map.
+    Unknown, duplicated, missing, or reordered aliases remain hard failures.
+    """
+    if not isinstance(text, str):
+        raise TypeError("text must be a string")
+
+    expected = {token.placeholder for token in tokens}
+    replacements: list[tuple[int, int, str]] = []
+    for match in _PLACEHOLDER_VARIANT_RE.finditer(text):
+        if not _matching_placeholder_brackets(match):
+            continue
+        canonical = f"⟦T{match.group('number')}⟧"
+        raw = match.group(0)
+        if raw == canonical:
+            continue
+        if canonical not in expected:
+            raise PlaceholderError(f"unknown placeholder variant: {raw}")
+        replacements.append((match.start(), match.end(), canonical))
+
+    normalized = text
+    for start, end, canonical in reversed(replacements):
+        normalized = normalized[:start] + canonical + normalized[end:]
+    validate_placeholders(normalized, tokens)
+    return normalized
+
+
 def validate_placeholders(text: str, tokens: Sequence[ProtectedToken]) -> None:
     """Require each known placeholder exactly once and reject invented ones."""
     if not isinstance(text, str):
@@ -223,6 +267,13 @@ def validate_placeholders(text: str, tokens: Sequence[ProtectedToken]) -> None:
         raise PlaceholderError(f"unknown placeholder: {unknown[0]}")
     if found != expected:
         raise PlaceholderError("protected placeholders were reordered")
+
+
+def _matching_placeholder_brackets(match: re.Match[str]) -> bool:
+    return (match.group("open"), match.group("close")) in {
+        ("⟦", "⟧"),
+        ("[", "]"),
+    }
 
 
 def restore_tokens(text: str, tokens: Sequence[ProtectedToken]) -> str:
@@ -249,6 +300,31 @@ def build_paraphrase_prompt(masked: str) -> str:
         "Fully rephrase the English text in natural English. Change the wording and "
         "sentence construction while keeping the complete meaning.",
         masked,
+    )
+
+
+def build_fidelity_repair_prompt(source_masked: str, draft_masked: str) -> str:
+    """Build the mandatory source-grounded second pass for verified paraphrase."""
+    _require_nonempty_text(source_masked, "authoritative source")
+    _require_nonempty_text(draft_masked, "draft to repair")
+    instruction = (
+        "Repair the draft against the authoritative source. Restore every missing or "
+        "changed claim, caveat, example, named entity, number, author stance, degree of "
+        "certainty, negation, scope, causal direction, paragraph role, and paragraph "
+        "order. Remove anything the source does not support. Keep the final wording and "
+        "sentence construction materially different from the source: do not copy source "
+        "phrases merely to make the comparison easier. Preserve every placeholder from "
+        "the source exactly once and in its relevant position. Return only the repaired "
+        "English text."
+    )
+    return (
+        f"{instruction}\n\n"
+        "--- BEGIN AUTHORITATIVE SOURCE ---\n"
+        f"{source_masked}\n"
+        "--- END AUTHORITATIVE SOURCE ---\n\n"
+        "--- BEGIN DRAFT TO REPAIR ---\n"
+        f"{draft_masked}\n"
+        "--- END DRAFT TO REPAIR ---"
     )
 
 
@@ -634,6 +710,31 @@ def transform_text(
         _require_stop_completion(completion)
         calls.append(TransformCall(stage="paraphrase", prompt=prompt, completion=completion))
         final_masked = completion.content
+    elif method == "paraphrase-verified":
+        draft_prompt = build_paraphrase_prompt(protected.masked)
+        draft_completion = client.complete(draft_prompt, model=forward_model)
+        _require_stop_completion(draft_completion)
+        calls.append(
+            TransformCall(
+                stage="paraphrase-draft",
+                prompt=draft_prompt,
+                completion=draft_completion,
+            )
+        )
+        repair_prompt = build_fidelity_repair_prompt(
+            protected.masked,
+            draft_completion.content,
+        )
+        repair_completion = client.complete(repair_prompt, model=forward_model)
+        _require_stop_completion(repair_completion)
+        calls.append(
+            TransformCall(
+                stage="fidelity-repair",
+                prompt=repair_prompt,
+                completion=repair_completion,
+            )
+        )
+        final_masked = repair_completion.content
     else:
         assert pivot is not None
         backward_model = (
@@ -652,9 +753,13 @@ def transform_text(
                 completion=forward_completion,
             )
         )
-        validate_intermediate(forward_completion.content, pivot, protected.tokens)
+        forward_masked = canonicalize_placeholders(
+            forward_completion.content,
+            protected.tokens,
+        )
+        validate_intermediate(forward_masked, pivot, protected.tokens)
 
-        backward_prompt = build_backward_prompt(forward_completion.content, pivot)
+        backward_prompt = build_backward_prompt(forward_masked, pivot)
         backward_completion = client.complete(backward_prompt, model=backward_model)
         _require_stop_completion(backward_completion)
         calls.append(
@@ -666,7 +771,7 @@ def transform_text(
         )
         final_masked = backward_completion.content
 
-    validate_placeholders(final_masked, protected.tokens)
+    final_masked = canonicalize_placeholders(final_masked, protected.tokens)
     validate_result(protected.masked, final_masked, pivot)
     restored = restore_tokens(final_masked, protected.tokens)
     return TransformationResult(
@@ -920,9 +1025,11 @@ __all__ = [
     "TransformationResult",
     "ValidationError",
     "build_backward_prompt",
+    "build_fidelity_repair_prompt",
     "build_forward_prompt",
     "build_paraphrase_prompt",
     "build_synonym_prompt",
+    "canonicalize_placeholders",
     "json_safe_value",
     "protect_tokens",
     "resolve_chat_completions_url",

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 2,
+  "experimentVersion": "text-watermark-roundtrip-verified-paraphrase-v2",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Freeze a 20-document follow-up before any paid v2 call. For every marked source document, make exactly two transformation calls on one pinned Qwen endpoint: first a full paraphrase draft, then an unconditional source-grounded fidelity repair that receives both the protected source and the draft. The repair step is never gated by an intermediate score or judge. After all transformation outputs are frozen, audit the final outputs independently with the pinned Gemini route. Publish every output, failure, and billed call; do not tune after seeing results.",
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "title": "OpenRouter privacy and logging documentation",
+      "url": "https://openrouter.ai/docs/features/privacy-and-logging"
+    }
+  ],
+  "baseExperiment": {
+    "configPath": "fixtures/experiment-config-v1.json",
+    "configSha256": "60f9bd952129b6c9b6acd4fd4994156e81a523deaebf375974561e67ec930ba6",
+    "resultPath": "results/experiment-raw-v1.json",
+    "resultSha256": "7cbebefa7e871032e9ac80125cd95d0a9cb2a733c99324f150640ab26744e723",
+    "sourceSelection": "baseline.documents[].markedText",
+    "documentCount": 20
+  },
+  "transform": {
+    "id": "paraphrase-verified",
+    "method": "paraphrase-verified",
+    "callGraph": [
+      "paraphrase-draft",
+      "fidelity-repair"
+    ],
+    "repairPolicy": "always_once",
+    "alwaysRunRepair": true,
+    "repairGrounding": [
+      "masked_source",
+      "draft"
+    ]
+  },
+  "provider": {
+    "transport": "openrouter",
+    "model": "qwen/qwen3.6-35b-a3b",
+    "providerOrder": [
+      "deepinfra/fp8"
+    ],
+    "endpointSnapshotPath": "fixtures/openrouter-endpoint-snapshot-qwen36-v2.json",
+    "endpointSnapshotSha256": "f9c025e2ee6ab16fdb592db67ba7a5e6333dbcde9cc0f9fb9f020b2049d94da3",
+    "expectedResponseModels": [
+      "qwen/qwen3.6-35b-a3b",
+      "qwen/qwen3.6-35b-a3b-20260415"
+    ],
+    "expectedResponseProviders": [
+      "DeepInfra"
+    ],
+    "allowFallbacks": false,
+    "dataCollection": "deny",
+    "zdr": true,
+    "requireParameters": true,
+    "reasoningEffort": "none",
+    "temperature": 0,
+    "maxTokens": 4096,
+    "seed": 20260817,
+    "timeoutSeconds": 180,
+    "pricingUsdPerMillionTokens": {
+      "prompt": "0.10",
+      "completion": "0.95"
+    },
+    "maxPriceUsdPerMillionTokens": {
+      "prompt": 0.10,
+      "completion": 0.95
+    }
+  },
+  "billing": {
+    "creditBaseCurrency": "USD",
+    "creditUsdBaseUnit": "1",
+    "inferencePricingMarkupPercent": 0,
+    "promptTokenOverheadReserve": 2048,
+    "purchaseFeeExcluded": true
+  },
+  "analysis": {
+    "documentCount": 20,
+    "bootstrapReplicates": 10000,
+    "bootstrapSeed": 20260817,
+    "primaryScoringUnit": "pooled_corpus",
+    "qualityMetric": "normalized_word_levenshtein",
+    "resamplingUnit": "document_id"
+  },
+  "finalAudit": {
+    "required": true,
+    "separateFromRepair": true,
+    "judgeDoesNotControlRepair": true,
+    "freezeAfterTransformResult": true,
+    "structuredPairCount": 20,
+    "model": "google/gemini-3.7-flash",
+    "providerOrder": [
+      "google-vertex/global"
+    ],
+    "endpointSnapshotPath": "fixtures/semantic-audit-endpoint-snapshot-v1.json",
+    "endpointSnapshotSha256": "2adb61707a3912b692605ef8151f0fdc32c410371c3739747b902e8e11975b0f"
+  },
+  "decisionPolicy": {
+    "successTarget": null,
+    "retuningAfterResults": false,
+    "publishAllOutputs": true
+  }
+}

@@ -15,8 +15,10 @@ from unmark import (
     ValidationError,
     build_backward_prompt,
     build_forward_prompt,
+    build_fidelity_repair_prompt,
     build_paraphrase_prompt,
     build_synonym_prompt,
+    canonicalize_placeholders,
     protect_tokens,
     result_validation_issues,
     restore_tokens,
@@ -123,6 +125,52 @@ class ProtectedTokenTests(unittest.TestCase):
             "Keep https://example.org and 15% exact.",
         )
 
+    def test_canonicalizes_only_unambiguous_known_placeholder_variants(self) -> None:
+        protected = protect_tokens("Keep $450, https://example.org and 15% exact.")
+        first, second, third = (item.placeholder for item in protected.tokens)
+        variant = (
+            protected.masked.replace(first, "[T1]")
+            .replace(second, "⟦ T2 ⟧")
+            .replace(third, "[ T3 ]")
+        )
+
+        normalized = canonicalize_placeholders(variant, protected.tokens)
+
+        self.assertEqual(normalized, protected.masked)
+        self.assertEqual(
+            restore_tokens(normalized, protected.tokens),
+            "Keep $450, https://example.org and 15% exact.",
+        )
+
+    def test_placeholder_canonicalization_remains_fail_closed(self) -> None:
+        protected = protect_tokens("Keep https://example.org and 15% exact.")
+        first, second = (item.placeholder for item in protected.tokens)
+
+        with self.assertRaisesRegex(PlaceholderError, "unknown"):
+            canonicalize_placeholders(
+                protected.masked.replace(first, "[T999]"),
+                protected.tokens,
+            )
+        with self.assertRaisesRegex(PlaceholderError, "duplicated"):
+            canonicalize_placeholders(
+                protected.masked.replace(first, f"{first} [T1]"),
+                protected.tokens,
+            )
+        with self.assertRaisesRegex(PlaceholderError, "reordered"):
+            canonicalize_placeholders(
+                protected.masked.replace(first, "TEMP").replace(second, "[T1]").replace(
+                    "TEMP", "[T2]"
+                ),
+                protected.tokens,
+            )
+
+    def test_placeholder_like_source_text_is_protected_before_canonicalization(self) -> None:
+        protected = protect_tokens("Literal [T1], exact ⟦ T2 ⟧, and 15% remain.")
+        self.assertEqual(
+            [item.original for item in protected.tokens],
+            ["[T1]", "⟦ T2 ⟧", "15%"],
+        )
+
 
 class PromptAndValidationTests(unittest.TestCase):
     def test_prompts_state_fidelity_and_no_summary_contract(self) -> None:
@@ -141,6 +189,19 @@ class PromptAndValidationTests(unittest.TestCase):
 
         self.assertIn("natural english", build_backward_prompt("中间文本。", "zh").lower())
         self.assertIn("limited number", build_synonym_prompt("Masked text.").lower())
+
+    def test_fidelity_repair_prompt_is_source_grounded_and_keeps_rewrite(self) -> None:
+        prompt = build_fidelity_repair_prompt(
+            "Authoritative source with ⟦T1⟧.",
+            "Draft with ⟦T1⟧.",
+        )
+        lowered = prompt.lower()
+        self.assertIn("authoritative source", lowered)
+        self.assertIn("draft to repair", lowered)
+        self.assertIn("materially different", lowered)
+        self.assertIn("do not copy", lowered)
+        self.assertIn("Authoritative source with ⟦T1⟧.", prompt)
+        self.assertIn("Draft with ⟦T1⟧.", prompt)
 
     def test_intermediate_language_validators_cover_both_pivots(self) -> None:
         validate_intermediate(
@@ -474,6 +535,67 @@ class TransformCallGraphTests(unittest.TestCase):
                 self.assertIn('"A-17"', result.text)
                 self.assertIn("https://example.org/report", result.text)
                 self.assertNotEqual(result.text, self.original)
+
+    def test_transform_canonicalizes_obvious_placeholder_variants(self) -> None:
+        protected = protect_tokens(self.original)
+        output = (
+            protected.masked
+            .replace("I often use this careful method", "I regularly apply this cautious method")
+            .replace("⟦T1⟧", "[T1]")
+            .replace("⟦T2⟧", "⟦ T2 ⟧")
+        )
+        transport = QueueTransport([response(output)])
+        client = OpenRouterClient("secret", transport=transport)
+
+        result = transform_text(self.original, method="paraphrase", client=client)
+
+        self.assertIn('"A-17"', result.text)
+        self.assertIn("https://example.org/report", result.text)
+
+    def test_verified_paraphrase_always_runs_draft_and_source_grounded_repair(self) -> None:
+        protected = protect_tokens(self.original)
+        draft = (
+            protected.masked
+            .replace("I often use this careful method", "This cautious method is my usual choice")
+            .replace("⟦T1⟧", "[T1]")
+        )
+        repaired = (
+            protected.masked
+            .replace(
+                "I often use this careful method",
+                "I routinely rely on this cautious approach",
+            )
+            .replace("It preserves every", "It continues to retain each")
+            .replace("⟦T2⟧", "[ T2 ]")
+        )
+        transport = QueueTransport(
+            [response(draft, suffix="draft"), response(repaired, suffix="repair")]
+        )
+        client = OpenRouterClient("secret", transport=transport)
+
+        result = transform_text(
+            self.original,
+            method="paraphrase-verified",
+            client=client,
+            model_forward="qwen/qwen3.6-35b-a3b",
+        )
+
+        self.assertEqual(len(transport.calls), 2)
+        self.assertEqual(
+            [call.stage for call in result.calls],
+            ["paraphrase-draft", "fidelity-repair"],
+        )
+        self.assertEqual(
+            [call["body"]["model"] for call in transport.calls],
+            ["qwen/qwen3.6-35b-a3b", "qwen/qwen3.6-35b-a3b"],
+        )
+        repair_prompt = transport.calls[1]["body"]["messages"][0]["content"]
+        self.assertIn(protected.masked, repair_prompt)
+        self.assertIn(draft, repair_prompt)
+        self.assertNotIn('"A-17"', repair_prompt)
+        self.assertIn('"A-17"', result.text)
+        self.assertIn("https://example.org/report", result.text)
+        self.assertNotEqual(result.text, self.original)
 
     def test_single_call_methods_do_not_read_backward_model_configuration(self) -> None:
         protected = protect_tokens(self.original)

@@ -32,7 +32,7 @@ JUDGE_FIELDS = (
     "paragraphRoleOrOrderDrift",
 )
 VOICE_LEVELS = ("none", "minor", "material")
-EXPECTED_METHOD_IDS = ("synonyms", "roundtrip-de", "roundtrip-zh", "paraphrase")
+DEFAULT_METHOD_IDS = ("synonyms", "roundtrip-de", "roundtrip-zh", "paraphrase")
 
 
 class AuditError(Exception):
@@ -84,6 +84,7 @@ class AuditConfig:
     endpoint_snapshot_sha256: str
     batch_size: int
     structured_pair_count: int
+    method_ids: tuple[str, ...]
     pair_order_seed: str
     model: str
     provider_order: tuple[str, ...]
@@ -133,8 +134,16 @@ def load_audit_config(path: str | Path) -> AuditConfig:
     structured_pair_count = _positive_int(
         audit.get("structuredPairCount"), "audit.structuredPairCount"
     )
-    if structured_pair_count != 80:
-        raise ValueError("audit.structuredPairCount must be 80")
+    method_ids = _string_tuple(
+        audit.get("methodIds", list(DEFAULT_METHOD_IDS)),
+        "audit.methodIds",
+    )
+    if len(method_ids) != len(set(method_ids)):
+        raise ValueError("audit.methodIds must not contain duplicates")
+    if structured_pair_count != 20 * len(method_ids):
+        raise ValueError(
+            "audit.structuredPairCount must equal 20 documents per method"
+        )
     if structured_pair_count % batch_size:
         raise ValueError("audit batch size must divide the structured pair count")
     pair_order_seed = _text(audit.get("pairOrderSeed"), "audit.pairOrderSeed")
@@ -228,6 +237,7 @@ def load_audit_config(path: str | Path) -> AuditConfig:
         endpoint_snapshot_sha256=endpoint_sha256,
         batch_size=batch_size,
         structured_pair_count=structured_pair_count,
+        method_ids=method_ids,
         pair_order_seed=pair_order_seed,
         model=model,
         provider_order=provider_order,
@@ -262,12 +272,14 @@ def build_blinded_pairs(
     for raw_method in methods:
         method = _mapping(raw_method, "source method")
         method_id = _text(method.get("methodId"), "source methodId")
+        if method_id in by_method:
+            raise ValueError("source artifact contains a duplicate methodId")
         by_method[method_id] = method
-    if tuple(method for method in EXPECTED_METHOD_IDS if method in by_method) != EXPECTED_METHOD_IDS:
+    if any(method_id not in by_method for method_id in config.method_ids):
         raise ValueError("source artifact is missing an audit method")
 
     pairs: list[AuditPair] = []
-    for method_id in EXPECTED_METHOD_IDS:
+    for method_id in config.method_ids:
         documents = by_method[method_id].get("documents")
         if not isinstance(documents, list) or len(documents) != 20:
             raise ValueError(f"{method_id} must contain exactly 20 documents")
@@ -426,34 +438,49 @@ def protected_token_failure(source: str, candidate: str) -> dict[str, object]:
     observed = [
         candidate[span.start : span.end] for span in find_protected_spans(candidate)
     ]
-    matched: list[str] = []
-    cursor = 0
-    for token in expected:
-        while cursor < len(observed) and observed[cursor] != token:
-            cursor += 1
-        if cursor < len(observed):
-            matched.append(token)
-            cursor += 1
-    missing = list(expected[len(matched) :]) if len(matched) != len(expected) else []
-    if len(matched) != len(expected):
-        missing = []
-        cursor = 0
-        for token in expected:
-            found = False
-            while cursor < len(observed):
-                if observed[cursor] == token:
-                    found = True
-                    cursor += 1
-                    break
-                cursor += 1
-            if not found:
-                missing.append(token)
+    matched_expected = _ordered_lcs_expected_indices(expected, observed)
+    missing = [
+        token for index, token in enumerate(expected) if index not in matched_expected
+    ]
     return {
         "expectedCount": len(expected),
         "failed": bool(missing),
         "missing": missing,
         "observedCount": len(observed),
     }
+
+
+def _ordered_lcs_expected_indices(
+    expected: Sequence[str],
+    observed: Sequence[str],
+) -> frozenset[int]:
+    """Return expected-token indices in a stable longest ordered match."""
+    rows = len(expected) + 1
+    columns = len(observed) + 1
+    lengths = [[0] * columns for _ in range(rows)]
+    for left in range(len(expected) - 1, -1, -1):
+        for right in range(len(observed) - 1, -1, -1):
+            if expected[left] == observed[right]:
+                lengths[left][right] = 1 + lengths[left + 1][right + 1]
+            else:
+                lengths[left][right] = max(
+                    lengths[left + 1][right],
+                    lengths[left][right + 1],
+                )
+
+    matched: set[int] = set()
+    left = 0
+    right = 0
+    while left < len(expected) and right < len(observed):
+        if expected[left] == observed[right]:
+            matched.add(left)
+            left += 1
+            right += 1
+        elif lengths[left + 1][right] >= lengths[left][right + 1]:
+            left += 1
+        else:
+            right += 1
+    return frozenset(matched)
 
 
 def run_audit(
@@ -624,7 +651,7 @@ def run_audit(
         for pair in pairs
     ]
     aggregates: list[dict[str, object]] = []
-    for method_id in EXPECTED_METHOD_IDS:
+    for method_id in config.method_ids:
         method_pair_ids = {
             pair.pair_id for pair in pair_by_id.values() if pair.method_id == method_id
         }

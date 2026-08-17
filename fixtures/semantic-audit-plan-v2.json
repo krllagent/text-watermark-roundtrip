@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "auditVersion": "exp002-verified-paraphrase-semantic-audit-v2",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Freeze one independent blinded review of all 20 advanced-paraphrase outputs after transformation outputs are immutable and before the judge is called. The judge sees only opaque source-candidate pairs. It does not see the method, detector result, price, latency, or automatic validation. Protected exact-value failures are computed separately by code.",
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    }
+  ],
+  "scope": {
+    "documentCountPerMethod": 20,
+    "methods": [
+      "paraphrase-verified"
+    ],
+    "structuredPairCount": 20
+  },
+  "blinding": {
+    "hideCost": true,
+    "hideDetectorResults": true,
+    "hideLatency": true,
+    "hideMethodId": true,
+    "reviewerReceivesOpaquePairId": true
+  },
+  "structuredFields": [
+    "lostClaims",
+    "addedClaims",
+    "changedClaims",
+    "lostOrChangedExamples",
+    "stanceDrift",
+    "certaintyDrift",
+    "caveatDrift",
+    "paragraphRoleOrOrderDrift",
+    "voiceDrift",
+    "evidenceNotes"
+  ],
+  "decisionRule": {
+    "fidelityFailureIfAny": [
+      "lostClaims",
+      "addedClaims",
+      "changedClaims",
+      "lostOrChangedExamples",
+      "stanceDrift",
+      "certaintyDrift",
+      "caveatDrift",
+      "paragraphRoleOrOrderDrift",
+      "protectedTokenFailure"
+    ],
+    "voiceDriftIsReportedSeparately": true
+  },
+  "reporting": {
+    "publishEveryStructuredFinding": true,
+    "publishOpaqueIdMappingAfterReview": true,
+    "reportFailureCountAndRate": true,
+    "retuneAfterResults": false
+  }
+}

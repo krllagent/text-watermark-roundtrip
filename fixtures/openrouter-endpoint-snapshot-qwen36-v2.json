@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "snapshotVersion": "openrouter-qwen36-35b-a3b-deepinfra-fp8-2026-08-17",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Fetched OpenRouter's zero-data-retention endpoint catalog before any v2 transformation call, selected the exact DeepInfra FP8 endpoint tag, and omitted volatile uptime and latency fields from the frozen contract.",
+  "sources": [
+    {
+      "title": "OpenRouter zero-data-retention endpoint catalog",
+      "url": "https://openrouter.ai/api/v1/endpoints/zdr"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "title": "OpenRouter privacy and logging documentation",
+      "url": "https://openrouter.ai/docs/features/privacy-and-logging"
+    }
+  ],
+  "requestedModelId": "qwen/qwen3.6-35b-a3b",
+  "catalogModelId": "qwen/qwen3.6-35b-a3b",
+  "endpoint": {
+    "contextLength": 262144,
+    "maxCompletionTokens": 16384,
+    "name": "DeepInfra | qwen/qwen3.6-35b-a3b-20260415",
+    "pricingUsdPerToken": {
+      "completion": "0.00000095",
+      "prompt": "0.0000001"
+    },
+    "providerName": "DeepInfra",
+    "quantization": "fp8",
+    "supportedParameters": [
+      "frequency_penalty",
+      "include_reasoning",
+      "logit_bias",
+      "max_tokens",
+      "min_p",
+      "presence_penalty",
+      "reasoning",
+      "repetition_penalty",
+      "response_format",
+      "seed",
+      "stop",
+      "structured_outputs",
+      "temperature",
+      "tool_choice",
+      "tools",
+      "top_k",
+      "top_p"
+    ],
+    "tag": "deepinfra/fp8"
+  }
+}
