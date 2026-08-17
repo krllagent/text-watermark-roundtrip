@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "model-canary-blind-review-v1",
+  "packetSha256": "edd547ceb8d16b8d593c6e42cec4fd58c03d0c3b9c468dd49758f4ebed952911",
+  "reviews": [
+    {
+      "pairId": "pair-121e6e31b57072dd",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "pairId": "pair-04888890599e3473",
+      "verdict": "minor",
+      "findings": [
+        {
+          "criterion": "negation",
+          "sourceQuote": "No result is offered as a claim about real clay, and all names are fictional.",
+          "candidateQuote": "The No result is presented as a claim about real clay, and the all names are invented.",
+          "note": "An inserted article turns the negated disclaimer into a garbled sentence that can be read as asserting the result IS presented as a claim about real clay, compromising the negation."
+        }
+      ]
+    },
+    {
+      "pairId": "pair-638bb3be0cbecfc9",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "pairId": "pair-9933e5fe6bb5efbc",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "pairId": "pair-32868cc458de08e4",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "pairId": "pair-c469c57292696bfa",
+      "verdict": "pass",
+      "findings": []
+    }
+  ]
+}
