@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "experimentVersion": "text-watermark-roundtrip-model-canary-v6-development",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Freeze a difficult six-document development canary for choosing between two GPT-5.6 one-pass paraphrase candidates. Reuse the exact marked inputs and hardened v4 draft request boundary, make no Qwen provider calls, and later issue exactly one call per candidate and document. The four Qwen major cases and two deterministically preselected Qwen minor cases are development data because their outcomes were already inspected. Candidate outputs are automatically checked for route, finish, usage, placeholders, pipeline contracts, detector score, and word distance, then require a separate fully blinded manual fidelity verdict before selection. This package makes no provider calls and cannot support a confirmatory claim.",
+  "sources": [
+    {
+      "title": "Frozen source, Qwen reference, and Codex close reading",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip/commit/b642f42"
+    },
+    {
+      "title": "OpenAI GPT-5.6 model guidance",
+      "url": "https://developers.openai.com/api/docs/guides/latest-model#update-api-and-model-parameters"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "title": "OpenRouter privacy and logging documentation",
+      "url": "https://openrouter.ai/docs/features/privacy-and-logging"
+    }
+  ],
+  "sourceArtifacts": {
+    "sourceCommit": "b642f42",
+    "reservedHoldoutCommit": "19ea51e",
+    "v4Config": {
+      "path": "fixtures/verified-paraphrase-config-v4.json",
+      "sha256": "f1575a361e47ec8c4275da62113a845998a5e9257d5053afb01203417aa6f32c"
+    },
+    "v4Result": {
+      "path": "results/verified-paraphrase-raw-v4.json",
+      "sha256": "68d488111b069ff8aff46ccc171dca6eb732b23453d5f488c506d7c1c1e9aac4"
+    },
+    "v5Config": {
+      "path": "fixtures/verified-paraphrase-config-v5-single-pass.json",
+      "sha256": "1fe50548e334debca41737e06ebaa2bba92807a939944932df5a8099059df1e7"
+    },
+    "v5Result": {
+      "path": "results/verified-paraphrase-derived-v5-single-pass.json",
+      "sha256": "ac15e8c2bf753870cddd63ff42cabc81a3f14a8662a608bb913df5567861f7ff"
+    },
+    "codexPlan": {
+      "path": "fixtures/codex-close-reading-plan-v5.json",
+      "sha256": "217fdd8e394580497b4436a2e320892f0305b2f26296b4ccc6d9b4c31d9988ea"
+    },
+    "codexResult": {
+      "path": "results/codex-close-reading-v5.json",
+      "sha256": "13e241d222c63a720896bc879b53443b42224e1ebe9ac255ed4e20429ff390db"
+    },
+    "reservedHoldoutPlan": {
+      "path": "fixtures/corpus-plan-v6-holdout.json",
+      "sha256": "b811fb35798fd3a5a74060acebc51b9b14b510e6041b7b602c8f729a8c50a30e"
+    },
+    "reservedHoldoutManifest": {
+      "path": "corpus/holdout-v6/manifest-v6-holdout.json",
+      "sha256": "d22cb3ed43bd075b6c572e386583c3d35a18c8d65fe0a28a0925f9cc691b0c3d"
+    }
+  },
+  "developmentCases": {
+    "classification": "development_only",
+    "documentIds": [
+      "doc-11",
+      "doc-12",
+      "doc-15",
+      "doc-20",
+      "doc-03",
+      "doc-19"
+    ],
+    "selectionFrozenFromCodexResult": {
+      "majorDocumentIds": [
+        "doc-11",
+        "doc-12",
+        "doc-15",
+        "doc-20"
+      ],
+      "deterministicMinorDocumentIds": [
+        "doc-03",
+        "doc-19"
+      ]
+    },
+    "sourceSelection": "v4.methods[0].documents[].markedInputText",
+    "qwenReferenceSelection": "v5.documents[].outputText"
+  },
+  "candidates": [
+    {
+      "model": "openai/gpt-5.6-luna",
+      "officialWorkloadClassification": "efficient, high-volume workloads",
+      "endpointSnapshot": {
+        "path": "fixtures/openrouter-endpoint-snapshot-gpt56-luna-v6.json",
+        "sha256": "4469cc504ba95cf354bf5b7d7f52cbf64ac17bb20ab02f6f3979abbc63394775"
+      },
+      "expectedResponseModels": [
+        "openai/gpt-5.6-luna",
+        "openai/gpt-5.6-luna-20260709"
+      ],
+      "pricingUsdPerMillionTokens": {
+        "prompt": "0.10",
+        "completion": "0.60"
+      },
+      "maxPriceUsdPerMillionTokens": {
+        "prompt": 0.10,
+        "completion": 0.60
+      }
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "officialWorkloadClassification": "balance of intelligence and cost",
+      "endpointSnapshot": {
+        "path": "fixtures/openrouter-endpoint-snapshot-gpt56-terra-v6.json",
+        "sha256": "63fc44543df2c6b027fccd342c3162921288ca1f0d6a119d054bd470d510577e"
+      },
+      "expectedResponseModels": [
+        "openai/gpt-5.6-terra",
+        "openai/gpt-5.6-terra-20260709"
+      ],
+      "pricingUsdPerMillionTokens": {
+        "prompt": "1.00",
+        "completion": "6.00"
+      },
+      "maxPriceUsdPerMillionTokens": {
+        "prompt": 1.00,
+        "completion": 6.00
+      }
+    }
+  ],
+  "routing": {
+    "transport": "openrouter",
+    "providerOrder": [
+      "openai"
+    ],
+    "expectedResponseProviders": [
+      "OpenAI"
+    ],
+    "allowFallbacks": false,
+    "dataCollection": "deny",
+    "zdr": true,
+    "requireParameters": true,
+    "requireDirectStrategy": true,
+    "requireSingleAttempt": true,
+    "requireEmptyPipeline": true
+  },
+  "request": {
+    "stage": "paraphrase-draft",
+    "callGraph": [
+      "paraphrase-draft"
+    ],
+    "instructionRole": "system",
+    "untrustedPayloadRole": "user",
+    "userPayloadEncoding": "canonical_json_utf8",
+    "userPayloadFields": [
+      "sourceText"
+    ],
+    "messageCount": 2,
+    "systemInstructionSource": "unmark.V4_SYSTEM_INSTRUCTIONS[paraphrase-draft]",
+    "systemInstructionSha256": "4e781df580b5b040ec025e0612ef0e17a563bb537a7d5ef0c2f4128846ce35d3",
+    "reasoningEffort": "medium",
+    "maxTokens": 4096,
+    "seed": 20260817,
+    "temperaturePolicy": "omit_unsupported_parameter",
+    "responseFormat": null
+  },
+  "execution": {
+    "order": "candidate_major_then_document_order",
+    "callsPerCandidate": 6,
+    "totalProviderCalls": 12,
+    "retryPolicy": "never",
+    "fallbackPolicy": "never",
+    "checkpointEveryPaidResponse": true,
+    "unknownChargePolicy": "leave_in_flight_tombstone_and_require_explicit_confirm_not_charged",
+    "timeoutSeconds": 180,
+    "futureLiveCommand": "python run_model_canary_v6.py --live --max-new-calls 12 --max-provider-cost-credits 0.30"
+  },
+  "billing": {
+    "creditBaseCurrency": "USD",
+    "creditUsdBaseUnit": "1",
+    "inferencePricingMarkupPercent": 0,
+    "promptTokenOverheadReserve": 2048,
+    "purchaseFeeExcluded": true,
+    "reserveFullMaxCompletionForEveryNextCall": true
+  },
+  "qwenReference": {
+    "model": "qwen/qwen3.6-35b-a3b",
+    "providerCalls": 0,
+    "outputSource": "v5.documents[].outputText",
+    "manualVerdictSource": "codexResult.summaries.all20.documentsByVerdict",
+    "selectable": false
+  },
+  "manualSelectionPlan": {
+    "path": "fixtures/model-canary-manual-selection-plan-v6.json",
+    "sha256": "51c5e28eab443dd4c02da41045b1a7464c672b0ebf1d8dbe14f9c17b2f38b7da"
+  },
+  "parityFixture": {
+    "path": "fixtures/model-canary-parity-v6.json",
+    "sha256": "3902ebdf43f16a37e5169d4f3f01a26f94512fccda3f35fdf2f5432962c71d91"
+  },
+  "analysis": {
+    "detector": "frozen toy-lexical-v1 detector from the v4 base experiment",
+    "wordDistanceMetric": "normalized_word_levenshtein",
+    "pipelineChecks": [
+      "finish_reason_stop",
+      "placeholder_canonicalization",
+      "placeholder_exact_once_and_ordered",
+      "protected_value_exact_restoration",
+      "nonempty_length_paragraph_and_changed_output_contracts"
+    ],
+    "publishPerDocumentRawMaskedAndRestoredOutputs": true,
+    "publishActualCostAndLatency": true
+  },
+  "decisionPolicy": {
+    "classification": "development_only",
+    "confirmatoryClaimAllowed": false,
+    "candidatePassesOnlyIf": {
+      "maximumMajorMaterialFindings": 0,
+      "maximumMinorMaterialFindings": 0,
+      "maximumPipelineFailures": 0,
+      "minimumMeanNormalizedWordDistance": 0.15,
+      "requiredReviewedDocumentCount": 6
+    },
+    "ifBothPass": "lower_actual_provider_cost_then_lower_total_latency",
+    "ifOnePasses": "select_passing_candidate",
+    "ifNeitherPasses": "stop_without_demo_candidate",
+    "retuningAfterResults": false,
+    "qwenReferenceSelectable": false
+  }
+}

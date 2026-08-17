@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "snapshotVersion": "openrouter-gpt56-luna-openai-2026-08-17",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Fetched OpenRouter's public model endpoint catalog before any v6 provider call, selected the exact OpenAI standard endpoint tag, and froze only route, capability, context, and pricing fields needed to validate the future development canary. Volatile uptime, throughput, and latency fields are deliberately excluded.",
+  "sources": [
+    {
+      "title": "OpenRouter GPT-5.6 Luna endpoint catalog",
+      "url": "https://openrouter.ai/api/v1/models/openai/gpt-5.6-luna/endpoints"
+    },
+    {
+      "title": "OpenAI GPT-5.6 model guidance",
+      "url": "https://developers.openai.com/api/docs/guides/latest-model#update-api-and-model-parameters"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "title": "OpenRouter privacy and logging documentation",
+      "url": "https://openrouter.ai/docs/features/privacy-and-logging"
+    }
+  ],
+  "requestedModelId": "openai/gpt-5.6-luna",
+  "catalogModelId": "openai/gpt-5.6-luna",
+  "officialWorkloadClassification": "efficient, high-volume workloads",
+  "endpoint": {
+    "contextLength": 1050000,
+    "maxCompletionTokens": 128000,
+    "name": "OpenAI | openai/gpt-5.6-luna-20260709",
+    "pricingUsdPerToken": {
+      "completion": "0.0000006",
+      "inputCacheRead": "0.00000001",
+      "inputCacheWrite": "0.000000125",
+      "prompt": "0.0000001"
+    },
+    "providerName": "OpenAI",
+    "quantization": "unknown",
+    "supportedParameters": [
+      "reasoning",
+      "include_reasoning",
+      "seed",
+      "max_tokens",
+      "response_format",
+      "structured_outputs",
+      "tools",
+      "tool_choice",
+      "reasoning_effort"
+    ],
+    "tag": "openai"
+  },
+  "pricingOverrideOutsideCanary": {
+    "minimumPromptTokens": 272000,
+    "completionUsdPerToken": "0.0000009",
+    "promptUsdPerToken": "0.0000002"
+  }
+}
