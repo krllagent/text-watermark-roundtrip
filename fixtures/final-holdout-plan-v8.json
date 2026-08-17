@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "experimentVersion": "text-watermark-final-holdout-v8",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Freeze an exhaustive context review, an encoder-only allowlist, deterministic 10 percent marked inputs, and local detector controls on the untouched v6 holdout before any final provider call. The encoder may alter only contexts approved without consulting watermark activity. The public toy detector remains unchanged and scores the complete lexicon on unmarked, marked, and later model-output text. Provider execution stays blocked until the independently selected v7 winner configuration and commit are added in one reviewed revision.",
+  "sources": [
+    {
+      "title": "Experiment repository and locally frozen holdout",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    }
+  ],
+  "sourceCorpus": {
+    "sourceCommit": "19ea51e8ca9212dfe2c7a8457d8b52f7d08df617",
+    "plan": {
+      "path": "fixtures/corpus-plan-v6-holdout.json",
+      "sha256": "b811fb35798fd3a5a74060acebc51b9b14b510e6041b7b602c8f729a8c50a30e"
+    },
+    "manifest": {
+      "path": "corpus/holdout-v6/manifest-v6-holdout.json",
+      "sha256": "d22cb3ed43bd075b6c572e386583c3d35a18c8d65fe0a28a0925f9cc691b0c3d"
+    },
+    "expectedDocumentCount": 20,
+    "expectedScorerEligibleOccurrences": 411
+  },
+  "lexicon": {
+    "path": "fixtures/synonym_pairs-v1.json",
+    "sha256": "c548a86a3a3d101a3db58ad82e58a648b6a4eb9b428ac1c0b5f8c7538b3229b3"
+  },
+  "markerConfig": {
+    "path": "fixtures/experiment-config-v1.json",
+    "sha256": "60f9bd952129b6c9b6acd4fd4994156e81a523deaebf375974561e67ec930ba6"
+  },
+  "detectorImplementation": {
+    "path": "watermark_toy.py",
+    "sha256": "ef584694f3674745bc1c3dac0d43e243117fa869041af15f65d1c261095a35b4",
+    "allowlistAware": false
+  },
+  "contextReview": {
+    "expectedReviewedOccurrences": 411,
+    "expectedApprovedOccurrences": 275,
+    "expectedRejectedOccurrences": 136,
+    "reviewerExposure": "All occurrences were traversed in document order and judged from the source and case-preserving partner text; activity, favored variants, detector results, and provider outputs were not consulted during the exhaustive pass.",
+    "maskScope": "encoder_only",
+    "detectorUsesMask": false
+  },
+  "prepaidControls": {
+    "densityBps": 1000,
+    "contextWidth": 4,
+    "minActivePositions": 20,
+    "wrongKeyCount": 1000,
+    "wrongKeySeedHex": "66696e616c2d686f6c646f75742d76382d77726f6e672d6b657973"
+  },
+  "expectedBaseline": {
+    "approvedActiveOpportunities": 18,
+    "approvedActiveFavored": 18,
+    "rejectedActiveSkipped": 16,
+    "physicalChanges": 7,
+    "unmarked": {"activePositions": 34, "hits": 18, "status": "not_detected"},
+    "marked": {"activePositions": 34, "hits": 25, "status": "detected"}
+  },
+  "providerExecution": {
+    "status": "blocked_pending_committed_v7_winner_binding",
+    "requiredAtomicRevision": [
+      "winner result path, SHA-256, and commit",
+      "exact model and provider endpoint snapshot",
+      "exact one-pass request parity for all 20 documents"
+    ],
+    "callsBeforeRevision": 0
+  },
+  "finalConfirmationGate": {
+    "callCount": 20,
+    "onePassPerDocument": true,
+    "retryAllowed": false,
+    "fallbackAllowed": false,
+    "sameCommittedWinnerConfigurationForEveryDocument": true,
+    "transportFinishRouteOrUsageFailureFailsDocument": true,
+    "maximumPipelineFailures": 0,
+    "maximumPlaceholderFailures": 0,
+    "protectedValues": "exactly_once_in_source_order",
+    "outputDetectorStatus": "not_detected",
+    "minimumOutputActivePositions": 20,
+    "minimumMeanWordDistance": 0.15,
+    "minimumEachDocumentWordDistance": 0.15,
+    "eachDocumentLengthRatio": {"minimum": 0.6, "maximum": 1.6},
+    "eachDocumentParagraphRatio": {"minimum": 0.7, "maximum": 1.3},
+    "blindReview": {
+      "documentCount": 20,
+      "minimumPassDocuments": 19,
+      "maximumMajorFindings": 0,
+      "maximumMinorDocuments": 1,
+      "maximumMinorFindings": 1,
+      "nonPassRequiresCriterion": true,
+      "nonPassRequiresExactSourceAndCandidateQuotes": true,
+      "quotesMustBeExactSubstrings": true,
+      "opaqueReviewArtifactMustBeCommittedBeforeReveal": true
+    },
+    "demoRequiresEveryGate": true,
+    "claimScope": "This frozen synthetic twenty-document set only; report 0/20 only if observed and do not infer a population failure rate."
+  }
+}
