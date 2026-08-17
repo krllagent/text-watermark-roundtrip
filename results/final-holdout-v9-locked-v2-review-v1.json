@@ -1,0 +1,168 @@
+{
+  "packetSha256": "297da3c02c337147b956008bda2bbbd9a700dccfe4ecafe1bdc6457d421deddf",
+  "reviewers": "four independent blind readers, five pairs each, no method or model labels",
+  "reviews": [
+    {
+      "findings": [],
+      "pairId": "pair-0e176dc1fec9f22f",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-ce3101b0f6328f8a",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-2ec17b57d720d097",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-7ca68245bea908ab",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-d26c806a38f29d7c",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-a34773998f40a1ca",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-f657f03789f89857",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-a1890617b21259d0",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-77463505553507b5",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-6b618dc04d80b438",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-35bec77a07cce293",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-ba80cfbf2140cf28",
+      "verdict": "pass"
+    },
+    {
+      "findings": [
+        {
+          "candidateQuote": "> ⟦T1⟧",
+          "criterion": "exact_string",
+          "explanation": "The pull quote is replaced by an opaque placeholder token, so the quoted sentence is absent from the candidate.",
+          "sourceQuote": "\"I do not need more choices; I need one honest choice.\""
+        },
+        {
+          "candidateQuote": "the battery read ⟦T2⟧",
+          "criterion": "number_or_entity",
+          "explanation": "The battery reading of 22% is masked by a placeholder token and no longer conveyed.",
+          "sourceQuote": "its battery showed 22%"
+        },
+        {
+          "candidateQuote": "She used a taxi for ⟦T3⟧",
+          "criterion": "exact_string",
+          "explanation": "The exact taxi fare of $18.40 is replaced by a placeholder token.",
+          "sourceQuote": "She took a taxi for $18.40"
+        },
+        {
+          "candidateQuote": "a charger sensor will record ⟦T4⟧",
+          "criterion": "exact_string",
+          "explanation": "The code token `ready_after=80` written by the sensor is masked by a placeholder.",
+          "sourceQuote": "will write `ready_after=80` when battery level exceeds 80%"
+        },
+        {
+          "candidateQuote": "the battery level surpasses ⟦T5⟧",
+          "criterion": "number_or_entity",
+          "explanation": "The 80% battery threshold is replaced by a placeholder token.",
+          "sourceQuote": "when battery level exceeds 80%"
+        },
+        {
+          "candidateQuote": "the app will show ⟦T6⟧ ⟦T7⟧ or ⟦T8⟧",
+          "criterion": "exact_string",
+          "explanation": "The three literal status labels ready/charging/unknown are all replaced by placeholder tokens.",
+          "sourceQuote": "the app will display “ready,” “charging,” or “unknown.”"
+        },
+        {
+          "candidateQuote": "The experiment has a fictional cost of ⟦T9⟧, versus ⟦T10⟧ for four scooters.",
+          "criterion": "number_or_entity",
+          "explanation": "The cost figures $960 and $7,600 are both masked by placeholder tokens.",
+          "sourceQuote": "The trial costs a fictional $960, compared with $7,600 for four scooters."
+        },
+        {
+          "candidateQuote": "a ⟦T11⟧ decrease in failed pickups without reducing total trips by more than ⟦T12⟧",
+          "criterion": "number_or_entity",
+          "explanation": "The success thresholds 25% and 10% are replaced by placeholder tokens, removing the measurable criteria.",
+          "sourceQuote": "a 25% reduction in failed pickups without a fall of more than 10% in total trips"
+        },
+        {
+          "candidateQuote": "research overview appears at ⟦T13⟧",
+          "criterion": "exact_string",
+          "explanation": "The URL is masked by a placeholder token.",
+          "sourceQuote": "https://wrenwheel.example/research/charge"
+        },
+        {
+          "candidateQuote": "⟦T15⟧ is responsible for the ⟦T16⟧ rule",
+          "criterion": "exact_string",
+          "explanation": "The @handle and the 80% rule reference are both replaced by placeholder tokens.",
+          "sourceQuote": "@WrenwheelResearch owns the 80% rule"
+        }
+      ],
+      "pairId": "pair-915a3216265b02e6",
+      "verdict": "major"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-17181661463f2bf0",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-40f9893cad3a2ca3",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-b5e5436ce8b84600",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-a00d8729a473d7e7",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-dfa249a0e9793c8b",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-aeefc34e06f7a7c0",
+      "verdict": "pass"
+    },
+    {
+      "findings": [],
+      "pairId": "pair-76a236f776f26a2d",
+      "verdict": "pass"
+    }
+  ],
+  "schemaVersion": 1
+}
