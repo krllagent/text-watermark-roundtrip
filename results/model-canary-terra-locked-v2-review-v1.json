@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "model-canary-blind-review-v1",
+  "packetSha256": "539ec6bbfa43f601c4cbe72d521ca011f9a6404ccecdb43d6969983e3da33ee3",
+  "reviews": [
+    {
+      "pairId": "pair-0389473de91ee772",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "pairId": "pair-b6d5e6f78fa5e462",
+      "verdict": "minor",
+      "findings": [
+        {
+          "criterion": "changed_claim",
+          "sourceQuote": "it cannot tell me about internal strain",
+          "candidateQuote": "it cannot inform me about internal stress",
+          "note": "The technical term 'strain' (deformation) was changed to 'stress' (internal force), which are distinct materials-science quantities in a lab-notebook context."
+        }
+      ]
+    },
+    {
+      "pairId": "pair-ad3532534ddad181",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "pairId": "pair-762aae6eca0d93e1",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "pairId": "pair-853fc96797b4962b",
+      "verdict": "pass",
+      "findings": []
+    },
+    {
+      "pairId": "pair-fc5f0ed678c7f727",
+      "verdict": "pass",
+      "findings": []
+    }
+  ]
+}
