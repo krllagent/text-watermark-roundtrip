@@ -34,6 +34,8 @@ from unmark import (
     OpenRouterClient,
     PlaceholderError,
     ProviderResponseError,
+    build_audit_guided_repair_prompt,
+    build_fidelity_audit_prompt,
     build_fidelity_repair_prompt,
     build_paraphrase_prompt,
     canonicalize_placeholders,
@@ -48,8 +50,14 @@ from watermark_toy import encode_text, score_text
 CONFIG_SCHEMA_VERSION = 2
 CHECKPOINT_SCHEMA_VERSION = 1
 ARTIFACT_SCHEMA_VERSION = 2
-EXPECTED_METHOD_ID = "paraphrase-verified"
-EXPECTED_CALL_GRAPH = ("paraphrase-draft", "fidelity-repair")
+V2_METHOD_ID = "paraphrase-verified"
+V2_CALL_GRAPH = ("paraphrase-draft", "fidelity-repair")
+V3_METHOD_ID = "paraphrase-verified-v3"
+V3_CALL_GRAPH = (
+    "paraphrase-draft",
+    "fidelity-audit",
+    "fidelity-repair",
+)
 
 
 class VerifiedExperimentError(Exception):
@@ -101,6 +109,7 @@ class VerifiedParaphraseConfig:
     document_count: int
     method_id: str
     call_graph: tuple[str, ...]
+    always_run_audit: bool
     always_run_repair: bool
     model: str
     provider_order: tuple[str, ...]
@@ -160,16 +169,57 @@ def load_verified_paraphrase_config(
     transform = _mapping(raw.get("transform"), "transform")
     method_id = _text(transform.get("id"), "transform.id")
     call_graph = _string_tuple(transform.get("callGraph"), "transform.callGraph")
+    always_run_audit = transform.get("alwaysRunAudit") is True
     always_run_repair = transform.get("alwaysRunRepair")
-    if (
-        method_id != EXPECTED_METHOD_ID
-        or transform.get("method") != EXPECTED_METHOD_ID
-        or call_graph != EXPECTED_CALL_GRAPH
-        or transform.get("repairPolicy") != "always_once"
-        or always_run_repair is not True
-        or transform.get("repairGrounding") != ["masked_source", "draft"]
-    ):
-        raise ValueError("verified paraphrase must freeze the exact two-pass call graph")
+    is_v2 = (
+        method_id == V2_METHOD_ID
+        and transform.get("method") == V2_METHOD_ID
+        and call_graph == V2_CALL_GRAPH
+        and transform.get("repairPolicy") == "always_once"
+        and always_run_repair is True
+        and transform.get("repairGrounding") == ["masked_source", "draft"]
+        and not always_run_audit
+    )
+    is_v3 = (
+        method_id == V3_METHOD_ID
+        and transform.get("method") == V3_METHOD_ID
+        and call_graph == V3_CALL_GRAPH
+        and transform.get("auditPolicy") == "always_once"
+        and transform.get("repairPolicy") == "always_once"
+        and always_run_audit
+        and always_run_repair is True
+        and transform.get("auditGrounding") == ["masked_source", "draft"]
+        and transform.get("repairGrounding") == ["draft", "fidelity_audit"]
+        and transform.get("finalRepairSeesSource") is False
+    )
+    if not (is_v2 or is_v3):
+        raise ValueError("verified paraphrase must freeze a supported exact call graph")
+    if is_v3:
+        pilot = _mapping(raw.get("priorPilot"), "priorPilot")
+        pilot_config_path = _safe_path(
+            root_path, pilot.get("configPath"), "prior pilot config"
+        )
+        pilot_config_sha = _sha256(
+            pilot.get("configSha256"), "prior pilot config SHA-256"
+        )
+        _require_sha(pilot_config_path, pilot_config_sha, "prior pilot config")
+        pilot_checkpoint_path = _safe_path(
+            root_path, pilot.get("checkpointPath"), "prior pilot checkpoint"
+        )
+        pilot_checkpoint_sha = _sha256(
+            pilot.get("checkpointSha256"), "prior pilot checkpoint SHA-256"
+        )
+        _require_sha(
+            pilot_checkpoint_path,
+            pilot_checkpoint_sha,
+            "prior pilot checkpoint",
+        )
+        if (
+            pilot.get("completedCalls") != 2
+            or pilot.get("decision")
+            != "abort_before_full_matrix_source_copy_collapse"
+        ):
+            raise ValueError("v3 must bind the exact aborted v2 pilot")
 
     provider = _mapping(raw.get("provider"), "provider")
     if provider.get("transport") != "openrouter":
@@ -326,6 +376,7 @@ def load_verified_paraphrase_config(
         document_count=document_count,
         method_id=method_id,
         call_graph=call_graph,
+        always_run_audit=always_run_audit,
         always_run_repair=always_run_repair,
         model=model,
         provider_order=provider_order,
@@ -375,12 +426,25 @@ def build_verified_dry_run(
     for document_id in EXPECTED_DOCUMENT_IDS:
         protected = protect_tokens(marked[document_id])
         draft_prompt = build_paraphrase_prompt(protected.masked)
-        repair_prompt = build_fidelity_repair_prompt(
-            protected.masked,
-            "x" * draft_completion_estimate,
-        )
         prompt_estimate += len(draft_prompt.encode("utf-8"))
-        prompt_estimate += len(repair_prompt.encode("utf-8"))
+        estimated_draft = "x" * draft_completion_estimate
+        if config.always_run_audit:
+            audit_prompt = build_fidelity_audit_prompt(
+                protected.masked,
+                estimated_draft,
+            )
+            repair_prompt = build_audit_guided_repair_prompt(
+                estimated_draft,
+                "x" * draft_completion_estimate,
+            )
+            prompt_estimate += len(audit_prompt.encode("utf-8"))
+            prompt_estimate += len(repair_prompt.encode("utf-8"))
+        else:
+            repair_prompt = build_fidelity_repair_prompt(
+                protected.masked,
+                estimated_draft,
+            )
+            prompt_estimate += len(repair_prompt.encode("utf-8"))
     call_count = config.document_count * len(config.call_graph)
     prompt_estimate += call_count * config.prompt_token_overhead_reserve
     completion_estimate = call_count * config.max_tokens
@@ -490,10 +554,40 @@ def run_verified_live(
                 }
             )
 
-        repair_prompt = build_fidelity_repair_prompt(
-            protected.masked,
-            draft.content,
-        )
+        fidelity_audit: ChatCompletion | None = None
+        audit_record: dict[str, object] | None = None
+        if config.always_run_audit:
+            audit_prompt = build_fidelity_audit_prompt(
+                protected.masked,
+                draft.content,
+            )
+            fidelity_audit, audit_record = manager.complete(
+                call_id=f"{document.document_id}:{config.method_id}:fidelity-audit",
+                document_id=document.document_id,
+                stage="fidelity-audit",
+                input_text=draft.content,
+                prompt=audit_prompt,
+            )
+            if fidelity_audit.finish_reason != "stop":
+                issues.append(
+                    {
+                        "code": "finish_reason_contract",
+                        "message": (
+                            "fidelity audit finish reason was "
+                            f"{fidelity_audit.finish_reason!r}"
+                        ),
+                        "stage": "fidelity-audit",
+                    }
+                )
+            repair_prompt = build_audit_guided_repair_prompt(
+                draft.content,
+                fidelity_audit.content,
+            )
+        else:
+            repair_prompt = build_fidelity_repair_prompt(
+                protected.masked,
+                draft.content,
+            )
         repair, repair_record = manager.complete(
             call_id=f"{document.document_id}:{config.method_id}:fidelity-repair",
             document_id=document.document_id,
@@ -544,7 +638,11 @@ def run_verified_live(
         fidelity["failureReasons"] = [issue["code"] for issue in issues]
         rows.append(
             {
-                "calls": [draft_record, repair_record],
+                "calls": [
+                    draft_record,
+                    *([audit_record] if audit_record is not None else []),
+                    repair_record,
+                ],
                 "detector": output_score.to_dict(),
                 "documentId": document.document_id,
                 "fidelity": fidelity,
@@ -559,6 +657,11 @@ def run_verified_live(
                 "transformationOutcome": {
                     "issues": issues,
                     "rawDraftMaskedText": draft.content,
+                    "rawFidelityAuditText": (
+                        fidelity_audit.content
+                        if fidelity_audit is not None
+                        else None
+                    ),
                     "rawFinalMaskedText": repair.content,
                     "restorationMode": restoration_mode,
                     "status": "validation_failure" if issues else "accepted",

@@ -7,6 +7,7 @@ from pathlib import Path
 import unittest
 
 from unmark import (
+    build_audit_guided_repair_prompt,
     ConfigurationError,
     OpenRouterClient,
     PlaceholderError,
@@ -16,6 +17,7 @@ from unmark import (
     build_backward_prompt,
     build_forward_prompt,
     build_fidelity_repair_prompt,
+    build_fidelity_audit_prompt,
     build_paraphrase_prompt,
     build_synonym_prompt,
     canonicalize_placeholders,
@@ -593,6 +595,62 @@ class TransformCallGraphTests(unittest.TestCase):
         self.assertIn(protected.masked, repair_prompt)
         self.assertIn(draft, repair_prompt)
         self.assertNotIn('"A-17"', repair_prompt)
+        self.assertIn('"A-17"', result.text)
+        self.assertIn("https://example.org/report", result.text)
+        self.assertNotEqual(result.text, self.original)
+
+    def test_verified_v3_repairs_the_draft_without_source_prose_in_final_call(self) -> None:
+        protected = protect_tokens(self.original)
+        draft = (
+            protected.masked
+            .replace(
+                "I often use this careful method",
+                "This cautious method is my usual choice",
+            )
+            .replace("It preserves every", "It retains each")
+        )
+        audit = json.dumps(
+            {
+                "corrections": [
+                    {
+                        "problem": "The second paragraph omits the URL role.",
+                        "requiredChange": "Keep the URL as an example of preserved detail.",
+                    }
+                ]
+            }
+        )
+        repaired = draft.replace(
+            "and URL ⟦T2⟧",
+            "and also keeps the example URL ⟦T2⟧",
+        )
+        transport = QueueTransport(
+            [
+                response(draft, suffix="draft"),
+                response(audit, suffix="audit"),
+                response(repaired, suffix="repair"),
+            ]
+        )
+        client = OpenRouterClient("secret", transport=transport)
+
+        result = transform_text(
+            self.original,
+            method="paraphrase-verified-v3",
+            client=client,
+            model_forward="qwen/qwen3.6-35b-a3b",
+        )
+
+        self.assertEqual(len(transport.calls), 3)
+        self.assertEqual(
+            [call.stage for call in result.calls],
+            ["paraphrase-draft", "fidelity-audit", "fidelity-repair"],
+        )
+        audit_prompt = transport.calls[1]["body"]["messages"][0]["content"]
+        final_prompt = transport.calls[2]["body"]["messages"][0]["content"]
+        self.assertIn(protected.masked, audit_prompt)
+        self.assertIn(draft, final_prompt)
+        self.assertIn(audit, final_prompt)
+        self.assertNotIn(protected.masked, final_prompt)
+        self.assertNotIn('"A-17"', final_prompt)
         self.assertIn('"A-17"', result.text)
         self.assertIn("https://example.org/report", result.text)
         self.assertNotEqual(result.text, self.original)

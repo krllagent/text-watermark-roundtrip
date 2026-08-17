@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "experimentVersion": "text-watermark-roundtrip-verified-paraphrase-v3",
+  "verifiedAt": "2026-08-17",
+  "methodology": "Freeze a new 20-document follow-up after the two-call v2 canary showed source-copy collapse. For every marked source document, make exactly three calls on one pinned Qwen endpoint: a full paraphrase draft; a fidelity audit that compares source and draft but returns corrections rather than prose; and an unconditional minimal repair that receives the draft and corrections but not the source text. No v3 output is inspected before this protocol is frozen. After all v3 outputs are immutable, audit them independently with the pinned Gemini route. Publish every v2 pilot call, every v3 output, every failure, and every billed call; do not tune v3 after seeing results.",
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    },
+    {
+      "title": "OpenRouter provider routing documentation",
+      "url": "https://openrouter.ai/docs/guides/routing/provider-selection"
+    },
+    {
+      "title": "OpenRouter privacy and logging documentation",
+      "url": "https://openrouter.ai/docs/features/privacy-and-logging"
+    }
+  ],
+  "priorPilot": {
+    "configPath": "fixtures/verified-paraphrase-config-v2.json",
+    "configSha256": "ac862e414d7f86421aa6efd8e30e6ef55445a4c79ca6db3c7594cc4238f524c3",
+    "checkpointPath": "results/verified-paraphrase-checkpoint-v2.json",
+    "checkpointSha256": "6db20bc9df61d2be29968eb9d534bef865c9a3ba49ab8a65e6054968872a4bab",
+    "completedCalls": 2,
+    "decision": "abort_before_full_matrix_source_copy_collapse"
+  },
+  "baseExperiment": {
+    "configPath": "fixtures/experiment-config-v1.json",
+    "configSha256": "60f9bd952129b6c9b6acd4fd4994156e81a523deaebf375974561e67ec930ba6",
+    "resultPath": "results/experiment-raw-v1.json",
+    "resultSha256": "7cbebefa7e871032e9ac80125cd95d0a9cb2a733c99324f150640ab26744e723",
+    "sourceSelection": "baseline.documents[].markedText",
+    "documentCount": 20
+  },
+  "transform": {
+    "id": "paraphrase-verified-v3",
+    "method": "paraphrase-verified-v3",
+    "callGraph": [
+      "paraphrase-draft",
+      "fidelity-audit",
+      "fidelity-repair"
+    ],
+    "auditPolicy": "always_once",
+    "repairPolicy": "always_once",
+    "alwaysRunAudit": true,
+    "alwaysRunRepair": true,
+    "auditGrounding": [
+      "masked_source",
+      "draft"
+    ],
+    "repairGrounding": [
+      "draft",
+      "fidelity_audit"
+    ],
+    "finalRepairSeesSource": false
+  },
+  "provider": {
+    "transport": "openrouter",
+    "model": "qwen/qwen3.6-35b-a3b",
+    "providerOrder": [
+      "deepinfra/fp8"
+    ],
+    "endpointSnapshotPath": "fixtures/openrouter-endpoint-snapshot-qwen36-v2.json",
+    "endpointSnapshotSha256": "f9c025e2ee6ab16fdb592db67ba7a5e6333dbcde9cc0f9fb9f020b2049d94da3",
+    "expectedResponseModels": [
+      "qwen/qwen3.6-35b-a3b",
+      "qwen/qwen3.6-35b-a3b-20260415"
+    ],
+    "expectedResponseProviders": [
+      "DeepInfra"
+    ],
+    "allowFallbacks": false,
+    "dataCollection": "deny",
+    "zdr": true,
+    "requireParameters": true,
+    "reasoningEffort": "none",
+    "temperature": 0,
+    "maxTokens": 4096,
+    "seed": 20260817,
+    "timeoutSeconds": 180,
+    "pricingUsdPerMillionTokens": {
+      "prompt": "0.10",
+      "completion": "0.95"
+    },
+    "maxPriceUsdPerMillionTokens": {
+      "prompt": 0.10,
+      "completion": 0.95
+    }
+  },
+  "billing": {
+    "creditBaseCurrency": "USD",
+    "creditUsdBaseUnit": "1",
+    "inferencePricingMarkupPercent": 0,
+    "promptTokenOverheadReserve": 2048,
+    "purchaseFeeExcluded": true
+  },
+  "analysis": {
+    "documentCount": 20,
+    "bootstrapReplicates": 10000,
+    "bootstrapSeed": 20260817,
+    "primaryScoringUnit": "pooled_corpus",
+    "qualityMetric": "normalized_word_levenshtein",
+    "resamplingUnit": "document_id"
+  },
+  "finalAudit": {
+    "required": true,
+    "separateFromRepair": true,
+    "judgeDoesNotControlRepair": true,
+    "freezeAfterTransformResult": true,
+    "structuredPairCount": 20,
+    "model": "google/gemini-3.7-flash",
+    "providerOrder": [
+      "google-vertex/global"
+    ],
+    "endpointSnapshotPath": "fixtures/semantic-audit-endpoint-snapshot-v1.json",
+    "endpointSnapshotSha256": "2adb61707a3912b692605ef8151f0fdc32c410371c3739747b902e8e11975b0f"
+  },
+  "decisionPolicy": {
+    "successTarget": null,
+    "retuningAfterResults": false,
+    "publishAllOutputs": true
+  }
+}

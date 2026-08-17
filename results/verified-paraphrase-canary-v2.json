@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-08-17",
+  "methodology": "Run the first complete document of the frozen two-call v2 matrix, verify the exact route and both paid responses, then evaluate the final output before spending on the remaining 19 documents. The second pass reproduced every word of the marked source and removed only its final newline, so the v2 matrix was stopped without retrying or deleting either call.",
+  "sources": [
+    {
+      "title": "Experiment repository",
+      "url": "https://github.com/krllagent/text-watermark-roundtrip"
+    }
+  ],
+  "experimentVersion": "text-watermark-roundtrip-verified-paraphrase-v2",
+  "configSha256": "ac862e414d7f86421aa6efd8e30e6ef55445a4c79ca6db3c7594cc4238f524c3",
+  "checkpointSha256": "6db20bc9df61d2be29968eb9d534bef865c9a3ba49ab8a65e6054968872a4bab",
+  "documentId": "doc-01",
+  "decision": "abort_before_full_matrix_source_copy_collapse",
+  "calls": {
+    "count": 2,
+    "stages": [
+      "paraphrase-draft",
+      "fidelity-repair"
+    ],
+    "model": "qwen/qwen3.6-35b-a3b",
+    "provider": "DeepInfra",
+    "providerCostUsd": "0.00164135",
+    "latencySeconds": 17.857
+  },
+  "output": {
+    "sourceWords": 617,
+    "outputWords": 617,
+    "normalizedWordDistance": 0,
+    "sourceCharacters": 3514,
+    "outputCharacters": 3513,
+    "onlyObservedDifference": "final_newline_removed"
+  },
+  "keyedCheck": {
+    "sourcePreferredMatches": 3,
+    "sourceActivePositions": 3,
+    "outputPreferredMatches": 3,
+    "outputActivePositions": 3
+  }
+}
