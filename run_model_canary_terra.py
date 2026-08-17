@@ -238,8 +238,5 @@ def main(argv: list[str] | None = None) -> int:
     return engine.main(argv)
 
 
-configure_engine()
-
-
 if __name__ == "__main__":
     raise SystemExit(main())
