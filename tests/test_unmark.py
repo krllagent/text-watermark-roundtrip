@@ -2,9 +2,13 @@ from __future__ import annotations
 
 import json
 from decimal import Decimal
+from email.message import Message
+from io import BytesIO
 import os
 from pathlib import Path
 import unittest
+from unittest.mock import patch
+from urllib.error import HTTPError
 
 from unmark import (
     StageRequest,
@@ -17,6 +21,7 @@ from unmark import (
     OpenRouterClient,
     PlaceholderError,
     ProviderError,
+    ProviderHTTPError,
     ProviderResponseError,
     SemanticAuditContractError,
     ValidationError,
@@ -623,6 +628,72 @@ class OpenRouterClientTests(unittest.TestCase):
             12,
         )
 
+    def test_configurable_completion_token_field_is_exact(self) -> None:
+        transport = QueueTransport([response("Done.")])
+        client = OpenRouterClient(
+            "secret",
+            transport=transport,
+            max_tokens=4096,
+            token_cap_field="max_completion_tokens",
+        )
+
+        client.complete("Prompt", model="test/model", max_tokens=1536)
+
+        body = transport.calls[0]["body"]
+        self.assertEqual(body["max_completion_tokens"], 1536)
+        self.assertNotIn("max_tokens", body)
+
+        with self.assertRaisesRegex(ConfigurationError, "token_cap_field"):
+            OpenRouterClient(
+                "secret",
+                transport=transport,
+                token_cap_field="output_tokens",
+            )
+
+    def test_http_error_preserves_only_bounded_route_evidence(self) -> None:
+        headers = Message()
+        headers["X-Guard-Origin"] = "openrouter"
+        headers["X-Request-ID"] = "req-header-123"
+        raw = json.dumps(
+            {
+                "error": {
+                    "code": 404,
+                    "message": "No provider meets routing requirements" + "x" * 900,
+                    "metadata": {
+                        "error_type": "no_available_provider",
+                        "provider_code": "route_not_found",
+                        "ignoredSecret": "must-not-be-recorded",
+                    },
+                },
+                "ignored": "must-not-be-recorded",
+            }
+        ).encode("utf-8")
+        error = HTTPError(
+            "https://openrouter.ai/api/v1/chat/completions",
+            404,
+            "Not Found",
+            headers,
+            BytesIO(raw),
+        )
+
+        class FailingOpener:
+            def open(self, request, timeout):  # type: ignore[no-untyped-def]
+                raise error
+
+        with patch("unmark.build_opener", return_value=FailingOpener()):
+            with self.assertRaises(ProviderHTTPError) as caught:
+                OpenRouterClient("secret").complete("Prompt", model="test/model")
+
+        evidence = caught.exception.to_dict()
+        self.assertEqual(evidence["status"], 404)
+        self.assertEqual(evidence["xGuardOrigin"], "openrouter")
+        self.assertEqual(evidence["requestId"], "req-header-123")
+        self.assertEqual(evidence["errorCode"], 404)
+        self.assertEqual(evidence["errorType"], "no_available_provider")
+        self.assertEqual(evidence["providerCode"], "route_not_found")
+        self.assertLessEqual(len(evidence["message"]), 512)
+        self.assertNotIn("ignored", json.dumps(evidence))
+
     def test_stage_request_is_sent_as_exact_system_and_json_user_messages(self) -> None:
         transport = QueueTransport([response("A rewritten result.")])
         client = OpenRouterClient("secret", transport=transport)
@@ -731,6 +802,33 @@ class OpenRouterClientTests(unittest.TestCase):
             "0.0000001",
         )
         json.dumps(completion.to_dict(), sort_keys=True)
+
+    def test_prompt_cache_token_details_are_parsed_and_bounded_by_prompt(self) -> None:
+        reply = response("Complete output.")
+        reply["usage"]["prompt_tokens_details"] = {
+            "cached_tokens": 20,
+            "cache_write_tokens": 10,
+        }
+        completion = OpenRouterClient(
+            "secret", transport=QueueTransport([reply])
+        ).complete("Prompt", model="test/model")
+
+        self.assertEqual(completion.usage.cached_prompt_tokens, 20)
+        self.assertEqual(completion.usage.cache_write_tokens, 10)
+        self.assertEqual(
+            completion.usage.to_dict()["promptTokenDetails"],
+            {"cacheWriteTokens": 10, "cachedTokens": 20},
+        )
+
+        invalid = response("Complete output.")
+        invalid["usage"]["prompt_tokens_details"] = {
+            "cached_tokens": 100,
+            "cache_write_tokens": 2,
+        }
+        with self.assertRaisesRegex(ProviderResponseError, "cache token totals"):
+            OpenRouterClient(
+                "secret", transport=QueueTransport([invalid])
+            ).complete("Prompt", model="test/model")
 
     def test_transport_failure_has_no_hidden_fallback(self) -> None:
         calls: list[str] = []

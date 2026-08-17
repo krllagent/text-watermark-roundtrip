@@ -183,6 +183,44 @@ class ProviderError(TransformationError):
     """Raised for sanitized provider transport or response failures."""
 
 
+class ProviderHTTPError(ProviderError):
+    """An HTTP failure with bounded, non-secret routing evidence."""
+
+    def __init__(
+        self,
+        *,
+        status: int,
+        x_guard_origin: str | None = None,
+        request_id: str | None = None,
+        error_code: str | int | bool | None = None,
+        message: str | None = None,
+        error_type: str | int | bool | None = None,
+        provider_code: str | int | bool | None = None,
+    ) -> None:
+        super().__init__(f"OpenRouter request failed with HTTP {status}")
+        self.status = status
+        self.x_guard_origin = x_guard_origin
+        self.request_id = request_id
+        self.error_code = error_code
+        self.provider_message = message
+        self.error_type = error_type
+        self.provider_code = provider_code
+
+    def to_dict(self) -> dict[str, object]:
+        evidence: dict[str, object] = {"status": self.status}
+        for key, value in (
+            ("xGuardOrigin", self.x_guard_origin),
+            ("requestId", self.request_id),
+            ("errorCode", self.error_code),
+            ("message", self.provider_message),
+            ("errorType", self.error_type),
+            ("providerCode", self.provider_code),
+        ):
+            if value is not None:
+                evidence[key] = value
+        return evidence
+
+
 class ProviderResponseError(ProviderError):
     """A provider response was obtained but violated the response contract."""
 
@@ -214,14 +252,22 @@ class CompletionUsage:
     completion_tokens: int
     total_tokens: int
     cost: Decimal
+    cached_prompt_tokens: int = 0
+    cache_write_tokens: int = 0
 
     def to_dict(self) -> dict[str, object]:
-        return {
+        output: dict[str, object] = {
             "completionTokens": self.completion_tokens,
             "providerCostCredits": str(self.cost),
             "promptTokens": self.prompt_tokens,
             "totalTokens": self.total_tokens,
         }
+        if self.cached_prompt_tokens or self.cache_write_tokens:
+            output["promptTokenDetails"] = {
+                "cacheWriteTokens": self.cache_write_tokens,
+                "cachedTokens": self.cached_prompt_tokens,
+            }
+        return output
 
 
 @dataclass(frozen=True)
@@ -946,6 +992,7 @@ class OpenRouterClient:
         reasoning_effort: str = "none",
         temperature: float | None = 0.0,
         max_tokens: int = 4_096,
+        token_cap_field: str = "max_tokens",
         seed: int | None = None,
         max_prompt_price: float | None = None,
         max_completion_price: float | None = None,
@@ -1002,6 +1049,10 @@ class OpenRouterClient:
             or max_tokens <= 0
         ):
             raise ConfigurationError("max_tokens must be a positive integer")
+        if token_cap_field not in {"max_tokens", "max_completion_tokens"}:
+            raise ConfigurationError(
+                "token_cap_field must be max_tokens or max_completion_tokens"
+            )
         if seed is not None and (
             not isinstance(seed, int) or isinstance(seed, bool) or seed < 0
         ):
@@ -1041,6 +1092,7 @@ class OpenRouterClient:
         self.reasoning_effort = reasoning_effort
         self.temperature = None if temperature is None else float(temperature)
         self.max_tokens = max_tokens
+        self.token_cap_field = token_cap_field
         self.seed = seed
         self.max_prompt_price = (
             None if max_prompt_price is None else float(max_prompt_price)
@@ -1063,6 +1115,7 @@ class OpenRouterClient:
         reasoning_effort: str = "none",
         temperature: float | None = 0.0,
         max_tokens: int = 4_096,
+        token_cap_field: str = "max_tokens",
         seed: int | None = None,
         max_prompt_price: float | None = None,
         max_completion_price: float | None = None,
@@ -1084,6 +1137,7 @@ class OpenRouterClient:
             reasoning_effort=reasoning_effort,
             temperature=temperature,
             max_tokens=max_tokens,
+            token_cap_field=token_cap_field,
             seed=seed,
             max_prompt_price=max_prompt_price,
             max_completion_price=max_completion_price,
@@ -1120,7 +1174,7 @@ class OpenRouterClient:
                 )
             effective_response_format = normalized
         payload = {
-            "max_tokens": effective_max_tokens,
+            self.token_cap_field: effective_max_tokens,
             "messages": list(messages),
             "model": model,
             "provider": {
@@ -1629,7 +1683,7 @@ def _urlopen_transport(
                 raise ProviderError("OpenRouter redirected the configured endpoint")
             raw = response.read(5 * 1024 * 1024 + 1)
     except HTTPError as exc:
-        raise ProviderError(f"OpenRouter request failed with HTTP {exc.code}") from exc
+        raise _provider_http_error(exc) from exc
     except (URLError, OSError) as exc:
         raise ProviderError("OpenRouter request failed") from exc
     if len(raw) > 5 * 1024 * 1024:
@@ -1641,6 +1695,76 @@ def _urlopen_transport(
     if not isinstance(decoded, Mapping):
         raise ProviderError("OpenRouter returned an invalid response object")
     return decoded
+
+
+def _provider_http_error(error: HTTPError) -> ProviderHTTPError:
+    """Extract an allowlisted, bounded subset of an OpenRouter HTTP error."""
+    maximum_body_bytes = 64 * 1024
+    try:
+        raw = error.read(maximum_body_bytes + 1)
+    except (OSError, ValueError):
+        raw = b""
+    decoded: object = None
+    if len(raw) <= maximum_body_bytes:
+        try:
+            decoded = json.loads(raw.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            decoded = None
+
+    error_object: Mapping[str, object] = {}
+    if isinstance(decoded, Mapping):
+        candidate = decoded.get("error")
+        if isinstance(candidate, Mapping):
+            error_object = candidate
+    metadata: Mapping[str, object] = {}
+    candidate_metadata = error_object.get("metadata")
+    if isinstance(candidate_metadata, Mapping):
+        metadata = candidate_metadata
+
+    headers = error.headers
+    x_guard_origin = _bounded_http_text(
+        None if headers is None else headers.get("X-Guard-Origin"),
+        maximum=128,
+    )
+    request_id = None
+    if headers is not None:
+        for name in ("X-Request-ID", "X-OpenRouter-Request-ID", "Request-ID"):
+            request_id = _bounded_http_text(headers.get(name), maximum=256)
+            if request_id is not None:
+                break
+    if request_id is None:
+        request_id = _bounded_http_text(
+            error_object.get("request_id", metadata.get("request_id")),
+            maximum=256,
+        )
+
+    return ProviderHTTPError(
+        status=int(error.code),
+        x_guard_origin=x_guard_origin,
+        request_id=request_id,
+        error_code=_bounded_http_scalar(error_object.get("code")),
+        message=_bounded_http_text(error_object.get("message"), maximum=512),
+        error_type=_bounded_http_scalar(
+            error_object.get("error_type", metadata.get("error_type"))
+        ),
+        provider_code=_bounded_http_scalar(
+            error_object.get("provider_code", metadata.get("provider_code"))
+        ),
+    )
+
+
+def _bounded_http_text(value: object, *, maximum: int) -> str | None:
+    if not isinstance(value, str) or not value:
+        return None
+    return value[:maximum]
+
+
+def _bounded_http_scalar(value: object) -> str | int | bool | None:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, int):
+        return value
+    return _bounded_http_text(value, maximum=256)
 
 
 def _parse_completion(raw: Mapping[str, Any]) -> ChatCompletion:
@@ -1686,11 +1810,33 @@ def _parse_completion(raw: Mapping[str, Any]) -> ChatCompletion:
     )
     if total_tokens != prompt_tokens + completion_tokens:
         raise ProviderError("OpenRouter response has inconsistent usage.total_tokens")
+    prompt_details = raw_usage.get("prompt_tokens_details")
+    cached_prompt_tokens = 0
+    cache_write_tokens = 0
+    if prompt_details is not None:
+        if not isinstance(prompt_details, Mapping):
+            raise ProviderError(
+                "OpenRouter response has invalid usage.prompt_tokens_details"
+            )
+        cached_prompt_tokens = _optional_nonnegative_int(
+            prompt_details.get("cached_tokens"),
+            "prompt_tokens_details.cached_tokens",
+        )
+        cache_write_tokens = _optional_nonnegative_int(
+            prompt_details.get("cache_write_tokens"),
+            "prompt_tokens_details.cache_write_tokens",
+        )
+        if cached_prompt_tokens + cache_write_tokens > prompt_tokens:
+            raise ProviderError(
+                "OpenRouter response has inconsistent prompt cache token totals"
+            )
     usage = CompletionUsage(
         prompt_tokens=prompt_tokens,
         completion_tokens=completion_tokens,
         total_tokens=total_tokens,
         cost=_required_nonnegative_decimal(raw_usage.get("cost"), "cost"),
+        cached_prompt_tokens=cached_prompt_tokens,
+        cache_write_tokens=cache_write_tokens,
     )
     raw_metadata = raw.get("openrouter_metadata")
     if raw_metadata is not None and not isinstance(raw_metadata, Mapping):
@@ -1718,6 +1864,12 @@ def _required_nonnegative_int(value: object, label: str) -> int:
     if not isinstance(value, int) or isinstance(value, bool) or value < 0:
         raise ProviderError(f"OpenRouter response has invalid usage.{label}")
     return value
+
+
+def _optional_nonnegative_int(value: object, label: str) -> int:
+    if value is None:
+        return 0
+    return _required_nonnegative_int(value, label)
 
 
 def _required_nonnegative_decimal(value: object, label: str) -> Decimal:
@@ -1776,6 +1928,7 @@ __all__ = [
     "ProtectedText",
     "ProtectedToken",
     "ProviderError",
+    "ProviderHTTPError",
     "ProviderResponseError",
     "ParsedSemanticAudit",
     "RequestInput",
