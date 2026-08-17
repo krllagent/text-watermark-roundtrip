@@ -20,6 +20,7 @@ development documents, which is what a development set is for.
 from __future__ import annotations
 
 import argparse
+from concurrent import futures
 from decimal import Decimal
 import json
 import os
@@ -37,7 +38,7 @@ from watermark_toy import Document, score_corpus, score_text
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_OUTPUT = ROOT / "results" / "model-screen-v2.json"
-MAX_COMPLETION_TOKENS = 16_384
+MAX_COMPLETION_TOKENS = 32_768
 REASONING_EFFORT = "medium"
 
 CANDIDATES = (
@@ -115,14 +116,25 @@ def call_model(
         },
         method="POST",
     )
-    try:
-        with urllib.request.urlopen(request, timeout=600) as response:
-            payload = json.loads(response.read())
-    except urllib.error.HTTPError as error:
-        detail = error.read(4096).decode("utf-8", "replace")
-        return {"transportError": f"HTTP {error.code}: {detail[:400]}"}
-    except Exception as error:  # network-level failure
-        return {"transportError": f"{type(error).__name__}: {str(error)[:400]}"}
+    payload = None
+    last_error = ""
+    for attempt in range(5):
+        try:
+            with urllib.request.urlopen(request, timeout=900) as response:
+                payload = json.loads(response.read())
+            break
+        except urllib.error.HTTPError as error:
+            detail = error.read(4096).decode("utf-8", "replace")
+            last_error = f"HTTP {error.code}: {detail[:400]}"
+            # 429 here is the provider concurrency cap, not a content problem:
+            # back off and retry rather than scoring an unsent request.
+            if error.code != 429 or attempt == 4:
+                return {"transportError": last_error}
+            time.sleep(5 * (attempt + 1))
+        except Exception as error:  # network-level failure
+            return {"transportError": f"{type(error).__name__}: {str(error)[:400]}"}
+    if payload is None:
+        return {"transportError": last_error or "no response"}
     choices = payload.get("choices")
     if not isinstance(choices, list) or not choices:
         return {"transportError": "response carried no choice", "raw": payload}
@@ -212,78 +224,87 @@ def analyze(document_id: str, source: str, content: str) -> dict[str, object]:
     }
 
 
-def screen_model(
-    model: str, catalog_row: dict[str, object], budget: Decimal
+def screen_one_document(
+    model: str, template: dict[str, object], document_id: str, source: str
 ) -> dict[str, object]:
-    sources = engine.load_sources()
-    template = build_body(model, catalog_row)
-    documents: list[dict[str, object]] = []
+    """Run and score a single (model, document) pair. Never raises."""
+    request = locked_v2.build_visible_locked_request(
+        locked_v2.protect_visible_anchors(source).masked
+    )
+    messages = [dict(row) for row in locked_v2.locked_request_messages(request)]
+    started = time.monotonic()
+    response = call_model(model, template, messages)
+    latency = round((time.monotonic() - started) * 1000, 1)
+    if "transportError" in response:
+        return {
+            "documentId": document_id,
+            "latencyMs": latency,
+            "outcome": "transport_error",
+            "detail": response["transportError"],
+        }
+    row: dict[str, object] = {
+        "completionTokens": response["completionTokens"],
+        "costCredits": response["costCredits"],
+        "documentId": document_id,
+        "finishReason": response["finishReason"],
+        "latencyMs": latency,
+        "promptTokens": response["promptTokens"],
+        "provider": response.get("provider"),
+        "reasoningTokens": response["reasoningTokens"],
+        "servedModel": response["servedModel"],
+    }
+    content = str(response["content"])
+    if not content.strip():
+        row["outcome"] = "empty_content"
+        row["pipelineIssues"] = [
+            {
+                "code": "empty_content",
+                "message": (
+                    "model returned no text; "
+                    f"{response['reasoningTokens']} reasoning tokens spent"
+                ),
+            }
+        ]
+        return row
+    try:
+        analysis = analyze(document_id, source, content)
+    except Exception as error:  # scoring must not lose a paid response
+        row["outcome"] = "analysis_error"
+        row["detail"] = f"{type(error).__name__}: {str(error)[:300]}"
+        return row
+    row.update(
+        {
+            "anchorCount": analysis["anchorCount"],
+            "evaluatedOutputText": analysis["evaluatedOutputText"],
+            "outcome": "completed",
+            "pipelineIssues": analysis["pipelineIssues"],
+            "wordDistance": analysis["wordDistance"],
+        }
+    )
+    return row
+
+
+def summarize_model(
+    model: str, documents: list[dict[str, object]]
+) -> dict[str, object]:
+    order = {value: index for index, value in enumerate(engine.DOCUMENT_IDS)}
+    documents = sorted(documents, key=lambda row: order[str(row["documentId"])])
     outputs: list[Document] = []
     providers: set[str] = set()
     spent = Decimal(0)
     prompt_tokens = completion_tokens = reasoning_tokens = 0
-    for document_id in engine.DOCUMENT_IDS:
-        source = sources[document_id]
-        request = locked_v2.build_visible_locked_request(
-            locked_v2.protect_visible_anchors(source).masked
-        )
-        messages = [dict(row) for row in locked_v2.locked_request_messages(request)]
-        if spent >= budget:
-            documents.append({"documentId": document_id, "outcome": "budget_exhausted"})
-            continue
-        started = time.monotonic()
-        response = call_model(model, template, messages)
-        latency = round((time.monotonic() - started) * 1000, 1)
-        if "transportError" in response:
-            documents.append(
-                {
-                    "documentId": document_id,
-                    "latencyMs": latency,
-                    "outcome": "transport_error",
-                    "detail": response["transportError"],
-                }
+    for row in documents:
+        spent += Decimal(str(row.get("costCredits", "0")))
+        prompt_tokens += int(row.get("promptTokens", 0) or 0)
+        completion_tokens += int(row.get("completionTokens", 0) or 0)
+        reasoning_tokens += int(row.get("reasoningTokens", 0) or 0)
+        if row.get("provider"):
+            providers.add(str(row["provider"]))
+        if row.get("outcome") == "completed":
+            outputs.append(
+                Document(str(row["documentId"]), str(row.pop("evaluatedOutputText")))
             )
-            continue
-        spent += Decimal(str(response["costCredits"]))
-        prompt_tokens += int(response["promptTokens"])
-        completion_tokens += int(response["completionTokens"])
-        reasoning_tokens += int(response["reasoningTokens"])
-        if response.get("provider"):
-            providers.add(str(response["provider"]))
-        content = str(response["content"])
-        row: dict[str, object] = {
-            "completionTokens": response["completionTokens"],
-            "costCredits": response["costCredits"],
-            "documentId": document_id,
-            "finishReason": response["finishReason"],
-            "latencyMs": latency,
-            "reasoningTokens": response["reasoningTokens"],
-            "servedModel": response["servedModel"],
-        }
-        if not content.strip():
-            row["outcome"] = "empty_content"
-            row["pipelineIssues"] = [
-                {
-                    "code": "empty_content",
-                    "message": (
-                        "model returned no text; "
-                        f"{response['reasoningTokens']} reasoning tokens spent"
-                    ),
-                }
-            ]
-            documents.append(row)
-            continue
-        analysis = analyze(document_id, source, content)
-        outputs.append(Document(document_id, str(analysis["evaluatedOutputText"])))
-        row.update(
-            {
-                "anchorCount": analysis["anchorCount"],
-                "outcome": "completed",
-                "pipelineIssues": analysis["pipelineIssues"],
-                "wordDistance": analysis["wordDistance"],
-            }
-        )
-        documents.append(row)
+        row.pop("evaluatedOutputText", None)
     pooled = None
     if len(outputs) == len(engine.DOCUMENT_IDS):
         base, corpus = engine.load_detector()
@@ -316,25 +337,72 @@ def screen_model(
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--models", nargs="*", default=list(CANDIDATES))
-    parser.add_argument("--budget-per-model", default="0.25")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--workers", type=int, default=8)
     args = parser.parse_args(argv)
 
     catalog = fetch_catalog()
-    budget = Decimal(args.budget_per_model)
-    rows = []
+    sources = engine.load_sources()
+    templates: dict[str, dict[str, object]] = {}
+    jobs: list[tuple[str, str]] = []
     for model in args.models:
         catalog_row = catalog.get(model)
         if catalog_row is None:
-            print(json.dumps({"model": model, "skipped": "absent from OpenRouter"}))
+            print(
+                json.dumps({"model": model, "skipped": "absent from OpenRouter"}),
+                flush=True,
+            )
             continue
-        row = screen_model(model, catalog_row, budget)
+        templates[model] = build_body(model, catalog_row)
+        jobs.extend((model, document_id) for document_id in engine.DOCUMENT_IDS)
+
+    # Every (model, document) pair is independent: no shared state, no ordering
+    # requirement, and one model's failure must not hold up another's row.
+    collected: dict[str, list[dict[str, object]]] = {model: [] for model in templates}
+    done = 0
+    print(
+        json.dumps({"event": "start", "calls": len(jobs), "workers": args.workers}),
+        flush=True,
+    )
+    with futures.ThreadPoolExecutor(max_workers=args.workers) as pool:
+        pending = {
+            pool.submit(
+                screen_one_document,
+                model,
+                templates[model],
+                document_id,
+                sources[document_id],
+            ): (model, document_id)
+            for model, document_id in jobs
+        }
+        for future in futures.as_completed(pending):
+            model, document_id = pending[future]
+            row = future.result()
+            collected[model].append(row)
+            done += 1
+            print(
+                json.dumps(
+                    {
+                        "event": "progress",
+                        "done": f"{done}/{len(jobs)}",
+                        "model": model,
+                        "document": document_id,
+                        "outcome": row.get("outcome"),
+                    },
+                    sort_keys=True,
+                ),
+                flush=True,
+            )
+
+    rows = []
+    for model in templates:
+        row = summarize_model(model, collected[model])
         rows.append(row)
         pooled = row["pooledDetector"] or {}
         print(
             json.dumps(
                 {
-                    "model": model,
+                    "result": model,
                     "clean": f"{row['cleanDocuments']}/{row['producedDocuments']}",
                     "cost": row["totalCostCredits"],
                     "detector": pooled.get("status"),
