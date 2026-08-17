@@ -856,9 +856,10 @@ def require_committed(path: Path, label: str) -> None:
     The frozen protocol commits the blind packet before anyone sees a review, so
     a later edit cannot quietly reshape what the reviewer was asked to judge.
     """
+    resolved = path.resolve()
     try:
         blob = subprocess.run(
-            ["git", "rev-parse", f"HEAD:{path.relative_to(ROOT).as_posix()}"],
+            ["git", "rev-parse", f"HEAD:{resolved.relative_to(ROOT).as_posix()}"],
             cwd=ROOT,
             capture_output=True,
             check=True,
@@ -867,7 +868,7 @@ def require_committed(path: Path, label: str) -> None:
     except (subprocess.CalledProcessError, ValueError) as error:
         raise CanaryError(f"{label} must be committed before review") from error
     current = subprocess.run(
-        ["git", "hash-object", str(path)],
+        ["git", "hash-object", str(resolved)],
         cwd=ROOT,
         capture_output=True,
         check=True,
