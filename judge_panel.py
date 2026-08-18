@@ -178,6 +178,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--judges", nargs="*", default=list(JUDGES))
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--marked-corpus", action="store_true")
+    parser.add_argument("--only-arms", nargs="*", default=[])
     args = parser.parse_args(argv)
 
     payload = json.loads(args.input.read_text(encoding="utf-8"))
@@ -196,6 +197,9 @@ def main(argv: list[str] | None = None) -> int:
                 continue
             items.append((method, row["documentId"], row["evaluatedOutputText"]))
 
+    if args.only_arms:
+        wanted = set(args.only_arms)
+        items = [row for row in items if row[0] in wanted]
     jobs = [(m, d, t, j) for (m, d, t) in items for j in args.judges]
     print(json.dumps({"event": "start", "calls": len(jobs)}), flush=True)
     verdicts: dict[tuple[str, str], list[dict[str, object]]] = {}
