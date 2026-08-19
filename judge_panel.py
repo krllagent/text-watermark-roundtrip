@@ -179,17 +179,22 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--marked-corpus", action="store_true")
     parser.add_argument("--only-arms", nargs="*", default=[])
+    parser.add_argument("--corpus", type=Path)
     args = parser.parse_args(argv)
 
     payload = json.loads(args.input.read_text(encoding="utf-8"))
     # Judges compare against the text the user would actually hold, which is
     # the marked document, not the unmarked draft it was made from.
-    marked = ROOT / "results" / "exp003-marked-corpus-v1.json"
-    if args.marked_corpus and marked.exists():
-        rows = json.loads(marked.read_text(encoding="utf-8"))["documents"]
+    if args.corpus:
+        rows = json.loads(args.corpus.read_text(encoding="utf-8"))["documents"]
         sources = {row["documentId"]: row["markedText"] for row in rows}
     else:
-        sources = engine.load_sources()
+        marked = ROOT / "results" / "exp003-marked-corpus-v1.json"
+        if args.marked_corpus and marked.exists():
+            rows = json.loads(marked.read_text(encoding="utf-8"))["documents"]
+            sources = {row["documentId"]: row["markedText"] for row in rows}
+        else:
+            sources = engine.load_sources()
     items: list[tuple[str, str, str]] = []
     for method, data in payload["methods"].items():
         for row in data["documents"]:
