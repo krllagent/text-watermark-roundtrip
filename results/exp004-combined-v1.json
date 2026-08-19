@@ -1,0 +1,277 @@
+{
+ "aggregate": {
+  "synonyms": {
+   "meanG": 0.63,
+   "grossErrorsPerDocument": 0.906,
+   "wordChangeFraction": 0.1426,
+   "costPer1000DocumentsUsd": 5.434,
+   "modelCount": 6
+  },
+  "roundtrip-de": {
+   "meanG": 0.5498,
+   "grossErrorsPerDocument": 5.292,
+   "wordChangeFraction": 0.3605,
+   "costPer1000DocumentsUsd": 14.312,
+   "modelCount": 6
+  },
+  "roundtrip-zh": {
+   "meanG": 0.5335,
+   "grossErrorsPerDocument": 6.25,
+   "wordChangeFraction": 0.5234,
+   "costPer1000DocumentsUsd": 10.17,
+   "modelCount": 6
+  },
+  "paraphrase": {
+   "meanG": 0.5713,
+   "grossErrorsPerDocument": 1.042,
+   "wordChangeFraction": 0.3891,
+   "costPer1000DocumentsUsd": 5.447,
+   "modelCount": 6
+  }
+ },
+ "arms": [
+  {
+   "cleanDocuments": 7,
+   "costPer1000DocumentsUsd": 1.835,
+   "grossErrorsPerDocument": 0.25,
+   "meanG": 0.5887008062056794,
+   "method": "paraphrase",
+   "model": "deepseek/deepseek-v4-flash",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.22384706287432263
+  },
+  {
+   "cleanDocuments": 7,
+   "costPer1000DocumentsUsd": 1.975,
+   "grossErrorsPerDocument": 5.625,
+   "meanG": 0.5509164023668197,
+   "method": "roundtrip-de",
+   "model": "deepseek/deepseek-v4-flash",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.3344267352496683
+  },
+  {
+   "cleanDocuments": 6,
+   "costPer1000DocumentsUsd": 1.431,
+   "grossErrorsPerDocument": 4.5625,
+   "meanG": 0.5282690496867671,
+   "method": "roundtrip-zh",
+   "model": "deepseek/deepseek-v4-flash",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.5224063267206878
+  },
+  {
+   "cleanDocuments": 8,
+   "costPer1000DocumentsUsd": 0.68,
+   "grossErrorsPerDocument": 0.5,
+   "meanG": 0.6453071454482613,
+   "method": "synonyms",
+   "model": "deepseek/deepseek-v4-flash",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.07037019899938168
+  },
+  {
+   "cleanDocuments": 7,
+   "costPer1000DocumentsUsd": 9.248,
+   "grossErrorsPerDocument": 1.4375,
+   "meanG": 0.5906098044156922,
+   "method": "paraphrase",
+   "model": "minimax/minimax-m3",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.20509249594564963
+  },
+  {
+   "cleanDocuments": 5,
+   "costPer1000DocumentsUsd": 20.597,
+   "grossErrorsPerDocument": 3.25,
+   "meanG": 0.5469201785168798,
+   "method": "roundtrip-de",
+   "model": "minimax/minimax-m3",
+   "producedDocuments": 6,
+   "wordChangeFraction": 0.34878299860842915
+  },
+  {
+   "cleanDocuments": 5,
+   "costPer1000DocumentsUsd": 15.013,
+   "grossErrorsPerDocument": 7.9375,
+   "meanG": 0.5218082718845287,
+   "method": "roundtrip-zh",
+   "model": "minimax/minimax-m3",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.577078043485023
+  },
+  {
+   "cleanDocuments": 6,
+   "costPer1000DocumentsUsd": 11.54,
+   "grossErrorsPerDocument": 1.3125,
+   "meanG": 0.6435585742462026,
+   "method": "synonyms",
+   "model": "minimax/minimax-m3",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.20843629040839495
+  },
+  {
+   "cleanDocuments": 6,
+   "costPer1000DocumentsUsd": 1.75,
+   "grossErrorsPerDocument": 1.4375,
+   "meanG": 0.6026250130021195,
+   "method": "paraphrase",
+   "model": "qwen/qwen3.5-9b",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.24502586073951388
+  },
+  {
+   "cleanDocuments": 4,
+   "costPer1000DocumentsUsd": 3.749,
+   "grossErrorsPerDocument": 7.0,
+   "meanG": 0.5393640522231681,
+   "method": "roundtrip-de",
+   "model": "qwen/qwen3.5-9b",
+   "producedDocuments": 7,
+   "wordChangeFraction": 0.4701091395552576
+  },
+  {
+   "cleanDocuments": 4,
+   "costPer1000DocumentsUsd": 3.552,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.5401109822839543,
+   "method": "roundtrip-zh",
+   "model": "qwen/qwen3.5-9b",
+   "producedDocuments": 7,
+   "wordChangeFraction": 0.5541952357730283
+  },
+  {
+   "cleanDocuments": 7,
+   "costPer1000DocumentsUsd": 1.349,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.6233567299901923,
+   "method": "synonyms",
+   "model": "qwen/qwen3.5-9b",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.12286445212818081
+  },
+  {
+   "cleanDocuments": 7,
+   "costPer1000DocumentsUsd": 9.075,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.5283100173359901,
+   "method": "paraphrase",
+   "model": "qwen/qwen3.7-plus",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.6423831850670426
+  },
+  {
+   "cleanDocuments": 8,
+   "costPer1000DocumentsUsd": 11.296,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.5432728651510957,
+   "method": "roundtrip-de",
+   "model": "qwen/qwen3.7-plus",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.3833511606314429
+  },
+  {
+   "cleanDocuments": 6,
+   "costPer1000DocumentsUsd": 11.712,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.5328299588281811,
+   "method": "roundtrip-zh",
+   "model": "qwen/qwen3.7-plus",
+   "producedDocuments": 7,
+   "wordChangeFraction": 0.5138132726426382
+  },
+  {
+   "cleanDocuments": 8,
+   "costPer1000DocumentsUsd": 10.944,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.5673868904439107,
+   "method": "synonyms",
+   "model": "qwen/qwen3.7-plus",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.3696203535187243
+  },
+  {
+   "cleanDocuments": 8,
+   "costPer1000DocumentsUsd": 3.402,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.5649497324194689,
+   "method": "paraphrase",
+   "model": "tencent/hy3",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.5201974033831244
+  },
+  {
+   "cleanDocuments": 6,
+   "costPer1000DocumentsUsd": 9.924,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.5606001947055127,
+   "method": "roundtrip-de",
+   "model": "tencent/hy3",
+   "producedDocuments": 6,
+   "wordChangeFraction": 0.3129747052979786
+  },
+  {
+   "cleanDocuments": 7,
+   "costPer1000DocumentsUsd": 6.706,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.5440433348325499,
+   "method": "roundtrip-zh",
+   "model": "tencent/hy3",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.45492293947854145
+  },
+  {
+   "cleanDocuments": 8,
+   "costPer1000DocumentsUsd": 2.674,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.6489926428390892,
+   "method": "synonyms",
+   "model": "tencent/hy3",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.04345530380935991
+  },
+  {
+   "cleanDocuments": 7,
+   "costPer1000DocumentsUsd": 7.374,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.5527443215883958,
+   "method": "paraphrase",
+   "model": "z-ai/glm-5.2",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.4980979518687742
+  },
+  {
+   "cleanDocuments": 4,
+   "costPer1000DocumentsUsd": 38.33,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.5575410786890412,
+   "method": "roundtrip-de",
+   "model": "z-ai/glm-5.2",
+   "producedDocuments": 6,
+   "wordChangeFraction": 0.31332530214764
+  },
+  {
+   "cleanDocuments": 3,
+   "costPer1000DocumentsUsd": 22.607,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.533822272716592,
+   "method": "roundtrip-zh",
+   "model": "z-ai/glm-5.2",
+   "producedDocuments": 7,
+   "wordChangeFraction": 0.5182391336844999
+  },
+  {
+   "cleanDocuments": 8,
+   "costPer1000DocumentsUsd": 5.418,
+   "grossErrorsPerDocument": null,
+   "meanG": 0.6514390979454834,
+   "method": "synonyms",
+   "model": "z-ai/glm-5.2",
+   "producedDocuments": 8,
+   "wordChangeFraction": 0.04104933304328923
+  }
+ ],
+ "corpusMarkedMeanG": 0.6717540355998992,
+ "corpusUnmarkedMeanG": 0.499412269712174,
+ "schemaVersion": 1
+}
