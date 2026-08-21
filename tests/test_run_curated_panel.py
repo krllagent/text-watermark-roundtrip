@@ -1,0 +1,139 @@
+import json
+import tempfile
+import unittest
+from pathlib import Path
+
+import run_curated_panel as panel
+
+
+def _batch(candidate_count=2):
+    return {
+        "batchId": "doc-01-canary",
+        "documentId": "doc-01",
+        "sourceText": "Source report.",
+        "claims": [
+            {"id": f"c{index:02d}", "text": f"Claim {index}."}
+            for index in range(1, 11)
+        ],
+        "candidates": [
+            {"candidateId": f"candidate-{index:02d}", "text": f"Candidate {index}."}
+            for index in range(1, candidate_count + 1)
+        ],
+    }
+
+
+class CuratedPanelTests(unittest.TestCase):
+    def test_resume_filter_can_exclude_a_replaced_judge(self):
+        allowed = {"vendor/a", "vendor/b"}
+        previous = {
+            "a": {"candidates": [], "judge": "vendor/a"},
+            "old": {"candidates": [], "judge": "vendor/old"},
+        }
+
+        kept = {
+            key: value
+            for key, value in previous.items()
+            if "candidates" in value and value["judge"] in allowed
+        }
+
+        self.assertEqual(set(kept), {"a"})
+
+    def test_lost_paid_response_is_closed_at_reserved_ceiling(self):
+        state = {
+            "calls": {},
+            "inFlight": {
+                "doc-01::vendor/model": {
+                    "ceilingUsd": "0.02",
+                    "requestSha256": "a" * 64,
+                }
+            },
+            "priorCostUsd": "0.01",
+        }
+
+        result = panel.resolve_lost_paid_responses(state)
+
+        self.assertEqual(result["inFlight"], {})
+        self.assertEqual(result["status"], "batch_failed")
+        self.assertEqual(result["totalCostUsd"], "0.03")
+        self.assertTrue(result["calls"]["doc-01::vendor/model"]["costIsUpperBound"])
+
+    def test_prior_ledger_subtracts_only_resumable_valid_calls(self):
+        checkpoint = {
+            "calls": {
+                "valid": {"candidates": [], "costUsd": "0.2", "judge": "keep"},
+                "other": {"candidates": [], "costUsd": "0.3", "judge": "replace"},
+                "lost": {"costUsd": "0.1", "judge": "keep", "terminalError": {}},
+            },
+            "sources": [],
+            "totalCostUsd": "0.7",
+        }
+
+        result = panel.make_prior_ledger(checkpoint, reusable_models=["keep"])
+
+        self.assertEqual(result["reusableCostUsd"], "0.2")
+        self.assertEqual(result["totalCostUsd"], "0.5")
+
+    def test_prompt_freezes_ten_percent_grid_and_hides_method_names(self):
+        prompt = panel.build_prompt(_batch())
+
+        self.assertIn(
+            "0, 10, 20, 30, 40, 50, 60, 70, 80, 90, or 100",
+            " ".join(prompt.split()),
+        )
+        self.assertNotIn("DIPPER", prompt)
+        self.assertNotIn("roundtrip", prompt)
+
+    def test_schema_has_exact_dynamic_candidates_and_claims(self):
+        schema = panel.response_format(_batch(candidate_count=5))
+        candidate = schema["json_schema"]["schema"]["properties"]["candidates"]["items"]
+
+        self.assertEqual(candidate["properties"]["candidateId"]["enum"], [
+            "candidate-01", "candidate-02", "candidate-03", "candidate-04", "candidate-05"
+        ])
+        claims = candidate["properties"]["claims"]
+        self.assertEqual(claims["minItems"], 10)
+        self.assertEqual(claims["maxItems"], 10)
+        self.assertIn("c01", claims["items"]["properties"]["id"]["enum"])
+        self.assertNotIn(
+            "maxLength",
+            candidate["properties"]["materialErrors"]["items"],
+        )
+
+    def test_parse_response_rejects_non_grid_percentage(self):
+        batch = _batch(candidate_count=1)
+        payload = {
+            "candidates": [
+                {
+                    "candidateId": "candidate-01",
+                    "claims": [
+                        {"id": f"c{index:02d}", "status": "preserved"}
+                        for index in range(1, 11)
+                    ],
+                    "materialErrors": [],
+                    "readabilityPercent": 85,
+                    "usabilityPercent": 100,
+                }
+            ]
+        }
+
+        with self.assertRaisesRegex(ValueError, "10-percent grid"):
+            panel.parse_response(json.dumps(payload), batch)
+
+    def test_canary_contains_identical_and_five_targeted_tampers(self):
+        source = (
+            "twelve library employees. On May 16th, 2023. $7,500. "
+            "from May 16th to June 30th. continue utilizing the digital visitor log"
+        )
+        claims = [
+            {"id": f"c{index:02d}", "text": f"Claim {index}."}
+            for index in range(1, 11)
+        ]
+        batch, expected = panel.build_canary_batch(source=source, claims=claims)
+
+        self.assertEqual(batch["candidates"][0]["text"], source)
+        self.assertIn("$75,000", batch["candidates"][1]["text"])
+        self.assertEqual(expected["tamperedClaimIds"], ["c03", "c05", "c07", "c08", "c10"])
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,35 @@
+{
+  "computePerHourUsd": 0.0,
+  "containerDiskGb": 120,
+  "createdAt": "2026-08-21T11:30:55.161317Z",
+  "deleted": false,
+  "elapsedSeconds": 1.538983920123428,
+  "error": "RuntimeError: RunPod API POST /pods: HTTP 500: {'error': \"create pod: unmarshal to struct { Errors []struct { Message string }; Data json.RawMessage }: invalid character 'I' looking for beginning of value\\nunmarshal to struct { Errors []struct { Message string }; Data json.RawMessage }: invalid character 'I' looking for beginning of value\", 'status': 500}",
+  "estimatedCostUpperBoundUsd": 7.612934155861707e-06,
+  "hardCostCapUsd": 0.35,
+  "inputSha256": "0e06531998860f10b81abe236b90269c1bdb8272ba813bf27460cc2e0b3866a3",
+  "jobSha256": "5fcd120a28e358a5d7c094da6ba8bac3eebcef18e6bfedc2f2657592587544d7",
+  "methodology": "Measure wall-clock time from controller start through confirmed Pod deletion. Multiply the returned RunPod compute hourly rate plus the documented running container and volume storage rates by elapsed time. This is a conservative estimate, not a provider billing receipt.",
+  "outputSha256": null,
+  "podAbsentAfterDelete": false,
+  "podId": null,
+  "remoteStatus": null,
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "title": "RunPod create Pod REST API",
+      "url": "https://docs.runpod.io/api-reference/pods/POST/pods"
+    },
+    {
+      "title": "RunPod delete Pod REST API",
+      "url": "https://docs.runpod.io/api-reference/pods/DELETE/pods/{podId}"
+    },
+    {
+      "title": "RunPod Pod and storage pricing",
+      "url": "https://docs.runpod.io/pods/pricing"
+    }
+  ],
+  "verifiedAt": "2026-08-21T11:30:56.700893Z",
+  "volumeDiskGb": 10,
+  "watchdogMinutes": 12
+}

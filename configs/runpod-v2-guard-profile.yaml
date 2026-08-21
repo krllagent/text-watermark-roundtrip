@@ -1,0 +1,18 @@
+services:
+  runpod_v2:
+    local_prefix: "/runpod-v2"
+    upstream: "https://api.runpod.io"
+    upstream_timeout_seconds: 120
+    client_auth: "none"
+    allow:
+      methods: ["GET", "POST", "DELETE"]
+      path_prefixes:
+        - "/v2/pods"
+    auth:
+      type: "bearer_header"
+      token_ref: "runpod_api_key"
+    limits:
+      per_minute: 30
+      per_hour: 500
+      per_day: 2000
+      concurrency: 4

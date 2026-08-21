@@ -1,0 +1,15 @@
+{
+  "documentCount": 10,
+  "generation": {
+    "maxNewTokens": 1100,
+    "repetitionPenalty": 1.05,
+    "temperature": 0.7,
+    "topK": 40,
+    "topP": 0.9
+  },
+  "maxAttemptsPerPair": 5,
+  "model": "Qwen/Qwen2.5-14B-Instruct",
+  "modelRevision": "cf98f3b3bbb457ad9e2bb7baf9a0125b6b88caa8",
+  "schemaVersion": 1,
+  "seedBase": 2026082101
+}

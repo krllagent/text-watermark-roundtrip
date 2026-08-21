@@ -1,0 +1,6150 @@
+{
+  "budgetUsd": "0.65",
+  "calls": {
+    "doc-01::anthropic/claude-haiku-4.5": {
+      "batchId": "doc-01",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Cost stated as $7,000 instead of $7,500",
+            "Redundant phrases: 'paper-based paper book' and 'tablet-based tablet-based system'"
+          ],
+          "readabilityPercent": 60,
+          "usabilityPercent": 70
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Cost stated as $7,500 in one place but source clearly states $7,500, matching but candidate's wording differs slightly from source context"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        }
+      ],
+      "completionSha256": "5a6a0db2e2de83d31a59cc4ee2f109de2bbbd1760a124bd1c2e1df68d2e0768a",
+      "costUsd": "0.009876",
+      "judge": "anthropic/claude-haiku-4.5",
+      "provider": "Amazon Bedrock",
+      "usage": {
+        "completionTokens": 755,
+        "promptTokens": 6101,
+        "providerCostCredits": "0.009876",
+        "totalTokens": 6856
+      }
+    },
+    "doc-01::google/gemma-4-31b-it": {
+      "batchId": "doc-01",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Cost listed as $7,000 instead of approximately $7,500"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 70
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        }
+      ],
+      "completionSha256": "9cfcb311b810762e40ae7e47b4c7da02942a8f1de5a43a33386244a4576236a4",
+      "costUsd": "0.0007588",
+      "judge": "google/gemma-4-31b-it",
+      "provider": "CoreWeave",
+      "usage": {
+        "completionTokens": 675,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 5280
+        },
+        "promptTokens": 5293,
+        "providerCostCredits": "0.0007588",
+        "totalTokens": 5968
+      }
+    },
+    "doc-01::openai/gpt-5.6-luna": {
+      "batchId": "doc-01",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The tablet and application cost is stated as $7,000 instead of approximately $7,500."
+          ],
+          "readabilityPercent": 70,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The tablet and application cost is stated as approximately $7,500 instead of the source's approximately $7,000."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The tablet and software cost is stated as approximately $7,500 instead of the source's approximately $7,000."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The tablet and application software cost is stated as approximately $7,500 instead of the source's approximately $7,000."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The tablet and application cost is stated as approximately $7,500 instead of the source's approximately $7,000."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 80
+        }
+      ],
+      "completionSha256": "b4710a4a6e3496385baada60be8cd00ea66dfaee1dc67317c1342ae783e9f97e",
+      "costUsd": "0.00102206",
+      "judge": "openai/gpt-5.6-luna",
+      "provider": "OpenAI",
+      "usage": {
+        "completionTokens": 764,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 5233
+        },
+        "promptTokens": 5236,
+        "providerCostCredits": "0.00102206",
+        "totalTokens": 6000
+      }
+    },
+    "doc-01::x-ai/grok-4.20": {
+      "batchId": "doc-01",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "changed"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "cost listed as $7000 instead of $7500",
+            "resolved two days before May 14 instead of two days ahead of May 14",
+            "trial feedback from May 16 to June 30 instead of May 16th to June 30th",
+            "added unsupported claim of budgeting for future developments",
+            "added unsupported claim of monitoring through end of December 2023"
+          ],
+          "readabilityPercent": 70,
+          "usabilityPercent": 60
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "refers to patrons as readers",
+            "refers to visitors as readers"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        }
+      ],
+      "completionSha256": "c82f68ae95e059b2c2090a389bd7a48c2c45e7a2e0440b86011142b3e3c4bf17",
+      "costUsd": "0.00408425",
+      "judge": "x-ai/grok-4.20",
+      "provider": "xAI",
+      "usage": {
+        "completionTokens": 1184,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 5440
+        },
+        "promptTokens": 5469,
+        "providerCostCredits": "0.00408425",
+        "totalTokens": 6653
+      }
+    },
+    "doc-02::anthropic/claude-haiku-4.5": {
+      "batchId": "doc-02",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "changed"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Claim c06: states 'funded additional staffing required for weekly $500' which creates awkward phrasing and potential ambiguity about the cost"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Claim c04: states initial satisfaction was 76% but source states 78%",
+            "Refers to 'GreenCycle Bicycle Courier Services' instead of 'GreenCycle Delivery Services'",
+            "Uses date format '15 March 2023' and '1 April 2023' instead of standard format used in source"
+          ],
+          "readabilityPercent": 70,
+          "usabilityPercent": 60
+        }
+      ],
+      "completionSha256": "0ff93f06db0e5f1e2762b7fc38dce26cf21b37bf72fdb0869a14789f61cd2847",
+      "costUsd": "0.009731",
+      "judge": "anthropic/claude-haiku-4.5",
+      "provider": "Amazon Bedrock",
+      "usage": {
+        "completionTokens": 792,
+        "promptTokens": 5771,
+        "providerCostCredits": "0.009731",
+        "totalTokens": 6563
+      }
+    },
+    "doc-02::google/gemma-4-31b-it": {
+      "batchId": "doc-02",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "changed"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Sample described as random instead of representative",
+            "Satisfaction start figure changed from 78% to 76%",
+            "Daily delay metric changed from exceeding the window to being over 30 minutes late"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 60
+        }
+      ],
+      "completionSha256": "895aa4df6cc499f81745798f196c4eb3773a465d8774dd3d206dc1c4110a14f7",
+      "costUsd": "0.0007259",
+      "judge": "google/gemma-4-31b-it",
+      "provider": "CoreWeave",
+      "usage": {
+        "completionTokens": 695,
+        "promptTokens": 4896,
+        "providerCostCredits": "0.0007259",
+        "totalTokens": 5591
+      }
+    },
+    "doc-02::openai/gpt-5.6-luna": {
+      "batchId": "doc-02",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "changed"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The extra-staffing cost is stated as “weekly $500,” an ungrammatical and ambiguous replacement for $500 per week."
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "changed"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "changed"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "The organization is renamed “GreenCycle Bicycle Courier Services.”",
+            "The trial sample is called random, and its selection criteria are rendered incomplete.",
+            "Mid-trial satisfaction is changed from 78% to 83% to 76% to 83%.",
+            "The delay metric changes from delays beyond the two-hour window to deliveries more than 30 minutes late.",
+            "The rollout recommendation omits the explicit area-wide scope and continued dispatcher-training investment."
+          ],
+          "readabilityPercent": 70,
+          "usabilityPercent": 50
+        }
+      ],
+      "completionSha256": "9be4df346a10ea3d1afeb8fcf01688ad028f155c8b419fea9d16eff70ec2704f",
+      "costUsd": "0.0021194",
+      "judge": "openai/gpt-5.6-luna",
+      "provider": "OpenAI",
+      "usage": {
+        "completionTokens": 759,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 4832,
+          "cachedTokens": 0
+        },
+        "promptTokens": 4835,
+        "providerCostCredits": "0.0021194",
+        "totalTokens": 5594
+      }
+    },
+    "doc-02::x-ai/grok-4.20": {
+      "batchId": "doc-02",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Initial satisfaction given as 78% instead of matching source phrasing precisely",
+            "Satisfaction climbed to 83% mid-trial but source uses 'rising from an average of 78% to 83%'",
+            "Final satisfaction reached 86% but source says 'increase to 86%'",
+            "Delays fell from fifteen to five but source specifies 'beyond the stipulated two-hour window'"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "changed"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Funded additional staffing required for weekly $500 instead of at $500 per week",
+            "Satisfaction scores rose to 86% but omits 'final survey of customers revealed a satisfaction score increase' detail"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 70
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "changed"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "changed"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "Company name changed to GreenCycle Bicycle Courier Services",
+            "Initial satisfaction rose from 76% instead of 78%",
+            "Sample described as random instead of representative",
+            "Training requirement summarized without 'mandatory sessions for all current dispatchers beginning March 22'",
+            "Hotline cost phrased as spending extra $500 per week on staff costs without matching 'funded the additional staffing needed at $500 per week'"
+          ],
+          "readabilityPercent": 60,
+          "usabilityPercent": 40
+        }
+      ],
+      "completionSha256": "4fd7504ee718c1573f242428b0c68180a62a93ffef5fa7d8c4ec0a01ae853845",
+      "costUsd": "0.0093034",
+      "judge": "x-ai/grok-4.20",
+      "provider": "xAI",
+      "usage": {
+        "completionTokens": 1276,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 192
+        },
+        "promptTokens": 5052,
+        "providerCostCredits": "0.0093034",
+        "totalTokens": 6328
+      }
+    },
+    "doc-03::anthropic/claude-haiku-4.5": {
+      "batchId": "doc-03",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "changed"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Refers to 'math day' instead of 'Math Day' (minor)",
+            "Changed grades claim to 'six to eight' instead of explicit 'six through eight'",
+            "85% statistic changed to 'nearly 85%' with vague language"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "changed"
+            },
+            {
+              "id": "c09",
+              "status": "changed"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Grades limited to 'six and seven' instead of 'six through eight' - excludes eighth grade",
+            "States '84.9%' of judges instead of 'nearly 85%' - materially different precision",
+            "States 'nearly nine out of ten projects' (90%) but phrasing differs from exact claim"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 70
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Incorrectly identifies school as 'Florence Heights High School' instead of 'Florence Heights Middle School'"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        }
+      ],
+      "completionSha256": "cceefad94b34d3fa346ab5ab143d1256bc0e0723a2daf3885058aff37443e7c3",
+      "costUsd": "0.009553",
+      "judge": "anthropic/claude-haiku-4.5",
+      "provider": "Amazon Bedrock",
+      "usage": {
+        "completionTokens": 834,
+        "promptTokens": 5383,
+        "providerCostCredits": "0.009553",
+        "totalTokens": 6217
+      }
+    },
+    "doc-03::google/gemma-4-31b-it": {
+      "batchId": "doc-03",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Claimed the event coincided with Pi Day instead of Math Day."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Omitted the start year of 1997.",
+            "Incorrectly stated only grades six and seven submitted projects (source says six to eight)."
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 70
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Incorrectly identifies the school as Florence Heights High School instead of Middle School."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 70
+        }
+      ],
+      "completionSha256": "c91bb509bc1f10bf10dde4b5a3d4e54ce2c1b24385ad37bde1ea65b7b7d5ca6b",
+      "costUsd": "0.00087858",
+      "judge": "google/gemma-4-31b-it",
+      "provider": "CoreWeave",
+      "usage": {
+        "completionTokens": 1272,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 320
+        },
+        "promptTokens": 4461,
+        "providerCostCredits": "0.00087858",
+        "totalTokens": 5733
+      }
+    },
+    "doc-03::openai/gpt-5.6-luna": {
+      "batchId": "doc-03",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The claim that Emily's applications resonated with the scientific community is retained, but the wording about jurors' potential interest is awkward and slightly unsupported."
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The fair is said to align with math day festivities rather than the source's math day celebrations; this is a minor wording change but preserves the event reference."
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "The submission grades are changed from six through eight to six and seven.",
+            "Emily Wilson's name is omitted from the project description, and the project is attributed only to an unnamed seventh-grade project.",
+            "The report adds a full-fledged club engaging students throughout the year and refers to Science Fair week, details not present in the source."
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "The recommendation is strengthened from asking administrators to consider establishing a science club to urging them to establish a permanent club."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The school is changed from Florence Heights Middle School to Florence Heights High School."
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        }
+      ],
+      "completionSha256": "34ce3710f85fc40d27e9e6cd343b08dcbd032fef891905974d67f4274f1ee73d",
+      "costUsd": "0.0021075",
+      "judge": "openai/gpt-5.6-luna",
+      "provider": "OpenAI",
+      "usage": {
+        "completionTokens": 807,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 4554,
+          "cachedTokens": 0
+        },
+        "promptTokens": 4557,
+        "providerCostCredits": "0.0021075",
+        "totalTokens": 5364
+      }
+    },
+    "doc-03::x-ai/grok-4.20": {
+      "batchId": "doc-03",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "Pi Day instead of math day",
+            "eighty awards presented instead of distributed",
+            "honorable mentions instead of commendations for effort",
+            "90% of the projects instead of revealed a strong engagement level"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 70
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "changed"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "changed"
+            },
+            {
+              "id": "c09",
+              "status": "changed"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "grades six and seven instead of six to eight",
+            "84.9% instead of nearly 85%",
+            "Math and the Environment instead of Mathematics and Environmental Studies",
+            "Emily’s project instead of select individuals like Emily",
+            "nearly nine out of ten instead of 90%"
+          ],
+          "readabilityPercent": 60,
+          "usabilityPercent": 40
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Florence Heights High School instead of Middle School",
+            "booth space instead of table space",
+            "general science instead of General Science"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 70
+        }
+      ],
+      "completionSha256": "6481bb1be41a68a7b76a6c0fb9cd947fe5b8b10501823b7e1002f520ba5e3ad7",
+      "costUsd": "0.0087659",
+      "judge": "x-ai/grok-4.20",
+      "provider": "xAI",
+      "usage": {
+        "completionTokens": 1218,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 192
+        },
+        "promptTokens": 4738,
+        "providerCostCredits": "0.0087659",
+        "totalTokens": 5956
+      }
+    },
+    "doc-04::anthropic/claude-haiku-4.5": {
+      "batchId": "doc-04",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "Sarah name given as 'Sarah E. Johnson' instead of 'Sarah Johnson'",
+            "Total cost split into $3,000 plus $500 instead of 'nearly $3,500'",
+            "Auto-fill recommendation described as 'automatic reminders for commonly ordered items' rather than 'auto-fill options'"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "missing"
+            },
+            {
+              "id": "c02",
+              "status": "missing"
+            },
+            {
+              "id": "c03",
+              "status": "missing"
+            },
+            {
+              "id": "c04",
+              "status": "missing"
+            },
+            {
+              "id": "c05",
+              "status": "missing"
+            },
+            {
+              "id": "c06",
+              "status": "missing"
+            },
+            {
+              "id": "c07",
+              "status": "missing"
+            },
+            {
+              "id": "c08",
+              "status": "missing"
+            },
+            {
+              "id": "c09",
+              "status": "missing"
+            },
+            {
+              "id": "c10",
+              "status": "missing"
+            }
+          ],
+          "materialErrors": [
+            "Entire text is empty"
+          ],
+          "readabilityPercent": 0,
+          "usabilityPercent": 0
+        }
+      ],
+      "completionSha256": "aa7b1c01eefdab8921d9791ec6f4f936bc37624357da9aa49b72413c33cb78b9",
+      "costUsd": "0.008908",
+      "judge": "anthropic/claude-haiku-4.5",
+      "provider": "Amazon Bedrock",
+      "usage": {
+        "completionTokens": 758,
+        "promptTokens": 5118,
+        "providerCostCredits": "0.008908",
+        "totalTokens": 5876
+      }
+    },
+    "doc-04::google/gemma-4-31b-it": {
+      "batchId": "doc-04",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "Recommends automatic reminders for common items instead of auto-fill options"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "missing"
+            },
+            {
+              "id": "c02",
+              "status": "missing"
+            },
+            {
+              "id": "c03",
+              "status": "missing"
+            },
+            {
+              "id": "c04",
+              "status": "missing"
+            },
+            {
+              "id": "c05",
+              "status": "missing"
+            },
+            {
+              "id": "c06",
+              "status": "missing"
+            },
+            {
+              "id": "c07",
+              "status": "missing"
+            },
+            {
+              "id": "c08",
+              "status": "missing"
+            },
+            {
+              "id": "c09",
+              "status": "missing"
+            },
+            {
+              "id": "c10",
+              "status": "missing"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 0,
+          "usabilityPercent": 0
+        }
+      ],
+      "completionSha256": "2128ab58c8981f7112e6e4701a4a6cf3e1d388ba79b99a1b8883358bf0d9df80",
+      "costUsd": "0.00064698",
+      "judge": "google/gemma-4-31b-it",
+      "provider": "CoreWeave",
+      "usage": {
+        "completionTokens": 667,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 320
+        },
+        "promptTokens": 4202,
+        "providerCostCredits": "0.00064698",
+        "totalTokens": 4869
+      }
+    },
+    "doc-04::openai/gpt-5.6-luna": {
+      "batchId": "doc-04",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "The implementation cost is changed from nearly $3,500 total to about $3,000 plus $500, and the source does not specify that breakdown.",
+            "The recommendation changes auto-fill options into automatic reminders for commonly ordered items."
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "missing"
+            },
+            {
+              "id": "c02",
+              "status": "missing"
+            },
+            {
+              "id": "c03",
+              "status": "missing"
+            },
+            {
+              "id": "c04",
+              "status": "missing"
+            },
+            {
+              "id": "c05",
+              "status": "missing"
+            },
+            {
+              "id": "c06",
+              "status": "missing"
+            },
+            {
+              "id": "c07",
+              "status": "missing"
+            },
+            {
+              "id": "c08",
+              "status": "missing"
+            },
+            {
+              "id": "c09",
+              "status": "missing"
+            },
+            {
+              "id": "c10",
+              "status": "missing"
+            }
+          ],
+          "materialErrors": [
+            "The candidate text is empty and omits all ten claims."
+          ],
+          "readabilityPercent": 0,
+          "usabilityPercent": 0
+        }
+      ],
+      "completionSha256": "3ca8ec51b6b1d9dc30a5b6b6ad968e150352443f266d542ccf41ab6fe511ea77",
+      "costUsd": "0.0019053",
+      "judge": "openai/gpt-5.6-luna",
+      "provider": "OpenAI",
+      "usage": {
+        "completionTokens": 696,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 4278,
+          "cachedTokens": 0
+        },
+        "promptTokens": 4281,
+        "providerCostCredits": "0.0019053",
+        "totalTokens": 4977
+      }
+    },
+    "doc-04::x-ai/grok-4.20": {
+      "batchId": "doc-04",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "c10: report suggests automatic alerts and auto-fill instead of notifications"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "changed"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "changed"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "c02: Sarah E. Johnson and no explicit target date",
+            "c03: added local network requirement",
+            "c04: cost broken as $3000+$500",
+            "c06: added older employees",
+            "c10: automatic reminders twice instead of notifications and auto-fill"
+          ],
+          "readabilityPercent": 70,
+          "usabilityPercent": 60
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "missing"
+            },
+            {
+              "id": "c02",
+              "status": "missing"
+            },
+            {
+              "id": "c03",
+              "status": "missing"
+            },
+            {
+              "id": "c04",
+              "status": "missing"
+            },
+            {
+              "id": "c05",
+              "status": "missing"
+            },
+            {
+              "id": "c06",
+              "status": "missing"
+            },
+            {
+              "id": "c07",
+              "status": "missing"
+            },
+            {
+              "id": "c08",
+              "status": "missing"
+            },
+            {
+              "id": "c09",
+              "status": "missing"
+            },
+            {
+              "id": "c10",
+              "status": "missing"
+            }
+          ],
+          "materialErrors": [
+            "empty document"
+          ],
+          "readabilityPercent": 0,
+          "usabilityPercent": 0
+        }
+      ],
+      "completionSha256": "c1ef96e711abbf80bd5ff48232bc2604eb685abbb5defe160127d9bbebcf9f4f",
+      "costUsd": "0.0083109",
+      "judge": "x-ai/grok-4.20",
+      "provider": "xAI",
+      "usage": {
+        "completionTokens": 1158,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 192
+        },
+        "promptTokens": 4494,
+        "providerCostCredits": "0.0083109",
+        "totalTokens": 5652
+      }
+    },
+    "doc-05::anthropic/claude-haiku-4.5": {
+      "batchId": "doc-05",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Membership fee dropped from $34 to $30 instead of source's $34 to $30 (consistent but c05 states maintenance fees fell by 24% allowing fee drop, while source describes the relationship differently)",
+            "Maintenance costs reduction described as resulting in fee drop, which misrepresents the causal relationship from source"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Membership fee changed from $36 to $32, contradicting source which states $34 to $30",
+            "Maintenance costs decline described as 'a quarter' instead of source's 'nearly 24%'"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 60
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Association president name changed from Johnathon Adams to 'John Adams'"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        }
+      ],
+      "completionSha256": "a02ea316d37299994e2256336c5bd7f76b83629dd4f7d2cce7ce13ede4d3398a",
+      "costUsd": "0.00917",
+      "judge": "anthropic/claude-haiku-4.5",
+      "provider": "Amazon Bedrock",
+      "usage": {
+        "completionTokens": 819,
+        "promptTokens": 5075,
+        "providerCostCredits": "0.00917",
+        "totalTokens": 5894
+      }
+    },
+    "doc-05::google/gemma-4-31b-it": {
+      "batchId": "doc-05",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Maintenance cost reduction cited as a quarter instead of nearly 24%",
+            "Membership fee listed as $36 to $32 instead of $34 to $30"
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 70
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "President's name changed to John Adams instead of Johnathon Adams"
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        }
+      ],
+      "completionSha256": "9429abf610e51a6e14bd3800b4e0a9d5b371fccae56165dacadc9dfac93735a7",
+      "costUsd": "0.00065496",
+      "judge": "google/gemma-4-31b-it",
+      "provider": "CoreWeave",
+      "usage": {
+        "completionTokens": 704,
+        "promptTokens": 4156,
+        "providerCostCredits": "0.00065496",
+        "totalTokens": 4860
+      }
+    },
+    "doc-05::openai/gpt-5.6-luna": {
+      "batchId": "doc-05",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The membership fee is changed from $34 to $30 to $36 to $32.",
+            "The source's approximately 24% maintenance-cost reduction is changed to exactly a quarter.",
+            "Registration is said to be required by March 22, omitting the online or community-center registration options."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Johnathon Adams is renamed John Adams and the association is described as local.",
+            "The festival is attributed to Adams as organizing it, rather than merely reported as part of the activities.",
+            "The membership fee is changed from $34 to $30 to $36 to $32.",
+            "The source's nearly 24% reduction is changed to a quarter."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 70
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Johnathon Adams is renamed John Adams and his role is changed from association president to chair."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The workshop registration deadline changes from before March 22 to before March 22nd/“before” rather than preserving the source's required deadline wording; this is a minor temporal wording change."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 90
+        }
+      ],
+      "completionSha256": "99e30147caef4b2e40d1ef466e9e244950376970d5f8aee7fd602781793ab6d8",
+      "costUsd": "0.0020383",
+      "judge": "openai/gpt-5.6-luna",
+      "provider": "OpenAI",
+      "usage": {
+        "completionTokens": 826,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 4186,
+          "cachedTokens": 0
+        },
+        "promptTokens": 4189,
+        "providerCostCredits": "0.0020383",
+        "totalTokens": 5015
+      }
+    },
+    "doc-05::x-ai/grok-4.20": {
+      "batchId": "doc-05",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "changed"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "c09: added specific crops (tomatoes and basil)",
+            "c10: unsupported 'permanent digital records' phrasing and 'simplify...experience'"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 70
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "changed"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "c04: 'Johnathan' misspelled, 'his year's activities' and 'organizing' unsupported",
+            "c05: fee drop from $36 to $32 instead of $34 to $30; 'a quarter' instead of 'nearly 24%'",
+            "c09: unsupported 'hurriedly' and 'all sorts of vegetables and herbs'",
+            "c10: unsupported 'track application data' and website inclusion phrasing"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 60
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "changed"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "c04: 'John Adams' instead of 'Johnathon Adams'; 'chair' instead of 'president'"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "c02: 'before March 22nd' instead of 'by March 22'"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 80
+        }
+      ],
+      "completionSha256": "59a84a77180a441e02b71f98150340ff1ebe9bced52c2e8e568816f937a93133",
+      "costUsd": "0.0084459",
+      "judge": "x-ai/grok-4.20",
+      "provider": "xAI",
+      "usage": {
+        "completionTokens": 1254,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 192
+        },
+        "promptTokens": 4410,
+        "providerCostCredits": "0.0084459",
+        "totalTokens": 5664
+      }
+    },
+    "doc-06::anthropic/claude-haiku-4.5": {
+      "batchId": "doc-06",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Claim c01: States pilot started in March 2023 but source says April 1st start date"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Claim c01: States pilot started in March 2023 but source says April 1st start date"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "Claim c01: States March 2023 but source indicates April 1st start",
+            "Claim c02: Says 'Department of Information and Technology Initiatives' but source says 'Department of Technology Initiatives'",
+            "Claim c05: Says '87 per cent of visitors were satisfied' but source says satisfaction was 87% and usage was 85% for 70%+ of visit; also changes 'more than 70%' to 'at least sixty per cent'",
+            "Claim c10: Says 'wide implementation' and 'delivering significant savings in rental costs' but should specify 'phased implementation' and 'operational costs'"
+          ],
+          "readabilityPercent": 70,
+          "usabilityPercent": 60
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Claim c01: States pilot started in March 2023 but source says April 1st start date"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Claim c01: States pilot started in March 2023 but source says April 1st start date",
+            "Claim c02: Says 'Chief Curator' but source says 'head curator'",
+            "Claim c05: Grammatical error 'participants used the audio guide for more than seventy percent of their time in the museum 85%' - number placement error makes claim unclear"
+          ],
+          "readabilityPercent": 70,
+          "usabilityPercent": 60
+        }
+      ],
+      "completionSha256": "a56eaadf22d59d197c9c4202786a894af7a5cb7c4a769d1e7b7f5e3f123a3bcc",
+      "costUsd": "0.010058",
+      "judge": "anthropic/claude-haiku-4.5",
+      "provider": "Amazon Bedrock",
+      "usage": {
+        "completionTokens": 983,
+        "promptTokens": 5143,
+        "providerCostCredits": "0.010058",
+        "totalTokens": 6126
+      }
+    },
+    "doc-06::google/gemma-4-31b-it": {
+      "batchId": "doc-06",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Department name changed to Information and Technology Initiatives",
+            "Visit duration threshold changed from 70% to 60%",
+            "Wait time of under two minutes omitted"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 70
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Grammatical error: 'time in the museum 85%'"
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 90
+        }
+      ],
+      "completionSha256": "4406d51a6c6f4b73ca69316dac9f844353909a4ee4122de67fa24116712df4eb",
+      "costUsd": "0.00086078",
+      "judge": "google/gemma-4-31b-it",
+      "provider": "CoreWeave",
+      "usage": {
+        "completionTokens": 1257,
+        "promptTokens": 4334,
+        "providerCostCredits": "0.00086078",
+        "totalTokens": 5591
+      }
+    },
+    "doc-06::openai/gpt-5.6-luna": {
+      "batchId": "doc-06",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "changed"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "changed"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "The guide was described as replacing rental radio equipment rather than traditional audio-guide rentals.",
+            "The usage figure was changed from more than 70% of the visit to at least 60%.",
+            "The claim that waits fell to less than two minutes was omitted.",
+            "The reported 40% reduction was attributed to rental costs rather than physical-guide maintenance expenses.",
+            "The rollout recommendation omitted interface refinements and interactive features and changed the feedback detail."
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 60
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "changed"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "changed"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Robert Johnson was incorrectly identified as Chief Curator rather than head curator.",
+            "The 85% usage statistic is grammatically malformed and not clearly stated as 85% of participants.",
+            "The annual savings figure was presented as a projection rather than anticipated savings contingent on museum-wide implementation."
+          ],
+          "readabilityPercent": 80,
+          "usabilityPercent": 80
+        }
+      ],
+      "completionSha256": "07bc24491c0e4dd499f54cb3c89e55d05d2f5753680294b3748cc66eb750fbc6",
+      "costUsd": "0.0020208",
+      "judge": "openai/gpt-5.6-luna",
+      "provider": "OpenAI",
+      "usage": {
+        "completionTokens": 781,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 4332,
+          "cachedTokens": 0
+        },
+        "promptTokens": 4335,
+        "providerCostCredits": "0.0020208",
+        "totalTokens": 5116
+      }
+    },
+    "doc-06::x-ai/grok-4.20": {
+      "batchId": "doc-06",
+      "costIsUpperBound": true,
+      "costUsd": "0.01819250",
+      "judge": "x-ai/grok-4.20",
+      "terminalError": {
+        "code": "paid_response_lost_before_parse_checkpoint",
+        "message": "Provider returned content, but local JSON parsing failed before the completion was checkpointed; exact request must not be retried."
+      }
+    }
+  },
+  "configSha256": "63f89d88b631a6cbd07928edd1ae40a8c28401fedccb1ae5616677a992b63661",
+  "createdAt": "2026-08-21T12:45:35.156737Z",
+  "inFlight": {},
+  "methodology": "Durable four-vendor panel checkpoint. Reserve each request before dispatch, never redispatch an unresolved call, blind method identity, and reject any percentage outside 0..100 in ten-point increments.",
+  "mode": "full",
+  "panelInputSha256": "9bde98f6a79f5ebf9b071de831c9cfab8b37c372d447b7d45fad6367401eb568",
+  "priorCostUsd": "0.04680206",
+  "priorSpendEvidence": {
+    "path": "results/curated-panel-v1.json",
+    "sha256": "d13c9ec760a9c427142d95c9f4eb102ba34bb642841c842c9e82bd63c3b4bb24"
+  },
+  "schemaVersion": 1,
+  "sources": [
+    "https://openrouter.ai/api/v1/models",
+    "https://huggingface.co/kalpeshk2011/dipper-paraphraser-xxl",
+    "https://github.com/eth-sri/watermark-stealing"
+  ],
+  "status": "batch_failed",
+  "totalCostUsd": "0.17694027",
+  "verifiedAt": "2026-08-21T12:50:06.872868Z"
+}

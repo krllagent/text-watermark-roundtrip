@@ -1,0 +1,121 @@
+{
+  "budgetsUsd": {
+    "dipperGpu": "0.35",
+    "panel": "0.65",
+    "totalAdditional": "1.25",
+    "transformations": "0.25"
+  },
+  "calibration": {
+    "path": "results/quality-synthid-curated-calibration-v1.json",
+    "sha256": "2e748e59233ed7bf6613f1d6b9d4efc0ac3ce8035563ad12a3664bf311c1b13f",
+    "singleDetectionThreshold": 0.5095383054287164
+  },
+  "claims": {
+    "countPerDocument": 10,
+    "path": "configs/curated-priority-claims-v1.json",
+    "sha256": "7e3320f2b469410fa6820be74501286e9e2f0111a7b8d3d291402f41d8d35f05"
+  },
+  "corpus": {
+    "path": "results/quality-synthid-corpus-curated-v1.json",
+    "sha256": "17f3d71eef3fca9aa61cc19f5a8000d433450b81617bf5a79078572c8d294231"
+  },
+  "derivedFrom": {
+    "path": "configs/curated-percent-eval-v2.json",
+    "reason": "The first five-candidate full batch produced two locally malformed or truncated JSON responses at the 900-token cap. Increase only the output cap; judges, prompt, claims, schema, scoring, and budgets remain frozen.",
+    "sha256": "1a1f52b10494bc9fd442e32599ea6d609809df18ecee06b2bad407069cafea65"
+  },
+  "documentIds": [
+    "doc-01",
+    "doc-02",
+    "doc-03",
+    "doc-04",
+    "doc-05",
+    "doc-06",
+    "doc-07",
+    "doc-08",
+    "doc-09",
+    "doc-10"
+  ],
+  "judges": [
+    {
+      "completionUsdPerToken": "0.0000012",
+      "model": "openai/gpt-5.6-luna",
+      "promptUsdPerToken": "0.0000002",
+      "vendor": "OpenAI"
+    },
+    {
+      "completionUsdPerToken": "0.000005",
+      "model": "anthropic/claude-haiku-4.5",
+      "promptUsdPerToken": "0.000001",
+      "vendor": "Anthropic"
+    },
+    {
+      "completionUsdPerToken": "0.00000034",
+      "model": "google/gemma-4-31b-it",
+      "promptUsdPerToken": "0.0000001",
+      "vendor": "Google"
+    },
+    {
+      "completionUsdPerToken": "0.0000025",
+      "model": "x-ai/grok-4.20",
+      "promptUsdPerToken": "0.00000125",
+      "vendor": "xAI"
+    }
+  ],
+  "methods": [
+    "synonyms",
+    "paraphrase",
+    "roundtrip-de",
+    "roundtrip-zh",
+    "dipper"
+  ],
+  "panel": {
+    "canaryCalls": 4,
+    "fullCalls": 200,
+    "maxCompletionTokensPerCall": 1400,
+    "reasoningEffort": "none",
+    "temperature": 0.0
+  },
+  "parentDerivation": {
+    "path": "configs/curated-percent-eval-v1.json",
+    "reason": "Gemini 3.7 Flash rejected the canary because reasoning is mandatory; the experiment requires reasoning effort none for bounded cost.",
+    "sha256": "86135775dc585fd3a2b0277bb6299b655dffe38f5edc5aba32ba24b87695590e"
+  },
+  "percentageContract": {
+    "aggregateFourJudges": "majority vote per claim; conservative lower median for percentage scores",
+    "allowedJudgePercentages": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+    ],
+    "claimPreservationPercent": "10 times the count of ten majority-preserved priority claims",
+    "finalPercent": "per-document minimum of watermark removal, claim preservation, readability, and usability; then arithmetic mean by method",
+    "pspPercent": "100 times official P-SP",
+    "readabilityPercent": "four-judge conservative lower median on the frozen 10-point grid",
+    "usabilityPercent": "four-judge conservative lower median on the frozen 10-point grid",
+    "watermarkRemovalPercent": "100 * (source meanG - candidate meanG) / (source meanG - paired clean meanG), clipped to [0,100]"
+  },
+  "schemaVersion": 1,
+  "sources": [
+    "https://openrouter.ai/api/v1/models",
+    "https://huggingface.co/kalpeshk2011/dipper-paraphraser-xxl",
+    "https://github.com/eth-sri/watermark-stealing"
+  ],
+  "transformer": {
+    "completionUsdPerToken": "0.00000128",
+    "maxCompletionTokensPerCall": 2500,
+    "model": "qwen/qwen3.7-plus",
+    "promptUsdPerToken": "0.00000032",
+    "reasoningEffort": "none",
+    "temperature": 0.0
+  },
+  "verifiedAt": "2026-08-21T12:45:26.802720Z"
+}

@@ -1,0 +1,439 @@
+{
+  "createdAt": "2026-08-21T11:44:46.026947Z",
+  "inputs": {
+    "corpusSha256": "17f3d71eef3fca9aa61cc19f5a8000d433450b81617bf5a79078572c8d294231",
+    "dipperSha256": null,
+    "methodsSha256": "cc53705d6ede155b5c0f72677747680a24d389d1b6671b1451b4a7265b62b071"
+  },
+  "methodology": "Run the official P-SP model from the ETH watermark-stealing tree locally on CPU. Score source and candidate directly; assign zero to a pipeline failure that produced no candidate.",
+  "model": {
+    "paranmtModelSha256": "5a1b43bf2d72f4e976933092297e3f666c3a22a7e55f99156543f2e867f27fa1",
+    "weightsSha256": "b30c15a83dada8dac8949b14b9433bce915ef9f4ec17fef17845db4b2df0c34c"
+  },
+  "rows": [
+    {
+      "candidateTextSha256": "665ceb7949fb15982745ce0a02d73d718e788fd7fa60d1868bcc8c37a78560c1",
+      "documentId": "doc-01",
+      "method": "synonyms",
+      "pairId": "doc-01::synonyms",
+      "pipelineCompleted": true,
+      "psp": 0.983600914478302,
+      "pspPercent": 98.3600914478302,
+      "sourceTextSha256": "0e2674e757dc5117f8f04edb0076871fdee8c6b9d9c41df39f15ca81b9aae187"
+    },
+    {
+      "candidateTextSha256": "efc24f5238eeba77dae327ffa2674f60001f94ccba69f33df28ac21fef7a506e",
+      "documentId": "doc-01",
+      "method": "paraphrase",
+      "pairId": "doc-01::paraphrase",
+      "pipelineCompleted": true,
+      "psp": 0.9409236311912537,
+      "pspPercent": 94.09236311912537,
+      "sourceTextSha256": "0e2674e757dc5117f8f04edb0076871fdee8c6b9d9c41df39f15ca81b9aae187"
+    },
+    {
+      "candidateTextSha256": "f831db62a1fec31d086ccae45d709bef534cfabbdf22bd900f6fc0b04bce17d2",
+      "documentId": "doc-01",
+      "method": "roundtrip-de",
+      "pairId": "doc-01::roundtrip-de",
+      "pipelineCompleted": true,
+      "psp": 0.9836239218711853,
+      "pspPercent": 98.36239218711853,
+      "sourceTextSha256": "0e2674e757dc5117f8f04edb0076871fdee8c6b9d9c41df39f15ca81b9aae187"
+    },
+    {
+      "candidateTextSha256": "3a839353b3c6619708aa5bba6a679ecc31304ccc0d06668d10e14ba46bdc3ae6",
+      "documentId": "doc-01",
+      "method": "roundtrip-zh",
+      "pairId": "doc-01::roundtrip-zh",
+      "pipelineCompleted": true,
+      "psp": 0.9760833978652954,
+      "pspPercent": 97.60833978652954,
+      "sourceTextSha256": "0e2674e757dc5117f8f04edb0076871fdee8c6b9d9c41df39f15ca81b9aae187"
+    },
+    {
+      "candidateTextSha256": "4dacfaddfc25f0f07070cabb566a4a666660271d1d54c0326d7f69b02ce12ad7",
+      "documentId": "doc-02",
+      "method": "synonyms",
+      "pairId": "doc-02::synonyms",
+      "pipelineCompleted": true,
+      "psp": 0.9991053342819214,
+      "pspPercent": 99.91053342819214,
+      "sourceTextSha256": "7d3f85e505a5524f5cfa9468ed9ef150d694817863790e6bde422e3ef5d90d7f"
+    },
+    {
+      "candidateTextSha256": "02edb9b49f98c53fbe52f0019bb73c4f95ea82f2f74741187b192c1edeec5948",
+      "documentId": "doc-02",
+      "method": "paraphrase",
+      "pairId": "doc-02::paraphrase",
+      "pipelineCompleted": true,
+      "psp": 0.9601957201957703,
+      "pspPercent": 96.01957201957703,
+      "sourceTextSha256": "7d3f85e505a5524f5cfa9468ed9ef150d694817863790e6bde422e3ef5d90d7f"
+    },
+    {
+      "candidateTextSha256": "8c5c9693cd75f4e646d74e4c61572dc04a88e98c993365d0f9b5600fa31040ab",
+      "documentId": "doc-02",
+      "method": "roundtrip-de",
+      "pairId": "doc-02::roundtrip-de",
+      "pipelineCompleted": true,
+      "psp": 0.9853119850158691,
+      "pspPercent": 98.53119850158691,
+      "sourceTextSha256": "7d3f85e505a5524f5cfa9468ed9ef150d694817863790e6bde422e3ef5d90d7f"
+    },
+    {
+      "candidateTextSha256": "61f2b08a1cfc1f2eacb95f2aca2cdcd94c72a51bc476d13a489b8ec5129e4c07",
+      "documentId": "doc-02",
+      "method": "roundtrip-zh",
+      "pairId": "doc-02::roundtrip-zh",
+      "pipelineCompleted": true,
+      "psp": 0.9909583330154419,
+      "pspPercent": 99.09583330154419,
+      "sourceTextSha256": "7d3f85e505a5524f5cfa9468ed9ef150d694817863790e6bde422e3ef5d90d7f"
+    },
+    {
+      "candidateTextSha256": "a4333ce8ae332edd18d9cee1ab84136d088d9589025d7baf969b44ed9d2bb92e",
+      "documentId": "doc-03",
+      "method": "synonyms",
+      "pairId": "doc-03::synonyms",
+      "pipelineCompleted": true,
+      "psp": 0.9749786257743835,
+      "pspPercent": 97.49786257743835,
+      "sourceTextSha256": "750ddfe87b9f553295918f7adc6def44e65a9cf1488a4a36654fc92a382d9db2"
+    },
+    {
+      "candidateTextSha256": "f89e092c05523ac6f8715af293ffd4486a5f1a1beb9e74b893efaf35362ceaac",
+      "documentId": "doc-03",
+      "method": "paraphrase",
+      "pairId": "doc-03::paraphrase",
+      "pipelineCompleted": true,
+      "psp": 0.9288620948791504,
+      "pspPercent": 92.88620948791504,
+      "sourceTextSha256": "750ddfe87b9f553295918f7adc6def44e65a9cf1488a4a36654fc92a382d9db2"
+    },
+    {
+      "candidateTextSha256": "1a4584ab46a93bb2950403d1f59f9f8c4ed887a41186ea79f241fb3b1bfd16bb",
+      "documentId": "doc-03",
+      "method": "roundtrip-de",
+      "pairId": "doc-03::roundtrip-de",
+      "pipelineCompleted": true,
+      "psp": 0.9761520624160767,
+      "pspPercent": 97.61520624160767,
+      "sourceTextSha256": "750ddfe87b9f553295918f7adc6def44e65a9cf1488a4a36654fc92a382d9db2"
+    },
+    {
+      "candidateTextSha256": "9556c0e90c3a209e7d69f84a13ee2ff484e9257ae8e72e8bf80db8364f3ed2d2",
+      "documentId": "doc-03",
+      "method": "roundtrip-zh",
+      "pairId": "doc-03::roundtrip-zh",
+      "pipelineCompleted": true,
+      "psp": 0.981596052646637,
+      "pspPercent": 98.1596052646637,
+      "sourceTextSha256": "750ddfe87b9f553295918f7adc6def44e65a9cf1488a4a36654fc92a382d9db2"
+    },
+    {
+      "candidateTextSha256": "56ad05d9ee7afd5501e2eaf644d8c59b704ffe902314ef19ab7a661bb48deef6",
+      "documentId": "doc-04",
+      "method": "synonyms",
+      "pairId": "doc-04::synonyms",
+      "pipelineCompleted": true,
+      "psp": 0.9837605357170105,
+      "pspPercent": 98.37605357170105,
+      "sourceTextSha256": "5648e30fe3f53aa2369714d756f2b1c0508892c8154a915db7063b17e1fdba4b"
+    },
+    {
+      "candidateTextSha256": "f519036500676a6c6dc0d8cb52c11cc02a17034b5f15d75003ce5f960c5f7b04",
+      "documentId": "doc-04",
+      "method": "paraphrase",
+      "pairId": "doc-04::paraphrase",
+      "pipelineCompleted": true,
+      "psp": 0.9578043222427368,
+      "pspPercent": 95.78043222427368,
+      "sourceTextSha256": "5648e30fe3f53aa2369714d756f2b1c0508892c8154a915db7063b17e1fdba4b"
+    },
+    {
+      "candidateTextSha256": "35384a73a754aafd7a34d8fea8d5d287defa43aa838f1c68d87842ee39cf5d1d",
+      "documentId": "doc-04",
+      "method": "roundtrip-de",
+      "pairId": "doc-04::roundtrip-de",
+      "pipelineCompleted": true,
+      "psp": 0.9870584607124329,
+      "pspPercent": 98.70584607124329,
+      "sourceTextSha256": "5648e30fe3f53aa2369714d756f2b1c0508892c8154a915db7063b17e1fdba4b"
+    },
+    {
+      "candidateTextSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "documentId": "doc-04",
+      "method": "roundtrip-zh",
+      "pairId": "doc-04::roundtrip-zh",
+      "pipelineCompleted": false,
+      "psp": 0.0,
+      "pspPercent": 0.0,
+      "sourceTextSha256": "5648e30fe3f53aa2369714d756f2b1c0508892c8154a915db7063b17e1fdba4b"
+    },
+    {
+      "candidateTextSha256": "0ca3e32af99e712ea706e356108796c335e8c36fe4524dc6ca3eaf0d059997cf",
+      "documentId": "doc-05",
+      "method": "synonyms",
+      "pairId": "doc-05::synonyms",
+      "pipelineCompleted": true,
+      "psp": 0.9948490262031555,
+      "pspPercent": 99.48490262031555,
+      "sourceTextSha256": "0e5c18500c8791f1dca4d86b2741e95652586fa02b1211c0a461666947fba197"
+    },
+    {
+      "candidateTextSha256": "0de5e3ba24cd3676d945e232a7036d0cca98b3af437df6d897a1dec2c7a3c32c",
+      "documentId": "doc-05",
+      "method": "paraphrase",
+      "pairId": "doc-05::paraphrase",
+      "pipelineCompleted": true,
+      "psp": 0.9551411271095276,
+      "pspPercent": 95.51411271095276,
+      "sourceTextSha256": "0e5c18500c8791f1dca4d86b2741e95652586fa02b1211c0a461666947fba197"
+    },
+    {
+      "candidateTextSha256": "d7b1f4bb2193340dbef7d99cfeada8c04631c5c33acb0b24298b6e79f63eeb5e",
+      "documentId": "doc-05",
+      "method": "roundtrip-de",
+      "pairId": "doc-05::roundtrip-de",
+      "pipelineCompleted": true,
+      "psp": 0.987591564655304,
+      "pspPercent": 98.7591564655304,
+      "sourceTextSha256": "0e5c18500c8791f1dca4d86b2741e95652586fa02b1211c0a461666947fba197"
+    },
+    {
+      "candidateTextSha256": "899fce22817f3bb49966c7a1f34c3adb9229072157f396ff794eff16d9316342",
+      "documentId": "doc-05",
+      "method": "roundtrip-zh",
+      "pairId": "doc-05::roundtrip-zh",
+      "pipelineCompleted": true,
+      "psp": 0.9803834557533264,
+      "pspPercent": 98.03834557533264,
+      "sourceTextSha256": "0e5c18500c8791f1dca4d86b2741e95652586fa02b1211c0a461666947fba197"
+    },
+    {
+      "candidateTextSha256": "29e6d23536c9cc9eb7b06532b9d8b831602c717cf363dfe854899835ecc75e6c",
+      "documentId": "doc-06",
+      "method": "synonyms",
+      "pairId": "doc-06::synonyms",
+      "pipelineCompleted": true,
+      "psp": 0.9962429404258728,
+      "pspPercent": 99.62429404258728,
+      "sourceTextSha256": "0d831ab5df729097cd78e1ea41dccdc2928e3d5ecbd330a7f77c98d5c47c5318"
+    },
+    {
+      "candidateTextSha256": "7a8abd0fa35e30f809564b890d856847f2e191f24672a674f306975e0faf335e",
+      "documentId": "doc-06",
+      "method": "paraphrase",
+      "pairId": "doc-06::paraphrase",
+      "pipelineCompleted": true,
+      "psp": 0.9371441006660461,
+      "pspPercent": 93.71441006660461,
+      "sourceTextSha256": "0d831ab5df729097cd78e1ea41dccdc2928e3d5ecbd330a7f77c98d5c47c5318"
+    },
+    {
+      "candidateTextSha256": "8af477e3b0c26a347b5192ad090badaa30cb4781b061de17e20acd9ec079cae3",
+      "documentId": "doc-06",
+      "method": "roundtrip-de",
+      "pairId": "doc-06::roundtrip-de",
+      "pipelineCompleted": true,
+      "psp": 0.9872135519981384,
+      "pspPercent": 98.72135519981384,
+      "sourceTextSha256": "0d831ab5df729097cd78e1ea41dccdc2928e3d5ecbd330a7f77c98d5c47c5318"
+    },
+    {
+      "candidateTextSha256": "4dd6b69fae0cb3d76d66a350954bfd7e7a4d2bab8ffb0a7420a13dbaca4b39e9",
+      "documentId": "doc-06",
+      "method": "roundtrip-zh",
+      "pairId": "doc-06::roundtrip-zh",
+      "pipelineCompleted": true,
+      "psp": 0.9812565445899963,
+      "pspPercent": 98.12565445899963,
+      "sourceTextSha256": "0d831ab5df729097cd78e1ea41dccdc2928e3d5ecbd330a7f77c98d5c47c5318"
+    },
+    {
+      "candidateTextSha256": "35fbd0180acb8478b965e13d6e6393aa8c914508ffb0900c54614e2bdbe32be7",
+      "documentId": "doc-07",
+      "method": "synonyms",
+      "pairId": "doc-07::synonyms",
+      "pipelineCompleted": true,
+      "psp": 0.9724526405334473,
+      "pspPercent": 97.24526405334473,
+      "sourceTextSha256": "65723879946418567e632933da10a1c88b7c450a3c0158397b83839aa1c57a27"
+    },
+    {
+      "candidateTextSha256": "702faa8ab613d7e4f07768ac658e672e4cd3486b7302f2f421a00c9c4e826c6c",
+      "documentId": "doc-07",
+      "method": "paraphrase",
+      "pairId": "doc-07::paraphrase",
+      "pipelineCompleted": true,
+      "psp": 0.9750055074691772,
+      "pspPercent": 97.50055074691772,
+      "sourceTextSha256": "65723879946418567e632933da10a1c88b7c450a3c0158397b83839aa1c57a27"
+    },
+    {
+      "candidateTextSha256": "b83d4068c0231d3204d841ca84fb52baae9e55959a811de7b35b6c60906f5437",
+      "documentId": "doc-07",
+      "method": "roundtrip-de",
+      "pairId": "doc-07::roundtrip-de",
+      "pipelineCompleted": true,
+      "psp": 0.9910886287689209,
+      "pspPercent": 99.10886287689209,
+      "sourceTextSha256": "65723879946418567e632933da10a1c88b7c450a3c0158397b83839aa1c57a27"
+    },
+    {
+      "candidateTextSha256": "23eedf6039d672bb3dce4f644b7fe3a56ed63268921eec1dfcbfb0e193c081d6",
+      "documentId": "doc-07",
+      "method": "roundtrip-zh",
+      "pairId": "doc-07::roundtrip-zh",
+      "pipelineCompleted": true,
+      "psp": 0.9844621419906616,
+      "pspPercent": 98.44621419906616,
+      "sourceTextSha256": "65723879946418567e632933da10a1c88b7c450a3c0158397b83839aa1c57a27"
+    },
+    {
+      "candidateTextSha256": "43a45d17d496c3c2047db9c17bf1105cac2db86ee8a100d6f2171ae1507812a0",
+      "documentId": "doc-08",
+      "method": "synonyms",
+      "pairId": "doc-08::synonyms",
+      "pipelineCompleted": true,
+      "psp": 0.9980541467666626,
+      "pspPercent": 99.80541467666626,
+      "sourceTextSha256": "0adf0b99eac18d78a6900bdbc4f56bae072f2bec10400dfa116c369ed9ab3a82"
+    },
+    {
+      "candidateTextSha256": "c9f4d78532d7eb16a84e50b2926a7d27f8ef7358b5a4f3d6fdd828c428bcd684",
+      "documentId": "doc-08",
+      "method": "paraphrase",
+      "pairId": "doc-08::paraphrase",
+      "pipelineCompleted": true,
+      "psp": 0.9360669851303101,
+      "pspPercent": 93.606698513031,
+      "sourceTextSha256": "0adf0b99eac18d78a6900bdbc4f56bae072f2bec10400dfa116c369ed9ab3a82"
+    },
+    {
+      "candidateTextSha256": "59c2b935808f96321685ebecff274262fc720b2591110482967505aed35764ed",
+      "documentId": "doc-08",
+      "method": "roundtrip-de",
+      "pairId": "doc-08::roundtrip-de",
+      "pipelineCompleted": true,
+      "psp": 0.9807940721511841,
+      "pspPercent": 98.07940721511841,
+      "sourceTextSha256": "0adf0b99eac18d78a6900bdbc4f56bae072f2bec10400dfa116c369ed9ab3a82"
+    },
+    {
+      "candidateTextSha256": "a66a4e916efc065b071d1da7ce328c0bf1b599d9987ef42227515532fea7c53d",
+      "documentId": "doc-08",
+      "method": "roundtrip-zh",
+      "pairId": "doc-08::roundtrip-zh",
+      "pipelineCompleted": true,
+      "psp": 0.9797419905662537,
+      "pspPercent": 97.97419905662537,
+      "sourceTextSha256": "0adf0b99eac18d78a6900bdbc4f56bae072f2bec10400dfa116c369ed9ab3a82"
+    },
+    {
+      "candidateTextSha256": "ac56d3f58193549c2c4ddcd8b9ef6d5dccbfb812ddfceda0fab73acb706ec0f1",
+      "documentId": "doc-09",
+      "method": "synonyms",
+      "pairId": "doc-09::synonyms",
+      "pipelineCompleted": true,
+      "psp": 0.9501146078109741,
+      "pspPercent": 95.01146078109741,
+      "sourceTextSha256": "e3ca18da54a81c762cb0ccb07e23e12dab8993a7125887115d58fe298faaa6c5"
+    },
+    {
+      "candidateTextSha256": "0c00392936e1838e3419c542a5e5adcfcbb5334dc52e7464c036f8046e786adb",
+      "documentId": "doc-09",
+      "method": "paraphrase",
+      "pairId": "doc-09::paraphrase",
+      "pipelineCompleted": true,
+      "psp": 0.9495132565498352,
+      "pspPercent": 94.95132565498352,
+      "sourceTextSha256": "e3ca18da54a81c762cb0ccb07e23e12dab8993a7125887115d58fe298faaa6c5"
+    },
+    {
+      "candidateTextSha256": "a8623ecb69f4f42428e8d9912cf87c97af32cab3534eb7a9bcb6232fefc8a318",
+      "documentId": "doc-09",
+      "method": "roundtrip-de",
+      "pairId": "doc-09::roundtrip-de",
+      "pipelineCompleted": true,
+      "psp": 0.9831504821777344,
+      "pspPercent": 98.31504821777344,
+      "sourceTextSha256": "e3ca18da54a81c762cb0ccb07e23e12dab8993a7125887115d58fe298faaa6c5"
+    },
+    {
+      "candidateTextSha256": "5ac2c6a25612431a5c1c53c33eaf8fb7ade2d9b50bce39bca8d6c5f1da738629",
+      "documentId": "doc-09",
+      "method": "roundtrip-zh",
+      "pairId": "doc-09::roundtrip-zh",
+      "pipelineCompleted": true,
+      "psp": 0.977218508720398,
+      "pspPercent": 97.7218508720398,
+      "sourceTextSha256": "e3ca18da54a81c762cb0ccb07e23e12dab8993a7125887115d58fe298faaa6c5"
+    },
+    {
+      "candidateTextSha256": "9c9ba2d895075d300885eb07cda7bc42f33625d4c6bcd57327c0fedbbfb1f023",
+      "documentId": "doc-10",
+      "method": "synonyms",
+      "pairId": "doc-10::synonyms",
+      "pipelineCompleted": true,
+      "psp": 0.9847826361656189,
+      "pspPercent": 98.47826361656189,
+      "sourceTextSha256": "e773991b25cb2466ab21f43a0360170d8648a2ae7df56cd6c25dd3abd1e39a56"
+    },
+    {
+      "candidateTextSha256": "2d65f23f9454e15431e0584cac60393789679b105a92761ed1a157c67138bf55",
+      "documentId": "doc-10",
+      "method": "paraphrase",
+      "pairId": "doc-10::paraphrase",
+      "pipelineCompleted": true,
+      "psp": 0.935605525970459,
+      "pspPercent": 93.5605525970459,
+      "sourceTextSha256": "e773991b25cb2466ab21f43a0360170d8648a2ae7df56cd6c25dd3abd1e39a56"
+    },
+    {
+      "candidateTextSha256": "8c52b6ff273b89be279c682b648a225b61ae1d00d2096298937bc8dc46cd7c75",
+      "documentId": "doc-10",
+      "method": "roundtrip-de",
+      "pairId": "doc-10::roundtrip-de",
+      "pipelineCompleted": true,
+      "psp": 0.9862545132637024,
+      "pspPercent": 98.62545132637024,
+      "sourceTextSha256": "e773991b25cb2466ab21f43a0360170d8648a2ae7df56cd6c25dd3abd1e39a56"
+    },
+    {
+      "candidateTextSha256": "6460904db1e9858847405ebf3ffd66f2a75c002fbef16c6e973c85bbb20f1634",
+      "documentId": "doc-10",
+      "method": "roundtrip-zh",
+      "pairId": "doc-10::roundtrip-zh",
+      "pipelineCompleted": true,
+      "psp": 0.9739177227020264,
+      "pspPercent": 97.39177227020264,
+      "sourceTextSha256": "e773991b25cb2466ab21f43a0360170d8648a2ae7df56cd6c25dd3abd1e39a56"
+    }
+  ],
+  "schemaVersion": 1,
+  "sources": [
+    "https://github.com/eth-sri/watermark-stealing",
+    "https://www.cs.cmu.edu/~jwieting/paraphrase-at-scale-english.zip"
+  ],
+  "summary": {
+    "paraphrase": {
+      "meanPspPercent": 94.76262271404266,
+      "pairCount": 10
+    },
+    "roundtrip-de": {
+      "meanPspPercent": 98.48239243030548,
+      "pairCount": 10
+    },
+    "roundtrip-zh": {
+      "meanPspPercent": 88.25618147850037,
+      "pairCount": 10
+    },
+    "synonyms": {
+      "meanPspPercent": 98.37941408157349,
+      "pairCount": 10
+    }
+  },
+  "verifiedAt": "2026-08-21T11:44:46.026947Z"
+}

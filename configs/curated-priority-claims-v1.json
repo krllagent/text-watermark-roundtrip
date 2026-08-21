@@ -1,0 +1,129 @@
+{
+  "claimCountPerDocument": 10,
+  "documents": {
+    "doc-01": [
+      {"id": "c01", "text": "In March 2023, Sunset Valley Public Library began replacing its paper visitor log with a tablet-based digital sign-in system."},
+      {"id": "c02", "text": "The library acquired two Samsung Galaxy tablets with a visitor-log application, with installation and configuration available from April 1, 2023."},
+      {"id": "c03", "text": "Head librarian Margaret Hart led an April 10, 2023 orientation attended by twelve library employees."},
+      {"id": "c04", "text": "A Wi-Fi connection failure delayed the May 1 launch; a technician visited May 8 and the issue was resolved before the revised May 14 target."},
+      {"id": "c05", "text": "The digital sign-in system went live on May 16, 2023, and staff initially helped older patrons who found it confusing."},
+      {"id": "c06", "text": "The system recorded visitors' preferred contact method and interests so the library could tailor recommendations."},
+      {"id": "c07", "text": "The tablets and application cost approximately $7,500."},
+      {"id": "c08", "text": "Feedback gathered from May 16 through June 30 was broadly positive but identified hardware-durability and data-analysis concerns."},
+      {"id": "c09", "text": "The library planned to continue monitoring outcomes through December 2023."},
+      {"id": "c10", "text": "The report recommends continuing the digital visitor log and budgeting for future updates and software enhancements."}
+    ],
+    "doc-02": [
+      {"id": "c01", "text": "GreenCycle announced the two-hour courier pickup-window trial on March 15, 2023."},
+      {"id": "c02", "text": "The trial involved fifty couriers and eighty business clients, began April 1, 2023, and was scheduled for seven weeks."},
+      {"id": "c03", "text": "Mandatory dispatcher training began March 22, ten days before the official trial start."},
+      {"id": "c04", "text": "Mid-trial customer satisfaction rose from 78% to 83%, and 70% of participating businesses reported a positive operational impact."},
+      {"id": "c05", "text": "On May 3, heavy rain and high order volume caused twenty-three deliveries to be delayed by more than thirty minutes."},
+      {"id": "c06", "text": "GreenCycle added a customer hotline and extra staffing costing $500 per week."},
+      {"id": "c07", "text": "GPS tracking software updates cost approximately $1,750 per iteration phase."},
+      {"id": "c08", "text": "At the May 19 end of the trial, customer satisfaction had reached 86%."},
+      {"id": "c09", "text": "Average daily delays beyond the pickup window fell from fifteen to about five."},
+      {"id": "c10", "text": "The report recommends a phased area-wide rollout beginning in summer 2023, with continued dispatcher training and technology investment."}
+    ],
+    "doc-03": [
+      {"id": "c01", "text": "Florence Heights Middle School held its science fair on March 14, 2023; it had run since 1997 and this was the sixth parent-panel-judged edition."},
+      {"id": "c02", "text": "Projects were due March 1, and eighty students in grades six through eight submitted projects."},
+      {"id": "c03", "text": "Each parent judge reviewed three projects per rotation, and organizers held a mid-judging meeting to align scoring."},
+      {"id": "c04", "text": "Emily Wilson's standout project examined how different soil types affected plant water uptake."},
+      {"id": "c05", "text": "The fair cost $250 for equipment rental, refreshments, and printing supplies."},
+      {"id": "c06", "text": "A power outage threatened the event, but backup generators allowed it to continue."},
+      {"id": "c07", "text": "Awards covered General Science, Mathematics, and Environmental Studies, with Emily among those singled out."},
+      {"id": "c08", "text": "The measured outcome said 90% of projects demonstrated sound scientific practice and creativity."},
+      {"id": "c09", "text": "Nearly 85% of parent judges commented positively on the educational value of judging."},
+      {"id": "c10", "text": "The report recommends retaining parental judging, adding more technology topics, and creating a science club."}
+    ],
+    "doc-04": [
+      {"id": "c01", "text": "In March 2021, Sweet Breeze Bakery decided to modernize because telephone orders recorded on paper were producing errors."},
+      {"id": "c02", "text": "Manager Sarah Johnson chose a centralized Google Sheets order system with an implementation target of April 15, 2021."},
+      {"id": "c03", "text": "Andrew Lee helped define roles: order takers entered orders, kitchen staff managed production and inventory, and drivers tracked routes and delivery slots."},
+      {"id": "c04", "text": "The hardware, software licenses, and training materials cost nearly $3,500."},
+      {"id": "c05", "text": "Whole-team training began March 22, 2021."},
+      {"id": "c06", "text": "Some technology-averse employees resisted, so Sarah and Andrew added personalized evening support; most staff were confident by April 5."},
+      {"id": "c07", "text": "The new order-management system went live on April 16, 2021."},
+      {"id": "c08", "text": "Post-implementation order confusion or incorrect deliveries fell to 2%, compared with 8% previously."},
+      {"id": "c09", "text": "The spreadsheet saved approximately thirty minutes per day previously spent searching manual records."},
+      {"id": "c10", "text": "The report recommends notifications and auto-fill features plus continuing staff training and support."}
+    ],
+    "doc-05": [
+      {"id": "c01", "text": "Maplewood Park community garden held its annual plot-allocation meeting on March 15, 2023."},
+      {"id": "c02", "text": "New applicants had to register by March 22 for sustainable-gardening workshops on April 7 or April 14."},
+      {"id": "c03", "text": "Fifty-five plots were available, up from forty-seven after city funding enabled expansion."},
+      {"id": "c04", "text": "Association president Johnathon Adams reported that the fall harvest festival attracted more than five hundred visitors."},
+      {"id": "c05", "text": "Maintenance fees fell by nearly 24%, allowing the seasonal membership fee to drop from $34 to $30."},
+      {"id": "c06", "text": "Duplicate applications were resolved with a digital tracking system that enforced one plot per selected applicant."},
+      {"id": "c07", "text": "The final allocation gave forty-eight plots to returning members and seven to newcomers."},
+      {"id": "c08", "text": "A local farm donated sixty cubic feet of compost, and a fence-material delay was resolved within a week."},
+      {"id": "c09", "text": "Participants prepared beds and shared tools, gardening knowledge, and pest-management skills."},
+      {"id": "c10", "text": "The report recommends permanent digital allocation records and real-time application status updates."}
+    ],
+    "doc-06": [
+      {"id": "c01", "text": "The Metropolitan Museum of Art launched an April 2023 pilot in which approximately 5,000 visitors used their own smartphones as audio guides."},
+      {"id": "c02", "text": "Robert Johnson led the project with a local technology firm that developed a free app for major smartphone platforms."},
+      {"id": "c03", "text": "Visitors had to install the app and accept its terms within thirty minutes of entry."},
+      {"id": "c04", "text": "The museum allocated $50,000 for development, marketing, and staff training."},
+      {"id": "c05", "text": "Eighty-five percent used the guide for more than 70% of their visit, and reported satisfaction averaged 87%."},
+      {"id": "c06", "text": "Some elderly visitors struggled with the app, producing a drop-off rate of about 15%."},
+      {"id": "c07", "text": "Audio-guide queue waits fell from more than ten minutes to less than two minutes."},
+      {"id": "c08", "text": "By the May 10 evaluation deadline, the project had met its engagement and cost-reduction goals."},
+      {"id": "c09", "text": "The pilot was estimated to reduce physical-guide maintenance expenses by 40%, or as much as $220,000 annually if expanded."},
+      {"id": "c10", "text": "The report recommends a phased museum-wide rollout with interface refinements, interactive features, and continued feedback collection."}
+    ],
+    "doc-07": [
+      {"id": "c01", "text": "In March 2023, Springfield Repair Cafe began tracking repeat repairs within six months, led by statistician Dr. Hannah Lee across about one hundred appliances."},
+      {"id": "c02", "text": "Michael Thompson's washing machine was first adjusted at no charge on April 5 and returned with a similar problem on June 18."},
+      {"id": "c03", "text": "The return required replacement of a damaged gear system, cost $75, and was completed by June 22."},
+      {"id": "c04", "text": "Six of the one hundred tracked appliances returned, a recurrence rate of roughly 6%."},
+      {"id": "c05", "text": "Owner interviews linked repeat failures to installation problems and improper usage."},
+      {"id": "c06", "text": "The cafe introduced workshops teaching appliance care, troubleshooting, and correct installation."},
+      {"id": "c07", "text": "Volunteers began supplying appliance-specific maintenance checklists during the initial repair."},
+      {"id": "c08", "text": "The checklists included advice not to overload washing machines."},
+      {"id": "c09", "text": "Repeat repairs decreased during the following year after the preventive measures were introduced."},
+      {"id": "c10", "text": "The report recommends broader preventive education, stronger guidelines, and continuing client support throughout an appliance's life."}
+    ],
+    "doc-08": [
+      {"id": "c01", "text": "Greenbrook Village presented the evening-bus proposal on March 1, 2023 and implemented the approved schedule on April 16."},
+      {"id": "c02", "text": "The old E2 service departed at 6:45 PM and ended at 10:00 PM; the revision ran from 5:30 PM to 11:30 PM."},
+      {"id": "c03", "text": "The revised timetable added an 8:30 PM run aimed at students and employees."},
+      {"id": "c04", "text": "Drivers and mechanics were trained and a public-information campaign preceded implementation."},
+      {"id": "c05", "text": "Initial overcrowding on the 8:30 PM run led Fleet Services to add another bus."},
+      {"id": "c06", "text": "An additional $50,000 was allocated for spare parts and operational enhancements."},
+      {"id": "c07", "text": "Ridership, punctuality, and satisfaction were monitored through the June 30 trial endpoint."},
+      {"id": "c08", "text": "Passenger surveys reported 85% satisfaction or very high satisfaction."},
+      {"id": "c09", "text": "The report concluded that accessibility and convenience had improved."},
+      {"id": "c10", "text": "The report recommends making the timetable permanent and conducting biannual reviews."}
+    ],
+    "doc-09": [
+      {"id": "c01", "text": "On January 15, 2023, the office decided to introduce a rotating coffee-machine cleaning schedule after repeated malfunctions."},
+      {"id": "c02", "text": "Facility manager Mary organized forty-eight staff into eight groups of six in a cleaning rotation."},
+      {"id": "c03", "text": "Morning meetings ran from 7:45 to 8:00 AM, with the first rotation beginning February 3."},
+      {"id": "c04", "text": "Mary allocated $250 for cleaning supplies."},
+      {"id": "c05", "text": "The machine broke down on February 17 and took three days to repair, reducing employee satisfaction."},
+      {"id": "c06", "text": "Surveyed satisfaction increased by 15% after staff adjusted to the cleaning duties."},
+      {"id": "c07", "text": "The rota helped staff discover and address maintenance problems such as mineral buildup."},
+      {"id": "c08", "text": "After the February repair there were no further significant malfunctions by April 30, and two minor problems were fixed within thirty minutes."},
+      {"id": "c09", "text": "Mary held follow-up meetings every two weeks to discuss problems and encourage compliance."},
+      {"id": "c10", "text": "The report recommends continuing the rota, assessing it after six months, extending guidelines to other appliances, and funding supplies."}
+    ],
+    "doc-10": [
+      {"id": "c01", "text": "Westbury Community Aquatics Center had used a conflict-prone manual booking process through January 1, 2023."},
+      {"id": "c02", "text": "Its automated lane-reservation system cost $4,250 and launched on February 28, 2023."},
+      {"id": "c03", "text": "April reservations opened March 7 and all April slots were booked by April 4."},
+      {"id": "c04", "text": "WSC chairman Phil Adams contacted manager Sarah White on April 16 about double-booked evening lane slots."},
+      {"id": "c05", "text": "Sarah's April 17 review found overlap between individual requests and pre-arranged club bookings."},
+      {"id": "c06", "text": "The fix created reserved club blocks while allowing casual reservations around them."},
+      {"id": "c07", "text": "By April 30, individual and club bookings were being handled without further conflict and users reported satisfaction."},
+      {"id": "c08", "text": "Visitors increased by approximately 25%, with an estimated $1,200 increase in swimming-fee revenue."},
+      {"id": "c09", "text": "Other local running clubs asked about using a similar system for track reservations."},
+      {"id": "c10", "text": "The report recommends retaining reserved group blocks and auditing the booking system regularly."}
+    ]
+  },
+  "methodology": "Ten priority claims per curated marked source, selected before any new transformation or judging call. Claims cover named entities, dates, quantities, causal relations, problems, outcomes, and recommendations. A candidate receives ten percentage points for each claim that a majority of the four blinded judges classifies as preserved.",
+  "schemaVersion": 1,
+  "sources": ["results/quality-synthid-corpus-curated-v1.json"],
+  "verifiedAt": "2026-08-21"
+}

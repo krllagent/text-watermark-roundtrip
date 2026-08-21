@@ -1,0 +1,39 @@
+{
+  "apiVersion": "v2",
+  "cloudType": "SECURE",
+  "computePerHourUsd": 1.39,
+  "containerDiskGb": 120,
+  "createdAt": "2026-08-21T12:36:06.620151Z",
+  "deleted": true,
+  "elapsedSeconds": 342.87428141594864,
+  "error": null,
+  "estimatedCostUpperBoundUsd": 0.1340836754228198,
+  "gpuTypeIds": [
+    "NVIDIA A100 80GB PCIe",
+    "NVIDIA A100-SXM4-80GB"
+  ],
+  "hardCostCapUsd": 0.35,
+  "inputSha256": "0e06531998860f10b81abe236b90269c1bdb8272ba813bf27460cc2e0b3866a3",
+  "jobSha256": "5fcd120a28e358a5d7c094da6ba8bac3eebcef18e6bfedc2f2657592587544d7",
+  "maxComputePerHourUsd": 1.6,
+  "methodology": "Measure the v2 Pod lifecycle from controller start through confirmed termination. Use provider-returned hourly cost and the configured hard cost cap; a separate watchdog terminates the Pod if the controller dies.",
+  "outputSha256": "b06857e031440da6751cc8dfda73be668db03034d314089cbe0655063713f818",
+  "podAbsentAfterDelete": true,
+  "podId": "o7lirkfs2hv5vr",
+  "podName": "dipper-curated-v2-20260821",
+  "remoteStatus": "complete",
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "title": "RunPod API v2 create Pod",
+      "url": "https://docs.runpod.io/api-reference-v2/pods/create-a-pod"
+    },
+    {
+      "title": "RunPod API v2 terminate Pod",
+      "url": "https://docs.runpod.io/api-reference-v2/pods/terminate-a-pod"
+    }
+  ],
+  "verifiedAt": "2026-08-21T12:41:49.495141Z",
+  "volumeDiskGb": 10,
+  "watchdogMinutes": 12
+}

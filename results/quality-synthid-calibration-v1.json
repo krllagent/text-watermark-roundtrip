@@ -1,0 +1,436 @@
+{
+  "alpha": 0.01,
+  "corpus": {
+    "path": "/home/openclaw/projects/text-watermark-roundtrip/results/quality-synthid-corpus-gpu-v1.json",
+    "sha256": "9b77259c5f94f99dea5ec9a34c9be75787749f21e9e5efe485cb3f18aadf7823"
+  },
+  "createdAt": "2026-08-21T09:14:52.427445Z",
+  "documents": [
+    {
+      "documentId": "doc-01",
+      "marked": {
+        "detectedAtLengthAwareAlpha": true,
+        "empiricalPValue": 9.99990000099999e-06,
+        "fprAtLegacyThreshold": 0.04374,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5091324200913242,
+        "nullMean": 0.5000026543378995,
+        "nullStandardDeviation": 0.003931172358977514,
+        "observedMeanG": 0.5684931506849316,
+        "samplingTableEntriesUsed": 18499,
+        "validGValueCount": 21900,
+        "weightFrequencies": {
+          "1": 15517,
+          "2": 2613,
+          "3": 324,
+          "4": 40,
+          "5": 5
+        }
+      },
+      "unmarked": {
+        "detectedAtLengthAwareAlpha": false,
+        "empiricalPValue": 0.7718522814771852,
+        "fprAtLegacyThreshold": 0.05353,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5096634093376764,
+        "nullMean": 0.5000050380021714,
+        "nullStandardDeviation": 0.004174373125528475,
+        "observedMeanG": 0.4969055374592834,
+        "samplingTableEntriesUsed": 16134,
+        "validGValueCount": 18420,
+        "weightFrequencies": {
+          "1": 14047,
+          "2": 1909,
+          "3": 158,
+          "4": 19,
+          "5": 1
+        }
+      }
+    },
+    {
+      "documentId": "doc-02",
+      "marked": {
+        "detectedAtLengthAwareAlpha": true,
+        "empiricalPValue": 9.99990000099999e-06,
+        "fprAtLegacyThreshold": 0.05121,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5094805849722642,
+        "nullMean": 0.5000008058497226,
+        "nullStandardDeviation": 0.004076135366341995,
+        "observedMeanG": 0.5714573877962683,
+        "samplingTableEntriesUsed": 17041,
+        "validGValueCount": 19830,
+        "weightFrequencies": {
+          "1": 14524,
+          "2": 2265,
+          "3": 235,
+          "4": 15,
+          "5": 1,
+          "6": 1
+        }
+      },
+      "unmarked": {
+        "detectedAtLengthAwareAlpha": false,
+        "empiricalPValue": 0.9451705482945171,
+        "fprAtLegacyThreshold": 0.04484,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5091970121381886,
+        "nullMean": 0.500012901493931,
+        "nullStandardDeviation": 0.003933701396755022,
+        "observedMeanG": 0.49374416433239965,
+        "samplingTableEntriesUsed": 18334,
+        "validGValueCount": 21420,
+        "weightFrequencies": {
+          "1": 15560,
+          "2": 2483,
+          "3": 270,
+          "4": 21
+        }
+      }
+    },
+    {
+      "documentId": "doc-03",
+      "marked": {
+        "detectedAtLengthAwareAlpha": true,
+        "empiricalPValue": 9.99990000099999e-06,
+        "fprAtLegacyThreshold": 0.05402,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5096774193548387,
+        "nullMean": 0.5000063209677419,
+        "nullStandardDeviation": 0.004158659319124219,
+        "observedMeanG": 0.5704838709677419,
+        "samplingTableEntriesUsed": 16146,
+        "validGValueCount": 18600,
+        "weightFrequencies": {
+          "1": 13939,
+          "2": 1976,
+          "3": 215,
+          "4": 16
+        }
+      },
+      "unmarked": {
+        "detectedAtLengthAwareAlpha": false,
+        "empiricalPValue": 0.12380876191238088,
+        "fprAtLegacyThreshold": 0.04539,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5091904761904762,
+        "nullMean": 0.5000012904761905,
+        "nullStandardDeviation": 0.003970042173401236,
+        "observedMeanG": 0.5046190476190476,
+        "samplingTableEntriesUsed": 17998,
+        "validGValueCount": 21000,
+        "weightFrequencies": {
+          "1": 15272,
+          "2": 2467,
+          "3": 242,
+          "4": 17
+        }
+      }
+    },
+    {
+      "documentId": "doc-04",
+      "marked": {
+        "detectedAtLengthAwareAlpha": true,
+        "empiricalPValue": 9.99990000099999e-06,
+        "fprAtLegacyThreshold": 0.04801,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5093584177520502,
+        "nullMean": 0.49998568258562476,
+        "nullStandardDeviation": 0.004021292398889586,
+        "observedMeanG": 0.5696092619392186,
+        "samplingTableEntriesUsed": 17583,
+        "validGValueCount": 20730,
+        "weightFrequencies": {
+          "1": 14798,
+          "2": 2456,
+          "3": 301,
+          "4": 24,
+          "5": 3,
+          "6": 1
+        }
+      },
+      "unmarked": {
+        "detectedAtLengthAwareAlpha": false,
+        "empiricalPValue": 0.47862521374786254,
+        "fprAtLegacyThreshold": 0.04938,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5094368340943684,
+        "nullMean": 0.5000076580416033,
+        "nullStandardDeviation": 0.004063271383109179,
+        "observedMeanG": 0.5002536783358701,
+        "samplingTableEntriesUsed": 17039,
+        "validGValueCount": 19710,
+        "weightFrequencies": {
+          "1": 14628,
+          "2": 2173,
+          "3": 219,
+          "4": 17,
+          "5": 1,
+          "6": 1
+        }
+      }
+    },
+    {
+      "documentId": "doc-05",
+      "marked": {
+        "detectedAtLengthAwareAlpha": true,
+        "empiricalPValue": 9.99990000099999e-06,
+        "fprAtLegacyThreshold": 0.0618,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5101243339253997,
+        "nullMean": 0.5000017673179397,
+        "nullStandardDeviation": 0.004344098042176079,
+        "observedMeanG": 0.581586737714624,
+        "samplingTableEntriesUsed": 14794,
+        "validGValueCount": 16890,
+        "weightFrequencies": {
+          "1": 12894,
+          "2": 1721,
+          "3": 163,
+          "4": 15,
+          "5": 1
+        }
+      },
+      "unmarked": {
+        "detectedAtLengthAwareAlpha": false,
+        "empiricalPValue": 0.8203017969820302,
+        "fprAtLegacyThreshold": 0.05958,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5100639906922629,
+        "nullMean": 0.5000179906922629,
+        "nullStandardDeviation": 0.004306326334183257,
+        "observedMeanG": 0.4961023851076207,
+        "samplingTableEntriesUsed": 15154,
+        "validGValueCount": 17190,
+        "weightFrequencies": {
+          "1": 13288,
+          "2": 1707,
+          "3": 148,
+          "4": 11
+        }
+      }
+    },
+    {
+      "documentId": "doc-06",
+      "marked": {
+        "detectedAtLengthAwareAlpha": true,
+        "empiricalPValue": 9.99990000099999e-06,
+        "fprAtLegacyThreshold": 0.05729,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5098993288590604,
+        "nullMean": 0.5000297947427292,
+        "nullStandardDeviation": 0.004221295004150885,
+        "observedMeanG": 0.5616890380313199,
+        "samplingTableEntriesUsed": 15629,
+        "validGValueCount": 17880,
+        "weightFrequencies": {
+          "1": 13563,
+          "2": 1892,
+          "3": 163,
+          "4": 11
+        }
+      },
+      "unmarked": {
+        "detectedAtLengthAwareAlpha": false,
+        "empiricalPValue": 0.18246817531824683,
+        "fprAtLegacyThreshold": 0.05519,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.509672131147541,
+        "nullMean": 0.49999425355191257,
+        "nullStandardDeviation": 0.0041954219183386885,
+        "observedMeanG": 0.5038251366120219,
+        "samplingTableEntriesUsed": 15930,
+        "validGValueCount": 18300,
+        "weightFrequencies": {
+          "1": 13784,
+          "2": 1939,
+          "3": 191,
+          "4": 15,
+          "5": 1
+        }
+      }
+    },
+    {
+      "documentId": "doc-07",
+      "marked": {
+        "detectedAtLengthAwareAlpha": true,
+        "empiricalPValue": 9.99990000099999e-06,
+        "fprAtLegacyThreshold": 0.04424,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5091874422899354,
+        "nullMean": 0.49998744829178204,
+        "nullStandardDeviation": 0.003944339932962351,
+        "observedMeanG": 0.5698060941828255,
+        "samplingTableEntriesUsed": 18204,
+        "validGValueCount": 21660,
+        "weightFrequencies": {
+          "1": 15159,
+          "2": 2662,
+          "3": 356,
+          "4": 26,
+          "5": 1
+        }
+      },
+      "unmarked": {
+        "detectedAtLengthAwareAlpha": false,
+        "empiricalPValue": 0.26360736392636075,
+        "fprAtLegacyThreshold": 0.04846,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5094952523738131,
+        "nullMean": 0.5000353503248376,
+        "nullStandardDeviation": 0.004025169114410494,
+        "observedMeanG": 0.5025987006496752,
+        "samplingTableEntriesUsed": 17269,
+        "validGValueCount": 20010,
+        "weightFrequencies": {
+          "1": 14772,
+          "2": 2267,
+          "3": 217,
+          "4": 12,
+          "5": 1
+        }
+      }
+    },
+    {
+      "documentId": "doc-08",
+      "marked": {
+        "detectedAtLengthAwareAlpha": true,
+        "empiricalPValue": 9.99990000099999e-06,
+        "fprAtLegacyThreshold": 0.05588,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5098560354374307,
+        "nullMean": 0.49999133887043196,
+        "nullStandardDeviation": 0.004221408582325569,
+        "observedMeanG": 0.573311184939092,
+        "samplingTableEntriesUsed": 15682,
+        "validGValueCount": 18060,
+        "weightFrequencies": {
+          "1": 13538,
+          "2": 1931,
+          "3": 193,
+          "4": 19,
+          "5": 1
+        }
+      },
+      "unmarked": {
+        "detectedAtLengthAwareAlpha": false,
+        "empiricalPValue": 0.5594344056559435,
+        "fprAtLegacyThreshold": 0.04595,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5093057607090103,
+        "nullMean": 0.49997867011324476,
+        "nullStandardDeviation": 0.004008028256841274,
+        "observedMeanG": 0.49940915805022157,
+        "samplingTableEntriesUsed": 17515,
+        "validGValueCount": 20310,
+        "weightFrequencies": {
+          "1": 14960,
+          "2": 2327,
+          "3": 216,
+          "4": 12
+        }
+      }
+    },
+    {
+      "documentId": "doc-09",
+      "marked": {
+        "detectedAtLengthAwareAlpha": true,
+        "empiricalPValue": 9.99990000099999e-06,
+        "fprAtLegacyThreshold": 0.05195,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5094949494949494,
+        "nullMean": 0.500010098989899,
+        "nullStandardDeviation": 0.00408975636865521,
+        "observedMeanG": 0.5691919191919191,
+        "samplingTableEntriesUsed": 16930,
+        "validGValueCount": 19800,
+        "weightFrequencies": {
+          "1": 14367,
+          "2": 2275,
+          "3": 269,
+          "4": 19
+        }
+      },
+      "unmarked": {
+        "detectedAtLengthAwareAlpha": false,
+        "empiricalPValue": 0.16561834381656185,
+        "fprAtLegacyThreshold": 0.05657,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5097972972972973,
+        "nullMean": 0.4999989268018018,
+        "nullStandardDeviation": 0.004221643713960151,
+        "observedMeanG": 0.5041103603603604,
+        "samplingTableEntriesUsed": 15557,
+        "validGValueCount": 17760,
+        "weightFrequencies": {
+          "1": 13531,
+          "2": 1859,
+          "3": 157,
+          "4": 10
+        }
+      }
+    },
+    {
+      "documentId": "doc-10",
+      "marked": {
+        "detectedAtLengthAwareAlpha": true,
+        "empiricalPValue": 9.99990000099999e-06,
+        "fprAtLegacyThreshold": 0.04852,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5094170403587444,
+        "nullMean": 0.5000020946686597,
+        "nullStandardDeviation": 0.004051787852414462,
+        "observedMeanG": 0.5800697558545093,
+        "samplingTableEntriesUsed": 17201,
+        "validGValueCount": 20070,
+        "weightFrequencies": {
+          "1": 14648,
+          "2": 2268,
+          "3": 256,
+          "4": 27,
+          "5": 2
+        }
+      },
+      "unmarked": {
+        "detectedAtLengthAwareAlpha": false,
+        "empiricalPValue": 0.8139418605813942,
+        "fprAtLegacyThreshold": 0.04866,
+        "legacyThreshold": 0.5067,
+        "lengthAwareThreshold": 0.5094017094017094,
+        "nullMean": 0.5000058004022122,
+        "nullStandardDeviation": 0.004056824322361713,
+        "observedMeanG": 0.4964303670186023,
+        "samplingTableEntriesUsed": 17022,
+        "validGValueCount": 19890,
+        "weightFrequencies": {
+          "1": 14431,
+          "2": 2338,
+          "3": 232,
+          "4": 18,
+          "5": 3
+        }
+      }
+    }
+  ],
+  "legacyThresholdAudit": {
+    "claimedFpr": 0.01,
+    "empiricalMixtureFpr": 0.050755,
+    "threshold": 0.5067
+  },
+  "methodology": "For every exact marked and unmarked detector token sequence, count all lookups of each binary SynthID sampling-table entry after the stored context-repetition mask. Draw an exact weighted Bernoulli null in which each table entry is independently random, preserving hash collisions and within-text dependencies. Use the nearest-rank upper 1-alpha quantile. The single threshold is the same quantile of the equal-document mixture of all unmarked conditional nulls. No model or paid API is used.",
+  "replicatesPerSequence": 100000,
+  "schemaVersion": 1,
+  "seed": 20260821,
+  "singleThreshold": {
+    "markedDetectedCount": 10,
+    "markedDocumentCount": 10,
+    "observedUnmarkedFalsePositiveCount": 0,
+    "threshold": 0.5095452273863068,
+    "unmarkedDocumentCount": 10
+  },
+  "sources": [
+    "https://huggingface.co/docs/transformers/main/en/internal/generation_utils#transformers.SynthIDTextWatermarkLogitsProcessor",
+    "https://doi.org/10.1038/s41586-024-08025-4"
+  ],
+  "verifiedAt": "2026-08-21T09:14:52.430034Z"
+}

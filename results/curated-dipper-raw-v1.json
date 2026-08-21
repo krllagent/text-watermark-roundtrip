@@ -1,0 +1,1086 @@
+{
+  "attack": {
+    "doSample": true,
+    "lexicalDiversity": 60,
+    "logitsProcessors": [],
+    "maxNewTokens": 1600,
+    "maxPromptTokens": 1600,
+    "model": "kalpeshk2011/dipper-paraphraser-xxl",
+    "modelRevision": "c1fbf7a958a2aab022e9e6f81f7a3139f9e6ee3c",
+    "numBeams": 1,
+    "orderDiversity": 20,
+    "publishedRepetitionPenaltyConfig": 1.6,
+    "reseedBeforeEverySentenceChunk": true,
+    "seed": 123,
+    "sentenceChunkSize": 3,
+    "temperature": 0.7,
+    "tokenizer": "google/t5-v1_1-xxl",
+    "tokenizerRevision": "3db67ab1af984cf10548a73467f0e5bca2aaaeb2",
+    "topK": 50,
+    "topP": 1.0
+  },
+  "cases": [
+    {
+      "caseId": "doc-01::marked-source",
+      "caseIndex": 0,
+      "chunks": [
+        {
+          "chunkIndex": 0,
+          "generatedTokensIncludingDecoderStart": 85,
+          "generationSeconds": 3.4439398921094835,
+          "inputTokens": 279,
+          "inputTruncated": false,
+          "promptSha256": "bf42cf813b7e9c641cb6a5d7f8ec4c52138d77ec8fa66704a2701d0cc642666b",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 279
+        },
+        {
+          "chunkIndex": 1,
+          "generatedTokensIncludingDecoderStart": 79,
+          "generationSeconds": 2.5209504649974406,
+          "inputTokens": 360,
+          "inputTruncated": false,
+          "promptSha256": "6b9f9a446787e4a5d619c52d2684fa8e192eb228543a4e42d109ed69e822fe4f",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 360
+        },
+        {
+          "chunkIndex": 2,
+          "generatedTokensIncludingDecoderStart": 61,
+          "generationSeconds": 2.020790077280253,
+          "inputTokens": 425,
+          "inputTruncated": false,
+          "promptSha256": "095a294817851b8f8c567133f209fc2616bd9c2d78f03db786f92d5c72f68f2c",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 425
+        },
+        {
+          "chunkIndex": 3,
+          "generatedTokensIncludingDecoderStart": 81,
+          "generationSeconds": 2.595928161405027,
+          "inputTokens": 486,
+          "inputTruncated": false,
+          "promptSha256": "ba4cdac9019477ec64e1872934cd38e939f2dc9ab26c2788fafdff29271c33fc",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 486
+        },
+        {
+          "chunkIndex": 4,
+          "generatedTokensIncludingDecoderStart": 88,
+          "generationSeconds": 2.841085989959538,
+          "inputTokens": 574,
+          "inputTruncated": false,
+          "promptSha256": "ec75a194baef1f8f98bf582384ffbaeca9f7bbe6306dabad7493230556b391cf",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 574
+        },
+        {
+          "chunkIndex": 5,
+          "generatedTokensIncludingDecoderStart": 72,
+          "generationSeconds": 2.463236447889358,
+          "inputTokens": 664,
+          "inputTruncated": false,
+          "promptSha256": "bc49530b394605c3a51f8d486423622dea758253593a2e36277d798292ce2c7e",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 664
+        },
+        {
+          "chunkIndex": 6,
+          "generatedTokensIncludingDecoderStart": 113,
+          "generationSeconds": 3.7136557730846107,
+          "inputTokens": 749,
+          "inputTruncated": false,
+          "promptSha256": "275fc3075e25496c5e6dc03d4e372ab96aa52d3dbc6b03bdefc418cae0d0cad8",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 749
+        },
+        {
+          "chunkIndex": 7,
+          "generatedTokensIncludingDecoderStart": 88,
+          "generationSeconds": 2.9284725370816886,
+          "inputTokens": 822,
+          "inputTruncated": false,
+          "promptSha256": "f157c672e9d824f089658a1f57db20d191e99be8f09dfb01ec24f299d51f11bb",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 822
+        },
+        {
+          "chunkIndex": 8,
+          "generatedTokensIncludingDecoderStart": 90,
+          "generationSeconds": 3.29488873668015,
+          "inputTokens": 937,
+          "inputTruncated": false,
+          "promptSha256": "2addd507b46dbf9b03cdd3d592425a7de14f851cc794111088e5e4ac8cce5a82",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 937
+        }
+      ],
+      "documentId": "doc-01",
+      "inputKind": "marked-source",
+      "inputTextSha256": "0e2674e757dc5117f8f04edb0076871fdee8c6b9d9c41df39f15ca81b9aae187",
+      "inputWordCount": 638,
+      "methodBeforeDipper": null,
+      "outputText": "In March 2023, the Sunset Valley Public Library started converting its visitor-book system from a paper-based paper book to a digital tablet-based tablet-based system, in order to simplify the check-in procedure for patrons and reduce the administrative burden for staff. To handle the transition, the library teamed up with a tech company that specialized in digital solutions for educational institutions. The library bought two Samsung Galaxy tablets, each loaded with a custom-built visitor-book app designed by the tech company. According to plans drawn up that spring, the tablets were to be installed on opposite sides of the entrance to the library, so that incoming visitors could see one right away. Both devices were to be ready for installation and configuration by April 1st. The library's head librarian, Margaret Hart, spearheaded training for staff. She emphasized how important the new system was for the overall visitor experience and for the library's efficiency. The initial staff training session was held on April 10th, 2023, attended by twelve library employees. The library's head librarian noted that the new system was easy to use, with a touchscreen interface, and that data security was straightforward. But the transition was not without its challenges. In early May, the library encountered a major snag. Neither of the tablets could connect properly to the library's wireless network, which was essential for the smooth transfer of visitor information. The library's head librarian immediately called in a technician, who came to the library on May 8th to troubleshoot the problem. This incident delayed the public launch of the new visitor-book system, originally scheduled for May 1st. Nonetheless, this issue was resolved two days before the new target date of May 14th. On May 16th, 2023, the new digital system went live. Margaret observed that some visitors were initially confused, especially older patrons less accustomed to using digital devices. Staff were able to help visitors sign in with the new system, using friendly, efficient customer service. Within three weeks, staff noticed a general adjustment period, with visitors adapting to the new system and signing in with the new app. The library's head librarian noted that the new system allowed staff to record additional information about visitors, such as their preferred method of contact and their interests, which allowed the library to recommend services and events tailored to the visitor's tastes. During the two-month trial period from May 16th to June 30th, staff recorded the feedback they received from visitors and staff. The cost of the tablets and app was estimated to be $7,000, which the library considered a worthwhile investment, given the estimated savings on paper and the administrative time savings. The library's head librarian noted areas for improvement, such as the need for more durable hardware and the need for further development of the data-analysis capabilities of the app. On the whole, however, the reaction to the new system was overwhelmingly positive. Nonetheless, to get a definitive view of how well the new system is working, the library will continue to monitor the outcome through the end of December 2023. On the basis of the initial results and feedback from staff and visitors, it was felt that the project was likely to be beneficial for the library's operations and future development. On the basis of these observations and the feedback received, the library will continue to use a digital visitor-book system, and will budget for future developments to keep the system up to date and to implement additional features to improve the experience for both staff and visitors.",
+      "outputTextSha256": "8d8045e16d30d1c0b728baa57f59502bd925f58e5cf2d23a5f4b8f7a5d23d1e5",
+      "outputWordCount": 588,
+      "seconds": 25.874562557786703,
+      "sentenceCount": 27
+    },
+    {
+      "caseId": "doc-02::marked-source",
+      "caseIndex": 1,
+      "chunks": [
+        {
+          "chunkIndex": 0,
+          "generatedTokensIncludingDecoderStart": 68,
+          "generationSeconds": 2.1603792821988463,
+          "inputTokens": 278,
+          "inputTruncated": false,
+          "promptSha256": "070f03ecee712986aeb7ab3cada110779923d55c9f416ecd0782f9c1fbcb05aa",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 278
+        },
+        {
+          "chunkIndex": 1,
+          "generatedTokensIncludingDecoderStart": 67,
+          "generationSeconds": 2.1070639258250594,
+          "inputTokens": 335,
+          "inputTruncated": false,
+          "promptSha256": "1d31efd4fc6e17812636250faf4a483a4d0f33c276cc224e46c26a69ff449a11",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 335
+        },
+        {
+          "chunkIndex": 2,
+          "generatedTokensIncludingDecoderStart": 87,
+          "generationSeconds": 2.5991975301876664,
+          "inputTokens": 419,
+          "inputTruncated": false,
+          "promptSha256": "3a91d31569482d0ab2631fa2a1bcb83005cc4d465f19567013a87a9c7aee0a3a",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 419
+        },
+        {
+          "chunkIndex": 3,
+          "generatedTokensIncludingDecoderStart": 77,
+          "generationSeconds": 2.257239214144647,
+          "inputTokens": 507,
+          "inputTruncated": false,
+          "promptSha256": "245d08c2c480f87dcb9a395f3914c34373869fc9316ed9609547913172341ad1",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 507
+        },
+        {
+          "chunkIndex": 4,
+          "generatedTokensIncludingDecoderStart": 75,
+          "generationSeconds": 2.297381676733494,
+          "inputTokens": 554,
+          "inputTruncated": false,
+          "promptSha256": "8e40f388e63db33ea1b3bbef577328b6905567edc659c2ba775513936d6ec57c",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 554
+        },
+        {
+          "chunkIndex": 5,
+          "generatedTokensIncludingDecoderStart": 110,
+          "generationSeconds": 3.3153915479779243,
+          "inputTokens": 656,
+          "inputTruncated": false,
+          "promptSha256": "9db96cf99880e4d42002d59faf6d977114018df6acd397dafbe4a535514f18f9",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 656
+        },
+        {
+          "chunkIndex": 6,
+          "generatedTokensIncludingDecoderStart": 87,
+          "generationSeconds": 2.788574727717787,
+          "inputTokens": 762,
+          "inputTruncated": false,
+          "promptSha256": "1e30e36226b1676c98b47c1033cdfe6053b32fb5be9d9adc6bc76bd3a6696c49",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 762
+        },
+        {
+          "chunkIndex": 7,
+          "generatedTokensIncludingDecoderStart": 61,
+          "generationSeconds": 2.062501731328666,
+          "inputTokens": 822,
+          "inputTruncated": false,
+          "promptSha256": "ba95e16d2375ec9032599ff550905bdbaf55388eb9b58bd3a3193c87f2643802",
+          "sentenceCount": 2,
+          "untruncatedInputTokens": 822
+        }
+      ],
+      "documentId": "doc-02",
+      "inputKind": "marked-source",
+      "inputTextSha256": "7d3f85e505a5524f5cfa9468ed9ef150d694817863790e6bde422e3ef5d90d7f",
+      "inputWordCount": 552,
+      "methodBeforeDipper": null,
+      "outputText": "On 15 March 2023, in the thronged, commercial hub of downtown Seattle, GreenCycle Bicycle Courier Services announced a trial of a two-hour pickup window for its couriers. This new service aimed to increase customer satisfaction while exploring the operational challenges and benefits of more precise timing. The trial would start on 1 April 2023 and run for seven weeks. GreenCycle chose a random sample of 50 couriers and 80 business customers, the geographical spread and order frequency of each to ensure a variety of conditions. By choosing early April, they intended to avoid the disruption of any public holidays. The main challenge during the trial was to make sure all dispatchers knew how to communicate the new time-limits to couriers and customers as efficiently as possible. So, beginning 22 March, ten days before the start of the trial, GreenCycle required all its dispatchers to take a series of mandatory training sessions. These included detailed role-playing and real-time practice to build staff confidence. After some initial confusion for both dispatchers and customers about what the new pickup window meant, customer satisfaction rose from an average of 76% to 83% during the trial. This markedly increased satisfaction coincided with the dispatchers’ new experience enabling them to improve their communications. Of the 80 participating businesses, 70% reported that the more precise timing had improved their business performance. However, significant operational problems were encountered, particularly during the first three weeks of the trial. The delays were most noticeable on busy days when a lot of orders were scheduled at once. On 3 May, for example, on a rainy day with high order volumes, twenty-three deliveries were more than 30 minutes late, which reduced the overall service level. On the basis of these problems, GreenCycle changed its strategy half-way through the trial. It introduced a customer helpline, spending an extra $500 per week on staff costs, and changed the schedules to make them even more precise so that fewer couriers would be needed during the busy periods. The changes to the schedules included using the new, more detailed, timing information from the new, improved, time-limited, GPS-based system, with an estimated cost of $1,750 per iteration. On 19 May, at the end of the trial, customer satisfaction had risen from 83% to 86%, largely because the new helpline had improved communications and reduced the impact of the changing schedules. Operational reviews showed a reduction from a daily average of fifteen to five deliveries that were more than 30 minutes late, showing a significant improvement in reliability, despite the continued challenging weather conditions. The report recommends that GreenCycle expand its service, using a phased rollout beginning in the summer of 2023. It recommends that future investments in training and technology, such as the refined GPS system, are needed to maintain and possibly improve the service and customer satisfaction.",
+      "outputTextSha256": "7ba4f4e345e02b9e3b9bb5d87330ca87692f3397ff6c6526d919093041d1b61b",
+      "outputWordCount": 471,
+      "seconds": 19.61993637867272,
+      "sentenceCount": 23
+    },
+    {
+      "caseId": "doc-03::marked-source",
+      "caseIndex": 2,
+      "chunks": [
+        {
+          "chunkIndex": 0,
+          "generatedTokensIncludingDecoderStart": 82,
+          "generationSeconds": 2.290387031622231,
+          "inputTokens": 273,
+          "inputTruncated": false,
+          "promptSha256": "e7bd4381b708c425f6cebf47a4b5207a4af766a2867aadf444860a79e39244db",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 273
+        },
+        {
+          "chunkIndex": 1,
+          "generatedTokensIncludingDecoderStart": 86,
+          "generationSeconds": 2.403062641620636,
+          "inputTokens": 357,
+          "inputTruncated": false,
+          "promptSha256": "45e829be7f115f0b543c9acb5fb4e5adb01655947d47b4ffc08aa897003db77d",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 357
+        },
+        {
+          "chunkIndex": 2,
+          "generatedTokensIncludingDecoderStart": 39,
+          "generationSeconds": 1.2879724949598312,
+          "inputTokens": 424,
+          "inputTruncated": false,
+          "promptSha256": "385cb4c547abd821c98e578606ff4ca8a8e8860b9829409ffa0ccac9e5891809",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 424
+        },
+        {
+          "chunkIndex": 3,
+          "generatedTokensIncludingDecoderStart": 86,
+          "generationSeconds": 2.4754119999706745,
+          "inputTokens": 484,
+          "inputTruncated": false,
+          "promptSha256": "c0adc7664965780b393e3a4b1eebfdd75981772390a94944b4925ac9a771a5f7",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 484
+        },
+        {
+          "chunkIndex": 4,
+          "generatedTokensIncludingDecoderStart": 93,
+          "generationSeconds": 2.7833471158519387,
+          "inputTokens": 559,
+          "inputTruncated": false,
+          "promptSha256": "55265a5ffd40baf6f350a645d5807d9415986bb524aa6f7a035c0d87166bbe0d",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 559
+        },
+        {
+          "chunkIndex": 5,
+          "generatedTokensIncludingDecoderStart": 76,
+          "generationSeconds": 2.4051879411563277,
+          "inputTokens": 645,
+          "inputTruncated": false,
+          "promptSha256": "89bd881082bba9d2cffb2948b609ad9491dc078452754b293c5df70562a5e9dc",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 645
+        },
+        {
+          "chunkIndex": 6,
+          "generatedTokensIncludingDecoderStart": 88,
+          "generationSeconds": 2.7353379600681365,
+          "inputTokens": 711,
+          "inputTruncated": false,
+          "promptSha256": "7ed6d21b7beed67bd92a9c02cfa1812661be216181949fc468085c194f1b4686",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 711
+        },
+        {
+          "chunkIndex": 7,
+          "generatedTokensIncludingDecoderStart": 78,
+          "generationSeconds": 2.583705740980804,
+          "inputTokens": 795,
+          "inputTruncated": false,
+          "promptSha256": "aba81bc70760c06ef4884cbac46f680d839835c5c5aff24a009bd997c41d60dd",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 795
+        },
+        {
+          "chunkIndex": 8,
+          "generatedTokensIncludingDecoderStart": 40,
+          "generationSeconds": 1.6827226113528013,
+          "inputTokens": 830,
+          "inputTruncated": false,
+          "promptSha256": "17232b91122e20b3019e8cda5dc7ce2331aef79ddca162e36b0fb76ad53adfaa",
+          "sentenceCount": 1,
+          "untruncatedInputTokens": 830
+        }
+      ],
+      "documentId": "doc-03",
+      "inputKind": "marked-source",
+      "inputTextSha256": "750ddfe87b9f553295918f7adc6def44e65a9cf1488a4a36654fc92a382d9db2",
+      "inputWordCount": 520,
+      "methodBeforeDipper": null,
+      "outputText": "The science fair took place on March 14, 2023, as part of Math Day celebrations at Florence Heights Middle School. This was the sixth year the fair was not judged by teachers, but by a rotating panel of parents who took turns. The idea was to give this panel of parents a sense of objectivity, to give parents first-hand insight into their children's projects. The fair required student projects to be completed by March 1, giving them ample preparation time and several additional weeks to refine their experimentation and results. Each participant was assigned a space on a table in the school gym to show their work on the day of the fair. By this deadline, eighty students in grades six and seven had submitted projects, ranging from introductory biology experiments to basic physics demonstrations. On entering the gym, the parents saw rows of colorful posters, detailing the projects’ methods and conclusions. Each judge examined three projects each time, giving each project multiple points of view. The judges had some problems deciding how to rate a given project’s creativity. The judging panel held a quick meeting halfway through the judging, during which they went over the scoring guidelines to establish a common point of reference. A seventh-grade project stood out, which examined the effect of different kinds of soil on plant water uptake, using a range of common vegetables from home gardens. The project not only had highly detailed analysis, but it also included practical applications that resonated with both the scientific community and the judges’ likely interest in home gardening. The event ran smoothly until shortly before the start, when a short power outage threatened to halt the proceedings. Despite the late addition of budgetary considerations, the committee managed to keep costs down to $250, which covered the rental of equipment, refreshments, and printing supplies. The gymnasium had a backup generator, so besides the initial scare, the fair went without a hitch. Eighty awards were given out in various categories, including General Science, Math, and the Environment. The awards were presented at a special evening assembly, where the participants, their parents, and the teachers could all celebrate the fair together. Most projects received commendations for effort alone, but a few, like Emily’s project, stood out as truly exceptional. The measured outcome was that the participants were highly engaged, with nearly nine out of ten projects exemplifying solid science and creativity. High levels of parental engagement were also reported, with 84.9% of the judges feeling that judging the fair was a beneficial educational experience. The students' feedback highlighted the value of hands-on experience, as well as the benefit of receiving feedback from multiple sources. The report recommends that the parents continue to judge the fair, as this helped to establish a sense of community and transparency in the judging process. In future, it recommends to broaden the scope of projects, to include more technological experiments. The report also recommends that the school administration consider establishing a full-fledged science club, which would engage young scientists throughout the year, not just during Science Fair week.",
+      "outputTextSha256": "7ea990ca4697d812d367a900695e18c7507d258d44f22684cef78f1b33df8e22",
+      "outputWordCount": 513,
+      "seconds": 20.682388767134398,
+      "sentenceCount": 25
+    },
+    {
+      "caseId": "doc-04::marked-source",
+      "caseIndex": 3,
+      "chunks": [
+        {
+          "chunkIndex": 0,
+          "generatedTokensIncludingDecoderStart": 88,
+          "generationSeconds": 2.6310324100777507,
+          "inputTokens": 282,
+          "inputTruncated": false,
+          "promptSha256": "ed2737cf69ef08196098ce7861f423797e444191311b5865fa55c65e0c8a5c5c",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 282
+        },
+        {
+          "chunkIndex": 1,
+          "generatedTokensIncludingDecoderStart": 47,
+          "generationSeconds": 1.4967003013007343,
+          "inputTokens": 354,
+          "inputTruncated": false,
+          "promptSha256": "7fc44020362160b8b25d0db1dc53cf68763757e06dd67998555891ec1f710789",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 354
+        },
+        {
+          "chunkIndex": 2,
+          "generatedTokensIncludingDecoderStart": 72,
+          "generationSeconds": 2.209742784034461,
+          "inputTokens": 392,
+          "inputTruncated": false,
+          "promptSha256": "846a65979062f044f9c316949f0ad9f21663369b0b59aca63102e9de5aaa7734",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 392
+        },
+        {
+          "chunkIndex": 3,
+          "generatedTokensIncludingDecoderStart": 101,
+          "generationSeconds": 2.9573189485818148,
+          "inputTokens": 461,
+          "inputTruncated": false,
+          "promptSha256": "8ea3545a126878cf5b7a6c9b2c8dc2de21c169c85001bf3570f5e855e987c447",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 461
+        },
+        {
+          "chunkIndex": 4,
+          "generatedTokensIncludingDecoderStart": 84,
+          "generationSeconds": 2.5920650330372155,
+          "inputTokens": 573,
+          "inputTruncated": false,
+          "promptSha256": "a972e908248751681370a67cc84b563ce9a9846cd1866b4489b47aac3657dc3a",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 573
+        },
+        {
+          "chunkIndex": 5,
+          "generatedTokensIncludingDecoderStart": 78,
+          "generationSeconds": 2.539817240089178,
+          "inputTokens": 644,
+          "inputTruncated": false,
+          "promptSha256": "0571aa33fd79a7de3079926618ba28965631c5f27951ab53b2666ff401eadf14",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 644
+        },
+        {
+          "chunkIndex": 6,
+          "generatedTokensIncludingDecoderStart": 94,
+          "generationSeconds": 2.867320394143462,
+          "inputTokens": 745,
+          "inputTruncated": false,
+          "promptSha256": "e364e25fadf730fa401491244bae6486a864a32b5f75ceceeac0b970de171597",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 745
+        },
+        {
+          "chunkIndex": 7,
+          "generatedTokensIncludingDecoderStart": 55,
+          "generationSeconds": 1.9706366839818656,
+          "inputTokens": 811,
+          "inputTruncated": false,
+          "promptSha256": "26c3eb73d232fbc8836a8341153e97dd27587f5991d5c23b6f81ac14de33c011",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 811
+        },
+        {
+          "chunkIndex": 8,
+          "generatedTokensIncludingDecoderStart": 77,
+          "generationSeconds": 2.603873030282557,
+          "inputTokens": 872,
+          "inputTruncated": false,
+          "promptSha256": "25a7517e9f1eefde3b19fae95af185618f0525bcddaad89cc45c826a4eab9a7b",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 872
+        }
+      ],
+      "documentId": "doc-04",
+      "inputKind": "marked-source",
+      "inputTextSha256": "5648e30fe3f53aa2369714d756f2b1c0508892c8154a915db7063b17e1fdba4b",
+      "inputWordCount": 593,
+      "methodBeforeDipper": null,
+      "outputText": "In March 2021, Sweet Breeze Bakery, a local favorite in central Elmwood City, decided to modernize its service as demand grew. The bakery specialized in artisan breads, pastries, and cakes, but telephone orders piled up during peak times, and the manual order-tracking system with paper notes was cumbersome, confusing, and sometimes led to errors that upset customers. Manager Sarah E. Johnson researched various digital tools and decided to implement a Google Sheets document to be the central repository for all the orders, to facilitate communication between the front desk, the kitchen, and the delivery drivers. The transition had to be complete by April 15, 2021, which left a month to test and fine-tune the new system before it went live. For the planning stage, she brought on Andrew H. Lee, a tech-savvy employee with a lot of project-management experience, to help her outline roles and responsibilities. The order-takers were to enter every order into the shared sheet, while the kitchen staff was to use it to schedule the production of orders and manage inventories, while the delivery drivers would have access to the same sheet to track their routes and expected delivery times, according to the time slots specified by customers while ordering. The system would have to be shared between all staff via a local network, and they would have to buy more computers or tablets for access from the shop floor. The hardware and software would cost about $3,000, plus $500 for the training. Training began March 22, 2021, with a focus on basic functions such as how to enter, modify, and safely save entries in the shared document. Despite careful planning, a major obstacle turned out to be the initial resistance of the staff to the new system, particularly the older ones who were less comfortable with technology. The reluctance threatened the deadline and the expected improvements in efficiency. To address this challenge, Sarah and Andrew organized additional evening sessions, where especially unconfident staff could receive more personal attention from others in the team who were already proficient in using the system. By April 5, after several positive feedback loops and successive successes, most employees were confident using the new system. On April 16, the bakery went live with its new digital order-tracking system. Information from the sheet, which was used to track the status of every order, showed that errors were down, with only 2% of phone orders leading to misunderstandings or erroneous deliveries, compared with 8% previously. During the following weeks, the performance of the digital system was carefully scrutinized to assess the improvements in efficiency and customer satisfaction. The transition also saved employees about thirty minutes a day, which they no longer needed to spend looking for manual records. The staff were able to devote more time to checking the quality of the baked goods and talking to customers, which further benefited operational performance. The report recommends that the bakery adopt more advanced features of the Google Sheets tool such as automatic reminders for approaching deadlines and automatic reminders for commonly ordered items, which would further simplify the process and reduce the administrative burden. As a next step, it should offer ongoing training and support to ensure that no technological barriers prevent the smooth functioning of the new system.",
+      "outputTextSha256": "49c1a9652f092db65b2a1fb917e6d1ae43c848f23fadd0b5926e1100f12d9b94",
+      "outputWordCount": 545,
+      "seconds": 21.904664745088667,
+      "sentenceCount": 27
+    },
+    {
+      "caseId": "doc-05::marked-source",
+      "caseIndex": 4,
+      "chunks": [
+        {
+          "chunkIndex": 0,
+          "generatedTokensIncludingDecoderStart": 91,
+          "generationSeconds": 2.4677606127224863,
+          "inputTokens": 295,
+          "inputTruncated": false,
+          "promptSha256": "eae7ab2ddd202eb9a41a51f67eb3e820260270f0eedb8d093999299bfc4d1a49",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 295
+        },
+        {
+          "chunkIndex": 1,
+          "generatedTokensIncludingDecoderStart": 106,
+          "generationSeconds": 2.954937567934394,
+          "inputTokens": 396,
+          "inputTruncated": false,
+          "promptSha256": "c516c5fb73f5b59e58c85861a25e97c706ab693238975d05deef71c0a996f409",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 396
+        },
+        {
+          "chunkIndex": 2,
+          "generatedTokensIncludingDecoderStart": 78,
+          "generationSeconds": 2.3700163839384913,
+          "inputTokens": 472,
+          "inputTruncated": false,
+          "promptSha256": "f1dfb104c7b48d0366a4523e1195065756955d63d0942154cd2b651ac82e07a9",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 472
+        },
+        {
+          "chunkIndex": 3,
+          "generatedTokensIncludingDecoderStart": 106,
+          "generationSeconds": 3.0416959496214986,
+          "inputTokens": 570,
+          "inputTruncated": false,
+          "promptSha256": "8a2856ec2262f85947c99851a4df0a2f0bda5f2ccceb127d501e9a096a47133d",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 570
+        },
+        {
+          "chunkIndex": 4,
+          "generatedTokensIncludingDecoderStart": 82,
+          "generationSeconds": 2.5316222100518644,
+          "inputTokens": 641,
+          "inputTruncated": false,
+          "promptSha256": "eb1d3f85e3638168bea4b263bf42fc5630cf1d3547887b2d7c0d5a5bac164bc7",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 641
+        },
+        {
+          "chunkIndex": 5,
+          "generatedTokensIncludingDecoderStart": 71,
+          "generationSeconds": 2.3421290600672364,
+          "inputTokens": 713,
+          "inputTruncated": false,
+          "promptSha256": "0eca6e5dc73de95153e4fe1f4758ea61766230662dc43264a297f4658165d290",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 713
+        },
+        {
+          "chunkIndex": 6,
+          "generatedTokensIncludingDecoderStart": 22,
+          "generationSeconds": 1.0947731449268758,
+          "inputTokens": 733,
+          "inputTruncated": false,
+          "promptSha256": "b4a68901142a4738dfbda46c69fe473e3756d2fd23587e8233fdd3cd8a63e4ed",
+          "sentenceCount": 1,
+          "untruncatedInputTokens": 733
+        }
+      ],
+      "documentId": "doc-05",
+      "inputKind": "marked-source",
+      "inputTextSha256": "0e5c18500c8791f1dca4d86b2741e95652586fa02b1211c0a461666947fba197",
+      "inputWordCount": 480,
+      "methodBeforeDipper": null,
+      "outputText": "On 15 March 2023, the community garden in Maplewood Park held its annual meeting to allocate its plots for the coming season. This year, the garden continued the policy of requiring new applicants to attend a workshop on sustainable gardening. Over the past year, the garden had grown organic produce successfully, helping to ensure food security while bringing together more than 80 passionate people, creating a lively hub of experienced and novice gardeners. The number of available plots had gone up to about 55, up from 47 the previous year, thanks to new funding from the city council, which had enabled the garden to be expanded to unused land on the park's perimeter. The workshops were scheduled for 7 and 14 April, 2023, and those interested needed to register by 22 March. Johnathan Adams, president of the local community garden association, reported on his year's activities, including organizing a successful harvest festival with over 500 visitors. He pointed out that the maintenance costs had declined by a quarter, resulting in a reduction in the seasonal subscription from $36 to $32 per person for the period beginning 1 April, 2023. The committee encountered a minor hiccup in the registration process when some people mistakenly applied twice because the deadlines for new and returning members overlapped. The committee had therefore implemented a digital system to track applications, enabling each successful applicant to be assigned only one plot, thus eliminating any unfair advantage. By late March, all the plots had been allocated, forty-eight to returning members and seven to new applicants, with the majority choosing raised beds to grow vegetables and herbs. The committee had also managed to obtain a donation of 60 cubic feet of premium compost from a local farm, which was distributed evenly among the plots to improve soil quality. The preparations went smoothly except for the minor delay in acquiring additional materials for the fence, which was expected due to supply chain constraints but was resolved within a week. By the time planting season came around in April, shoots began to show up from the freshly turned earth, and the participants hurriedly prepared their plots to sow seeds for all sorts of vegetables and herbs. Everyone eagerly shared their tools, knowledge, and skills, from the propagation of seeds to dealing with pests. The report recommends a permanent digital system to track application data to simplify the application and registration processes in future, including a real-time status update for applicants, which would be included in the garden's website. Such a system would help to increase access while preserving the welcoming nature of the community garden.",
+      "outputTextSha256": "62b5d3b94968b5723f100876565cac010b60c2ac57edc524cac8421b23ff9a38",
+      "outputWordCount": 435,
+      "seconds": 16.828229882288724,
+      "sentenceCount": 19
+    },
+    {
+      "caseId": "doc-06::marked-source",
+      "caseIndex": 5,
+      "chunks": [
+        {
+          "chunkIndex": 0,
+          "generatedTokensIncludingDecoderStart": 70,
+          "generationSeconds": 1.9144590361975133,
+          "inputTokens": 285,
+          "inputTruncated": false,
+          "promptSha256": "3a0cbe968094d4dba511305d5e884de3c846093dd1abe17d6bca0d5353e508c8",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 285
+        },
+        {
+          "chunkIndex": 1,
+          "generatedTokensIncludingDecoderStart": 72,
+          "generationSeconds": 2.0806644689291716,
+          "inputTokens": 322,
+          "inputTruncated": false,
+          "promptSha256": "6c0e4396d3a3d922074dd54d0f4a845534b582a02817e24513bb5d1c027ef6fd",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 322
+        },
+        {
+          "chunkIndex": 2,
+          "generatedTokensIncludingDecoderStart": 45,
+          "generationSeconds": 1.4159254981204867,
+          "inputTokens": 396,
+          "inputTruncated": false,
+          "promptSha256": "5c0313640d3abec613f9e0a2299a175ca652165f216d083af1db5a4d206e7c36",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 396
+        },
+        {
+          "chunkIndex": 3,
+          "generatedTokensIncludingDecoderStart": 94,
+          "generationSeconds": 2.60680729476735,
+          "inputTokens": 475,
+          "inputTruncated": false,
+          "promptSha256": "0a9b491394fe5d65d0efc5806c3d8c338df576f3df5f409318f303cb51942754",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 475
+        },
+        {
+          "chunkIndex": 4,
+          "generatedTokensIncludingDecoderStart": 57,
+          "generationSeconds": 1.8496051589027047,
+          "inputTokens": 522,
+          "inputTruncated": false,
+          "promptSha256": "4e83b96e3c16c88639af8415a82ce48cdfbe1be71304863bc91b9c0b5d65b44d",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 522
+        },
+        {
+          "chunkIndex": 5,
+          "generatedTokensIncludingDecoderStart": 74,
+          "generationSeconds": 2.297867924440652,
+          "inputTokens": 624,
+          "inputTruncated": false,
+          "promptSha256": "0abd05081941129f0e54004e8ec0aa4415d6d859b7c86eb725d751996fe231d6",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 624
+        },
+        {
+          "chunkIndex": 6,
+          "generatedTokensIncludingDecoderStart": 98,
+          "generationSeconds": 3.0810607471503317,
+          "inputTokens": 696,
+          "inputTruncated": false,
+          "promptSha256": "0a2e70e9f31cfc9a6fe07007e5cbb3a866a976f08f6511e55b801dd2cf8adbf4",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 696
+        },
+        {
+          "chunkIndex": 7,
+          "generatedTokensIncludingDecoderStart": 19,
+          "generationSeconds": 1.0685844970867038,
+          "inputTokens": 700,
+          "inputTruncated": false,
+          "promptSha256": "bf0137096e930cb4756189d58f1681b41dfc67f9e74c60958a852080ddf5af6d",
+          "sentenceCount": 1,
+          "untruncatedInputTokens": 700
+        }
+      ],
+      "documentId": "doc-06",
+      "inputKind": "marked-source",
+      "inputTextSha256": "0d831ab5df729097cd78e1ea41dccdc2928e3d5ecbd330a7f77c98d5c47c5318",
+      "inputWordCount": 503,
+      "methodBeforeDipper": null,
+      "outputText": "In March 2023 the Metropolitan Museum of Art in New York, using a QR-code on entry, began a four-week trial of an unbranded mobile-phone-based audio guide for its visitors. The trial aimed to reduce the cost of renting radio equipment and, it was hoped, to increase visitor engagement. The project's head was Robert Johnson, head of the museum's Department of Information and Technology Initiatives. In association with the Museum's local technology partner the museum developed a free app compatible with all major smartphone platforms. Visitors were required to install the app and accept the terms of usage within thirty minutes of the time of their entry. The pilot had a budget of $50,000 for the development of the app, marketing materials, and staff training. Anticipating problems the Museum provided full instructions and dedicated staff at information booths during all opening hours. On completion of their visit, a survey showed that 87 per cent of visitors were satisfied with the new guide, a higher level of satisfaction than senior management had expected. It was noted that in the trial 85% of visitors used the guide for at least sixty per cent of their visit. Despite detailed instructions and staff support, a proportion of elderly visitors found it difficult to navigate the app, and they dropped out at around fifteen per cent. The trial had an unexpected side-effect of reducing waiting time at rental desks for the previous radio-guide equipment, where the average waiting time had been in the past over ten minutes. This had been a long-standing irritant to many visitors. On May 10, when the trial had reached its initial deadline, the trial had achieved its two main aims, improving visitor engagement and reducing operational costs. The trial had reduced the costs of renting radio equipment by an estimated forty per cent, a reduction which if carried out across the whole museum could result in annual cost savings of up to $220,000. On the basis of the success of the trial the Museum was now planning a wider rollout of the mobile guide to other galleries and exhibits. Mr Johnson and his team were now concentrating on refining the app's usability and adding more interactive features. The report recommends wide implementation of the mobile guide across the whole museum, to be carried out in phases over the next year to allow continual refinement based on real-time feedback from visitors. The expansion would further increase the visitor experience while delivering significant savings in rental costs.",
+      "outputTextSha256": "0fcc0e70e136cb3af31fb8e0dba79ccceb24e1fb03305a680fc2f7f09273e310",
+      "outputWordCount": 414,
+      "seconds": 16.341701832599938,
+      "sentenceCount": 22
+    },
+    {
+      "caseId": "doc-07::marked-source",
+      "caseIndex": 6,
+      "chunks": [
+        {
+          "chunkIndex": 0,
+          "generatedTokensIncludingDecoderStart": 75,
+          "generationSeconds": 2.0949392807669938,
+          "inputTokens": 287,
+          "inputTruncated": false,
+          "promptSha256": "e0549e6f7f3fd0d4c7bfbe550a05cf30cc890351b409077e2e74b3a7d00ef239",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 287
+        },
+        {
+          "chunkIndex": 1,
+          "generatedTokensIncludingDecoderStart": 54,
+          "generationSeconds": 1.619576525874436,
+          "inputTokens": 339,
+          "inputTruncated": false,
+          "promptSha256": "c9c851190929a76e36dedd831402f81cf484a18b20ed0060c9902896f90307ba",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 339
+        },
+        {
+          "chunkIndex": 2,
+          "generatedTokensIncludingDecoderStart": 70,
+          "generationSeconds": 2.0291185886599123,
+          "inputTokens": 406,
+          "inputTruncated": false,
+          "promptSha256": "e93bdd6911f28ed1231c9cc207f856fb84422632a7fb7453fd25f4b9d2139fbe",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 406
+        },
+        {
+          "chunkIndex": 3,
+          "generatedTokensIncludingDecoderStart": 92,
+          "generationSeconds": 2.633089961949736,
+          "inputTokens": 493,
+          "inputTruncated": false,
+          "promptSha256": "a77f5aa687200a9fec6e7b9da4b017570d4b3d80fe233090e48da97979e55f1f",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 493
+        },
+        {
+          "chunkIndex": 4,
+          "generatedTokensIncludingDecoderStart": 74,
+          "generationSeconds": 2.2669940371997654,
+          "inputTokens": 568,
+          "inputTruncated": false,
+          "promptSha256": "79cb8ea1da1f7bc9a2658ae372177af4165f5be186dc699a648f9a655871ce0d",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 568
+        },
+        {
+          "chunkIndex": 5,
+          "generatedTokensIncludingDecoderStart": 73,
+          "generationSeconds": 2.3031015102751553,
+          "inputTokens": 648,
+          "inputTruncated": false,
+          "promptSha256": "bbfcefdaba323263eb3c82bffb9eff90469a514898ade5c1cf52da3c850e2222",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 648
+        },
+        {
+          "chunkIndex": 6,
+          "generatedTokensIncludingDecoderStart": 73,
+          "generationSeconds": 2.377166433725506,
+          "inputTokens": 714,
+          "inputTruncated": false,
+          "promptSha256": "ffda17b4634bd464f118505127fb56e84ee4cc0c04b967a6ece994ba35570c92",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 714
+        },
+        {
+          "chunkIndex": 7,
+          "generatedTokensIncludingDecoderStart": 58,
+          "generationSeconds": 2.127208821941167,
+          "inputTokens": 788,
+          "inputTruncated": false,
+          "promptSha256": "adc3181d3e3ad64d77fdc5787199c2e385c2d57fde0395904929ee2c7bcc1537",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 788
+        },
+        {
+          "chunkIndex": 8,
+          "generatedTokensIncludingDecoderStart": 76,
+          "generationSeconds": 2.5947939306497574,
+          "inputTokens": 843,
+          "inputTruncated": false,
+          "promptSha256": "9ea21a21cb860b2367b1fed0a8ad8dd1557e884361e62ad39499ad9b80e28fff",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 843
+        },
+        {
+          "chunkIndex": 9,
+          "generatedTokensIncludingDecoderStart": 74,
+          "generationSeconds": 2.749586842022836,
+          "inputTokens": 909,
+          "inputTruncated": false,
+          "promptSha256": "8c56fdbda4c94a6ee51f49f1312acc3753abbdab579e5c34f51c63d07a9b2d9e",
+          "sentenceCount": 2,
+          "untruncatedInputTokens": 909
+        }
+      ],
+      "documentId": "doc-07",
+      "inputKind": "marked-source",
+      "inputTextSha256": "65723879946418567e632933da10a1c88b7c450a3c0158397b83839aa1c57a27",
+      "inputWordCount": 616,
+      "methodBeforeDipper": null,
+      "outputText": "In March 2023, the repair cafe in downtown Springfield began tracking the rate of appliances that returned for a second repair within six months after their first visit. The goal was to identify any patterns that could lead to better service and more durable repairs. Dr. X, a local statistics scholar and volunteer at the cafe, was assigned to manage this project. Over the course of three months, she collected data on about 100 appliances brought in for service. One of these appliances was Mr. Michael Thompson's washing machine, which he brought in on April 5, 2023, complaining that the spin cycle was irregular. The volunteers diagnosed wear and tear and made the necessary adjustments free, because of the machine's age. However, Mr. Thompson returned on June 18, 2023, with a similar complaint. This time there was a part that needed to be replaced. Apparently the gears, which were the previous repair, were too worn. One of the experienced volunteers, David Wilson, suggested that misuse, maybe overuse, was speeding up the wear. The part was quickly obtained from a local appliance supplier, who offered to sell it to the repair cafe at a discount, because of a long-standing, mutually beneficial community relationship. The repair cafe charged Mr. Thompson $ 75 for the repair, including the cost of the part and the technician's labor. On June 22, 2023, the agreed deadline for Mr. Thompson, the washing machine was fully functioning again, after a thorough testing to make sure the damage was properly repaired. Dr. X decided to examine the records of repeat offenders in detail. Among the appliances with a second return visit were a coffee maker and a refrigerator. Six appliances had returned for a second repair within six months, indicating a return rate of 6%. In her desire to constantly improve, Dr. X interviewed the owners of these appliances in an attempt to learn why the repairs had failed so early despite the initial success. The responses indicated that problems ranged from improper installation to misuse. On the basis of these interviews, the repair cafe launched a series of workshops designed to teach owners how to care for their appliances. These workshops included hands-on demonstrations and advice based on common malfunctions. These workshops also emphasized proper installation of appliances such as dryers and washing machines, to address incidents where improper installation caused premature wear. Volunteers also began to issue detailed maintenance instructions for each appliance, warning against common mistakes such as overloading washers, which had the potential to cause early failures. These measures were well received by the community, eager to learn new ways to extend the life of their appliances. Volunteers noticed that customers not only appreciated but also used the new resources to keep their appliances in good working order longer. Over the next year, the percentage of repeat repairs fell significantly, indicating a successful shift from repairs to preventive maintenance. This shift reaffirmed the importance of informing customers about post-repair maintenance and follow-up maintenance. The report recommends that the repair cafe continue to offer preventive measures beyond immediate repairs, to guide its customers throughout the life of the appliances they own. This would allow the repair cafe to offer more detailed guidance and regular contact points to foster a culture of informed use and early troubleshooting, reducing future incidents of repeated repairs and increasing satisfaction.",
+      "outputTextSha256": "5330adab89642148ee9ec98cd441d730c27baf1779ff1938f3919f26d1762fc4",
+      "outputWordCount": 559,
+      "seconds": 22.83455424103886,
+      "sentenceCount": 29
+    },
+    {
+      "caseId": "doc-08::marked-source",
+      "caseIndex": 7,
+      "chunks": [
+        {
+          "chunkIndex": 0,
+          "generatedTokensIncludingDecoderStart": 83,
+          "generationSeconds": 2.4214388420805335,
+          "inputTokens": 275,
+          "inputTruncated": false,
+          "promptSha256": "4a4ce3c81ae7a9200fce4d72a07bc8fe0407d421be3e96a75ffbf232263ad145",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 275
+        },
+        {
+          "chunkIndex": 1,
+          "generatedTokensIncludingDecoderStart": 89,
+          "generationSeconds": 2.522986555006355,
+          "inputTokens": 359,
+          "inputTruncated": false,
+          "promptSha256": "2bad537539014373b4be01fec0e9ee023ff930b978358f19893b5ad87fc21730",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 359
+        },
+        {
+          "chunkIndex": 2,
+          "generatedTokensIncludingDecoderStart": 76,
+          "generationSeconds": 2.196089955046773,
+          "inputTokens": 444,
+          "inputTruncated": false,
+          "promptSha256": "5eb66bf5ebecac4293b556688218d1228d6de52f470ae30a9e984677ae8dafc8",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 444
+        },
+        {
+          "chunkIndex": 3,
+          "generatedTokensIncludingDecoderStart": 72,
+          "generationSeconds": 2.0965118259191513,
+          "inputTokens": 497,
+          "inputTruncated": false,
+          "promptSha256": "291c447632e935b27b5b395b266619485647ce05750972168ba8858e4219dfb9",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 497
+        },
+        {
+          "chunkIndex": 4,
+          "generatedTokensIncludingDecoderStart": 70,
+          "generationSeconds": 2.108701344113797,
+          "inputTokens": 566,
+          "inputTruncated": false,
+          "promptSha256": "c4667315ac26a49618e5381a16c718e0e36ce9122e7a200d1b54b11dcee7f95a",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 566
+        },
+        {
+          "chunkIndex": 5,
+          "generatedTokensIncludingDecoderStart": 79,
+          "generationSeconds": 2.5158987129107118,
+          "inputTokens": 637,
+          "inputTruncated": false,
+          "promptSha256": "fbc3995bad28e119eee80b4333b2fdcfde5895d5d90264bba9853301dc766851",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 637
+        },
+        {
+          "chunkIndex": 6,
+          "generatedTokensIncludingDecoderStart": 66,
+          "generationSeconds": 2.156137450132519,
+          "inputTokens": 706,
+          "inputTruncated": false,
+          "promptSha256": "a350fe817f49ee475db7f236d1fa68f172a3874949b282ebf0c930bd00383d37",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 706
+        },
+        {
+          "chunkIndex": 7,
+          "generatedTokensIncludingDecoderStart": 66,
+          "generationSeconds": 2.217802681028843,
+          "inputTokens": 779,
+          "inputTruncated": false,
+          "promptSha256": "6c7ebb4a891ce88eebf8eda4acc5db38ef5fdf30acde38cef595a4d4524687d5",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 779
+        }
+      ],
+      "documentId": "doc-08",
+      "inputKind": "marked-source",
+      "inputTextSha256": "0adf0b99eac18d78a6900bdbc4f56bae072f2bec10400dfa116c369ed9ab3a82",
+      "inputWordCount": 501,
+      "methodBeforeDipper": null,
+      "outputText": "In the village of Greenbrook, in central Pennsylvania, the local bus route has changed its evening timetable, which will better meet the diverse needs of its residents. The first proposals for the change were presented to the public on March 1, 2023, at the monthly town council meeting. After a consultation with the public, the revised timetable was approved and came into effect on April 16, 2023. Before the changes took effect, Evening Express E2 left the village center at 6:45 p.m. and ran until 10 p.m. during the week. The change was made to meet the growing demand for service and to fill in a gap in the schedule. The new schedule extended the service time and increased the frequency of stops, such as those to Willow Creek and Silverton, in particular. The new timetable has departures as early as 5:30 p.m. and runs until 11:30 p.m., enabling residents to more easily access essential evening services. The addition of an 8:30 p.m. route placed additional demands on the existing fleet of buses, but it was deemed necessary to meet the growing needs of the public. After thorough training and information campaigns for the drivers and mechanics, the new schedule was launched on April 16, 2023. However, the first few weeks of operation encountered some difficulties that required urgent attention. On the first day of service, the 8:30 p.m. route was overcrowded, causing delays and complaints about lack of sufficient seats. After analyzing the feedback, the maintenance department immediately added a second bus to the route, which greatly improved the overall passenger service. Cost considerations were an important part of the decision to change the timetable. An additional budget of $50,000 was allocated specifically to supplementary spare parts and improvements to meet the increased needs of the expanded service. The extra financial investment was expected to increase the overall efficiency of the service by reducing breakdowns and downtime. During the first three months of operation, from April 16 to June 30, 2023, various indicators were closely observed to determine the influence of the new timetable, such as the number of passengers carried, the punctuality of service, and the satisfaction of passengers. Surveys of regular passengers showed an overwhelming positive response, with 85% of them either satisfied or very satisfied. Despite the initial difficulties encountered, the changes generally achieved the intended result. Among the improvements mentioned in particular were reduced waiting time and greater comfort as a result of increased space per passenger during rush hour. The report concludes that the service has improved access and convenience, as intended by the project. The report recommends that the service be continued after the trial period and be incorporated into the permanent schedule, and that regular monitoring take place every six months to ensure optimum responsiveness to the changing needs of the public.",
+      "outputTextSha256": "de1993ccd09741ce348d01c105a786f6dafbb7acac6aa5a99ff078105ccf2711",
+      "outputWordCount": 470,
+      "seconds": 18.265862483996898,
+      "sentenceCount": 24
+    },
+    {
+      "caseId": "doc-09::marked-source",
+      "caseIndex": 8,
+      "chunks": [
+        {
+          "chunkIndex": 0,
+          "generatedTokensIncludingDecoderStart": 93,
+          "generationSeconds": 2.7056282171979547,
+          "inputTokens": 272,
+          "inputTruncated": false,
+          "promptSha256": "cfffcfefe77d5aa9f9b5577aa52b62c31bb0bb55a44084aee2a5b8955cfa8beb",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 272
+        },
+        {
+          "chunkIndex": 1,
+          "generatedTokensIncludingDecoderStart": 73,
+          "generationSeconds": 2.056063294876367,
+          "inputTokens": 354,
+          "inputTruncated": false,
+          "promptSha256": "d8337b9578c22d912d3009cdb99e04dadff89b451701ebf05a3ba67bfeef7c64",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 354
+        },
+        {
+          "chunkIndex": 2,
+          "generatedTokensIncludingDecoderStart": 45,
+          "generationSeconds": 1.505929775070399,
+          "inputTokens": 419,
+          "inputTruncated": false,
+          "promptSha256": "10788c54b27931d5841f0a4ebf2c6340acb36ead8efe6681b92e0ed846337de9",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 419
+        },
+        {
+          "chunkIndex": 3,
+          "generatedTokensIncludingDecoderStart": 48,
+          "generationSeconds": 1.5048554670065641,
+          "inputTokens": 448,
+          "inputTruncated": false,
+          "promptSha256": "5a28c18b6a798180841609959af31ef985b6557ab29226ee91e8ab31305ca83a",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 448
+        },
+        {
+          "chunkIndex": 4,
+          "generatedTokensIncludingDecoderStart": 86,
+          "generationSeconds": 2.503741577733308,
+          "inputTokens": 527,
+          "inputTruncated": false,
+          "promptSha256": "626b344fd40df61bc22b96ce15067288f67af608b18ff35d7326fd00c9b19560",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 527
+        },
+        {
+          "chunkIndex": 5,
+          "generatedTokensIncludingDecoderStart": 112,
+          "generationSeconds": 3.137964494060725,
+          "inputTokens": 631,
+          "inputTruncated": false,
+          "promptSha256": "d7f48e005ab69d2dd456974970a47e0ba5add53b046295d9e3baab286de373ba",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 631
+        },
+        {
+          "chunkIndex": 6,
+          "generatedTokensIncludingDecoderStart": 76,
+          "generationSeconds": 2.4101977427490056,
+          "inputTokens": 704,
+          "inputTruncated": false,
+          "promptSha256": "8ef82475af844bceb806c46d0819fef746b2450402013416ab6cd55cfa13198c",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 704
+        },
+        {
+          "chunkIndex": 7,
+          "generatedTokensIncludingDecoderStart": 65,
+          "generationSeconds": 2.243708447087556,
+          "inputTokens": 777,
+          "inputTruncated": false,
+          "promptSha256": "629a5dc6cb62634fcaecb59fe02c2259d0ea68efff86d985890435f7e68058cc",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 777
+        },
+        {
+          "chunkIndex": 8,
+          "generatedTokensIncludingDecoderStart": 80,
+          "generationSeconds": 2.6510648960247636,
+          "inputTokens": 853,
+          "inputTruncated": false,
+          "promptSha256": "5a8ce55e7d2b96b6f8f46759e0d77e5f342bca1aa4c4f6e855e9eb107e8e4793",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 853
+        }
+      ],
+      "documentId": "doc-09",
+      "inputKind": "marked-source",
+      "inputTextSha256": "e3ca18da54a81c762cb0ccb07e23e12dab8993a7125887115d58fe298faaa6c5",
+      "inputWordCount": 572,
+      "methodBeforeDipper": null,
+      "outputText": "On 15 January 2023, in response to staff feedback about the East Wing office kitchen's often malfunctioning coffee machine, it was decided to introduce a rota for cleaning the machine, in order to maintain it and avoid overuse. The aim was to reduce overuse, extend the machine's life, and increase the availability of coffee at peak times. Mary, the facilities manager, was responsible for implementing the rota. She created an Excel file listing all the staff members who would have to take part in the weekly cleaning and maintenance. There were forty-eight staff members, divided into eight groups of six, each with its own turn on the rota. Every member of staff with a cleaning turn was given clear written instructions and a check-list. Mary set up a morning meeting for each group, to ensure that everyone was clear about its responsibilities. The meeting time was set for 7.45 am, and the first round started on 3 February 2023. As extra support, Mary was given $250 from the office petty cash to buy cleaning supplies. During the experiment, several problems arose. On 17 February, the coffee machine broke down immediately before the cleaning session. The machine was repaired three days later, but during that time, the staff was not happy, because of the lack of hot drinks in the morning. Mary was able to restore normal service, and no significant drop in staff satisfaction was noticed. In order to monitor the success of the new system, Mary conducted a survey of the morning rota participants, and a second larger survey after a month. The initial results showed that although some staff had objected to the additional morning cleaning, overall satisfaction rose by 16% once they were used to the new routines. The cleaning schedule was now always on time, and maintenance issues such as calcification could be noticed and dealt with more easily than when everyone relied on the kitchen staff to take care of them. From February's repair, until the end of April, the coffee machine remained in good working order, without any breakdowns that could be attributed to lack of maintenance. The two minor problems that did arise were quickly resolved by the cleaning staff, within thirty minutes, demonstrating the efficiency of the preventive maintenance. It should be noted that the success of the rota required further organisational effort. Mary arranged follow-up meetings with staff every fortnight, to discuss any difficulties and to encourage adherence to the schedule. The meetings also offered staff the opportunity to make any comments or suggestions about the process. These additional meetings were generally very well received, and many staff members appreciated the improved quality of their morning coffee. Several staff members suggested extending the rota to other appliances, which showed the potential for wider office benefits. The report recommends that the coffee machine rota be continued, but also recommends that a full assessment be carried out after six months, so that the long-term impact of the experiment can be evaluated. It also recommends extending the cleaning rota to other frequently used appliances, and to use additional office resources to ensure that supplies are always available for maintenance work.",
+      "outputTextSha256": "9b11164365f48a998d6f3013b26dafd95826d4e001a9450199621acb7f6fe65f",
+      "outputWordCount": 526,
+      "seconds": 20.752865882590413,
+      "sentenceCount": 27
+    },
+    {
+      "caseId": "doc-10::marked-source",
+      "caseIndex": 9,
+      "chunks": [
+        {
+          "chunkIndex": 0,
+          "generatedTokensIncludingDecoderStart": 93,
+          "generationSeconds": 2.504971317946911,
+          "inputTokens": 326,
+          "inputTruncated": false,
+          "promptSha256": "c35bfa79b5756bdc7656f11a35b0f026f53dfbdedc6b6e06500a92784e61e102",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 326
+        },
+        {
+          "chunkIndex": 1,
+          "generatedTokensIncludingDecoderStart": 81,
+          "generationSeconds": 2.281800242140889,
+          "inputTokens": 413,
+          "inputTruncated": false,
+          "promptSha256": "8254e09fdbe650a747401ba1cc953b5223f5f139d5c8fbac4c16f6c1b33f4c3f",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 413
+        },
+        {
+          "chunkIndex": 2,
+          "generatedTokensIncludingDecoderStart": 80,
+          "generationSeconds": 2.2692231433466077,
+          "inputTokens": 487,
+          "inputTruncated": false,
+          "promptSha256": "21256e894b30d8ade17fb9f269920a7a1eb9435c8eeba4823820d5e9d58cf169",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 487
+        },
+        {
+          "chunkIndex": 3,
+          "generatedTokensIncludingDecoderStart": 63,
+          "generationSeconds": 1.9268074440769851,
+          "inputTokens": 527,
+          "inputTruncated": false,
+          "promptSha256": "98500bd62d21d30fe92f9fa00e45fe18de3b5a0a48c3d7735585784f8353e849",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 527
+        },
+        {
+          "chunkIndex": 4,
+          "generatedTokensIncludingDecoderStart": 89,
+          "generationSeconds": 2.5913310279138386,
+          "inputTokens": 600,
+          "inputTruncated": false,
+          "promptSha256": "068701a45856280933fcf61eb7f8900913406ea9d687223e8d88fe9d5c803688",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 600
+        },
+        {
+          "chunkIndex": 5,
+          "generatedTokensIncludingDecoderStart": 85,
+          "generationSeconds": 2.6485572340898216,
+          "inputTokens": 691,
+          "inputTruncated": false,
+          "promptSha256": "7d407fc9ca0639598e27a8a16b02c5e33430c9b4cc0cfb842c41c291a4b0f937",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 691
+        },
+        {
+          "chunkIndex": 6,
+          "generatedTokensIncludingDecoderStart": 76,
+          "generationSeconds": 2.528711316175759,
+          "inputTokens": 780,
+          "inputTruncated": false,
+          "promptSha256": "0866daa51c8df3e1aa3e37e8a68c681ba8d29f7347c24953dfbe965b4c292040",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 780
+        },
+        {
+          "chunkIndex": 7,
+          "generatedTokensIncludingDecoderStart": 81,
+          "generationSeconds": 2.6571454256772995,
+          "inputTokens": 844,
+          "inputTruncated": false,
+          "promptSha256": "e2708a2d53a5bb0098fc247767b54b649298db3674898cd1107ca9c9216c8276",
+          "sentenceCount": 3,
+          "untruncatedInputTokens": 844
+        },
+        {
+          "chunkIndex": 8,
+          "generatedTokensIncludingDecoderStart": 20,
+          "generationSeconds": 1.2162780133076012,
+          "inputTokens": 866,
+          "inputTruncated": false,
+          "promptSha256": "00c105713d3f4c1422d7dd81ad2874ba3f7b30ba5ae5acc720408953382206b7",
+          "sentenceCount": 1,
+          "untruncatedInputTokens": 866
+        }
+      ],
+      "documentId": "doc-10",
+      "inputKind": "marked-source",
+      "inputTextSha256": "e773991b25cb2466ab21f43a0360170d8648a2ae7df56cd6c25dd3abd1e39a56",
+      "inputWordCount": 542,
+      "methodBeforeDipper": null,
+      "outputText": "The Westbury Park Community Aquatic Center has undergone extensive renovations, most importantly the installation of a new state-of-the-art reservation system for the four exercise lanes. Before January 1, 2023, swimmers had to use a manual reservation process, which frequently led to conflicts and misunderstandings. Members of the Westbury Swimming Club had complained that they couldn't get the lanes they needed for their weekly training. Management decided to implement an automatic online reservation system costing $, The new system was launched on February 28, 2023, and was designed to allocate the lanes in the pool according to the needs of each member in a fair and transparent way. The first reservations opened on March 7, 2023, for the month of April, to test the system's effectiveness before the normal summer season. On April 4, 2023, all the available time slots for the month of April were fully booked, indicating great community interest in the new system. However, on April 16, 2023, Phil Adams, the chairman of the Westbury Swimming Club, contacted Sarah White, the manager, to say that evenings were double booked, which would lead to conflicts, especially during peak hours. On April 17, 2023, Sarah White, the manager, checked the reservations reported by Phil Adams. She found that several time slots the Westbury Swimming Club had been using for months were now being contested. This shows the difficulty of reserving long-term time slots under the new system. On April 19, 2023, Sarah White arranged a meeting with the IT department to resolve any conflicts. It was found that the booking discrepancies resulted from the overlapping of individual swimmers' requests and the long-term reservations of a swimming club. The solution was to reserve time slots in the system for clubs such as the Westbury Swimming Club, which could be used by swimmers when available. On April 30, 2023, the system had been tested and proved to be working well. Both individual and club reservations were managed without further conflicts, and the feedback from the public showed great satisfaction with the ease and fairness of the new system. As a result, several running clubs began to ask if they could use the same system for their track events, showing that this innovation could have broader applications. The popularity of the system led to an increase in visitors of about 25 percent, an unexpected, but welcome, result in such a short time. This led to an increase in revenue of $1,200 from swimming fees alone, proving a direct benefit to the center's finances. The successful implementation of the new system has brought benefits far beyond convenience alone. The increased satisfaction of the swimmers and a reduction of the manual work of the staff have contributed to a more efficient operation. Cooperation with local sports clubs has also proved to be beneficial for both parties. The report recommends that formally reserved time slots should be introduced for organized groups to avoid any conflict, encourage further community participation, and sustain the positive trend in visits and revenues. Regular audits of the reservation system are recommended to ensure continued efficient operation of the pool.",
+      "outputTextSha256": "63cf484239dd6223612531105a12cad60b5219c739fb05397cc6848b2c083a88",
+      "outputWordCount": 518,
+      "seconds": 20.65677779726684,
+      "sentenceCount": 25
+    }
+  ],
+  "createdAt": "2026-08-21T12:36:31.598246Z",
+  "inputSha256": "0e06531998860f10b81abe236b90269c1bdb8272ba813bf27460cc2e0b3866a3",
+  "methodology": "Run the public DIPPER-11B checkpoint in float32 using the ETH baseline prompt construction. Normalize whitespace, sentence-tokenize with NLTK, rewrite consecutive three-sentence windows, and append each generated window to the prefix used for subsequent windows. Persist a checkpoint after every completed case.",
+  "runtime": {
+    "cudaRuntime": "12.8",
+    "gpuName": "NVIDIA A100 80GB PCIe",
+    "modelDtype": "torch.float32",
+    "modelLoadSeconds": 107.94679908128455,
+    "nltk": "3.8.1",
+    "python": "3.11.11",
+    "torch": "2.8.0.dev20250319+cu128",
+    "transformers": "4.40.2"
+  },
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "title": "ETH SynthID-Text scrubbing evaluation",
+      "url": "https://www.sri.inf.ethz.ch/blog/probingsynthid"
+    },
+    {
+      "title": "ETH DIPPER scrubbing configuration",
+      "url": "https://github.com/eth-sri/watermark-stealing/blob/main/configs/scrubbing/llama7b/dipper_dolly_gptwm.yaml"
+    },
+    {
+      "title": "ETH DIPPER model configuration",
+      "url": "https://github.com/eth-sri/watermark-stealing/blob/main/configs/model/dipper.yaml"
+    },
+    {
+      "title": "ETH DIPPER attack implementation",
+      "url": "https://github.com/eth-sri/watermark-stealing/blob/main/src/attackers/our_attacker.py"
+    },
+    {
+      "title": "Official DIPPER implementation and model instructions",
+      "url": "https://github.com/martiansideofthemoon/ai-detection-paraphrases"
+    },
+    {
+      "title": "DIPPER-11B model",
+      "url": "https://huggingface.co/kalpeshk2011/dipper-paraphraser-xxl"
+    }
+  ],
+  "status": "complete",
+  "verifiedAt": "2026-08-21T12:41:43.998769Z"
+}

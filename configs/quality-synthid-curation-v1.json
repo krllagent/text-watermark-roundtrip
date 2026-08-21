@@ -1,0 +1,202 @@
+{
+  "edits": [
+    {
+      "documentId": "doc-02",
+      "editId": "m02-announced-not-launched",
+      "new": "GreenCycle Delivery Services announced a trial of its new service feature: a two-hour pickup window for couriers.",
+      "old": "GreenCycle Delivery Services launched a trial for their new service feature: a two-hour pickup window for couriers.",
+      "reason": "The next paragraph says the trial began on April 1; March 15 was therefore the announcement, not the launch.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-02",
+      "editId": "m02-seven-week-trial",
+      "new": "scheduled to last for seven weeks",
+      "old": "scheduled to last for exactly six weeks",
+      "reason": "April 1 through the stated May 19 end date is seven weeks, not six.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-02",
+      "editId": "m02-early-april",
+      "new": "By choosing early April",
+      "old": "By choosing mid-April",
+      "reason": "The stated trial start is April 1.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-02",
+      "editId": "m02-ten-day-training-lead",
+      "new": "ten days before the official start date",
+      "old": "a week before the official start date",
+      "reason": "March 22 is ten days before April 1.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-03",
+      "editId": "m03-equipment-rental",
+      "new": "which covered equipment rental, refreshments, and printing supplies",
+      "old": "which covered venue rental, refreshments, and printing supplies",
+      "reason": "The event is explicitly held in the school's own gymnasium, so equipment rather than venue rental is the coherent expense.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-05",
+      "editId": "m05-plot-total",
+      "new": "forty-eight to returning members and seven to newcomers",
+      "old": "forty-eight to returning members and seventeen to newcomers",
+      "reason": "The report states that fifty-five plots were available; 48 + 7 equals 55.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-05",
+      "editId": "m05-planting-season",
+      "new": "As the planting season approached",
+      "old": "As the spring equinox approached",
+      "reason": "The preceding events occur in late March, after the spring equinox.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-06",
+      "editId": "m06-guide-shortages",
+      "new": "long waits and audio-guide shortages",
+      "old": "long waits and cart shortages",
+      "reason": "The report discusses audio-guide devices and never introduces carts.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-07",
+      "editId": "m07-three-month-observation",
+      "new": "Over the course of three months",
+      "old": "Over the course of three weeks",
+      "reason": "The dated example runs from April 5 to June 18 and cannot fall inside a three-week collection period.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-07",
+      "editId": "m07-tracked-all-repairs",
+      "new": "appliances that were brought in for assistance",
+      "old": "appliances that were brought back for secondary assistance",
+      "reason": "The next result says only six of the one hundred tracked appliances returned, so the denominator must include initial repairs.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-09",
+      "editId": "m09-cleaning-rotation",
+      "new": "divided into eight groups of six, each assigned a turn in the cleaning rotation",
+      "old": "divided into eight groups of six, each assigned a day to manage the coffee machine",
+      "reason": "Eight groups cannot each have a distinct day in the stated weekly rota.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-09",
+      "editId": "m09-after-february-repair",
+      "new": "After the February repair, the coffee machine had not experienced any significant malfunctions by April 30, 2023",
+      "old": "By April 30, 2023, the coffee machine had not experienced any significant malfunctions",
+      "reason": "An earlier paragraph explicitly records a significant February breakdown.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-10",
+      "editId": "m10-double-booked-slots",
+      "new": "some evening lane slots were double-booked",
+      "old": "some unspecified lanes were overbooked",
+      "reason": "The following explanation identifies overlapping reservations, so double-booked slots is the precise wording.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-10",
+      "editId": "m10-retain-reserved-blocks",
+      "new": "the formal retention of reserved blocks for organized groups",
+      "old": "the immediate inclusion of reserved blocks for organized groups",
+      "reason": "Reserved blocks were already implemented earlier in the report.",
+      "side": "marked"
+    },
+    {
+      "documentId": "doc-01",
+      "editId": "u01-easter-weekend-date",
+      "new": "On April 8, 2023",
+      "old": "On April 5, 2023",
+      "reason": "In 2023 the Easter holiday weekend began after April 5; April 8 is the Saturday of that weekend.",
+      "side": "unmarked"
+    },
+    {
+      "documentId": "doc-02",
+      "editId": "u02-trial-timeline",
+      "new": "Preparations began on March 15, 2023, and the three-week trial was scheduled to run from March 20 to April 10, 2023.",
+      "old": "The trial began on March 15, 2023, and was set to run for three weeks, concluding on April 5, 2023.",
+      "reason": "A later paragraph explicitly says preparations finished and the trial commenced on March 20.",
+      "side": "unmarked"
+    },
+    {
+      "documentId": "doc-03",
+      "editId": "u03-equipment-rental",
+      "new": "covering equipment rental, decorations, and awards",
+      "old": "covering venue rental, decorations, and awards",
+      "reason": "The event is held in the school's own gymnasium.",
+      "side": "unmarked"
+    },
+    {
+      "documentId": "doc-07",
+      "editId": "u07-second-repair",
+      "new": "a washing machine that returned for a second repair within three weeks",
+      "old": "a washing machine that returned twice within three weeks",
+      "reason": "The narrative describes one initial repair and one return, not two returns.",
+      "side": "unmarked"
+    },
+    {
+      "documentId": "doc-07",
+      "editId": "u07-remove-same-day",
+      "new": "However, on June 10, 2023",
+      "old": "However, the same day on June 10, 2023",
+      "reason": "The previous dated event is May 20, so June 10 is not the same day.",
+      "side": "unmarked"
+    },
+    {
+      "documentId": "doc-07",
+      "editId": "u07-supported-decrease",
+      "new": "indicating a substantial decrease compared with the earlier reporting period",
+      "old": "indicating a 51% decrease compared to the first half of the year",
+      "reason": "The text gives no initial total-repair denominator from which 51 percent can be calculated.",
+      "side": "unmarked"
+    },
+    {
+      "documentId": "doc-09",
+      "editId": "u09-cleaning-week",
+      "new": "around thirteen individuals would be responsible for cleaning duties during any given week",
+      "old": "around thirteen individuals would be responsible for cleaning duties on any given day",
+      "reason": "Forty employees cleaning once every three weeks implies roughly thirteen assignments per week, not per day.",
+      "side": "unmarked"
+    },
+    {
+      "documentId": "doc-09",
+      "editId": "u09-missed-date",
+      "new": "missed his assigned cleaning day on April 3, 2023",
+      "old": "missed his assigned cleaning day on March 28, 2023",
+      "reason": "The report says the first cleaning round did not begin until April 1; April 3 also coheres with the April 4 response meeting.",
+      "side": "unmarked"
+    },
+    {
+      "documentId": "doc-10",
+      "editId": "u10-four-month-period",
+      "new": "Over the next four months",
+      "old": "Over the next three months",
+      "reason": "The stated interval runs from March 1 through June 30.",
+      "side": "unmarked"
+    },
+    {
+      "documentId": "doc-10",
+      "editId": "u10-confirm-before-use",
+      "new": "confirm their reservations at least 24 hours before the reserved time",
+      "old": "confirm their reservations within 24 hours of booking",
+      "reason": "Confirmation before the reserved time, rather than immediately after booking, is the rule that can reduce no-shows.",
+      "side": "unmarked"
+    }
+  ],
+  "methodology": "Apply only exact, one-occurrence replacements for internally contradictory dates, counts, referents, or plainly malformed phrases. Do not stylistically rewrite passages or regenerate text. Preserve the raw GPU artifact separately and recompute every detector trace after curation.",
+  "schemaVersion": 1,
+  "sources": [
+    "results/quality-synthid-corpus-gpu-v1.json"
+  ],
+  "verifiedAt": "2026-08-21"
+}

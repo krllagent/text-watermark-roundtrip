@@ -1,0 +1,582 @@
+{
+  "budgetUsd": "0.65",
+  "calls": {
+    "doc-01::anthropic/claude-haiku-4.5": {
+      "batchId": "doc-01",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Cost stated as $7,000 instead of $7,500",
+            "Redundant phrasing: 'paper-based paper book' and 'tablet-based tablet-based system'"
+          ],
+          "readabilityPercent": 60,
+          "usabilityPercent": 70
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Cost stated as $7,500 but source says approximately $7,500 - minor variation acceptable",
+            "Report recommends continuing system (preserved but not explicitly derived from source conclusion)"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Cost stated as $7,500 but source says approximately $7,500 - discrepancy with c07"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Uses 'reader' and 'readers' instead of 'patron' or 'visitor' throughout (terminology shift)",
+            "Cost stated as $7,500 instead of source's approximately $7,500"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "Cost stated as $7,500 instead of source's approximately $7,500"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 90
+        }
+      ],
+      "completionSha256": "5c42921bbe58ad5ac21fbc1201ca03fc954cc2fb14efadc5f2318895b165d22a",
+      "costUsd": "0.010356",
+      "judge": "anthropic/claude-haiku-4.5",
+      "provider": "Amazon Bedrock",
+      "usage": {
+        "completionTokens": 851,
+        "promptTokens": 6101,
+        "providerCostCredits": "0.010356",
+        "totalTokens": 6952
+      }
+    },
+    "doc-01::google/gemma-4-31b-it": {
+      "batchId": "doc-01",
+      "costIsUpperBound": true,
+      "costUsd": "0.00172700",
+      "judge": "google/gemma-4-31b-it",
+      "terminalError": {
+        "code": "paid_response_lost_before_parse_checkpoint",
+        "message": "Provider returned content, but local JSON parsing failed before the completion was checkpointed; exact request must not be retried."
+      }
+    },
+    "doc-01::openai/gpt-5.6-luna": {
+      "batchId": "doc-01",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The tablet and application cost is stated as $7,000 instead of approximately $7,500."
+          ],
+          "readabilityPercent": 70,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The tablet and application cost is stated as approximately $7,500 instead of the source's amount, approximately $7,000."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-03",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The tablet and software cost is stated as approximately $7,500 instead of the source's amount, approximately $7,000."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-04",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The tablet and application cost is stated as approximately $7,500 instead of the source's amount, approximately $7,000."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 80
+        },
+        {
+          "candidateId": "candidate-05",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [
+            "The tablet and application cost is stated as approximately $7,500 instead of the source's amount, approximately $7,000."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 80
+        }
+      ],
+      "completionSha256": "e3317a47fc43741a2c545efae6c0fd2d93e0f58cfd50bc2d9bfc85a85a144644",
+      "costUsd": "0.00223405",
+      "judge": "openai/gpt-5.6-luna",
+      "provider": "OpenAI",
+      "usage": {
+        "completionTokens": 771,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 5233,
+          "cachedTokens": 0
+        },
+        "promptTokens": 5236,
+        "providerCostCredits": "0.00223405",
+        "totalTokens": 6007
+      }
+    },
+    "doc-01::x-ai/grok-4.20": {
+      "batchId": "doc-01",
+      "costIsUpperBound": true,
+      "costUsd": "0.02001250",
+      "judge": "x-ai/grok-4.20",
+      "terminalError": {
+        "code": "paid_response_lost_before_parse_checkpoint",
+        "message": "Provider returned content, but local JSON parsing failed before the completion was checkpointed; exact request must not be retried."
+      }
+    }
+  },
+  "configSha256": "1a1f52b10494bc9fd442e32599ea6d609809df18ecee06b2bad407069cafea65",
+  "createdAt": "2026-08-21T12:43:17.820576Z",
+  "inFlight": {},
+  "methodology": "Durable four-vendor panel checkpoint. Reserve each request before dispatch, never redispatch an unresolved call, blind method identity, and reject any percentage outside 0..100 in ten-point increments.",
+  "mode": "full",
+  "panelInputSha256": "9bde98f6a79f5ebf9b071de831c9cfab8b37c372d447b7d45fad6367401eb568",
+  "priorCostUsd": "0.01247251",
+  "priorSpendEvidence": {
+    "path": "results/curated-panel-canary-v3.json",
+    "sha256": "2faf78a26a811afa72417ae3c3217f310ab5edd28128d74abe97c7a6d7d1dbfa"
+  },
+  "schemaVersion": 1,
+  "sources": [
+    "https://openrouter.ai/api/v1/models",
+    "https://huggingface.co/kalpeshk2011/dipper-paraphraser-xxl",
+    "https://github.com/eth-sri/watermark-stealing"
+  ],
+  "status": "batch_failed",
+  "totalCostUsd": "0.04680206",
+  "verifiedAt": "2026-08-21T12:45:26.699913Z"
+}

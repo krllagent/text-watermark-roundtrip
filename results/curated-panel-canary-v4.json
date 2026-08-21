@@ -1,0 +1,392 @@
+{
+  "budgetUsd": "0.65",
+  "calls": {
+    "doc-01-canary::anthropic/claude-haiku-4.5": {
+      "batchId": "doc-01-canary",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "changed"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "changed"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "Attendance changed from twelve to two employees at April 10 orientation",
+            "Launch date changed from May 16 to June 16, 2023",
+            "Cost changed from $7,500 to $75,000",
+            "Trial period dates conflict: starts July 16 but ends June 30",
+            "Recommendation changed to discontinue system instead of continue"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 20
+        }
+      ],
+      "completionSha256": "e77e8d8b20e2edb36ae5a49e7f801161b6a26ebb03be864c488bfed456e264e5",
+      "costUsd": "0.005573",
+      "judge": "anthropic/claude-haiku-4.5",
+      "provider": "Amazon Bedrock",
+      "usage": {
+        "completionTokens": 351,
+        "promptTokens": 3818,
+        "providerCostCredits": "0.005573",
+        "totalTokens": 4169
+      }
+    },
+    "doc-01-canary::google/gemma-4-31b-it": {
+      "batchId": "doc-01-canary",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "changed"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "changed"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "Orientation attended by two employees instead of twelve",
+            "System went live June 16th instead of May 16th",
+            "Cost stated as $75,000 instead of $7,500",
+            "Trial period listed as July 16th to June 30th",
+            "Recommends discontinuing the system instead of continuing"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 40
+        }
+      ],
+      "completionSha256": "f68370800db6b459d78460f2f919e365b866f912e32ea17b57f5285b352b04a4",
+      "costUsd": "0.00054336",
+      "judge": "google/gemma-4-31b-it",
+      "provider": "CoreWeave",
+      "usage": {
+        "completionTokens": 694,
+        "promptTokens": 3074,
+        "providerCostCredits": "0.00054336",
+        "totalTokens": 3768
+      }
+    },
+    "doc-01-canary::openai/gpt-5.6-luna": {
+      "batchId": "doc-01-canary",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        },
+        {
+          "candidateId": "candidate-02",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "changed"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "changed"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "The orientation is stated as attended by two employees instead of twelve.",
+            "The system launch is incorrectly dated June 16 instead of May 16, 2023.",
+            "The stated cost is $75,000 instead of approximately $7,500.",
+            "The trial period is incorrectly stated as July 16 to June 30.",
+            "The recommendation says to discontinue the system instead of continue using it."
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 40
+        }
+      ],
+      "completionSha256": "0f5fa60e0c1d5fa0fa853c990ba6fe26a6bd4918a43066e49946158bcbe5d17a",
+      "costUsd": "0.0011865",
+      "judge": "openai/gpt-5.6-luna",
+      "provider": "OpenAI",
+      "usage": {
+        "completionTokens": 342,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 3102,
+          "cachedTokens": 0
+        },
+        "promptTokens": 3105,
+        "providerCostCredits": "0.0011865",
+        "totalTokens": 3447
+      }
+    },
+    "doc-01-canary::x-ai/grok-4.6": {
+      "batchId": "doc-01-canary",
+      "costUsd": "0",
+      "judge": "x-ai/grok-4.6",
+      "terminalError": {
+        "errorCode": 400,
+        "message": "Reasoning is mandatory for this endpoint and cannot be disabled.",
+        "status": 400,
+        "xGuardOrigin": "upstream"
+      }
+    }
+  },
+  "configSha256": "38412c97e4eddf25e950c5d8c4232f31a8aa9be9efcfc0fa0a2872ea43f88625",
+  "createdAt": "2026-08-21T12:50:15.834767Z",
+  "inFlight": {},
+  "methodology": "Durable four-vendor panel checkpoint. Reserve each request before dispatch, never redispatch an unresolved call, blind method identity, and reject any percentage outside 0..100 in ten-point increments.",
+  "mode": "canary",
+  "panelInputSha256": "f9c326c310d2a2c441fae218cae94a84222736df14b04917eec8e00e22e43b93",
+  "priorCostUsd": "0",
+  "priorSpendEvidence": null,
+  "resumedValidCallsFrom": {
+    "path": "results/curated-panel-canary-v3.json",
+    "sha256": "2faf78a26a811afa72417ae3c3217f310ab5edd28128d74abe97c7a6d7d1dbfa"
+  },
+  "schemaVersion": 1,
+  "sources": [
+    "https://openrouter.ai/api/v1/models",
+    "https://huggingface.co/kalpeshk2011/dipper-paraphraser-xxl",
+    "https://github.com/eth-sri/watermark-stealing"
+  ],
+  "status": "running",
+  "totalCostUsd": "0.00730286",
+  "verifiedAt": "2026-08-21T12:50:16.154139Z"
+}
