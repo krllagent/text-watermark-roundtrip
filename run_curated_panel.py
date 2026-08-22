@@ -226,27 +226,97 @@ def build_canary_batch(
     return batch, expected
 
 
+def build_single_canary_batches(
+    *, source: str, claims: Sequence[Mapping[str, object]]
+) -> tuple[list[dict[str, object]], dict[str, object]]:
+    """One-candidate canary: identical, tampered, and empty texts in separate prompts.
+
+    Single-candidate prompts remove cross-candidate contamination, so the canary
+    must show that each judge still (a) preserves a byte-identical text, (b)
+    detects the five deliberate material changes, and (c) does not award claims
+    or usability to an empty candidate.
+    """
+    paired, expected_pair = build_canary_batch(source=source, claims=claims)
+    identical_text = paired["candidates"][0]["text"]
+    tampered_text = paired["candidates"][1]["text"]
+
+    def batch(batch_id: str, text: str) -> dict[str, object]:
+        return {
+            "batchId": batch_id,
+            "candidates": [
+                {
+                    "candidateId": "candidate-01",
+                    "text": text,
+                    "textSha256": hashlib.sha256(text.encode()).hexdigest(),
+                }
+            ],
+            "claims": list(claims),
+            "documentId": "doc-01",
+            "sourceText": source,
+            "sourceTextSha256": hashlib.sha256(source.encode()).hexdigest(),
+        }
+
+    batches = [
+        batch("doc-01-canary-identical", identical_text),
+        batch("doc-01-canary-tampered", tampered_text),
+        batch("doc-01-canary-empty", ""),
+    ]
+    expected = {
+        "candidateId": "candidate-01",
+        "emptyBatchId": "doc-01-canary-empty",
+        "identicalBatchId": "doc-01-canary-identical",
+        "tamperedBatchId": "doc-01-canary-tampered",
+        "tamperedClaimIds": list(expected_pair["tamperedClaimIds"]),
+    }
+    return batches, expected
+
+
 def _prepare_canary(args: argparse.Namespace) -> int:
     config, corpus, _, claims = load_design(args.config)
     source = corpus["documents"][0]["marked"]["text"]
-    batch, expected = build_canary_batch(
-        source=source, claims=claims["documents"]["doc-01"]
-    )
-    now = utc_now()
-    artifact = {
-        "batches": [batch],
-        "createdAt": now,
-        "expected": expected,
-        "methodology": (
+    if getattr(args, "single", False):
+        batches, expected = build_single_canary_batches(
+            source=source, claims=claims["documents"]["doc-01"]
+        )
+        methodology = (
+            "Three one-candidate prompts test every judge before a single-candidate "
+            "panel: a byte-identical positive control, a readable negative control "
+            "with five deliberate material changes, and an empty candidate that must "
+            "receive no preserved claims and no usability."
+        )
+    else:
+        batch, expected = build_canary_batch(
+            source=source, claims=claims["documents"]["doc-01"]
+        )
+        batches = [batch]
+        methodology = (
             "One byte-identical positive control and one readable negative control with "
             "five deliberate material changes test every judge before the full panel."
-        ),
+        )
+    now = utc_now()
+    artifact = {
+        "batches": batches,
+        "createdAt": now,
+        "expected": expected,
+        "methodology": methodology,
         "schemaVersion": 1,
         "sources": config["sources"],
         "verifiedAt": now,
     }
     write_json_atomic(args.output, artifact)
     return 0
+
+
+def judge_reasoning_effort(
+    config: Mapping[str, object], judge: Mapping[str, object]
+) -> str:
+    """Per-judge reasoning override, defaulting to the frozen panel setting.
+
+    Some endpoints (Grok 4.6) reject reasoning_effort="none"; the override is
+    part of the frozen config so the exact request shape stays reproducible.
+    """
+    panel = config.get("panel", {})
+    return str(judge.get("reasoningEffort", panel.get("reasoningEffort", "none")))
 
 
 class PanelRunner:
@@ -406,7 +476,7 @@ class PanelRunner:
             timeout=900,
             allow_fallbacks=True,
             require_parameters=False,
-            reasoning_effort="none",
+            reasoning_effort=judge_reasoning_effort(self.config, judge),
             temperature=None,
             max_tokens=int(self.config["panel"]["maxCompletionTokensPerCall"]),
             max_prompt_price=float(Decimal(str(judge["promptUsdPerToken"])) * 1_000_000),
@@ -526,13 +596,70 @@ class PanelRunner:
         write_json_atomic(self.output_path, self.state)
 
 
+def validate_single_canary(
+    panel_input: Mapping[str, object],
+    calls: Mapping[str, object],
+    judges: Sequence[Mapping[str, object]],
+) -> dict[str, object]:
+    expected = panel_input["expected"]
+    batches = {batch["batchId"]: batch for batch in panel_input["batches"]}
+    claim_ids = [row["id"] for row in batches[expected["identicalBatchId"]]["claims"]]
+    target = set(expected["tamperedClaimIds"])
+    candidate_id = expected["candidateId"]
+
+    def verdict(batch_id: str, judge: Mapping[str, object]) -> Mapping[str, object]:
+        call = calls[f"{batch_id}::{judge['model']}"]
+        by_candidate = {row["candidateId"]: row for row in call["candidates"]}
+        return by_candidate[candidate_id]
+
+    rows = []
+    for judge in judges:
+        identical = verdict(expected["identicalBatchId"], judge)
+        tampered = verdict(expected["tamperedBatchId"], judge)
+        empty = verdict(expected["emptyBatchId"], judge)
+        identical_preserved = sum(
+            row["status"] == "preserved" for row in identical["claims"]
+        )
+        tampered_status = {row["id"]: row["status"] for row in tampered["claims"]}
+        detected_targets = sum(tampered_status[claim_id] != "preserved" for claim_id in target)
+        preserved_controls = sum(
+            tampered_status[claim_id] == "preserved"
+            for claim_id in claim_ids
+            if claim_id not in target
+        )
+        empty_preserved = sum(row["status"] == "preserved" for row in empty["claims"])
+        passed = (
+            identical_preserved == 10
+            and identical["readabilityPercent"] >= 90
+            and identical["usabilityPercent"] >= 90
+            and detected_targets >= 4
+            and preserved_controls >= 4
+            and empty_preserved == 0
+            and empty["usabilityPercent"] <= 10
+        )
+        rows.append(
+            {
+                "detectedTargetCount": detected_targets,
+                "emptyPreservedCount": empty_preserved,
+                "emptyUsabilityPercent": empty["usabilityPercent"],
+                "identicalPreservedCount": identical_preserved,
+                "judge": judge["model"],
+                "passed": passed,
+                "preservedControlCount": preserved_controls,
+            }
+        )
+    return {"judges": rows, "passed": all(row["passed"] for row in rows)}
+
+
 def validate_canary(
     panel_input: Mapping[str, object],
     calls: Mapping[str, object],
     judges: Sequence[Mapping[str, object]],
 ) -> dict[str, object]:
-    batch = panel_input["batches"][0]
     expected = panel_input["expected"]
+    if "emptyBatchId" in expected:
+        return validate_single_canary(panel_input, calls, judges)
+    batch = panel_input["batches"][0]
     all_claim_ids = [row["id"] for row in batch["claims"]]
     target = set(expected["tamperedClaimIds"])
     rows = []
@@ -669,6 +796,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     prepare = commands.add_parser("prepare-canary")
     prepare.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     prepare.add_argument("--output", type=Path, default=DEFAULT_CANARY_INPUT)
+    prepare.add_argument(
+        "--single",
+        action="store_true",
+        help="one-candidate canary: identical, tampered, and empty prompts",
+    )
     prepare.set_defaults(handler=_prepare_canary)
     run = commands.add_parser("run")
     run.add_argument("--config", type=Path, default=DEFAULT_CONFIG)

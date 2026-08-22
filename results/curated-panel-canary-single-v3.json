@@ -1,0 +1,885 @@
+{
+  "budgetUsd": "1.60",
+  "calls": {
+    "doc-01-canary-empty::anthropic/claude-sonnet-5": {
+      "batchId": "doc-01-canary-empty",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "missing"
+            },
+            {
+              "id": "c02",
+              "status": "missing"
+            },
+            {
+              "id": "c03",
+              "status": "missing"
+            },
+            {
+              "id": "c04",
+              "status": "missing"
+            },
+            {
+              "id": "c05",
+              "status": "missing"
+            },
+            {
+              "id": "c06",
+              "status": "missing"
+            },
+            {
+              "id": "c07",
+              "status": "missing"
+            },
+            {
+              "id": "c08",
+              "status": "missing"
+            },
+            {
+              "id": "c09",
+              "status": "missing"
+            },
+            {
+              "id": "c10",
+              "status": "missing"
+            }
+          ],
+          "materialErrors": [
+            "Candidate text is empty; no content provided to convey any claims."
+          ],
+          "readabilityPercent": 0,
+          "usabilityPercent": 0
+        }
+      ],
+      "completionSha256": "dd843fb3bd491d2a62cea5051fae232863d201245515b7ae5e3ca6ac32a2dfdd",
+      "costUsd": "0.008206",
+      "judge": "anthropic/claude-sonnet-5",
+      "provider": "Claude Platform on AWS",
+      "usage": {
+        "completionTokens": 230,
+        "promptTokens": 2953,
+        "providerCostCredits": "0.008206",
+        "totalTokens": 3183
+      }
+    },
+    "doc-01-canary-empty::google/gemma-4-31b-it": {
+      "batchId": "doc-01-canary-empty",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "missing"
+            },
+            {
+              "id": "c02",
+              "status": "missing"
+            },
+            {
+              "id": "c03",
+              "status": "missing"
+            },
+            {
+              "id": "c04",
+              "status": "missing"
+            },
+            {
+              "id": "c05",
+              "status": "missing"
+            },
+            {
+              "id": "c06",
+              "status": "missing"
+            },
+            {
+              "id": "c07",
+              "status": "missing"
+            },
+            {
+              "id": "c08",
+              "status": "missing"
+            },
+            {
+              "id": "c09",
+              "status": "missing"
+            },
+            {
+              "id": "c10",
+              "status": "missing"
+            }
+          ],
+          "materialErrors": [
+            "The candidate text is empty; all claims are missing."
+          ],
+          "readabilityPercent": 0,
+          "usabilityPercent": 0
+        }
+      ],
+      "completionSha256": "5e29339080b9a9aac3f5d97f224212e133f1fe7aa4be24eb1c6488a7ee52990e",
+      "costUsd": "0.00025822",
+      "judge": "google/gemma-4-31b-it",
+      "provider": "CoreWeave",
+      "usage": {
+        "completionTokens": 323,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 320
+        },
+        "promptTokens": 1484,
+        "providerCostCredits": "0.00025822",
+        "totalTokens": 1807
+      }
+    },
+    "doc-01-canary-empty::openai/gpt-5.6-luna": {
+      "batchId": "doc-01-canary-empty",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "missing"
+            },
+            {
+              "id": "c02",
+              "status": "missing"
+            },
+            {
+              "id": "c03",
+              "status": "missing"
+            },
+            {
+              "id": "c04",
+              "status": "missing"
+            },
+            {
+              "id": "c05",
+              "status": "missing"
+            },
+            {
+              "id": "c06",
+              "status": "missing"
+            },
+            {
+              "id": "c07",
+              "status": "missing"
+            },
+            {
+              "id": "c08",
+              "status": "missing"
+            },
+            {
+              "id": "c09",
+              "status": "missing"
+            },
+            {
+              "id": "c10",
+              "status": "missing"
+            }
+          ],
+          "materialErrors": [
+            "The candidate contains no text and omits all ten source claims."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 0
+        }
+      ],
+      "completionSha256": "ef34f32bfdb064837b6c8bc4f0f270e280e29544162ab740176cf44654eb426a",
+      "costUsd": "0.00020856",
+      "judge": "openai/gpt-5.6-luna",
+      "provider": "OpenAI",
+      "usage": {
+        "completionTokens": 147,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 1578
+        },
+        "promptTokens": 1581,
+        "providerCostCredits": "0.00020856",
+        "totalTokens": 1728
+      }
+    },
+    "doc-01-canary-empty::x-ai/grok-4.6": {
+      "batchId": "doc-01-canary-empty",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "missing"
+            },
+            {
+              "id": "c02",
+              "status": "missing"
+            },
+            {
+              "id": "c03",
+              "status": "missing"
+            },
+            {
+              "id": "c04",
+              "status": "missing"
+            },
+            {
+              "id": "c05",
+              "status": "missing"
+            },
+            {
+              "id": "c06",
+              "status": "missing"
+            },
+            {
+              "id": "c07",
+              "status": "missing"
+            },
+            {
+              "id": "c08",
+              "status": "missing"
+            },
+            {
+              "id": "c09",
+              "status": "missing"
+            },
+            {
+              "id": "c10",
+              "status": "missing"
+            }
+          ],
+          "materialErrors": [
+            "Candidate text is empty so all source facts are absent."
+          ],
+          "readabilityPercent": 0,
+          "usabilityPercent": 0
+        }
+      ],
+      "completionSha256": "dab34a2b94bb0a8d551faf9cae477ba84567d2f4e1984f74b1ed248982b6ec67",
+      "costUsd": "0.002358",
+      "judge": "x-ai/grok-4.6",
+      "provider": "xAI",
+      "usage": {
+        "completionTokens": 223,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 1920
+        },
+        "promptTokens": 1950,
+        "providerCostCredits": "0.002358",
+        "totalTokens": 2173
+      }
+    },
+    "doc-01-canary-identical::anthropic/claude-sonnet-5": {
+      "batchId": "doc-01-canary-identical",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        }
+      ],
+      "completionSha256": "42aa3d9f0412677bc62fb47b1a1b6f0a528580ea4fdbaf397081d38d19e669ac",
+      "costUsd": "0.010564",
+      "judge": "anthropic/claude-sonnet-5",
+      "provider": "Claude Platform on AWS",
+      "usage": {
+        "completionTokens": 220,
+        "promptTokens": 4182,
+        "providerCostCredits": "0.010564",
+        "totalTokens": 4402
+      }
+    },
+    "doc-01-canary-identical::google/gemma-4-31b-it": {
+      "batchId": "doc-01-canary-identical",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        }
+      ],
+      "completionSha256": "eb39439444f57cf35b1b33433619ce42000181773e0f9013a0924893fca2940f",
+      "costUsd": "0.00027762",
+      "judge": "google/gemma-4-31b-it",
+      "provider": "CoreWeave",
+      "usage": {
+        "completionTokens": 148,
+        "promptTokens": 2273,
+        "providerCostCredits": "0.00027762",
+        "totalTokens": 2421
+      }
+    },
+    "doc-01-canary-identical::openai/gpt-5.6-luna": {
+      "batchId": "doc-01-canary-identical",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        }
+      ],
+      "completionSha256": "42aa3d9f0412677bc62fb47b1a1b6f0a528580ea4fdbaf397081d38d19e669ac",
+      "costUsd": "0.00022006",
+      "judge": "openai/gpt-5.6-luna",
+      "provider": "OpenAI",
+      "usage": {
+        "completionTokens": 144,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 2333
+        },
+        "promptTokens": 2336,
+        "providerCostCredits": "0.00022006",
+        "totalTokens": 2480
+      }
+    },
+    "doc-01-canary-identical::x-ai/grok-4.6": {
+      "batchId": "doc-01-canary-identical",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "preserved"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "preserved"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "preserved"
+            },
+            {
+              "id": "c08",
+              "status": "preserved"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "preserved"
+            }
+          ],
+          "materialErrors": [],
+          "readabilityPercent": 100,
+          "usabilityPercent": 100
+        }
+      ],
+      "completionSha256": "42aa3d9f0412677bc62fb47b1a1b6f0a528580ea4fdbaf397081d38d19e669ac",
+      "costUsd": "0.006486",
+      "judge": "x-ai/grok-4.6",
+      "provider": "xAI",
+      "usage": {
+        "completionTokens": 205,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 128
+        },
+        "promptTokens": 2724,
+        "providerCostCredits": "0.006486",
+        "totalTokens": 2929
+      }
+    },
+    "doc-01-canary-tampered::anthropic/claude-sonnet-5": {
+      "batchId": "doc-01-canary-tampered",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "changed"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "changed"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "Orientation attendance changed from twelve to two employees",
+            "Launch date changed from May 16 to June 16",
+            "Cost changed from $7,500 to $75,000",
+            "Trial period changed from May 16–June 30 to July 16–June 30 (an incoherent range)",
+            "Final recommendation reversed from continuing the system to discontinuing it"
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 20
+        }
+      ],
+      "completionSha256": "5822ac9318e3ef18c0150e361b1e062472ee0b1afc71604ba38c97af2c4fc5d2",
+      "costUsd": "0.011576",
+      "judge": "anthropic/claude-sonnet-5",
+      "provider": "Claude Platform on AWS",
+      "usage": {
+        "completionTokens": 322,
+        "promptTokens": 4178,
+        "providerCostCredits": "0.011576",
+        "totalTokens": 4500
+      }
+    },
+    "doc-01-canary-tampered::google/gemma-4-31b-it": {
+      "batchId": "doc-01-canary-tampered",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "changed"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "changed"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "Orientation attended by two employees instead of twelve.",
+            "Go-live date listed as June 16th instead of May 16th.",
+            "Costs listed as $75,000 instead of $7,500.",
+            "Trial period start date listed as July 16th instead of May 16th.",
+            "Recommends discontinuing the system instead of continuing it."
+          ],
+          "readabilityPercent": 100,
+          "usabilityPercent": 60
+        }
+      ],
+      "completionSha256": "f7f89d7e865e4b7e7703e8265d2c78d98cf81bb9ec8b5a733d990463eb82d188",
+      "costUsd": "0.000365",
+      "judge": "google/gemma-4-31b-it",
+      "provider": "CoreWeave",
+      "usage": {
+        "completionTokens": 405,
+        "promptTokens": 2273,
+        "providerCostCredits": "0.000365",
+        "totalTokens": 2678
+      }
+    },
+    "doc-01-canary-tampered::openai/gpt-5.6-luna": {
+      "batchId": "doc-01-canary-tampered",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "changed"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "changed"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "The orientation is reported as attended by two employees instead of twelve.",
+            "The system launch is dated June 16 instead of May 16, 2023.",
+            "The reported cost is approximately $75,000 instead of $7,500.",
+            "The feedback period is incorrectly stated as July 16, 2023 to June 30, 2023 instead of May 16 to June 30, 2023.",
+            "The recommendation says to discontinue the digital visitor log instead of continuing it."
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 50
+        }
+      ],
+      "completionSha256": "6faa92d44311a76d4ef1105e41bad651ce6776a75810bac3c3da24423ce35552",
+      "costUsd": "0.00033044",
+      "judge": "openai/gpt-5.6-luna",
+      "provider": "OpenAI",
+      "usage": {
+        "completionTokens": 236,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 2332
+        },
+        "promptTokens": 2335,
+        "providerCostCredits": "0.00033044",
+        "totalTokens": 2571
+      }
+    },
+    "doc-01-canary-tampered::x-ai/grok-4.6": {
+      "batchId": "doc-01-canary-tampered",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "claims": [
+            {
+              "id": "c01",
+              "status": "preserved"
+            },
+            {
+              "id": "c02",
+              "status": "preserved"
+            },
+            {
+              "id": "c03",
+              "status": "changed"
+            },
+            {
+              "id": "c04",
+              "status": "preserved"
+            },
+            {
+              "id": "c05",
+              "status": "changed"
+            },
+            {
+              "id": "c06",
+              "status": "preserved"
+            },
+            {
+              "id": "c07",
+              "status": "changed"
+            },
+            {
+              "id": "c08",
+              "status": "changed"
+            },
+            {
+              "id": "c09",
+              "status": "preserved"
+            },
+            {
+              "id": "c10",
+              "status": "changed"
+            }
+          ],
+          "materialErrors": [
+            "Orientation attendance given as two employees instead of twelve.",
+            "Go-live date given as June 16 instead of May 16, 2023.",
+            "Cost given as approximately $75,000 instead of $7,500.",
+            "Trial/feedback window given as July 16 to June 30 instead of May 16 to June 30.",
+            "Recommendation reversed to discontinue the digital visitor log."
+          ],
+          "readabilityPercent": 90,
+          "usabilityPercent": 40
+        }
+      ],
+      "completionSha256": "ed53ac6d345dd6bcc59b113c3223a5c78802141e5cd730b10cce7849dabf6f6b",
+      "costUsd": "0.003214",
+      "judge": "x-ai/grok-4.6",
+      "provider": "xAI",
+      "usage": {
+        "completionTokens": 300,
+        "promptTokenDetails": {
+          "cacheWriteTokens": 0,
+          "cachedTokens": 2688
+        },
+        "promptTokens": 2723,
+        "providerCostCredits": "0.003214",
+        "totalTokens": 3023
+      }
+    }
+  },
+  "canary": {
+    "judges": [
+      {
+        "detectedTargetCount": 5,
+        "emptyPreservedCount": 0,
+        "emptyUsabilityPercent": 0,
+        "identicalPreservedCount": 10,
+        "judge": "openai/gpt-5.6-luna",
+        "passed": true,
+        "preservedControlCount": 5
+      },
+      {
+        "detectedTargetCount": 5,
+        "emptyPreservedCount": 0,
+        "emptyUsabilityPercent": 0,
+        "identicalPreservedCount": 10,
+        "judge": "anthropic/claude-sonnet-5",
+        "passed": true,
+        "preservedControlCount": 5
+      },
+      {
+        "detectedTargetCount": 5,
+        "emptyPreservedCount": 0,
+        "emptyUsabilityPercent": 0,
+        "identicalPreservedCount": 10,
+        "judge": "google/gemma-4-31b-it",
+        "passed": true,
+        "preservedControlCount": 5
+      },
+      {
+        "detectedTargetCount": 5,
+        "emptyPreservedCount": 0,
+        "emptyUsabilityPercent": 0,
+        "identicalPreservedCount": 10,
+        "judge": "x-ai/grok-4.6",
+        "passed": true,
+        "preservedControlCount": 5
+      }
+    ],
+    "passed": true
+  },
+  "configSha256": "90bf425a8c792931a984bd2c17e3aee1e0982eb84a3c2a293c2c230193594ddd",
+  "createdAt": "2026-08-22T09:17:52.548994Z",
+  "inFlight": {},
+  "methodology": "Durable four-vendor panel checkpoint. Reserve each request before dispatch, never redispatch an unresolved call, blind method identity, and reject any percentage outside 0..100 in ten-point increments.",
+  "mode": "canary",
+  "panelInputSha256": "d6dcf59803c7dd7bf4510336901f87c5d8ee5603225f9a4994fa0b089562e981",
+  "priorCostUsd": "0",
+  "priorSpendEvidence": null,
+  "schemaVersion": 1,
+  "selectedModels": [
+    "openai/gpt-5.6-luna",
+    "anthropic/claude-sonnet-5",
+    "google/gemma-4-31b-it",
+    "x-ai/grok-4.6"
+  ],
+  "sources": [
+    "https://openrouter.ai/api/v1/models",
+    "https://huggingface.co/kalpeshk2011/dipper-paraphraser-xxl",
+    "https://github.com/eth-sri/watermark-stealing"
+  ],
+  "status": "complete",
+  "totalCostUsd": "0.04406390",
+  "verifiedAt": "2026-08-22T09:18:19.874309Z"
+}

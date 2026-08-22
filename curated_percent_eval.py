@@ -13,6 +13,7 @@ from collections import defaultdict
 from datetime import datetime, timezone
 import hashlib
 import json
+from decimal import Decimal
 import math
 from pathlib import Path
 import random
@@ -463,6 +464,71 @@ def combine_panel_artifacts(
     return combined_input, combined_output
 
 
+def merge_single_candidate_panels(
+    *,
+    panel_input: Mapping[str, object],
+    outputs: Sequence[Mapping[str, object]],
+    judge_models: Sequence[str],
+) -> dict[str, object]:
+    """Union several one-candidate panel checkpoints over the same frozen input.
+
+    Every checkpoint must have been produced against ``panel_input`` (same
+    ``panelInputSha256``), call keys must not overlap, and after the union every
+    batch must carry exactly one valid verdict from each configured judge.
+    """
+    input_sha = sha256_text(
+        json.dumps(panel_input, ensure_ascii=False, sort_keys=True)
+    )
+    calls: dict[str, object] = {}
+    total = Decimal(0)
+    evidence = []
+    for output in outputs:
+        overlap = set(calls) & set(output["calls"])
+        if overlap:
+            raise ValueError(f"panel call keys overlap while merging: {sorted(overlap)[:3]}")
+        calls.update(output["calls"])
+        total += Decimal(str(output["totalCostUsd"]))
+        evidence.append(
+            {
+                "panelInputSha256": output.get("panelInputSha256"),
+                "selectedModels": output.get("selectedModels"),
+                "status": output.get("status"),
+                "totalCostUsd": output.get("totalCostUsd"),
+            }
+        )
+    expected_models = set(judge_models)
+    for batch in panel_input["batches"]:
+        if len(batch["candidates"]) != 1:
+            raise ValueError(f"batch {batch['batchId']} is not single-candidate")
+        seen = set()
+        for model in expected_models:
+            call = calls.get(f"{batch['batchId']}::{model}")
+            if not call or "candidates" not in call:
+                raise ValueError(f"missing valid verdict {batch['batchId']}::{model}")
+            seen.add(model)
+        if seen != expected_models:
+            raise ValueError(f"incomplete judge set for {batch['batchId']}")
+    now = utc_now()
+    return {
+        "calls": calls,
+        "createdAt": now,
+        "inputDigestSha256": input_sha,
+        "mergedFrom": evidence,
+        "methodology": (
+            "Union of one-candidate panel checkpoints over one frozen single-candidate "
+            "input. Every judge saw exactly one source and one candidate per prompt, so "
+            "no verdict could be contaminated by a neighbouring candidate. Every final "
+            "pair has exactly four vendor-independent verdicts under the same claims "
+            "and ten-percent contract."
+        ),
+        "schemaVersion": 1,
+        "sources": panel_input["sources"],
+        "status": "complete",
+        "totalCostUsd": format(total, "f"),
+        "verifiedAt": now,
+    }
+
+
 def summarize_final_pairs(
     pairs: Sequence[Mapping[str, object]], methods: Sequence[str]
 ) -> dict[str, object]:
@@ -632,6 +698,23 @@ def _split_panel_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def _merge_single_panel_command(args: argparse.Namespace) -> int:
+    config, _, _, _ = load_design(args.config)
+    panel_input = json.loads(args.input.read_text(encoding="utf-8"))
+    outputs = [json.loads(path.read_text(encoding="utf-8")) for path in args.outputs]
+    merged = merge_single_candidate_panels(
+        panel_input=panel_input,
+        outputs=outputs,
+        judge_models=[judge["model"] for judge in config["judges"]],
+    )
+    merged["mergedFromFiles"] = [
+        {"path": str(path), "sha256": sha256_file(path)} for path in args.outputs
+    ]
+    merged["panelInputSha256"] = sha256_file(args.input)
+    write_json_atomic(args.output_panel, merged)
+    return 0
+
+
 def _combine_panel_command(args: argparse.Namespace) -> int:
     values = [
         json.loads(path.read_text(encoding="utf-8"))
@@ -690,6 +773,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     split.add_argument("--output", type=Path, required=True)
     split.add_argument("--label", default="single")
     split.set_defaults(handler=_split_panel_command)
+    merge = commands.add_parser("merge-single-panel")
+    merge.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
+    merge.add_argument("--input", type=Path, required=True)
+    merge.add_argument("--outputs", type=Path, nargs="+", required=True)
+    merge.add_argument("--output-panel", type=Path, required=True)
+    merge.set_defaults(handler=_merge_single_panel_command)
+
     combine = commands.add_parser("combine-panel")
     combine.add_argument("--batched-input", type=Path, required=True)
     combine.add_argument("--split-input", type=Path, required=True)

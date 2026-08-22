@@ -165,5 +165,51 @@ class CuratedPercentEvalTests(unittest.TestCase):
         self.assertEqual(combined_output["totalCostUsd"], "0.3")
 
 
+class MergeSingleCandidatePanelsTest(unittest.TestCase):
+    def _input(self):
+        return {
+            "batches": [
+                {"batchId": "doc-01-s-candidate-01", "candidates": [{"candidateId": "candidate-01", "text": "a"}]},
+                {"batchId": "doc-01-s-candidate-02", "candidates": [{"candidateId": "candidate-02", "text": "b"}]},
+            ],
+            "blindMap": {},
+            "sources": [],
+        }
+
+    def _output(self, models, cost):
+        calls = {}
+        for batch in self._input()["batches"]:
+            for model in models:
+                calls[f"{batch['batchId']}::{model}"] = {
+                    "batchId": batch["batchId"],
+                    "candidates": [{"candidateId": batch["candidates"][0]["candidateId"]}],
+                    "judge": model,
+                }
+        return {"calls": calls, "totalCostUsd": cost, "status": "complete"}
+
+    def test_merge_unions_disjoint_judges_and_sums_cost(self):
+        merged = evaluation.merge_single_candidate_panels(
+            panel_input=self._input(),
+            outputs=[self._output(["a/x"], "0.10"), self._output(["b/y", "c/z"], "0.25")],
+            judge_models=["a/x", "b/y", "c/z"],
+        )
+        self.assertEqual(len(merged["calls"]), 6)
+        self.assertEqual(merged["totalCostUsd"], "0.35")
+
+    def test_merge_rejects_overlap_and_missing_judges(self):
+        with self.assertRaises(ValueError):
+            evaluation.merge_single_candidate_panels(
+                panel_input=self._input(),
+                outputs=[self._output(["a/x"], "0.1"), self._output(["a/x"], "0.1")],
+                judge_models=["a/x"],
+            )
+        with self.assertRaises(ValueError):
+            evaluation.merge_single_candidate_panels(
+                panel_input=self._input(),
+                outputs=[self._output(["a/x"], "0.1")],
+                judge_models=["a/x", "b/y"],
+            )
+
+
 if __name__ == "__main__":
     unittest.main()

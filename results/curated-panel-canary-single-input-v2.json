@@ -1,0 +1,191 @@
+{
+  "batches": [
+    {
+      "batchId": "doc-01-canary-identical",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "text": "In March 2023, the Sunset Valley Public Library initiated the process of digitalizing its visitor log system, transitioning from a traditional paper-based visitor book to a digital sign-in system using tablets. The goal was to streamline the check-in process for patrons while reducing the administrative burden on the staff. To facilitate this transition, the library collaborated with a tech company specializing in digital solutions for educational establishments.\n\nThe project planning phase began in late March 2023, where the library acquired two Samsung Galaxy tablets specifically equipped with a visitor log application, designed by the aforementioned tech company. Both devices were available for installation and configuration starting from April 1st. According to the plans laid out during the spring of that year, each device would be stationed at opposite ends of the library entrance to ensure convenient access for all visitors upon entry.\n\nFacing the challenge of integrating technology into an environment accustomed to paper, Margaret Hart, the head librarian, took the lead in training the library staff. The initial orientation session was held on April 10th, 2023, and was attended by twelve library employees. Margaret emphasized the importance of this change to enhance the overall visitor experience and increase operational efficiency within the library. She also noted that the system had some user-friendly features such as a touchscreen interface and straightforward data protection measures in place.\n\nHowever, the transition was not without its challenges. In early May 2023, the library encountered a significant obstacle when neither of the tablets connected properly to the library's Wi-Fi network, which was critical for maintaining a seamless flow of visitor data. The library promptly reached out to the tech company, and a technician visited on-site on May 8th to troubleshoot the issue. This incident delayed the official launch of the new visitor log system, originally scheduled for May 1st, but the resolution occurred two days ahead of the revised target date of May 14th.\n\nOn May 16th, 2023, the digital sign-in system went live for public use. Margaret observed that there was initial confusion among some patrons, primarily older visitors who were less accustomed to digital interactions. However, library staff efficiently guided these individuals through the process in a friendly manner, ensuring the transition was as smooth as possible for all visitors. Within three weeks of implementation, the staff noted that patrons had generally adapted well to the new system, as shown by the ease with which they could now sign in on arrival.\n\nThe new system allowed library staff to record additional information about visitors, including their preferred method of contact and specific interests, which facilitated personalized recommendations for events or services tailored to those preferences. The costs associated with the purchase of the tablets and the application amounted to approximately $7,500, a price deemed acceptable given the estimated savings on paper and the time saved managing paper logs.\n\nThroughout the trial period from May 16th to June 30th, Margaret and her team gathered feedback from both visitors and staff members. They identified areas of concern such as the need for more robust hardware durability and potential upgrades to the data analysis capabilities of the software. Nevertheless, the overall reception was positive, indicating that the transition had largely been successful.\n\nTo fully gauge the effectiveness of the new system, the outcomes will continue to be closely monitored through December 2023. Nevertheless, based on observed benefits and feedback during the first phase, the project looks likely to contribute positively to the library’s operations and service offerings going forward.\n\nThe report recommends that the Sunset Valley Public Library continue utilizing the digital visitor log system due to its efficiency and user-friendly design. It further suggests allocating a budget for potential future updates to maintain technological relevance and to explore software enhancements that could provide even greater utility to library patrons and staff alike.",
+          "textSha256": "0e2674e757dc5117f8f04edb0076871fdee8c6b9d9c41df39f15ca81b9aae187"
+        }
+      ],
+      "claims": [
+        {
+          "id": "c01",
+          "text": "In March 2023, Sunset Valley Public Library began replacing its paper visitor log with a tablet-based digital sign-in system."
+        },
+        {
+          "id": "c02",
+          "text": "The library acquired two Samsung Galaxy tablets with a visitor-log application, with installation and configuration available from April 1, 2023."
+        },
+        {
+          "id": "c03",
+          "text": "Head librarian Margaret Hart led an April 10, 2023 orientation attended by twelve library employees."
+        },
+        {
+          "id": "c04",
+          "text": "A Wi-Fi connection failure delayed the May 1 launch; a technician visited May 8 and the issue was resolved before the revised May 14 target."
+        },
+        {
+          "id": "c05",
+          "text": "The digital sign-in system went live on May 16, 2023, and staff initially helped older patrons who found it confusing."
+        },
+        {
+          "id": "c06",
+          "text": "The system recorded visitors' preferred contact method and interests so the library could tailor recommendations."
+        },
+        {
+          "id": "c07",
+          "text": "The tablets and application cost approximately $7,500."
+        },
+        {
+          "id": "c08",
+          "text": "Feedback gathered from May 16 through June 30 was broadly positive but identified hardware-durability and data-analysis concerns."
+        },
+        {
+          "id": "c09",
+          "text": "The library planned to continue monitoring outcomes through December 2023."
+        },
+        {
+          "id": "c10",
+          "text": "The report recommends continuing the digital visitor log and budgeting for future updates and software enhancements."
+        }
+      ],
+      "documentId": "doc-01",
+      "sourceText": "In March 2023, the Sunset Valley Public Library initiated the process of digitalizing its visitor log system, transitioning from a traditional paper-based visitor book to a digital sign-in system using tablets. The goal was to streamline the check-in process for patrons while reducing the administrative burden on the staff. To facilitate this transition, the library collaborated with a tech company specializing in digital solutions for educational establishments.\n\nThe project planning phase began in late March 2023, where the library acquired two Samsung Galaxy tablets specifically equipped with a visitor log application, designed by the aforementioned tech company. Both devices were available for installation and configuration starting from April 1st. According to the plans laid out during the spring of that year, each device would be stationed at opposite ends of the library entrance to ensure convenient access for all visitors upon entry.\n\nFacing the challenge of integrating technology into an environment accustomed to paper, Margaret Hart, the head librarian, took the lead in training the library staff. The initial orientation session was held on April 10th, 2023, and was attended by twelve library employees. Margaret emphasized the importance of this change to enhance the overall visitor experience and increase operational efficiency within the library. She also noted that the system had some user-friendly features such as a touchscreen interface and straightforward data protection measures in place.\n\nHowever, the transition was not without its challenges. In early May 2023, the library encountered a significant obstacle when neither of the tablets connected properly to the library's Wi-Fi network, which was critical for maintaining a seamless flow of visitor data. The library promptly reached out to the tech company, and a technician visited on-site on May 8th to troubleshoot the issue. This incident delayed the official launch of the new visitor log system, originally scheduled for May 1st, but the resolution occurred two days ahead of the revised target date of May 14th.\n\nOn May 16th, 2023, the digital sign-in system went live for public use. Margaret observed that there was initial confusion among some patrons, primarily older visitors who were less accustomed to digital interactions. However, library staff efficiently guided these individuals through the process in a friendly manner, ensuring the transition was as smooth as possible for all visitors. Within three weeks of implementation, the staff noted that patrons had generally adapted well to the new system, as shown by the ease with which they could now sign in on arrival.\n\nThe new system allowed library staff to record additional information about visitors, including their preferred method of contact and specific interests, which facilitated personalized recommendations for events or services tailored to those preferences. The costs associated with the purchase of the tablets and the application amounted to approximately $7,500, a price deemed acceptable given the estimated savings on paper and the time saved managing paper logs.\n\nThroughout the trial period from May 16th to June 30th, Margaret and her team gathered feedback from both visitors and staff members. They identified areas of concern such as the need for more robust hardware durability and potential upgrades to the data analysis capabilities of the software. Nevertheless, the overall reception was positive, indicating that the transition had largely been successful.\n\nTo fully gauge the effectiveness of the new system, the outcomes will continue to be closely monitored through December 2023. Nevertheless, based on observed benefits and feedback during the first phase, the project looks likely to contribute positively to the library’s operations and service offerings going forward.\n\nThe report recommends that the Sunset Valley Public Library continue utilizing the digital visitor log system due to its efficiency and user-friendly design. It further suggests allocating a budget for potential future updates to maintain technological relevance and to explore software enhancements that could provide even greater utility to library patrons and staff alike.",
+      "sourceTextSha256": "0e2674e757dc5117f8f04edb0076871fdee8c6b9d9c41df39f15ca81b9aae187"
+    },
+    {
+      "batchId": "doc-01-canary-tampered",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "text": "In March 2023, the Sunset Valley Public Library initiated the process of digitalizing its visitor log system, transitioning from a traditional paper-based visitor book to a digital sign-in system using tablets. The goal was to streamline the check-in process for patrons while reducing the administrative burden on the staff. To facilitate this transition, the library collaborated with a tech company specializing in digital solutions for educational establishments.\n\nThe project planning phase began in late March 2023, where the library acquired two Samsung Galaxy tablets specifically equipped with a visitor log application, designed by the aforementioned tech company. Both devices were available for installation and configuration starting from April 1st. According to the plans laid out during the spring of that year, each device would be stationed at opposite ends of the library entrance to ensure convenient access for all visitors upon entry.\n\nFacing the challenge of integrating technology into an environment accustomed to paper, Margaret Hart, the head librarian, took the lead in training the library staff. The initial orientation session was held on April 10th, 2023, and was attended by two library employees. Margaret emphasized the importance of this change to enhance the overall visitor experience and increase operational efficiency within the library. She also noted that the system had some user-friendly features such as a touchscreen interface and straightforward data protection measures in place.\n\nHowever, the transition was not without its challenges. In early May 2023, the library encountered a significant obstacle when neither of the tablets connected properly to the library's Wi-Fi network, which was critical for maintaining a seamless flow of visitor data. The library promptly reached out to the tech company, and a technician visited on-site on May 8th to troubleshoot the issue. This incident delayed the official launch of the new visitor log system, originally scheduled for May 1st, but the resolution occurred two days ahead of the revised target date of May 14th.\n\nOn June 16th, 2023, the digital sign-in system went live for public use. Margaret observed that there was initial confusion among some patrons, primarily older visitors who were less accustomed to digital interactions. However, library staff efficiently guided these individuals through the process in a friendly manner, ensuring the transition was as smooth as possible for all visitors. Within three weeks of implementation, the staff noted that patrons had generally adapted well to the new system, as shown by the ease with which they could now sign in on arrival.\n\nThe new system allowed library staff to record additional information about visitors, including their preferred method of contact and specific interests, which facilitated personalized recommendations for events or services tailored to those preferences. The costs associated with the purchase of the tablets and the application amounted to approximately $75,000, a price deemed acceptable given the estimated savings on paper and the time saved managing paper logs.\n\nThroughout the trial period from July 16th to June 30th, Margaret and her team gathered feedback from both visitors and staff members. They identified areas of concern such as the need for more robust hardware durability and potential upgrades to the data analysis capabilities of the software. Nevertheless, the overall reception was positive, indicating that the transition had largely been successful.\n\nTo fully gauge the effectiveness of the new system, the outcomes will continue to be closely monitored through December 2023. Nevertheless, based on observed benefits and feedback during the first phase, the project looks likely to contribute positively to the library’s operations and service offerings going forward.\n\nThe report recommends that the Sunset Valley Public Library discontinue the digital visitor log system due to its efficiency and user-friendly design. It further suggests allocating a budget for potential future updates to maintain technological relevance and to explore software enhancements that could provide even greater utility to library patrons and staff alike.",
+          "textSha256": "64f968cdd8a2ef3465a9ae3810266bc1c19c922de893ce597a2e0ea7defb48aa"
+        }
+      ],
+      "claims": [
+        {
+          "id": "c01",
+          "text": "In March 2023, Sunset Valley Public Library began replacing its paper visitor log with a tablet-based digital sign-in system."
+        },
+        {
+          "id": "c02",
+          "text": "The library acquired two Samsung Galaxy tablets with a visitor-log application, with installation and configuration available from April 1, 2023."
+        },
+        {
+          "id": "c03",
+          "text": "Head librarian Margaret Hart led an April 10, 2023 orientation attended by twelve library employees."
+        },
+        {
+          "id": "c04",
+          "text": "A Wi-Fi connection failure delayed the May 1 launch; a technician visited May 8 and the issue was resolved before the revised May 14 target."
+        },
+        {
+          "id": "c05",
+          "text": "The digital sign-in system went live on May 16, 2023, and staff initially helped older patrons who found it confusing."
+        },
+        {
+          "id": "c06",
+          "text": "The system recorded visitors' preferred contact method and interests so the library could tailor recommendations."
+        },
+        {
+          "id": "c07",
+          "text": "The tablets and application cost approximately $7,500."
+        },
+        {
+          "id": "c08",
+          "text": "Feedback gathered from May 16 through June 30 was broadly positive but identified hardware-durability and data-analysis concerns."
+        },
+        {
+          "id": "c09",
+          "text": "The library planned to continue monitoring outcomes through December 2023."
+        },
+        {
+          "id": "c10",
+          "text": "The report recommends continuing the digital visitor log and budgeting for future updates and software enhancements."
+        }
+      ],
+      "documentId": "doc-01",
+      "sourceText": "In March 2023, the Sunset Valley Public Library initiated the process of digitalizing its visitor log system, transitioning from a traditional paper-based visitor book to a digital sign-in system using tablets. The goal was to streamline the check-in process for patrons while reducing the administrative burden on the staff. To facilitate this transition, the library collaborated with a tech company specializing in digital solutions for educational establishments.\n\nThe project planning phase began in late March 2023, where the library acquired two Samsung Galaxy tablets specifically equipped with a visitor log application, designed by the aforementioned tech company. Both devices were available for installation and configuration starting from April 1st. According to the plans laid out during the spring of that year, each device would be stationed at opposite ends of the library entrance to ensure convenient access for all visitors upon entry.\n\nFacing the challenge of integrating technology into an environment accustomed to paper, Margaret Hart, the head librarian, took the lead in training the library staff. The initial orientation session was held on April 10th, 2023, and was attended by twelve library employees. Margaret emphasized the importance of this change to enhance the overall visitor experience and increase operational efficiency within the library. She also noted that the system had some user-friendly features such as a touchscreen interface and straightforward data protection measures in place.\n\nHowever, the transition was not without its challenges. In early May 2023, the library encountered a significant obstacle when neither of the tablets connected properly to the library's Wi-Fi network, which was critical for maintaining a seamless flow of visitor data. The library promptly reached out to the tech company, and a technician visited on-site on May 8th to troubleshoot the issue. This incident delayed the official launch of the new visitor log system, originally scheduled for May 1st, but the resolution occurred two days ahead of the revised target date of May 14th.\n\nOn May 16th, 2023, the digital sign-in system went live for public use. Margaret observed that there was initial confusion among some patrons, primarily older visitors who were less accustomed to digital interactions. However, library staff efficiently guided these individuals through the process in a friendly manner, ensuring the transition was as smooth as possible for all visitors. Within three weeks of implementation, the staff noted that patrons had generally adapted well to the new system, as shown by the ease with which they could now sign in on arrival.\n\nThe new system allowed library staff to record additional information about visitors, including their preferred method of contact and specific interests, which facilitated personalized recommendations for events or services tailored to those preferences. The costs associated with the purchase of the tablets and the application amounted to approximately $7,500, a price deemed acceptable given the estimated savings on paper and the time saved managing paper logs.\n\nThroughout the trial period from May 16th to June 30th, Margaret and her team gathered feedback from both visitors and staff members. They identified areas of concern such as the need for more robust hardware durability and potential upgrades to the data analysis capabilities of the software. Nevertheless, the overall reception was positive, indicating that the transition had largely been successful.\n\nTo fully gauge the effectiveness of the new system, the outcomes will continue to be closely monitored through December 2023. Nevertheless, based on observed benefits and feedback during the first phase, the project looks likely to contribute positively to the library’s operations and service offerings going forward.\n\nThe report recommends that the Sunset Valley Public Library continue utilizing the digital visitor log system due to its efficiency and user-friendly design. It further suggests allocating a budget for potential future updates to maintain technological relevance and to explore software enhancements that could provide even greater utility to library patrons and staff alike.",
+      "sourceTextSha256": "0e2674e757dc5117f8f04edb0076871fdee8c6b9d9c41df39f15ca81b9aae187"
+    },
+    {
+      "batchId": "doc-01-canary-empty",
+      "candidates": [
+        {
+          "candidateId": "candidate-01",
+          "text": "",
+          "textSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "claims": [
+        {
+          "id": "c01",
+          "text": "In March 2023, Sunset Valley Public Library began replacing its paper visitor log with a tablet-based digital sign-in system."
+        },
+        {
+          "id": "c02",
+          "text": "The library acquired two Samsung Galaxy tablets with a visitor-log application, with installation and configuration available from April 1, 2023."
+        },
+        {
+          "id": "c03",
+          "text": "Head librarian Margaret Hart led an April 10, 2023 orientation attended by twelve library employees."
+        },
+        {
+          "id": "c04",
+          "text": "A Wi-Fi connection failure delayed the May 1 launch; a technician visited May 8 and the issue was resolved before the revised May 14 target."
+        },
+        {
+          "id": "c05",
+          "text": "The digital sign-in system went live on May 16, 2023, and staff initially helped older patrons who found it confusing."
+        },
+        {
+          "id": "c06",
+          "text": "The system recorded visitors' preferred contact method and interests so the library could tailor recommendations."
+        },
+        {
+          "id": "c07",
+          "text": "The tablets and application cost approximately $7,500."
+        },
+        {
+          "id": "c08",
+          "text": "Feedback gathered from May 16 through June 30 was broadly positive but identified hardware-durability and data-analysis concerns."
+        },
+        {
+          "id": "c09",
+          "text": "The library planned to continue monitoring outcomes through December 2023."
+        },
+        {
+          "id": "c10",
+          "text": "The report recommends continuing the digital visitor log and budgeting for future updates and software enhancements."
+        }
+      ],
+      "documentId": "doc-01",
+      "sourceText": "In March 2023, the Sunset Valley Public Library initiated the process of digitalizing its visitor log system, transitioning from a traditional paper-based visitor book to a digital sign-in system using tablets. The goal was to streamline the check-in process for patrons while reducing the administrative burden on the staff. To facilitate this transition, the library collaborated with a tech company specializing in digital solutions for educational establishments.\n\nThe project planning phase began in late March 2023, where the library acquired two Samsung Galaxy tablets specifically equipped with a visitor log application, designed by the aforementioned tech company. Both devices were available for installation and configuration starting from April 1st. According to the plans laid out during the spring of that year, each device would be stationed at opposite ends of the library entrance to ensure convenient access for all visitors upon entry.\n\nFacing the challenge of integrating technology into an environment accustomed to paper, Margaret Hart, the head librarian, took the lead in training the library staff. The initial orientation session was held on April 10th, 2023, and was attended by twelve library employees. Margaret emphasized the importance of this change to enhance the overall visitor experience and increase operational efficiency within the library. She also noted that the system had some user-friendly features such as a touchscreen interface and straightforward data protection measures in place.\n\nHowever, the transition was not without its challenges. In early May 2023, the library encountered a significant obstacle when neither of the tablets connected properly to the library's Wi-Fi network, which was critical for maintaining a seamless flow of visitor data. The library promptly reached out to the tech company, and a technician visited on-site on May 8th to troubleshoot the issue. This incident delayed the official launch of the new visitor log system, originally scheduled for May 1st, but the resolution occurred two days ahead of the revised target date of May 14th.\n\nOn May 16th, 2023, the digital sign-in system went live for public use. Margaret observed that there was initial confusion among some patrons, primarily older visitors who were less accustomed to digital interactions. However, library staff efficiently guided these individuals through the process in a friendly manner, ensuring the transition was as smooth as possible for all visitors. Within three weeks of implementation, the staff noted that patrons had generally adapted well to the new system, as shown by the ease with which they could now sign in on arrival.\n\nThe new system allowed library staff to record additional information about visitors, including their preferred method of contact and specific interests, which facilitated personalized recommendations for events or services tailored to those preferences. The costs associated with the purchase of the tablets and the application amounted to approximately $7,500, a price deemed acceptable given the estimated savings on paper and the time saved managing paper logs.\n\nThroughout the trial period from May 16th to June 30th, Margaret and her team gathered feedback from both visitors and staff members. They identified areas of concern such as the need for more robust hardware durability and potential upgrades to the data analysis capabilities of the software. Nevertheless, the overall reception was positive, indicating that the transition had largely been successful.\n\nTo fully gauge the effectiveness of the new system, the outcomes will continue to be closely monitored through December 2023. Nevertheless, based on observed benefits and feedback during the first phase, the project looks likely to contribute positively to the library’s operations and service offerings going forward.\n\nThe report recommends that the Sunset Valley Public Library continue utilizing the digital visitor log system due to its efficiency and user-friendly design. It further suggests allocating a budget for potential future updates to maintain technological relevance and to explore software enhancements that could provide even greater utility to library patrons and staff alike.",
+      "sourceTextSha256": "0e2674e757dc5117f8f04edb0076871fdee8c6b9d9c41df39f15ca81b9aae187"
+    }
+  ],
+  "createdAt": "2026-08-22T09:16:24.999226Z",
+  "expected": {
+    "candidateId": "candidate-01",
+    "emptyBatchId": "doc-01-canary-empty",
+    "identicalBatchId": "doc-01-canary-identical",
+    "tamperedBatchId": "doc-01-canary-tampered",
+    "tamperedClaimIds": [
+      "c03",
+      "c05",
+      "c07",
+      "c08",
+      "c10"
+    ]
+  },
+  "methodology": "Three one-candidate prompts test every judge before a single-candidate panel: a byte-identical positive control, a readable negative control with five deliberate material changes, and an empty candidate that must receive no preserved claims and no usability.",
+  "schemaVersion": 1,
+  "sources": [
+    "https://openrouter.ai/api/v1/models",
+    "https://huggingface.co/kalpeshk2011/dipper-paraphraser-xxl",
+    "https://github.com/eth-sri/watermark-stealing"
+  ],
+  "verifiedAt": "2026-08-22T09:16:24.999226Z"
+}

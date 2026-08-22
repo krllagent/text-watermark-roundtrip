@@ -135,5 +135,83 @@ class CuratedPanelTests(unittest.TestCase):
         self.assertEqual(expected["tamperedClaimIds"], ["c03", "c05", "c07", "c08", "c10"])
 
 
+    def test_single_canary_has_identical_tampered_and_empty_prompts(self):
+        source = (
+            "twelve library employees. On May 16th, 2023. $7,500. "
+            "from May 16th to June 30th. continue utilizing the digital visitor log"
+        )
+        claims = [
+            {"id": f"c{index:02d}", "text": f"Claim {index}."}
+            for index in range(1, 11)
+        ]
+        batches, expected = panel.build_single_canary_batches(source=source, claims=claims)
+
+        self.assertEqual([b["batchId"] for b in batches], [
+            "doc-01-canary-identical", "doc-01-canary-tampered", "doc-01-canary-empty",
+        ])
+        self.assertTrue(all(len(b["candidates"]) == 1 for b in batches))
+        self.assertEqual(batches[0]["candidates"][0]["text"], source)
+        self.assertIn("$75,000", batches[1]["candidates"][0]["text"])
+        self.assertEqual(batches[2]["candidates"][0]["text"], "")
+        self.assertEqual(expected["tamperedClaimIds"], ["c03", "c05", "c07", "c08", "c10"])
+
+    def test_single_canary_validation_fails_judge_that_rewards_empty_text(self):
+        source = (
+            "twelve library employees. On May 16th, 2023. $7,500. "
+            "from May 16th to June 30th. continue utilizing the digital visitor log"
+        )
+        claims = [
+            {"id": f"c{index:02d}", "text": f"Claim {index}."}
+            for index in range(1, 11)
+        ]
+        batches, expected = panel.build_single_canary_batches(source=source, claims=claims)
+        panel_input = {"batches": batches, "expected": expected}
+        judges = [{"model": "good/judge"}, {"model": "bad/judge"}]
+
+        def verdict(statuses, read, usab):
+            return {
+                "candidateId": "candidate-01",
+                "claims": [{"id": f"c{i:02d}", "status": statuses[i - 1]} for i in range(1, 11)],
+                "readabilityPercent": read,
+                "usabilityPercent": usab,
+                "materialErrors": [],
+            }
+
+        preserved = ["preserved"] * 10
+        tampered = [
+            "changed" if f"c{i:02d}" in expected["tamperedClaimIds"] else "preserved"
+            for i in range(1, 11)
+        ]
+        missing = ["missing"] * 10
+        calls = {}
+        for judge in judges:
+            calls[f"doc-01-canary-identical::{judge['model']}"] = {
+                "candidates": [verdict(preserved, 100, 100)]
+            }
+            calls[f"doc-01-canary-tampered::{judge['model']}"] = {
+                "candidates": [verdict(tampered, 90, 80)]
+            }
+        calls["doc-01-canary-empty::good/judge"] = {"candidates": [verdict(missing, 0, 0)]}
+        calls["doc-01-canary-empty::bad/judge"] = {"candidates": [verdict(preserved, 100, 100)]}
+
+        result = panel.validate_canary(panel_input, calls, judges)
+
+        by_judge = {row["judge"]: row for row in result["judges"]}
+        self.assertTrue(by_judge["good/judge"]["passed"])
+        self.assertFalse(by_judge["bad/judge"]["passed"])
+        self.assertEqual(by_judge["bad/judge"]["emptyPreservedCount"], 10)
+        self.assertFalse(result["passed"])
+
+
+    def test_judge_reasoning_effort_defaults_to_panel_and_honours_override(self):
+        config = {"panel": {"reasoningEffort": "none"}}
+        self.assertEqual(panel.judge_reasoning_effort(config, {"model": "a"}), "none")
+        self.assertEqual(
+            panel.judge_reasoning_effort(config, {"model": "b", "reasoningEffort": "low"}),
+            "low",
+        )
+        self.assertEqual(panel.judge_reasoning_effort({}, {"model": "c"}), "none")
+
+
 if __name__ == "__main__":
     unittest.main()

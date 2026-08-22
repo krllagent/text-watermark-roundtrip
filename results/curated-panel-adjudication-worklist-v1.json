@@ -1,0 +1,2769 @@
+{
+  "createdAt": "2026-08-22T09:27:11.787373Z",
+  "materialErrors": [
+    {
+      "documentId": "doc-01",
+      "errors": [
+        {
+          "error": "Cost of tablets and app given as $7,000 instead of the source's $7,500",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Cost stated as $7,000 instead of approximately $7,500",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The stated tablet and application cost is $7,000 rather than the source's approximately $7,500.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The opening contains redundant phrasing: \"paper-based paper book\" and \"digital tablet-based tablet-based system.\"",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Tablets and app cost stated as $7,000 instead of approximately $7,500.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "dipper"
+    },
+    {
+      "documentId": "doc-01",
+      "errors": [
+        {
+          "error": "Margaret Hart is called library director instead of head librarian.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "roundtrip-de"
+    },
+    {
+      "documentId": "doc-02",
+      "errors": [
+        {
+          "error": "Company name given as GreenCycle Bicycle Courier Services instead of GreenCycle Delivery Services",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Mid-trial satisfaction rise stated as 76% to 83% instead of 78% to 83%",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Mid-trial customer satisfaction starting point listed as 76% instead of 78%",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The company is incorrectly named GreenCycle Bicycle Courier Services instead of GreenCycle Delivery Services.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Customer satisfaction is incorrectly stated as rising from 76% to 83% instead of 78% to 83%.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The candidate adds unsupported details, including a thronged downtown setting, a random sample, and public-holiday avoidance.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "It incorrectly says schedules were changed so fewer couriers would be needed during busy periods.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Company is called GreenCycle Bicycle Courier Services rather than GreenCycle Delivery Services.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Mid-trial satisfaction is said to have risen from 76% rather than 78%.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Schedule change is said to reduce courier need in busy periods, not improve peak allocation.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "GPS cost is tied to a generic improved GPS system, not dedicated two-hour-window software updates.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "dipper"
+    },
+    {
+      "documentId": "doc-02",
+      "errors": [
+        {
+          "error": "The phrase “funded additional staffing required for weekly $500” is grammatically malformed, though the intended $500-per-week cost is recoverable from context.",
+          "judge": "openai/gpt-5.6-luna"
+        }
+      ],
+      "method": "roundtrip-zh"
+    },
+    {
+      "documentId": "doc-03",
+      "errors": [
+        {
+          "error": "Omits the 'annual tradition since 1997' founding detail",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "States grades six and seven instead of six through eight",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Does not name Emily Wilson, only 'a seventh-grade project' and later 'Emily'",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "States power outage occurred 'shortly before the start' rather than before opening, and implies it happened but says 'the fair went without a hitch' ambiguously reversing timing of generator mention",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Changes 84.9% figure instead of source's 'nearly 85%', giving false precision not supported by source",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Omitted that the fair had run since 1997",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "Claimed projects were from grades six and seven instead of six through eight",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "Omitted the surname 'Wilson' for Emily",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "It omits the fair's annual history since 1997.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "It changes grades six through eight to grades six and seven.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "It omits Emily Wilson's surname and seventh-grade identification.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "It changes Environmental Studies to the Environment and 90% to nearly nine out of ten.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "It changes the nearly 85% positive judge feedback to 84.9% feeling judging was beneficial.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Omits that the fair has run since 1997.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Grades are six and seven, not six through eight.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Standout student is unnamed; last name Wilson is dropped.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Award category named Environment instead of Environmental Studies.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Outcome given as nearly nine out of ten rather than 90%.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "dipper"
+    },
+    {
+      "documentId": "doc-03",
+      "errors": [
+        {
+          "error": "Source says the fair coincided with 'math day celebrations', but candidate changed this to 'Pi Day celebrations'.",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "It changes the event's math day celebrations to Pi Day celebrations.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "It changes the science community's response to the project into a response from the scientific community.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Fair is said to coincide with Pi Day rather than the school's math day celebrations.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "roundtrip-de"
+    },
+    {
+      "documentId": "doc-03",
+      "errors": [
+        {
+          "error": "Source specifies 'Florence Heights Middle School' but candidate says 'Florence Heights High School'",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Named the school as 'Florence Heights High School' instead of 'Florence Heights Middle School'",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The school is incorrectly identified as Florence Heights High School instead of Florence Heights Middle School.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The claim that Emily's applications resonated with the scientific community is stronger and less faithful than the source's qualified wording about resonating with the science community and judges' potential interest in home gardening.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "School is called Florence Heights High School instead of Middle School.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Judges reviewed three projects per round rather than per rotation.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Backup generator is singular rather than generators.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Nearly 85% of judges gave positive evaluations rather than commented positively.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "roundtrip-zh"
+    },
+    {
+      "documentId": "doc-04",
+      "errors": [
+        {
+          "error": "Cost stated as $3,000 hardware/software plus $500 training (total $3,500 implied but broken down differently) versus source's undifferentiated 'nearly $3,500' total; candidate specifies exact split not supported by source",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "The stated approximately $3,500 total is replaced with $3,000 for hardware and software plus $500 for training, omitting the source's software licenses and training materials framing.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The recommendation for auto-fill options for commonly ordered items is replaced by automatic reminders, materially changing the recommended feature.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Splits cost as about $3,000 hardware/software plus $500 training instead of nearly $3,500 including licenses and training materials.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Recommends automatic reminders for commonly ordered items rather than auto-fill for regular clients' common items.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "dipper"
+    },
+    {
+      "documentId": "doc-04",
+      "errors": [
+        {
+          "error": "Elmwood City is shortened to Elmwood.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Customer engagement activities become customer retention activities.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Delivery time slots become time windows.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "roundtrip-de"
+    },
+    {
+      "documentId": "doc-04",
+      "errors": [
+        {
+          "error": "Candidate text is empty; no content provided at all.",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "The candidate contains no text and omits all ten material claims.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Candidate text is empty so every source claim is omitted.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "roundtrip-zh"
+    },
+    {
+      "documentId": "doc-05",
+      "errors": [
+        {
+          "error": "Fee change stated as $36 to $32 instead of the source's $34 to $30",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Seasonal membership fee incorrectly stated as $36 to $32 instead of $34 to $30",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The maintenance-fee reduction is changed from nearly 24%, with the fee falling from $34 to $30, to one quarter, with the fee falling from $36 to $32.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "President named Johnathan Adams instead of Johnathon Adams",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Fees said to fall by a quarter from $36 to $32 rather than nearly 24% from $34 to $30",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "dipper"
+    },
+    {
+      "documentId": "doc-05",
+      "errors": [
+        {
+          "error": "Maintenance cost reduction is described as a drop in maintenance fees rather than costs enabling a membership-fee cut.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "paraphrase"
+    },
+    {
+      "documentId": "doc-05",
+      "errors": [
+        {
+          "error": "John Adams is called the 'chair' rather than 'president' as in the source (name also shortened from Johnathon to John)",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Johnathon Adams is referred to as John Adams",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The association leader's name and title are changed from president Johnathon Adams to chair John Adams.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Johnathon Adams is named John Adams and called chair rather than president.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Nearly 24% reduction is applied to upkeep costs instead of maintenance fees.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "roundtrip-zh"
+    },
+    {
+      "documentId": "doc-06",
+      "errors": [
+        {
+          "error": "Candidate omits the April 1st start date and the ~5,000-visitor figure, instead vaguely referencing 'four-week trial'",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Candidate states visitors used the guide for 'at least sixty per cent' of their visit rather than 'more than seventy percent' as in the source",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Candidate omits the specific reduction in queue wait times to 'less than two minutes,' only vaguely stating waiting time was reduced",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Robert Johnson is described as 'head of Department of Information and Technology Initiatives' rather than 'head curator of Department of Technology Initiatives'",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Pilot date stated as March 2023 instead of April 2023",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "Visitor usage reported as 60% of visit instead of more than 70%",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "Omitted the fact that wait times dropped to less than two minutes",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "Omitted the number of participants (5,000 visitors)",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The pilot is dated March rather than the source's April 1 start and omits approximately 5,000 participating visitors.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The project leader is described as head of the Department of Information and Technology Initiatives rather than head curator of the Department of Technology Initiatives.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Usage is changed from more than 70% of the visit to at least 60%.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The source's queue reduction to less than two minutes is omitted.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The expense reduction is changed from maintaining physical guides to renting radio equipment. ",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Pilot dated March 2023 rather than April 2023 and omits ~5,000 visitors",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Usage duration given as at least 60% instead of more than 70%",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Does not state waits fell to less than two minutes",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Cost savings attributed to renting radio equipment rather than physical-guide maintenance",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Johnson’s title given as head of Information and Technology Initiatives",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "dipper"
+    },
+    {
+      "documentId": "doc-06",
+      "errors": [
+        {
+          "error": "Launch framed as March 2023 rather than an April 2023 pilot.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Johnson titled senior curator instead of head curator of Technology Initiatives.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "roundtrip-de"
+    },
+    {
+      "documentId": "doc-06",
+      "errors": [
+        {
+          "error": "The sentence 'participants used the audio guide for more than seventy percent of their time in the museum 85%' is garbled, awkwardly duplicating the 85% figure at the end instead of integrating it clearly as in the source.",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "The text contains a typographical error in the fourth paragraph: 'more than seventy percent of their time in the museum 85%'",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The participation statistic is corrupted: “more than seventy percent ... 85%” is grammatically and factually ambiguous.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The sentence introduces an unsupported claim that older visitors were the affected group, though this is consistent with the source's “elderly” wording.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Usage statistic is garbled as 'more than seventy percent of their time in the museum 85%' instead of 85% of participants using the guide for more than 70% of their visit.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "roundtrip-zh"
+    },
+    {
+      "documentId": "doc-07",
+      "errors": [
+        {
+          "error": "Statistician's name changed from Dr. Hannah Lee to 'Dr. X'",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Maintenance checklists are described as issued after the workshops/measures rather than provided during the initial repair, changing the timing/requirement",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Dr. Hannah Lee is referred to only as 'Dr. X'",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "'maintenance checklists' changed to 'detailed maintenance instructions'",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "Dr. Hannah Lee is replaced with the unsupported name Dr. X.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The candidate adds unsupported claims that customers used the resources and that the community was eager to learn.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The phrase \"repeat offenders\" incorrectly characterizes appliances with repeat visits.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Statistician named Dr. X instead of Dr. Hannah Lee.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Maintenance instructions not specified as checklists given during the initial repair.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "dipper"
+    },
+    {
+      "documentId": "doc-07",
+      "errors": [
+        {
+          "error": "Workshops are described as teaching proper care and installation but not troubleshooting; troubleshooting appears only in the later recommendation.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "paraphrase"
+    },
+    {
+      "documentId": "doc-07",
+      "errors": [
+        {
+          "error": "Source specifies the 'gear system' was damaged, but candidate says 'transmission system' was damaged, a different component",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Changed 'gear system' to 'transmission system'",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The damaged gear system is incorrectly called a transmission system.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The supplier is incorrectly called an appliance dealer rather than an appliance supplier.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Return repair described as a damaged transmission system instead of a damaged gear system.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "roundtrip-de"
+    },
+    {
+      "documentId": "doc-07",
+      "errors": [
+        {
+          "error": "Workshops are described as teaching upkeep and installation, not troubleshooting as claimed.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "synonyms"
+    },
+    {
+      "documentId": "doc-08",
+      "errors": [
+        {
+          "error": "The candidate omits that the 8:30 PM run specifically targeted students and employees, instead attributing the addition generically to growing public demand",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "The candidate attributes the added bus to 'the maintenance department' rather than the 'Fleet Services Department' as in the source",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "The candidate omits that the 8:30 PM run specifically targeted students and employees.",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The candidate attributes the addition of the second bus to the maintenance department instead of Fleet Services.",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The stated purpose of the added 8:30 p.m. run omits that it targeted students and employees.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The candidate says the new schedule increased the frequency of stops, which is not stated in the source.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Omits that the 8:30 PM run targeted students and employees.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Names the maintenance department rather than Fleet Services as adding the extra bus.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "dipper"
+    },
+    {
+      "documentId": "doc-08",
+      "errors": [
+        {
+          "error": "Survey result is described as 85% satisfied or very satisfied instead of satisfaction or very high satisfaction.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "roundtrip-zh"
+    },
+    {
+      "documentId": "doc-09",
+      "errors": [
+        {
+          "error": "Meeting time given as only 7:45 am without the end time (8:00 am), losing the specific 15-minute window stated in the source",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "States 'no significant drop in staff satisfaction was noticed' during the breakdown, contradicting the source's claim of a significant drop in satisfaction",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "States satisfaction rose by 16% instead of the source's 15%",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "Morning meeting end time (8:00 AM) is missing",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "Claims no significant drop in staff satisfaction during repair, contradicting source",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "Reports satisfaction rose by 16% instead of 15%",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The meetings are described as occurring at 7:45 AM, omitting the source's 7:45–8:00 AM time window.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The satisfaction increase is reported as 16% instead of 15%.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "States no significant drop in staff satisfaction after the 17 February breakdown; the source reports a significant drop.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Gives a 16% satisfaction rise instead of 15%.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Says Mary was given $250 rather than that she allocated it.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Sets meetings at 7.45 am only and omits the 8:00 AM end time.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "dipper"
+    },
+    {
+      "documentId": "doc-09",
+      "errors": [
+        {
+          "error": "Breakdown described as reducing staff morale rather than a significant drop in employee satisfaction.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "paraphrase"
+    },
+    {
+      "documentId": "doc-09",
+      "errors": [
+        {
+          "error": "Mary is titled facilities supervisor instead of facility manager.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "synonyms"
+    },
+    {
+      "documentId": "doc-10",
+      "errors": [
+        {
+          "error": "The cost of the new reservation system is missing (stated as '$,' with no figure, whereas source specifies $4,250)",
+          "judge": "anthropic/claude-sonnet-5"
+        },
+        {
+          "error": "The cost of the automated reservation system is missing ($4,250).",
+          "judge": "google/gemma-4-31b-it"
+        },
+        {
+          "error": "The system cost is rendered as \"$,\" instead of the source's $4,250.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "The opening paragraph contains an awkward, incomplete transition before the cost statement.",
+          "judge": "openai/gpt-5.6-luna"
+        },
+        {
+          "error": "Center name given as Westbury Park Community Aquatic Center rather than Community Aquatics Center.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "System cost is omitted (shown as $) instead of $4,250.",
+          "judge": "x-ai/grok-4.6"
+        },
+        {
+          "error": "Overlap between individual requests and club bookings is attributed to the April 19 IT meeting rather than Sarah's April 17 review.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "dipper"
+    },
+    {
+      "documentId": "doc-10",
+      "errors": [
+        {
+          "error": "Source says running clubs inquired about a similar system for track times; candidate says running groups asked about a comparable system for their track schedules, replacing clubs with groups.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "paraphrase"
+    },
+    {
+      "documentId": "doc-10",
+      "errors": [
+        {
+          "error": "Recommends regular reviews of the booking system rather than regular audits.",
+          "judge": "x-ai/grok-4.6"
+        }
+      ],
+      "method": "roundtrip-de"
+    }
+  ],
+  "methodology": "Every non-unanimous claim vote and every judge-reported material error from the single-candidate panel, with keyword-matched source and candidate sentences for manual review. Adjudication fields are filled by a human reviewer against the full texts; the panel majority remains the published number and adjudication is reported separately.",
+  "nonUnanimousClaims": [
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "The initial orientation session took place on April 10, 2023, and was attended by twelve library employees.",
+        "Faced with the challenge of integrating technology into an environment accustomed to paper, Margaret Hart, the library director, took the lead in training the library staff.",
+        "In March 2023, the Sunset Valley Public Library initiated the digitization of its visitor logbook system, transitioning from a traditional paper-based register to a digital check-in system utilizing tablets."
+      ],
+      "claimId": "c03",
+      "claimText": "Head librarian Margaret Hart led an April 10, 2023 orientation attended by twelve library employees.",
+      "documentId": "doc-01",
+      "method": "roundtrip-de",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "The initial orientation session was held on April 10th, 2023, and was attended by twelve library employees.",
+        "Facing the challenge of integrating technology into an environment accustomed to paper, Margaret Hart, the head librarian, took the lead in training the library staff.",
+        "In March 2023, the Sunset Valley Public Library initiated the process of digitalizing its visitor log system, transitioning from a traditional paper-based visitor book to a digital sign-in system using tablets."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "On 15 March 2023, in the thronged, commercial hub of downtown Seattle, GreenCycle Bicycle Courier Services announced a trial of a two-hour pickup window for its couriers.",
+        "So, beginning 22 March, ten days before the start of the trial, GreenCycle required all its dispatchers to take a series of mandatory training sessions.",
+        "GreenCycle chose a random sample of 50 couriers and 80 business customers, the geographical spread and order frequency of each to ensure a variety of conditions."
+      ],
+      "claimId": "c01",
+      "claimText": "GreenCycle announced the two-hour courier pickup-window trial on March 15, 2023.",
+      "documentId": "doc-02",
+      "method": "dipper",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "In the bustling commercial district of downtown Seattle, on March 15, 2023, GreenCycle Delivery Services announced a trial of its new service feature: a two-hour pickup window for couriers.",
+        "The report recommends expanding the implementation of the two-hour pickup window service across GreenCycle's entire service area, starting with a phased rollout beginning in summer 2023.",
+        "GreenCycle selected a representative sample of fifty couriers and eighty business clients, chosen based on geographic location and frequency of orders to ensure a variety of operating conditions."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "changed",
+        "x-ai/grok-4.6": "preserved"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "The event ran smoothly until shortly before the start, when a short power outage threatened to halt the proceedings.",
+        "A seventh-grade project stood out, which examined the effect of different kinds of soil on plant water uptake, using a range of common vegetables from home gardens.",
+        "The gymnasium had a backup generator, so besides the initial scare, the fair went without a hitch."
+      ],
+      "claimId": "c06",
+      "claimText": "A power outage threatened the event, but backup generators allowed it to continue.",
+      "documentId": "doc-03",
+      "method": "dipper",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "The event ran smoothly until shortly before opening; a power outage temporarily threatened to disrupt proceedings.",
+        "Fortunately, the gym had backup generators installed, allowing the show to go on without a hitch despite the initial scare.",
+        "This year marked the sixth time that the event would be judged not by teachers but by a rotating panel of parents."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "changed",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "preserved"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Eighty awards were given out in various categories, including General Science, Math, and the Environment.",
+        "The science fair took place on March 14, 2023, as part of Math Day celebrations at Florence Heights Middle School.",
+        "Despite the late addition of budgetary considerations, the committee managed to keep costs down to $250, which covered the rental of equipment, refreshments, and printing supplies."
+      ],
+      "claimId": "c07",
+      "claimText": "Awards covered General Science, Mathematics, and Environmental Studies, with Emily among those singled out.",
+      "documentId": "doc-03",
+      "method": "dipper",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 2,
+      "sourceSentences": [
+        "At the conclusion of the fair, eighty awards were distributed across various categories including General Science, Mathematics, and Environmental Studies.",
+        "Among the projects, a standout effort came from seventh-grader Emily Wilson, who examined the effects of different soil types on plant water uptake, using a variety of vegetables common to home gardens.",
+        "Her project not only showcased detailed analysis but also included practical applications that resonated well with both the science community and potential interest in home gardening among judges."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "changed",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "The measured outcome was that the participants were highly engaged, with nearly nine out of ten projects exemplifying solid science and creativity.",
+        "The idea was to give this panel of parents a sense of objectivity, to give parents first-hand insight into their children's projects.",
+        "The fair required student projects to be completed by March 1, giving them ample preparation time and several additional weeks to refine their experimentation and results."
+      ],
+      "claimId": "c08",
+      "claimText": "The measured outcome said 90% of projects demonstrated sound scientific practice and creativity.",
+      "documentId": "doc-03",
+      "method": "dipper",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 1,
+      "sourceSentences": [
+        "The measured outcome revealed a strong engagement level among participants, with 90% of projects demonstrating sound scientific practice and creativity.",
+        "The aim of this arrangement was to ensure neutrality and provide parents with firsthand insight into their children’s projects.",
+        "The science fair required students to complete their projects by March 1st, providing ample preparation time and giving them an opportunity to refine their methodologies and results over several weeks."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "changed",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "changed",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "High levels of parental engagement were also reported, with 84.9% of the judges feeling that judging the fair was a beneficial educational experience.",
+        "The report recommends that the parents continue to judge the fair, as this helped to establish a sense of community and transparency in the judging process.",
+        "This was the sixth year the fair was not judged by teachers, but by a rotating panel of parents who took turns."
+      ],
+      "claimId": "c09",
+      "claimText": "Nearly 85% of parent judges commented positively on the educational value of judging.",
+      "documentId": "doc-03",
+      "method": "dipper",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 2,
+      "sourceSentences": [
+        "Parental involvement was high, with nearly 85% of judges commenting positively on the educational value of participating as judges.",
+        "The report recommends continuing with the parental judging system due to its success in fostering community participation and transparency in grading.",
+        "This year marked the sixth time that the event would be judged not by teachers but by a rotating panel of parents."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "changed",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "changed",
+        "x-ai/grok-4.6": "preserved"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "The Florence Heights Middle School science fair, an annual tradition since 1997, was scheduled for March 14, 2023, coinciding with the school’s Pi Day celebrations.",
+        "Additionally, the report encourages school administration to consider establishing a dedicated science club to sustain young scientists’ interest beyond the annual fair.",
+        "Each participant was assigned a table in the school gymnasium to display their work on the day of the fair."
+      ],
+      "claimId": "c01",
+      "claimText": "Florence Heights Middle School held its science fair on March 14, 2023; it had run since 1997 and this was the sixth parent-panel-judged edition.",
+      "documentId": "doc-03",
+      "method": "roundtrip-de",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 1,
+      "sourceSentences": [
+        "The Florence Heights Middle School science fair, an annual tradition since 1997, was organized for March 14, 2023, coinciding with the school's math day celebrations.",
+        "The science fair required students to complete their projects by March 1st, providing ample preparation time and giving them an opportunity to refine their methodologies and results over several weeks.",
+        "Further, the report encourages the school administration to consider setting up a dedicated science club to sustain young scientists' interests beyond the annual fair."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "changed",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "changed",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Each judge reviewed three projects per round, thus providing multiple perspectives on each student’s effort.",
+        "This year marks the sixth time the event has been judged by a rotating panel of parents rather than teachers.",
+        "To address this, organizers convened a brief meeting midway through the judging process to revisit the scoring guidelines and ensure consistency."
+      ],
+      "claimId": "c03",
+      "claimText": "Each parent judge reviewed three projects per rotation, and organizers held a mid-judging meeting to align scoring.",
+      "documentId": "doc-03",
+      "method": "roundtrip-zh",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "Each judge reviewed three projects per rotation, resulting in multiple perspectives for each student’s endeavor.",
+        "This year marked the sixth time that the event would be judged not by teachers but by a rotating panel of parents.",
+        "To address this, the organizers scheduled a brief meeting halfway through the judging where scoring guidelines were rehashed to ensure consistency."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "The event proceeded smoothly until shortly before opening; a power outage temporarily threatened its continuation.",
+        "Fortunately, the gymnasium was equipped with a backup generator, allowing the exhibition to continue without hindrance despite the initial alarm.",
+        "This year marks the sixth time the event has been judged by a rotating panel of parents rather than teachers."
+      ],
+      "claimId": "c06",
+      "claimText": "A power outage threatened the event, but backup generators allowed it to continue.",
+      "documentId": "doc-03",
+      "method": "roundtrip-zh",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "The event ran smoothly until shortly before opening; a power outage temporarily threatened to disrupt proceedings.",
+        "Fortunately, the gym had backup generators installed, allowing the show to go on without a hitch despite the initial scare.",
+        "This year marked the sixth time that the event would be judged not by teachers but by a rotating panel of parents."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Parental involvement was strong, with nearly 85% of the judges giving positive evaluations of the educational value of serving as judges.",
+        "The report recommends continuing the parent-judging system due to its success in fostering community engagement and scoring transparency.",
+        "This year marks the sixth time the event has been judged by a rotating panel of parents rather than teachers."
+      ],
+      "claimId": "c09",
+      "claimText": "Nearly 85% of parent judges commented positively on the educational value of judging.",
+      "documentId": "doc-03",
+      "method": "roundtrip-zh",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "Parental involvement was high, with nearly 85% of judges commenting positively on the educational value of participating as judges.",
+        "The report recommends continuing with the parental judging system due to its success in fostering community participation and transparency in grading.",
+        "This year marked the sixth time that the event would be judged not by teachers but by a rotating panel of parents."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "The hardware and software would cost about $3,000, plus $500 for the training.",
+        "Training began March 22, 2021, with a focus on basic functions such as how to enter, modify, and safely save entries in the shared document.",
+        "As a next step, it should offer ongoing training and support to ensure that no technological barriers prevent the smooth functioning of the new system."
+      ],
+      "claimId": "c04",
+      "claimText": "The hardware, software licenses, and training materials cost nearly $3,500.",
+      "documentId": "doc-04",
+      "method": "dipper",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 1,
+      "sourceSentences": [
+        "The total cost came to nearly $3,500, which included hardware, software licenses, and training materials.",
+        "Training sessions for the entire team commenced on March 22, 2021, focusing on how to use basic functions like adding, modifying, and saving entries in the shared document safely.",
+        "Additionally, continuous training and support should remain available to ensure technological barriers do not hinder the robust functioning of the newly established system."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "changed",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "changed",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "The report recommends that the bakery adopt more advanced features of the Google Sheets tool such as automatic reminders for approaching deadlines and automatic reminders for commonly ordered items, which would further simplify the process and reduce the administrative burden.",
+        "The hardware and software would cost about $3,000, plus $500 for the training.",
+        "As a next step, it should offer ongoing training and support to ensure that no technological barriers prevent the smooth functioning of the new system."
+      ],
+      "claimId": "c10",
+      "claimText": "The report recommends notifications and auto-fill features plus continuing staff training and support.",
+      "documentId": "doc-04",
+      "method": "dipper",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 2,
+      "sourceSentences": [
+        "The report recommends adopting advanced features within the Google Sheets tool such as automatic notifications for approaching deadlines and auto-fill options for common items ordered by regular clients.",
+        "To address this issue, Sarah and Andrew organized additional evening sessions where those staff members could receive more personalized support from colleagues adept at using the new system.",
+        "Additionally, continuous training and support should remain available to ensure technological barriers do not hinder the robust functioning of the newly established system."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "changed",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Johnathan Adams, president of the local community garden association, reported on his year's activities, including organizing a successful harvest festival with over 500 visitors.",
+        "Over the past year, the garden had grown organic produce successfully, helping to ensure food security while bringing together more than 80 passionate people, creating a lively hub of experienced and novice gardeners."
+      ],
+      "claimId": "c04",
+      "claimText": "Association president Johnathon Adams reported that the fall harvest festival attracted more than five hundred visitors.",
+      "documentId": "doc-05",
+      "method": "dipper",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "Johnathon Adams, the current president of the community garden association, reported on the activities of the past year, including the successful coordination of a fall harvest festival which attracted over five hundred visitors.",
+        "Approximately fifty-five plots were available, up from forty-seven the previous year, thanks to additional funding from the city council that allowed for the expansion of the existing site into previously unused land along the park perimeter."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "This savings allowed the seasonal membership fee to drop from $34 to $30 per person, effective April 1, 2023.",
+        "He pointed out notable gains in maintenance efficiency, which resulted in a reduction of nearly 24% in maintenance costs compared to the previous year."
+      ],
+      "claimId": "c05",
+      "claimText": "Maintenance fees fell by nearly 24%, allowing the seasonal membership fee to drop from $34 to $30.",
+      "documentId": "doc-05",
+      "method": "paraphrase",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "He highlighted significant improvements in maintenance efficiency, leading to a cost reduction of nearly 24% in maintenance fees compared to the prior year.",
+        "This financial perk translated to a reduced membership fee from $34 to $30 per person for the season starting April 1, 2023."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "This financial benefit translated into lower membership fees, dropping from $34 to $30 per person for the season beginning April 1, 2023.",
+        "He highlighted a significant improvement in maintenance efficiency, which reduced upkeep costs by nearly 24% compared to the prior year."
+      ],
+      "claimId": "c05",
+      "claimText": "Maintenance fees fell by nearly 24%, allowing the seasonal membership fee to drop from $34 to $30.",
+      "documentId": "doc-05",
+      "method": "roundtrip-zh",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "He highlighted significant improvements in maintenance efficiency, leading to a cost reduction of nearly 24% in maintenance fees compared to the prior year.",
+        "This financial perk translated to a reduced membership fee from $34 to $30 per person for the season starting April 1, 2023."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "In association with the Museum's local technology partner the museum developed a free app compatible with all major smartphone platforms.",
+        "The project's head was Robert Johnson, head of the museum's Department of Information and Technology Initiatives.",
+        "Mr Johnson and his team were now concentrating on refining the app's usability and adding more interactive features."
+      ],
+      "claimId": "c02",
+      "claimText": "Robert Johnson led the project with a local technology firm that developed a free app for major smartphone platforms.",
+      "documentId": "doc-06",
+      "method": "dipper",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "In partnership with a local technology firm, they developed a free application that was compatible with all major smartphone platforms.",
+        "Robert Johnson, the head curator of the Met's Department of Technology Initiatives, spearheaded the project.",
+        "Over a four-week period, starting on April 1st, approximately 5,000 visitors opted into using their personal smartphones as audio tour devices via a QR code system upon entry."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "changed",
+        "x-ai/grok-4.6": "preserved"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Visitors were required to install the app and accept the terms of usage within thirty minutes of the time of their entry.",
+        "The trial had an unexpected side-effect of reducing waiting time at rental desks for the previous radio-guide equipment, where the average waiting time had been in the past over ten minutes.",
+        "Mr Johnson and his team were now concentrating on refining the app's usability and adding more interactive features."
+      ],
+      "claimId": "c07",
+      "claimText": "Audio-guide queue waits fell from more than ten minutes to less than two minutes.",
+      "documentId": "doc-06",
+      "method": "dipper",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 0,
+      "sourceSentences": [
+        "With the new system, wait times averaged less than two minutes, alleviating a long-standing frustration for many visitors.",
+        "The measured outcomes included a notable decrease in visitor complaints related to long waits and audio-guide shortages, as well as a modest but measurable increase in overall visitor satisfaction.",
+        "Visitors were required to install the app and accept the terms of use within thirty minutes of their entry time."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "missing",
+        "google/gemma-4-31b-it": "changed",
+        "openai/gpt-5.6-luna": "missing",
+        "x-ai/grok-4.6": "missing"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "The trial had reduced the costs of renting radio equipment by an estimated forty per cent, a reduction which if carried out across the whole museum could result in annual cost savings of up to $220,000.",
+        "The trial aimed to reduce the cost of renting radio equipment and, it was hoped, to increase visitor engagement.",
+        "The pilot had a budget of $50,000 for the development of the app, marketing materials, and staff training."
+      ],
+      "claimId": "c09",
+      "claimText": "The pilot was estimated to reduce physical-guide maintenance expenses by 40%, or as much as $220,000 annually if expanded.",
+      "documentId": "doc-06",
+      "method": "dipper",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 2,
+      "sourceSentences": [
+        "Financially, the pilot reduced expenses associated with maintaining the physical guides by an estimated 40%, translating to anticipated yearly savings of up to $220,000 if the system were implemented museum-wide.",
+        "In March 2023, the Metropolitan Museum of Art in New York City launched a pilot program aimed at evaluating the use of mobile device-based audio guides among visitors.",
+        "The initiative sought to reduce the costs associated with traditional audio guide rental services while potentially enhancing visitor engagement and accessibility."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "changed",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "In March 2023, the Metropolitan Museum of Art in New York City launched a pilot program designed to evaluate visitor use of mobile device-based audio guides.",
+        "Over a four-week period starting April 1, approximately 5,000 visitors opted to use their personal smartphones as audio guide devices by utilizing a QR code system upon entry.",
+        "During the test phase, it was found that 85% of participants used the audio guide for more than seventy percent of their museum visit."
+      ],
+      "claimId": "c01",
+      "claimText": "The Metropolitan Museum of Art launched an April 2023 pilot in which approximately 5,000 visitors used their own smartphones as audio guides.",
+      "documentId": "doc-06",
+      "method": "roundtrip-de",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "In March 2023, the Metropolitan Museum of Art in New York City launched a pilot program aimed at evaluating the use of mobile device-based audio guides among visitors.",
+        "Over a four-week period, starting on April 1st, approximately 5,000 visitors opted into using their personal smartphones as audio tour devices via a QR code system upon entry.",
+        "During the trial, it was noted that 85% of participants used the audio guide for more than seventy percent of their visit to the museum."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "In partnership with a local technology firm, they developed a free application compatible with all major smartphone platforms.",
+        "Robert Johnson, the senior curator of the Met’s Technology Initiatives department, led the project.",
+        "Over a four-week period starting April 1, approximately 5,000 visitors opted to use their personal smartphones as audio guide devices by utilizing a QR code system upon entry."
+      ],
+      "claimId": "c02",
+      "claimText": "Robert Johnson led the project with a local technology firm that developed a free app for major smartphone platforms.",
+      "documentId": "doc-06",
+      "method": "roundtrip-de",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "In partnership with a local technology firm, they developed a free application that was compatible with all major smartphone platforms.",
+        "Robert Johnson, the head curator of the Met's Department of Technology Initiatives, spearheaded the project.",
+        "Over a four-week period, starting on April 1st, approximately 5,000 visitors opted into using their personal smartphones as audio tour devices via a QR code system upon entry."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "During the trial, it was noted that participants used the audio guide for more than seventy percent of their time in the museum 85%.",
+        "Furthermore, surveys conducted at the end of the tours indicated an average visitor satisfaction rating of 87% for the new audio guide, exceeding the expectations of museum management.",
+        "Measured outcomes included a significant decrease in visitor complaints related to long waits and audio guide shortages, as well as a modest but measurable increase in overall visitor satisfaction."
+      ],
+      "claimId": "c05",
+      "claimText": "Eighty-five percent used the guide for more than 70% of their visit, and reported satisfaction averaged 87%.",
+      "documentId": "doc-06",
+      "method": "roundtrip-zh",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 1,
+      "sourceSentences": [
+        "During the trial, it was noted that 85% of participants used the audio guide for more than seventy percent of their visit to the museum.",
+        "Furthermore, surveys conducted at the conclusion of tours indicated that the average visitor's satisfaction level with the new audio guide was 87%, higher than expected by the museum management.",
+        "The measured outcomes included a notable decrease in visitor complaints related to long waits and audio-guide shortages, as well as a modest but measurable increase in overall visitor satisfaction."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "changed",
+        "openai/gpt-5.6-luna": "changed",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Volunteers also began to issue detailed maintenance instructions for each appliance, warning against common mistakes such as overloading washers, which had the potential to cause early failures.",
+        "In March 2023, the repair cafe in downtown Springfield began tracking the rate of appliances that returned for a second repair within six months after their first visit.",
+        "X interviewed the owners of these appliances in an attempt to learn why the repairs had failed so early despite the initial success."
+      ],
+      "claimId": "c07",
+      "claimText": "Volunteers began supplying appliance-specific maintenance checklists during the initial repair.",
+      "documentId": "doc-07",
+      "method": "dipper",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 1,
+      "sourceSentences": [
+        "Moreover, volunteers began providing detailed maintenance checklists for each type of appliance during the initial fix, ensuring clear instructions on how to avoid common pitfalls.",
+        "In March 2023, the Repair Cafe located in downtown Springfield began to track the frequency of appliances returning for a second repair within six months of their initial visit.",
+        "Lee started interviewing the owners to understand why these failures occurred despite initially successful repairs."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "changed",
+        "google/gemma-4-31b-it": "changed",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Drawing on the insights gained from these interactions, the Repair Cafe launched a series of educational workshops focused on teaching proper care for household appliances.",
+        "Special attention was given to the correct installation of large appliances, such as washing machines and dryers, to tackle cases where improper setup caused premature wear.",
+        "In March 2023, the Repair Cafe in downtown Springfield started monitoring how often appliances came back for a second fix within six months of their first visit."
+      ],
+      "claimId": "c06",
+      "claimText": "The cafe introduced workshops teaching appliance care, troubleshooting, and correct installation.",
+      "documentId": "doc-07",
+      "method": "paraphrase",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "Based on the insights gathered over these interactions, the Repair Cafe introduced a series of educational workshops aimed at teaching proper care for household appliances.",
+        "In particular, emphasis was placed on the correct installation of large appliances like washing machines and dryers to address incidences where incorrect setup led to premature wear and tear.",
+        "In March 2023, the Repair Cafe located in downtown Springfield began to track the frequency of appliances returning for a second repair within six months of their initial visit."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Drawing on the insights collected from these exchanges, the Repair Cafe launched a series of instructional workshops designed to teach proper upkeep for household appliances.",
+        "Specifically, focus was directed toward the correct installation of large appliances such as washing machines and dryers to tackle instances where wrong setup caused early wear and tear.",
+        "In March 2023, the Repair Cafe situated in downtown Springfield started to monitor the rate of appliances coming back for a second fix within six months of their first visit."
+      ],
+      "claimId": "c06",
+      "claimText": "The cafe introduced workshops teaching appliance care, troubleshooting, and correct installation.",
+      "documentId": "doc-07",
+      "method": "synonyms",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "Based on the insights gathered over these interactions, the Repair Cafe introduced a series of educational workshops aimed at teaching proper care for household appliances.",
+        "In particular, emphasis was placed on the correct installation of large appliances like washing machines and dryers to address incidences where incorrect setup led to premature wear and tear.",
+        "In March 2023, the Repair Cafe located in downtown Springfield began to track the frequency of appliances returning for a second repair within six months of their initial visit."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "and runs until 11:30 p.m., enabling residents to more easily access essential evening services.",
+        "The addition of an 8:30 p.m.",
+        "On the first day of service, the 8:30 p.m."
+      ],
+      "claimId": "c05",
+      "claimText": "Initial overcrowding on the 8:30 PM run led Fleet Services to add another bus.",
+      "documentId": "doc-08",
+      "method": "dipper",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 1,
+      "sourceSentences": [
+        "During the initial days, there were reports of overcrowding on the 8:30 PM run, leading to delays and complaints about insufficient seating capacity.",
+        "After feedback analysis, adjustments were made almost immediately; the Fleet Services Department agreed to add another bus to support this run, enhancing the overall passenger experience.",
+        "The revised timetable featured departures starting from as early as 5:30 PM and extending to 11:30 PM, allowing residents to access essential evening services more comfortably."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "changed",
+        "google/gemma-4-31b-it": "changed",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Surveys of regular riders showed overwhelmingly positive responses, with 85% indicating they were satisfied or very satisfied.",
+        "These metrics included passenger counts, on-time performance, and customer satisfaction levels.",
+        "The reported findings highlight significant improvements in accessibility and convenience for Greenbrook Village residents, aligning closely with the project’s core objectives."
+      ],
+      "claimId": "c08",
+      "claimText": "Passenger surveys reported 85% satisfaction or very high satisfaction.",
+      "documentId": "doc-08",
+      "method": "roundtrip-zh",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "Surveys conducted among regular passengers revealed an overwhelmingly positive response, with 85% expressing either satisfaction or very high satisfaction.",
+        "After feedback analysis, adjustments were made almost immediately; the Fleet Services Department agreed to add another bus to support this run, enhancing the overall passenger experience.",
+        "These included ridership numbers, punctuality rates, and customer satisfaction levels."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "As extra support, Mary was given $250 from the office petty cash to buy cleaning supplies.",
+        "It also recommends extending the cleaning rota to other frequently used appliances, and to use additional office resources to ensure that supplies are always available for maintenance work.",
+        "On 15 January 2023, in response to staff feedback about the East Wing office kitchen's often malfunctioning coffee machine, it was decided to introduce a rota for cleaning the machine, in order to maintain it and avoid overuse."
+      ],
+      "claimId": "c04",
+      "claimText": "Mary allocated $250 for cleaning supplies.",
+      "documentId": "doc-09",
+      "method": "dipper",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "To further support this initiative, Mary allocated $250 from the office's petty cash fund to purchase cleaning supplies.",
+        "In response to employee feedback regarding the frequent malfunctioning of the coffee machine in the East Wing office kitchen, a decision was made on January 15, 2023, to introduce a rotating cleaning schedule to maintain the equipment and prevent overuse.",
+        "Mary, the facility manager, was responsible for implementing the plan."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "On 17 February, the coffee machine broke down immediately before the cleaning session.",
+        "The machine was repaired three days later, but during that time, the staff was not happy, because of the lack of hot drinks in the morning.",
+        "From February's repair, until the end of April, the coffee machine remained in good working order, without any breakdowns that could be attributed to lack of maintenance."
+      ],
+      "claimId": "c05",
+      "claimText": "The machine broke down on February 17 and took three days to repair, reducing employee satisfaction.",
+      "documentId": "doc-09",
+      "method": "dipper",
+      "panelMajorityPreserved": false,
+      "preservedVotes": 1,
+      "sourceSentences": [
+        "It took three days to repair, during which period there was a significant drop in employee satisfaction due to the lack of hot drinks in the morning.",
+        "On February 17, 2023, the coffee machine broke down just before a scheduled cleaning session.",
+        "After the February repair, the coffee machine had not experienced any significant malfunctions by April 30, 2023 that could have been attributed to a lack of maintenance."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "changed",
+        "google/gemma-4-31b-it": "changed",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Repairs took three days, leading to a notable decline in staff morale due to the absence of hot beverages in the mornings.",
+        "From the time of the February repair until April 30, 2023, the coffee machine did not suffer any major breakdowns linked to poor maintenance.",
+        "On February 17, 2023, the machine failed just prior to a scheduled cleaning slot."
+      ],
+      "claimId": "c05",
+      "claimText": "The machine broke down on February 17 and took three days to repair, reducing employee satisfaction.",
+      "documentId": "doc-09",
+      "method": "paraphrase",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "It took three days to repair, during which period there was a significant drop in employee satisfaction due to the lack of hot drinks in the morning.",
+        "On February 17, 2023, the coffee machine broke down just before a scheduled cleaning session.",
+        "After the February repair, the coffee machine had not experienced any significant malfunctions by April 30, 2023 that could have been attributed to a lack of maintenance."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "The roster contained forty-eight personnel, split into eight teams of six, each given a slot in the cleaning cycle.",
+        "In reply to staff comments concerning the frequent breakdowns of the coffee maker in the East Wing office kitchen, a choice was made on January 15, 2023, to launch a rotating cleaning roster to care for the equipment and avoid overuse.",
+        "To further aid this effort, Mary allocated $250 from the office's petty cash fund to buy cleaning products."
+      ],
+      "claimId": "c02",
+      "claimText": "Facility manager Mary organized forty-eight staff into eight groups of six in a cleaning rotation.",
+      "documentId": "doc-09",
+      "method": "synonyms",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "The list included forty-eight staff members, divided into eight groups of six, each assigned a turn in the cleaning rotation.",
+        "Mary, the facility manager, was responsible for implementing the plan.",
+        "To further support this initiative, Mary allocated $250 from the office's petty cash fund to purchase cleaning supplies."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Before January 1, 2023, swimmers had to use a manual reservation process, which frequently led to conflicts and misunderstandings.",
+        "The Westbury Park Community Aquatic Center has undergone extensive renovations, most importantly the installation of a new state-of-the-art reservation system for the four exercise lanes.",
+        "The solution was to reserve time slots in the system for clubs such as the Westbury Swimming Club, which could be used by swimmers when available."
+      ],
+      "claimId": "c01",
+      "claimText": "Westbury Community Aquatics Center had used a conflict-prone manual booking process through January 1, 2023.",
+      "documentId": "doc-10",
+      "method": "dipper",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "In the heart of Westbury Park, the Community Aquatics Center has undergone significant renovations, most notably the installation of a state-of-the-art reservation system for its four lap lanes.",
+        "Up until January 1st, 2023, swimmers had been using a manual booking process which frequently resulted in conflicts and misunderstandings.",
+        "To solve this issue, the aquatics center's management team decided to implement an automated online reservation system, costing $4,250."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "It was found that the booking discrepancies resulted from the overlapping of individual swimmers' requests and the long-term reservations of a swimming club.",
+        "However, on April 16, 2023, Phil Adams, the chairman of the Westbury Swimming Club, contacted Sarah White, the manager, to say that evenings were double booked, which would lead to conflicts, especially during peak hours.",
+        "On April 17, 2023, Sarah White, the manager, checked the reservations reported by Phil Adams."
+      ],
+      "claimId": "c05",
+      "claimText": "Sarah's April 17 review found overlap between individual requests and pre-arranged club bookings.",
+      "documentId": "doc-10",
+      "method": "dipper",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "It was found that the booking discrepancies stemmed from an overlap between individual swimmer requests and pre-arranged club bookings.",
+        "By April 30th, 2023, the system's adjustments proved effective; both individual and club bookings were managed seamlessly without further conflict.",
+        "Adams on April 17th."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "Consequently, multiple local running groups started asking about implementing a comparable system for their track schedules, hinting at wider applicability for this innovative approach.",
+        "By April 30, 2023, the modifications to the system had proven successful, allowing both individual and group reservations to proceed smoothly without further incidents.",
+        "The initial booking window for April opened on March 7, 2023, serving as a preliminary trial of the system’s efficiency ahead of the busy summer months."
+      ],
+      "claimId": "c09",
+      "claimText": "Other local running clubs asked about using a similar system for track reservations.",
+      "documentId": "doc-10",
+      "method": "paraphrase",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "As a result, several local running clubs began inquiring about a similar system for their track times, suggesting the innovative approach could have broader applications.",
+        "Following the installation, the first round of reservations opened on March 7th, 2023, for the month of April, providing an early test-run for the system’s effectiveness before the start of summer season.",
+        "The resolution included setting up reserved blocks in the system specifically for clubs like the WSC while maintaining the ability to accommodate casual bookings around them."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    },
+    {
+      "adjudication": null,
+      "adjudicationNote": null,
+      "candidateEmpty": false,
+      "candidateSentences": [
+        "The report recommends formally maintaining reserved blocks for organized groups within the reservation system to avoid scheduling conflicts, further promote community engagement, and sustain the observed increases in usage and revenue.",
+        "The solution involved setting up reserved blocks in the system specifically for clubs like the WSC, while still maintaining the ability to accommodate occasional bookings around them.",
+        "By April 30, 2023, the system adjustments proved effective; both individual and club bookings were managed seamlessly without further conflicts."
+      ],
+      "claimId": "c10",
+      "claimText": "The report recommends retaining reserved group blocks and auditing the booking system regularly.",
+      "documentId": "doc-10",
+      "method": "roundtrip-de",
+      "panelMajorityPreserved": true,
+      "preservedVotes": 3,
+      "sourceSentences": [
+        "The report recommends the formal retention of reserved blocks for organized groups in the reservation system to avoid scheduling conflicts, further promote community engagement, and sustain the observed increases in usage and revenue.",
+        "The resolution included setting up reserved blocks in the system specifically for clubs like the WSC while maintaining the ability to accommodate casual bookings around them.",
+        "By April 30th, 2023, the system's adjustments proved effective; both individual and club bookings were managed seamlessly without further conflict."
+      ],
+      "votes": {
+        "anthropic/claude-sonnet-5": "preserved",
+        "google/gemma-4-31b-it": "preserved",
+        "openai/gpt-5.6-luna": "preserved",
+        "x-ai/grok-4.6": "changed"
+      }
+    }
+  ],
+  "schemaVersion": 1,
+  "scores": {
+    "doc-01::dipper": [
+      [
+        "anthropic/claude-sonnet-5",
+        80,
+        80
+      ],
+      [
+        "google/gemma-4-31b-it",
+        80,
+        90
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        80,
+        80
+      ],
+      [
+        "x-ai/grok-4.6",
+        80,
+        70
+      ]
+    ],
+    "doc-01::paraphrase": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-01::roundtrip-de": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        90
+      ]
+    ],
+    "doc-01::roundtrip-zh": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-01::synonyms": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-02::dipper": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        80
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        90
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        90,
+        70
+      ],
+      [
+        "x-ai/grok-4.6",
+        80,
+        60
+      ]
+    ],
+    "doc-02::paraphrase": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        90
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-02::roundtrip-de": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-02::roundtrip-zh": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        90
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        90,
+        90
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        90
+      ]
+    ],
+    "doc-02::synonyms": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-03::dipper": [
+      [
+        "anthropic/claude-sonnet-5",
+        80,
+        60
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        90
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        90,
+        70
+      ],
+      [
+        "x-ai/grok-4.6",
+        80,
+        60
+      ]
+    ],
+    "doc-03::paraphrase": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        90
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-03::roundtrip-de": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        80
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        90,
+        90
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        80
+      ]
+    ],
+    "doc-03::roundtrip-zh": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        80
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        90
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        90,
+        80
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        70
+      ]
+    ],
+    "doc-03::synonyms": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        90
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-04::dipper": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        80
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        80
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        70
+      ]
+    ],
+    "doc-04::paraphrase": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-04::roundtrip-de": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        90
+      ]
+    ],
+    "doc-04::roundtrip-zh": [
+      [
+        "anthropic/claude-sonnet-5",
+        0,
+        0
+      ],
+      [
+        "google/gemma-4-31b-it",
+        0,
+        0
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        0
+      ],
+      [
+        "x-ai/grok-4.6",
+        0,
+        0
+      ]
+    ],
+    "doc-04::synonyms": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        90,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-05::dipper": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        80
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        90
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        90
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        60
+      ]
+    ],
+    "doc-05::paraphrase": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        80
+      ]
+    ],
+    "doc-05::roundtrip-de": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-05::roundtrip-zh": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        80
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        90
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        70
+      ]
+    ],
+    "doc-05::synonyms": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-06::dipper": [
+      [
+        "anthropic/claude-sonnet-5",
+        80,
+        60
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        80
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        70
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        50
+      ]
+    ],
+    "doc-06::paraphrase": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        90
+      ]
+    ],
+    "doc-06::roundtrip-de": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        80
+      ]
+    ],
+    "doc-06::roundtrip-zh": [
+      [
+        "anthropic/claude-sonnet-5",
+        80,
+        90
+      ],
+      [
+        "google/gemma-4-31b-it",
+        90,
+        90
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        70,
+        70
+      ],
+      [
+        "x-ai/grok-4.6",
+        80,
+        80
+      ]
+    ],
+    "doc-06::synonyms": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-07::dipper": [
+      [
+        "anthropic/claude-sonnet-5",
+        80,
+        70
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        90
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        80,
+        70
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        70
+      ]
+    ],
+    "doc-07::paraphrase": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        90
+      ]
+    ],
+    "doc-07::roundtrip-de": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        90
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        90
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        80
+      ]
+    ],
+    "doc-07::roundtrip-zh": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-07::synonyms": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        90
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        90,
+        90
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        90
+      ]
+    ],
+    "doc-08::dipper": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        80
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        90
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        90
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        70
+      ]
+    ],
+    "doc-08::paraphrase": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        90
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-08::roundtrip-de": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-08::roundtrip-zh": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        90
+      ]
+    ],
+    "doc-08::synonyms": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-09::dipper": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        70
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        80
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        90
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        60
+      ]
+    ],
+    "doc-09::paraphrase": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        90
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        90
+      ]
+    ],
+    "doc-09::roundtrip-de": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        90
+      ]
+    ],
+    "doc-09::roundtrip-zh": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-09::synonyms": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        90
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        90
+      ]
+    ],
+    "doc-10::dipper": [
+      [
+        "anthropic/claude-sonnet-5",
+        80,
+        80
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        90
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        80,
+        80
+      ],
+      [
+        "x-ai/grok-4.6",
+        80,
+        70
+      ]
+    ],
+    "doc-10::paraphrase": [
+      [
+        "anthropic/claude-sonnet-5",
+        90,
+        90
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        90
+      ]
+    ],
+    "doc-10::roundtrip-de": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        90
+      ]
+    ],
+    "doc-10::roundtrip-zh": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        100,
+        100
+      ]
+    ],
+    "doc-10::synonyms": [
+      [
+        "anthropic/claude-sonnet-5",
+        100,
+        100
+      ],
+      [
+        "google/gemma-4-31b-it",
+        100,
+        100
+      ],
+      [
+        "openai/gpt-5.6-luna",
+        100,
+        100
+      ],
+      [
+        "x-ai/grok-4.6",
+        90,
+        90
+      ]
+    ]
+  },
+  "sources": [
+    "https://openrouter.ai/api/v1/models",
+    "https://huggingface.co/kalpeshk2011/dipper-paraphraser-xxl",
+    "https://github.com/eth-sri/watermark-stealing"
+  ],
+  "verifiedAt": "2026-08-22T09:27:11.787451Z"
+}
