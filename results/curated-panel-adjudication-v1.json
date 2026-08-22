@@ -1,5 +1,5 @@
 {
-  "adjudicatedBy": "agent (Claude) on behalf of the operator; pending operator confirmation",
+  "adjudicatedBy": "Claude Code (Fable 5) read every non-unanimous vote against the full texts; the two overturned decisions were confirmed by the operator (human) on 2026-08-22",
   "adjudicationSummary": {
     "dipper": {
       "adjudicatedClaimsPreserved": 78,
@@ -770,7 +770,7 @@
       "method": "roundtrip-de"
     }
   ],
-  "methodology": "Every non-unanimous claim vote and every judge-reported material error from the single-candidate panel, with keyword-matched source and candidate sentences for manual review. Adjudication fields are filled by a human reviewer against the full texts; the panel majority remains the published number and adjudication is reported separately. Adjudication here was performed by the operator-side agent reading the full source and candidate texts; it overturns the panel majority only where the texts contradict it. Published tables keep the panel majority; adjudicated totals are reported alongside.",
+  "methodology": "Every non-unanimous claim vote and every judge-reported material error from the single-candidate panel, with keyword-matched source and candidate sentences for manual review. Adjudication fields are filled by a human reviewer against the full texts; the panel majority remains the published number and adjudication is reported separately. Adjudication here was performed by Claude Code (Fable 5) reading the full source and candidate texts; it overturns the panel majority only where the texts contradict it, and each overturned decision was checked and confirmed by a human operator. Published tables keep the panel majority; adjudicated totals are reported alongside.",
   "nonUnanimousClaims": [
     {
       "adjudication": "changed",
@@ -1685,6 +1685,7 @@
       }
     }
   ],
+  "operatorConfirmedAt": "2026-08-22",
   "overturned": [
     {
       "adjudication": "changed",
@@ -2809,5 +2810,5 @@
     "https://huggingface.co/kalpeshk2011/dipper-paraphraser-xxl",
     "https://github.com/eth-sri/watermark-stealing"
   ],
-  "verifiedAt": "2026-08-22T09:29:48.094055Z"
+  "verifiedAt": "2026-08-22T09:38:54.686784Z"
 }
