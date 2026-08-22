@@ -17,8 +17,8 @@
   `THIRD_PARTY_NOTICES.md`.
 - [x] `README.md` под текущий эксперимент; `AGENTS.md` без stdlib-only;
   `results/README.md` карта canonical vs intermediate артефактов.
-- [ ] Merge `codex/advanced-paraphrase-v2` → `main` (ff), тег `v0.2.0`, push.
-- [ ] Сайт: ссылки статьи на тег.
+- [x] Merge `codex/advanced-paraphrase-v2` → `main` (ff), тег `v0.2.0`, push.
+- [x] Сайт: ссылки статьи на тег.
 
 Отвергнуто: перенос 58 промежуточных results в `results/archive/` (ломает
 sha-ссылки provenance между артефактами); вместо этого карта. Переписывание
