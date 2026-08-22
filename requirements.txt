@@ -1,0 +1,12 @@
+# Runtime for the CPU-side analysis, calibration, judging and table assembly.
+# Python 3.11+. Versions pinned to what produced the checked-in artifacts.
+numpy==2.5.2
+torch==2.13.0          # CPU build is enough locally: pip install torch --index-url https://download.pytorch.org/whl/cpu
+transformers==5.15.1
+huggingface_hub==1.28.0
+safetensors==0.8.0
+sentencepiece==0.2.2
+PyYAML==6.0.3
+# GPU jobs install their own pinned stacks on the Pod (see run_*_on_runpod*.py):
+#   corpus: transformers 5.15.1 / huggingface_hub 1.28.0 (Qwen2.5-14B-Instruct, A40)
+#   DIPPER: transformers 4.40.2 / accelerate 0.30.1 / nltk 3.8.1 (A100 80GB)

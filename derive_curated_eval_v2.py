@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-from pathlib import Path
 
 from curated_percent_eval import ROOT, utc_now, write_json_atomic
 

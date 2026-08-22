@@ -1,248 +1,122 @@
 # Text Watermark Round-Trip
 
-A transparent CPU-only experiment for one narrow question: what happens to a
-keyed lexical signal after synonym edits, translation loops, or a full
-paraphrase?
+Does a full paraphrase remove Google DeepMind's **SynthID Text** watermark, and
+what does it do to the facts? A small, fully logged experiment behind the
+painintheagent article on text-watermark removal.
 
-This repository does not detect a Claude, Gemini, or SynthID watermark. The
-marker and detector here are a deliberately simple teaching model. Their code,
-keyed choices, corpus, prompts, and results are meant to be inspectable from end
-to end.
+**Result on ten coherent English reports (reference SynthID Text, our own key,
+one frozen detector threshold at 1% false positives):** a full paraphrase by a
+model that carries no such watermark removed the mark in **10/10** texts and
+kept **100/100** of the pre-registered fact claims; the DIPPER-11B paraphraser
+removed it in 10/10 but lost 23/100 claims; German and Chinese round-trip
+translation removed it in **0/10**; light synonym edits in 2/10. An earlier
+attempt on an incoherent corpus had produced the opposite conclusion because the
+rewriters copied source spans verbatim; that failure is kept in the repo as
+evidence (`results/exp004-ngram-retention-v1.json`).
 
-## Current status
+This is **not** a detector for Claude, Gemini or any production watermark and
+it does not prove anything about Google's private key. It measures the
+published scheme under our key on this corpus.
 
-The CPU-only detector controls, 20-document transformation matrix, 10,000-draw
-paired bootstrap, blinded 80-pair semantic audit, and preselected 12-pair close
-reading are complete. The checked-in artifacts contain every transformed text,
-provider response, score, cost, and review finding. No GPU or Colab run was
-used.
+## What is in the box
 
-The main result is a tradeoff, not a universal remover. Limited synonym edits
-preserved meaning but left the toy signal detected. German and Chinese
-round-trips removed the toy detection but failed the blinded fidelity rule in
-13/20 and 12/20 documents. Full paraphrase also removed the detection, cost
-less than either translation loop, and failed fidelity in 6/20 documents. That
-is the best balance in this experiment, but a 30% document failure rate is not
-safe enough for unattended rewriting.
+| Stage | Script | Where it ran | Cost |
+|---|---|---|---|
+| Corpus: 10 marked reports + 10 clean twins, `Qwen/Qwen2.5-14B-Instruct` fp16, SynthID via `transformers` | `gen_quality_synthid_corpus_gpu.py` driven by `run_quality_corpus_on_runpod.py`, curation `curate_synthid_corpus.py` | RunPod, NVIDIA A40, $0.44/h, two runs ≈ 32 min | < $0.25 |
+| Detector calibration: 100k random-table conditional nulls per text, pooled threshold 0.5095383 at 1% FPR | `calibrate_synthid_threshold.py` | CPU | $0 |
+| Four transformations (synonyms, full paraphrase, DE and ZH round trip) with `qwen/qwen3.7-plus`, temperature 0 | `run_synthid_smoke.py` | OpenRouter | $0.07 |
+| DIPPER-11B paraphrase (`kalpeshk2011/dipper-paraphraser-xxl`, pinned revision, fp32) | `dipper_smoke.py` driven by `run_dipper_on_runpod_v2.py` | RunPod, A100 80GB, $1.39/h, ≈ 6 min | $0.13 |
+| Pairs, signal removal, exact 5-gram reuse, P-SP | `curated_percent_eval.py build-pairs`, `compute_curated_psp.py` | CPU | $0 |
+| Blinded fact panel: 10 frozen claims per source, four vendors, one candidate per prompt, canary with identical / tampered / empty text | `run_curated_panel.py` | OpenRouter | $0.92 (+ $0.08 canaries) |
+| Final table and manual adjudication of non-unanimous votes | `curated_percent_eval.py finalize`, `adjudication_worklist.py` | CPU | $0 |
 
-## How the toy marker works
+Total paid for the final table: about $1.45. The exact lifecycle and cost
+records are in `results/*lifecycle*.json` and in every paid artifact's
+`budget` / `totalCostUsd` fields.
 
-The lexicon contains two-member synonym classes such as `big / large`. At each
-eligible word, two domain-separated HMAC calculations make independent keyed
-choices.
+`results/README.md` is the map: which 16 files are canonical, which 6 are
+superseded by the 2026-08-22 re-judge, and what the other ~110 intermediate and
+stage-1 artifacts are. Nothing is deleted because artifacts reference each
+other by path and sha256.
 
-1. `activate-v1` decides whether the position is active at the configured
-   density.
-2. `favor-v1` chooses the preferred member of the pair.
-
-The encoder uses the preferred word at active positions. The detector repeats
-the calculation with the scoring key and counts preferred words only among the
-active positions selected by that key.
-
-`densityBps=1000` means ten percent of eligible synonym positions. It does not
-mean ten percent of every word, and it says nothing about the density of a
-production watermark. Every result reports eligible positions, active
-positions, actual changes, and active coverage across the full text.
-
-The context hash uses the previous four normalized tokens. Both members of a
-synonym class normalize to the same class ID. Repeated identical fingerprints
-receive a zero-based occurrence rank, which keeps the pseudo-random trials
-distinct without adding a fragile global word index.
-
-## Detection rule
-
-The main score pools counts across a fixed corpus while preserving each
-document ID in the HMAC input. For `n` active positions and `hits` preferred
-words, the display score is
-
-```text
-z = (2 * hits - n) / sqrt(n)
-```
-
-The decision uses the exact one-sided binomial tail under the toy random-key
-null.
-
-```text
-P[Binomial(n, 0.5) >= hits]
-```
-
-Fewer than 20 active positions returns `insufficient_evidence`; `p` and `z`
-remain null. Otherwise, `p <= 0.01` returns `detected`. The exact numerator and
-denominator are authoritative; decimal `p` and `z` are display values.
-
-## Run the tests
-
-Python 3.11 or newer is enough.
+## Reproduce the table without paying anything
 
 ```bash
-python3 -m unittest discover -s tests -v
+python3 -m venv .venv && . .venv/bin/activate
+pip install -r requirements.txt        # CPU torch is enough; see the file
+python3 -m unittest tests.test_curated_percent_eval tests.test_run_curated_panel \
+        tests.test_control_server tests.test_derive_curated_eval_v5
+python3 curated_percent_eval.py finalize \
+  --config configs/curated-percent-eval-v5.json \
+  --pairs results/curated-percent-pairs-v1.json \
+  --psp results/curated-psp-v1.json \
+  --panel-input results/curated-panel-xai-input-v1.json \
+  --panel-output results/curated-panel-single-v1.json \
+  --methods results/curated-methods-v1.json \
+  --output /tmp/curated-percent-table-v2.json
+diff <(python3 -c "import json;print(json.dumps(json.load(open('/tmp/curated-percent-table-v2.json'))['summary'],sort_keys=True,indent=1))") \
+     <(python3 -c "import json;print(json.dumps(json.load(open('results/curated-percent-table-v2.json'))['summary'],sort_keys=True,indent=1))")
 ```
 
-The suite covers golden HMAC vectors, exact binomial boundaries, protected
-spans, density monotonicity, idempotent marking, corpus pooling, and wrong-key
-controls.
+`python3 -m unittest discover -s tests` runs everything, including slow
+recomputations of calibration and n-gram retention; expect several minutes.
 
-Run the deterministic synthetic preflight with 1,000 wrong keys:
+## Re-run the paid and GPU stages
 
-```bash
-python3 run_controls.py \
-  --key-hex 00112233445566778899aabbccddeeff102132435465768798a9babbdcddedef \
-  --density-bps 1000 \
-  --wrong-key-count 1000 \
-  --output results/synthetic-preflight-v1.json
-```
+Set `OPENROUTER_API_KEY` / `OPENROUTER_BASE_URL` and `RUNPOD_API_KEY` /
+`RUNPOD_API_BASE_URL`. Every runner freezes its prompts, config hashes and cost
+caps before the first call, checkpoints each paid response, and refuses to
+exceed the budget written in the config. GPU jobs run on RunPod Pods: the
+runner creates the Pod, ships the job script through the Pod environment,
+polls a token-protected control channel (`control_server.py`; the RunPod HTTP
+proxy is public, so the per-run bearer token is required for every download),
+downloads the artifact, deletes the Pod, and arms a `systemd-run --user`
+watchdog that deletes the Pod even if the controller dies (credentials reach
+the watchdog through a 0600 `EnvironmentFile`, never argv).
 
-Add `--check` to regenerate the same run in memory and fail if the checked-in
-artifact differs byte for byte.
+| Job | Command | Needs |
+|---|---|---|
+| Corpus | `python3 run_quality_corpus_on_runpod.py run` | 1× A40-class GPU (≥ 40 GB), ~30 min |
+| Transformations | `python3 run_synthid_smoke.py --corpus results/quality-synthid-corpus-curated-v1.json --model qwen/qwen3.7-plus --output results/curated-methods-v1.json` | OpenRouter |
+| DIPPER | `python3 run_dipper_on_runpod_v2.py --gpu-types "NVIDIA A100 80GB PCIe"` | 1× A100 80GB (fp32 11B), ~6 min |
+| Panel canary, then panel | `python3 run_curated_panel.py prepare-canary --config configs/curated-percent-eval-v5.json --single --output results/curated-panel-canary-single-input-v3.json` → `run --mode canary` → `run --mode full --input results/curated-panel-xai-input-v1.json` | OpenRouter |
 
-On the frozen synthetic fixture, the true key recovered all 133 active
-positions (`z=11.53`), while the unmarked corpus was not detected. Nine of
-1,000 wrong keys crossed the fixed one-percent threshold. All 1,000 wrong-key
-scores had enough evidence. These are detector plumbing checks, not results for
-the later transformation article.
+## Method notes and limitations
 
-The frozen article corpus has its own fail-closed checks.
+- **Detector.** Mean g-value over the exact SynthID sampling table with our
+  key (ngram 5, table 65,536, depth 30); no language model runs at detection
+  time. One pooled threshold for all texts, calibrated before any method ran;
+  a per-document length-aware threshold is also stored in the calibration
+  artifact. One paraphrase lies within 0.0002 of the pooled threshold.
+- **Signal removed %** is the share of the distance between the marked text's
+  score and its clean twin's score that the candidate travelled. It is not a
+  share of "AI-written text".
+- **Judges.** A first panel showed three judges five candidates of one
+  document per prompt; verdicts leaked between candidates (one judge charged
+  DIPPER's changed numbers to the plain paraphrase) and Grok 4.20 scored an
+  empty text 100/100. It was replaced by single-candidate prompts and a canary
+  that disqualified Claude Haiku 4.5 and Grok 4.20; the final judges are
+  GPT-5.6 Luna, Claude Sonnet 5, Gemma 4 31B IT and Grok 4.6 (reasoning low).
+  Both panels are kept; only the second feeds the published numbers.
+- **Scope.** Ten fictional English reports of 500–600 words, one key, one
+  corpus. Short texts carry less signal; production keys are private; the
+  repo says nothing about whether a specific Gemini output was cleaned.
+- **Rewriter choice.** Removal only works if the rewriting model does not add
+  an equivalent watermark itself. The API model used here did not add this
+  mark; open weights under your own control are the safer default.
 
-```bash
-python3 run_corpus_controls.py
-python3 run_corpus_controls.py --check
-python3 run_experiment.py --dry-run
-```
+## Layout
 
-The corpus contains 20 documents, 12,777 words, and 834 synonym occurrences
-whose local contexts were reviewed before the watermark key was applied. The
-current canonical control artifact is
-`results/corpus-controls-v1.json` (SHA-256
-`03e4efa807a05ec51bbf674c2c3ed7eca3e5f17415cbcf452e3135b4154ab0b0`).
+`configs/` frozen designs (prompts, judges, budgets, claims) · `corpus/` stage-1
+texts · `results/` every artifact (see its README) · `tests/` unit tests ·
+`docs/plans/` working plans · `scripts/` operator helpers (the Guard setup
+script is specific to the author's host and not needed for reproduction) ·
+`attic/` stage-1 leftovers.
 
-| Configured density over eligible positions | Active positions | Active share of all words | Marked true-key z | Unmarked true-key z | Wrong-key detections |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| 5% | 45 | 0.352% | 6.71 | 0.15 | 12 / 1,000 |
-| 10% | 97 | 0.759% | 9.85 | -0.10 | 9 / 1,000 |
-| 20% | 176 | 1.377% | 13.27 | 0.15 | 9 / 1,000 |
+## Citing and licenses
 
-At all three densities, the marked corpus was detected, the unmarked corpus was
-not detected, and every wrong-key score had enough evidence. At the main 10%
-setting, only 0.384% of all words actually changed during encoding. Density is
-therefore not interchangeable with the percentage of all words visibly edited.
-
-## Use the CLI
-
-The CLI reads a UTF-8 file and prints canonical JSON. This sample key is public
-and only demonstrates the toy scheme.
-
-```bash
-python3 watermark_toy.py \
-  encode \
-  --key-hex 00112233445566778899aabbccddeeff102132435465768798a9babbdcddedef \
-  --document-id example-1 \
-  --density-bps 1000 \
-  --input example.txt
-```
-
-Score a marked or transformed version with the same document ID:
-
-```bash
-python3 watermark_toy.py \
-  detect \
-  --key-hex 00112233445566778899aabbccddeeff102132435465768798a9babbdcddedef \
-  --document-id example-1 \
-  --density-bps 1000 \
-  --input marked.txt
-```
-
-This command returns a single-document diagnostic. The experiment's primary
-decision pools counts across all frozen corpus documents with `score_corpus`;
-it does not average per-document decisions.
-
-Document ID is part of this toy scheme. The detector cannot score an arbitrary
-copied passage without the ID used by the encoder. That is a known limitation,
-not a property claimed for production systems.
-
-## Evidence boundary
-
-The experiment can report that a named transformation changed this published
-toy score from A to B. It can also show how much wording moved, whether claims
-survived, and what the calls cost. It cannot prove that the same transformation
-removes a secret production watermark.
-
-The synonym pairs are not interchangeable in every English sentence. Corpus
-authors must use them only where both variants preserve the intended meaning,
-then manually inspect every marked document before transformation calls.
-
-## Completed transformation result
-
-The fixed comparison used one transformation model for all methods:
-`qwen/qwen3.5-9b`, pinned through OpenRouter to the DeepInfra BF16 endpoint with
-fallback disabled. The frozen price was $0.10 per million input tokens and
-$0.15 per million output tokens. Keeping the model fixed isolates the method;
-translation still costs more because each document requires two calls.
-
-The main marker density was 10% of the 834 eligible synonym positions. This
-activated 97 positions, or 0.759% of all 12,777 words. The baseline had 97/97
-preferred hits (`z=9.85`, `p=6.31e-30`).
-
-| Method | Toy detector | Original active positions retained | Mean word distance | Blinded fidelity failures | Cost, 20 docs | Cost / 1,000 docs | Median latency / doc |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| No transform | detected (`z=9.85`) | 100.0% | 0.0% | not audited | $0 | $0 | 0 s |
-| Limited synonyms | detected (`z=6.19`) | 83.5% | 5.7% | 0 / 20 | $0.00409255 | $0.20462750 | 22.0 s |
-| German round-trip | not detected (`z=1.48`) | 37.1% | 24.0% | 13 / 20 | $0.00969590 | $0.48479500 | 54.5 s |
-| Chinese round-trip | not detected (`z=-0.45`) | 19.6% | 42.3% | 12 / 20 | $0.00800110 | $0.40005500 | 42.8 s |
-| Full paraphrase | not detected (`z=-0.11`) | 24.7% | 29.2% | 6 / 20 | $0.00417150 | $0.20857500 | 23.9 s |
-
-The active-position survival changes versus no transform were nonzero across
-all 10,000 paired bootstrap draws. The 95% intervals were -30.6 to -4.7
-percentage points for synonyms, -73.4 to -52.9 for German, -87.9 to -73.3 for
-Chinese, and -84.8 to -61.6 for paraphrase. These intervals describe this
-frozen corpus, not production watermark robustness.
-
-The blinded audit used `google/gemini-3.7-flash`, pinned to Google Vertex global
-with low reasoning, ZDR, and no fallback. It reviewed all 80 source-candidate
-pairs without method, score, cost, or latency labels and cost $0.076574625.
-A separate close read used the 12 pairs selected before transformation. It
-agreed with the structured judge on 9/12 verdicts and was stricter on three
-translation outputs. All three synonym samples and all three paraphrase samples
-passed that small manual sample; all three German and all three Chinese samples
-failed. The sample is a qualitative cross-check, not a replacement for the
-full 80-pair audit.
-
-The transformation calls cost $0.02596105. Transformation plus independent
-audit cost $0.102535675 in provider charges. Two rejected route canaries were
-confirmed uncharged and are recorded in
-`results/semantic-audit-route-canary-failure-v1.json`.
-
-## Reproduce the experiment
-
-The deterministic controls and checked-in result validation require no API
-key:
-
-```bash
-python3 run_corpus_controls.py --check
-python3 run_experiment.py --dry-run
-python3 run_semantic_audit.py --dry-run
-python3 -m unittest discover -s tests -v
-```
-
-A new paid run uses the normal OpenRouter credential and optional guard-aware
-base URL. The commands require explicit provider-cost ceilings:
-
-```bash
-python3 run_experiment.py \
-  --live \
-  --max-provider-cost-credits 0.30
-
-python3 run_semantic_audit.py \
-  --live \
-  --max-provider-cost-credits 0.20
-```
-
-The frozen raw result is `results/experiment-raw-v1.json`; the full blinded
-audit is `results/semantic-audit-v1.json`; and the independent manual findings
-are `results/semantic-close-reading-v1.json`.
-
-German and Chinese remain parameters, not predetermined winners. A web demo is
-a later decision based on these results.
-
-## License
-
-MIT
+Code: MIT (`LICENSE`). Third-party models, code and terms: `THIRD_PARTY_NOTICES.md`.
+Citation metadata: `CITATION.cff`. The watermark scheme is Dathathri et al.,
+*Nature* 2024; the paraphrase attack baseline is Krishna et al. 2023 (DIPPER);
+the ETH Zurich SRI probing post (Jovanović, Gloaguen, Vechev, 2024) is the
+closest prior measurement.

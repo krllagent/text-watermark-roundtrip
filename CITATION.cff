@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+title: "Text Watermark Round-Trip: does a full paraphrase remove SynthID Text?"
+message: "If you use this code or these artifacts, please cite the repository."
+type: software
+authors:
+  - family-names: Balakhonov
+    given-names: Kirill
+license: MIT
+repository-code: "https://github.com/krllagent/text-watermark-roundtrip"
+url: "https://painintheagent.com"
+date-released: 2026-08-22
+abstract: >
+  Reproducible measurement of how synonym edits, German and Chinese
+  round-trip translation, a full model paraphrase and the DIPPER paraphraser
+  affect the reference SynthID Text watermark on a ten-document corpus, with a
+  blinded four-vendor fact panel judging meaning preservation.
+references:
+  - type: article
+    title: "Scalable watermarking for identifying large language model outputs"
+    authors:
+      - family-names: Dathathri
+        given-names: Sumanth
+    journal: Nature
+    year: 2024
+    doi: 10.1038/s41586-024-08025-4
+  - type: article
+    title: "Paraphrasing evades detectors of AI-generated text, but retrieval is an effective defense"
+    authors:
+      - family-names: Krishna
+        given-names: Kalpesh
+    year: 2023
+    url: "https://arxiv.org/abs/2303.13408"
+  - type: article
+    title: "A Watermark for Large Language Models"
+    authors:
+      - family-names: Kirchenbauer
+        given-names: John
+    year: 2023
+    url: "https://arxiv.org/abs/2301.10226"
+  - type: misc
+    title: "Probing SynthID-Text (SRI Lab, ETH Zurich)"
+    authors:
+      - family-names: Jovanović
+        given-names: Nikola
+      - family-names: Gloaguen
+        given-names: Thibaud
+      - family-names: Vechev
+        given-names: Martin
+    year: 2024
+    url: "https://www.sri.inf.ethz.ch/blog/probingsynthid"

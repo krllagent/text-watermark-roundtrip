@@ -14,7 +14,7 @@ import re
 from collections import defaultdict
 from pathlib import Path
 
-from curated_percent_eval import ROOT, utc_now, write_json_atomic
+from curated_percent_eval import utc_now, write_json_atomic
 
 
 def sentences(text: str) -> list[str]:
@@ -48,7 +48,6 @@ def main() -> int:
     panel_input = json.loads(args.input.read_text(encoding="utf-8"))
     panel = json.loads(args.panel.read_text(encoding="utf-8"))
     blind = {k: v.split("::") for k, v in panel_input["blindMap"].items()}
-    batches = {b["batchId"]: b for b in panel_input["batches"]}
     votes: dict[tuple[str, str, str], list[tuple[str, str]]] = defaultdict(list)
     errors: dict[tuple[str, str], list[tuple[str, str]]] = defaultdict(list)
     scores: dict[tuple[str, str], list[tuple[str, int, int]]] = defaultdict(list)

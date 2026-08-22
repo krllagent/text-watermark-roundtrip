@@ -19,6 +19,7 @@ import json
 import os
 from pathlib import Path
 import re
+import secrets
 import signal
 import subprocess
 import sys
@@ -118,8 +119,7 @@ def _start_command() -> str:
         "printf '%s' \"$DIPPER_INPUT_B64\" | base64 -d > /workspace/dipper-input.json; "
         "printf '%s' '{\"service\":\"dipper-smoke\",\"version\":1}' "
         "> /workspace/control-ready.json; "
-        "python3 -m http.server 8000 --directory /workspace "
-        ">/workspace/control-http.log 2>&1 & "
+        + CONTROL_SERVER_START +
         "( status=0; "
         "python3 -m pip install --no-input --disable-pip-version-check "
         "'transformers==4.40.2' 'accelerate==0.30.1' 'nltk==3.8.1' "
@@ -142,9 +142,14 @@ def build_pod_payload(
     cloud_type: str = "SECURE",
     gpu_type_ids: tuple[str, ...] = GPU_TYPE_IDS,
     pod_name: str = "dipper-synthid-smoke-20260820",
+    control_token: str | None = None,
+    control_server_source_b64: str | None = None,
 ) -> dict[str, object]:
     if cloud_type not in ("SECURE", "COMMUNITY", "ALL"):
         raise ValueError("cloud_type must be SECURE, COMMUNITY, or ALL")
+    control_token = control_token or new_control_token()
+    if len(control_token) < 32:
+        raise ValueError("control_token must be at least 32 characters")
     return {
         "allowedCudaVersions": ["12.8"],
         "cloudType": cloud_type,
@@ -153,6 +158,8 @@ def build_pod_payload(
         "dockerEntrypoint": [],
         "dockerStartCmd": ["bash", "-lc", _start_command()],
         "env": {
+            "CONTROL_SERVER_B64": control_server_source_b64 or control_server_b64(),
+            "CONTROL_TOKEN": control_token,
             "DIPPER_INPUT_B64": input_b64,
             "DIPPER_JOB_B64": job_source_b64,
         },
@@ -198,8 +205,76 @@ def _write_json_atomic(path: Path, value: object) -> None:
     temporary.replace(path)
 
 
-def _http_get(url: str, *, timeout: float = 20) -> tuple[int, bytes]:
-    request = urllib.request.Request(url, headers={"User-Agent": "dipper-smoke/1.0"})
+CONTROL_SERVER_PATH = Path(__file__).resolve().parent / "control_server.py"
+CONTROL_SERVER_START = (
+    "printf '%s' \"$CONTROL_SERVER_B64\" | base64 -d > /workspace/control_server.py; "
+    "python3 /workspace/control_server.py --directory /workspace --port 8000 "
+    ">/workspace/control-http.log 2>&1 & "
+)
+
+
+def new_control_token() -> str:
+    """Per-run bearer token for the Pod control channel (RunPod proxies are public)."""
+    return secrets.token_urlsafe(32)
+
+
+def control_server_b64() -> str:
+    import base64
+
+    return base64.b64encode(CONTROL_SERVER_PATH.read_bytes()).decode("ascii")
+
+
+def watchdog_env_file(unit: str, *, api_key: str, base_url: str) -> Path:
+    """Write RunPod credentials for the delete watchdog to a 0600 file.
+
+    The transient unit reads them through EnvironmentFile=, so the key never
+    appears in systemd-run argv or in the unit's public metadata.
+    """
+    import os
+
+    root = Path(os.environ.get("XDG_RUNTIME_DIR") or (Path.home() / ".cache"))
+    directory = root / "text-watermark-roundtrip" / "watchdog"
+    directory.mkdir(parents=True, exist_ok=True)
+    os.chmod(directory, 0o700)
+    path = directory / f"{unit}.env"
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "w", encoding="utf-8") as handle:
+        handle.write(f'RUNPOD_API_KEY="{api_key}"\n')
+        handle.write(f'RUNPOD_API_BASE_URL="{base_url}"\n')
+    return path
+
+
+def watchdog_command(
+    *,
+    unit: str,
+    minutes: int,
+    env_file: Path,
+    script: Path,
+    pod_id: str,
+) -> list[str]:
+    return [
+        "systemd-run",
+        "--user",
+        f"--on-active={minutes}m",
+        f"--unit={unit}",
+        f"--property=EnvironmentFile={env_file}",
+        sys.executable,
+        str(script),
+        "delete",
+        "--pod-id",
+        pod_id,
+        "--env-file",
+        str(env_file),
+    ]
+
+
+def _http_get(
+    url: str, *, timeout: float = 20, token: str | None = None
+) -> tuple[int, bytes]:
+    headers = {"User-Agent": "dipper-smoke/1.0"}
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    request = urllib.request.Request(url, headers=headers)
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             return response.status, response.read()
@@ -253,6 +328,7 @@ class DipperPodRun:
         self.pod_name = pod_name
         self.pod_id: str | None = None
         self.watchdog_unit: str | None = None
+        self.control_token = new_control_token()
         self.deleted = False
         self.absent = False
         self.compute_per_hour = 0.0
@@ -287,19 +363,18 @@ class DipperPodRun:
     def arm_watchdog(self) -> None:
         assert self.pod_id is not None
         unit = "runpod-delete-" + re.sub(r"[^A-Za-z0-9_-]", "-", self.pod_id)
-        command = [
-            "systemd-run",
-            "--user",
-            f"--on-active={self.watchdog_minutes}m",
-            f"--unit={unit}",
-            f"--setenv=RUNPOD_API_KEY={self.client.config.api_key}",
-            f"--setenv=RUNPOD_API_BASE_URL={self.client.config.base_url}",
-            sys.executable,
-            str(Path(__file__).resolve()),
-            "delete",
-            "--pod-id",
-            self.pod_id,
-        ]
+        env_file = watchdog_env_file(
+            unit,
+            api_key=self.client.config.api_key,
+            base_url=self.client.config.base_url,
+        )
+        command = watchdog_command(
+            unit=unit,
+            minutes=self.watchdog_minutes,
+            env_file=env_file,
+            script=Path(__file__).resolve(),
+            pod_id=self.pod_id,
+        )
         result = subprocess.run(command, text=True, capture_output=True, check=False)
         if result.returncode:
             raise RuntimeError("could not arm RunPod watchdog: " + result.stderr.strip())
@@ -392,7 +467,7 @@ class DipperPodRun:
         next_report = 0.0
         while time.monotonic() < deadline:
             try:
-                status, raw = _http_get(base + "/control-ready.json", timeout=12)
+                status, raw = _http_get(base + "/control-ready.json", timeout=12, token=self.control_token)
                 if status == 200 and json.loads(raw) == {
                     "service": "dipper-smoke",
                     "version": 1,
@@ -421,7 +496,7 @@ class DipperPodRun:
         raise TimeoutError("DIPPER control channel was not ready within 10 minutes")
 
     def _download_output(self, base: str, *, require_complete: bool) -> dict[str, object]:
-        status, raw = _http_get(base + "/dipper-output.json", timeout=90)
+        status, raw = _http_get(base + "/dipper-output.json", timeout=90, token=self.control_token)
         if status != 200:
             raise RuntimeError(f"DIPPER artifact download returned HTTP {status}")
         artifact = json.loads(raw)
@@ -452,7 +527,7 @@ class DipperPodRun:
                         pass
                     raise RuntimeError("DIPPER controller stopped before hard cost cap")
             try:
-                status, raw = _http_get(base + "/dipper-job.exit", timeout=12)
+                status, raw = _http_get(base + "/dipper-job.exit", timeout=12, token=self.control_token)
                 text = raw.decode("utf-8", "replace").strip()
                 if status == 200 and text.isdigit():
                     exit_code = int(text)
@@ -463,7 +538,7 @@ class DipperPodRun:
             if now >= next_report:
                 progress: list[object] = []
                 try:
-                    status, raw = _http_get(base + "/dipper-job.log", timeout=20)
+                    status, raw = _http_get(base + "/dipper-job.log", timeout=20, token=self.control_token)
                     if status == 200:
                         lines = raw.decode("utf-8", "replace").splitlines()
                         for line in lines[reported_lines:]:
@@ -501,7 +576,7 @@ class DipperPodRun:
             except Exception:
                 pass
             try:
-                _, raw = _http_get(base + "/dipper-job.log", timeout=30)
+                _, raw = _http_get(base + "/dipper-job.log", timeout=30, token=self.control_token)
                 tail = raw.decode("utf-8", "replace")[-5_000:]
             except Exception:
                 tail = "unavailable"
@@ -517,6 +592,7 @@ class DipperPodRun:
         job_source = self.job_path.read_bytes()
         input_source = self.input_path.read_bytes()
         payload = build_pod_payload(
+            control_token=self.control_token,
             job_source_b64=base64.b64encode(job_source).decode("ascii"),
             input_b64=base64.b64encode(input_source).decode("ascii"),
             cloud_type=self.cloud_type,
@@ -633,7 +709,12 @@ def _run(args: argparse.Namespace) -> int:
 
 def _delete(args: argparse.Namespace) -> int:
     client = RunPodClient(resolve_runpod_config())
-    status, _ = client.request("DELETE", f"/pods/{args.pod_id}")
+    try:
+        status, _ = client.request("DELETE", f"/pods/{args.pod_id}")
+    finally:
+        env_file = getattr(args, "env_file", None)
+        if env_file:
+            Path(env_file).unlink(missing_ok=True)
     return 0 if status in (200, 202, 204) else 1
 
 
@@ -658,6 +739,7 @@ def main(argv: list[str] | None = None) -> int:
     run.set_defaults(handler=_run)
     delete = commands.add_parser("delete")
     delete.add_argument("--pod-id", required=True)
+    delete.add_argument("--env-file", type=Path)
     delete.set_defaults(handler=_delete)
     args = parser.parse_args(argv)
     return int(args.handler(args))

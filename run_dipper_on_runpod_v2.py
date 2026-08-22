@@ -21,11 +21,13 @@ from run_dipper_on_runpod import (
     DEFAULT_JOB,
     DipperPodRun,
     IMAGE_NAME,
-    MAX_COMPUTE_PER_HOUR_USD,
     VOLUME_DISK_GB,
     _sha256,
     _write_json_atomic,
     cost_upper_bound_usd,
+    CONTROL_SERVER_START,
+    control_server_b64,
+    new_control_token,
 )
 
 
@@ -100,8 +102,16 @@ def pods_from_response(value: object) -> list[dict[str, object]]:
 
 
 def build_payload(
-    *, job_source_b64: str, input_b64: str, gpu_type: str
+    *,
+    job_source_b64: str,
+    input_b64: str,
+    gpu_type: str,
+    control_token: str | None = None,
+    control_server_source_b64: str | None = None,
 ) -> dict[str, object]:
+    control_token = control_token or new_control_token()
+    if len(control_token) < 32:
+        raise ValueError("control_token must be at least 32 characters")
     command = (
         "/start.sh >/workspace/runpod-start.log 2>&1 & "
         "printf '%s' \"$DIPPER_INPUT_GZ_B64\" | base64 -d | gzip -d "
@@ -110,8 +120,7 @@ def build_payload(
         "> /workspace/dipper_smoke.py; "
         "printf '%s' '{\"service\":\"dipper-smoke\",\"version\":1}' "
         "> /workspace/control-ready.json; "
-        "python3 -m http.server 8000 --directory /workspace "
-        ">/workspace/control-http.log 2>&1 & "
+        + CONTROL_SERVER_START +
         "( status=0; "
         "python3 -m pip install --no-input --disable-pip-version-check "
         "'transformers==4.40.2' 'accelerate==0.30.1' 'nltk==3.8.1' "
@@ -130,6 +139,8 @@ def build_payload(
         "cloud": "SECURE",
         "disk": CONTAINER_DISK_GB,
         "env": {
+            "CONTROL_SERVER_B64": control_server_source_b64 or control_server_b64(),
+            "CONTROL_TOKEN": control_token,
             "DIPPER_INPUT_GZ_B64": input_b64,
             "DIPPER_JOB_GZ_B64": job_source_b64,
         },
@@ -210,6 +221,7 @@ class V2PodRun(DipperPodRun):
                         "POST",
                         "/pods",
                         build_payload(
+                            control_token=self.control_token,
                             job_source_b64=job_b64,
                             input_b64=input_b64,
                             gpu_type=gpu_type,

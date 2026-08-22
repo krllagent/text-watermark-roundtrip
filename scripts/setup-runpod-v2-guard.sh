@@ -6,14 +6,18 @@ if [ "$(id -u)" != "0" ]; then
   exit 2
 fi
 
-PROJECT_DIR="/home/openclaw/projects/text-watermark-roundtrip"
-GUARD_ETC="/etc/agent-api-guard"
-GUARD_BIN="/usr/local/bin/guard"
+# Operator-only helper for the author's VPS: registers a Pod-only RunPod
+# profile in a locally installed Agent API Guard. It is NOT part of the
+# reproduction path; the runners only need RUNPOD_API_KEY/RUNPOD_API_BASE_URL.
+# Paths can be overridden through the environment.
+PROJECT_DIR="${TWR_PROJECT_DIR:-$(cd "$(dirname "$0")/.." && pwd)}"
+GUARD_ETC="${GUARD_ETC:-/etc/agent-api-guard}"
+GUARD_BIN="${GUARD_BIN:-/usr/local/bin/guard}"
 CONFIG_PATH="$GUARD_ETC/config.yaml"
 SECRETS_PATH="$GUARD_ETC/secrets.env"
 PROFILE_PATH="$PROJECT_DIR/configs/runpod-v2-guard-profile.yaml"
 MERGE_HELPER="$PROJECT_DIR/scripts/merge_runpod_v2_guard.py"
-BACKUP_DIR="/root/agent-api-guard-runpod-v2-setup"
+BACKUP_DIR="${GUARD_BACKUP_DIR:-/root/agent-api-guard-runpod-v2-setup}"
 TS="$(date +%Y%m%d-%H%M%S)"
 BACKUP_PATH="$BACKUP_DIR/config.yaml.before-$TS"
 

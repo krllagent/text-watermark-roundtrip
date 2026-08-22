@@ -17,7 +17,6 @@ from pathlib import Path
 import re
 import signal
 import subprocess
-import sys
 import time
 
 from run_dipper_on_runpod import (
@@ -27,6 +26,11 @@ from run_dipper_on_runpod import (
     _sha256,
     cost_upper_bound_usd,
     resolve_runpod_config,
+    CONTROL_SERVER_START,
+    control_server_b64,
+    new_control_token,
+    watchdog_command,
+    watchdog_env_file,
 )
 
 
@@ -57,8 +61,7 @@ def _start_command() -> str:
         "> /workspace/corpus-config.json; "
         "printf '%s' '{\"service\":\"quality-synthid-corpus\",\"version\":1}' "
         "> /workspace/control-ready.json; "
-        "python3 -m http.server 8000 --directory /workspace "
-        ">/workspace/control-http.log 2>&1 & "
+        + CONTROL_SERVER_START +
         "( status=0; "
         "python3 -m pip install --no-input --disable-pip-version-check "
         "'transformers==5.15.1' 'huggingface_hub==1.28.0' "
@@ -75,7 +78,16 @@ def _start_command() -> str:
     )
 
 
-def build_pod_payload(*, job_source_b64: str, config_b64: str) -> dict[str, object]:
+def build_pod_payload(
+    *,
+    job_source_b64: str,
+    config_b64: str,
+    control_token: str | None = None,
+    control_server_source_b64: str | None = None,
+) -> dict[str, object]:
+    control_token = control_token or new_control_token()
+    if len(control_token) < 32:
+        raise ValueError("control_token must be at least 32 characters")
     return {
         "allowedCudaVersions": ["12.8"],
         "cloudType": "SECURE",
@@ -84,6 +96,8 @@ def build_pod_payload(*, job_source_b64: str, config_b64: str) -> dict[str, obje
         "dockerEntrypoint": [],
         "dockerStartCmd": ["bash", "-lc", _start_command()],
         "env": {
+            "CONTROL_SERVER_B64": control_server_source_b64 or control_server_b64(),
+            "CONTROL_TOKEN": control_token,
             "CORPUS_CONFIG_B64": config_b64,
             "CORPUS_JOB_B64": job_source_b64,
         },
@@ -104,19 +118,18 @@ class QualityCorpusPodRun(DipperPodRun):
     def arm_watchdog(self) -> None:
         assert self.pod_id is not None
         unit = "runpod-delete-" + re.sub(r"[^A-Za-z0-9_-]", "-", self.pod_id)
-        command = [
-            "systemd-run",
-            "--user",
-            f"--on-active={WATCHDOG_MINUTES}m",
-            f"--unit={unit}",
-            f"--setenv=RUNPOD_API_KEY={self.client.config.api_key}",
-            f"--setenv=RUNPOD_API_BASE_URL={self.client.config.base_url}",
-            sys.executable,
-            str(Path(__file__).resolve()),
-            "delete",
-            "--pod-id",
-            self.pod_id,
-        ]
+        env_file = watchdog_env_file(
+            unit,
+            api_key=self.client.config.api_key,
+            base_url=self.client.config.base_url,
+        )
+        command = watchdog_command(
+            unit=unit,
+            minutes=WATCHDOG_MINUTES,
+            env_file=env_file,
+            script=Path(__file__).resolve(),
+            pod_id=self.pod_id,
+        )
         result = subprocess.run(command, text=True, capture_output=True, check=False)
         if result.returncode:
             raise RuntimeError("could not arm RunPod watchdog: " + result.stderr.strip())
@@ -134,7 +147,7 @@ class QualityCorpusPodRun(DipperPodRun):
         next_report = 0.0
         while time.monotonic() < deadline:
             try:
-                status, raw = _http_get(base + "/control-ready.json", timeout=12)
+                status, raw = _http_get(base + "/control-ready.json", timeout=12, token=self.control_token)
                 if status == 200 and json.loads(raw) == {
                     "service": "quality-synthid-corpus",
                     "version": 1,
@@ -160,7 +173,7 @@ class QualityCorpusPodRun(DipperPodRun):
         raise TimeoutError("corpus control channel was not ready within 10 minutes")
 
     def _download_output(self, base: str, *, require_complete: bool) -> dict[str, object]:
-        status, raw = _http_get(base + "/quality-synthid-corpus-v1.json", timeout=120)
+        status, raw = _http_get(base + "/quality-synthid-corpus-v1.json", timeout=120, token=self.control_token)
         if status != 200:
             raise RuntimeError(f"corpus artifact download returned HTTP {status}")
         artifact = json.loads(raw)
@@ -174,7 +187,9 @@ class QualityCorpusPodRun(DipperPodRun):
     def _recover_checkpoint(self, base: str) -> None:
         try:
             status, raw = _http_get(
-                base + "/quality-synthid-corpus-v1.partial.json", timeout=120
+                base + "/quality-synthid-corpus-v1.partial.json",
+                timeout=120,
+                token=self.control_token,
             )
             if status == 200:
                 recovery = self.output_path.with_suffix(".partial.json")
@@ -201,7 +216,7 @@ class QualityCorpusPodRun(DipperPodRun):
                 self._recover_checkpoint(base)
                 raise RuntimeError("controller stopped job before the $2 hard cost cap")
             try:
-                status, raw = _http_get(base + "/corpus-job.exit", timeout=12)
+                status, raw = _http_get(base + "/corpus-job.exit", timeout=12, token=self.control_token)
                 value = raw.decode("utf-8", "replace").strip()
                 if status == 200 and value.isdigit():
                     exit_code = int(value)
@@ -212,7 +227,7 @@ class QualityCorpusPodRun(DipperPodRun):
             if now >= next_report:
                 progress: list[object] = []
                 try:
-                    status, raw = _http_get(base + "/corpus-job.log", timeout=20)
+                    status, raw = _http_get(base + "/corpus-job.log", timeout=20, token=self.control_token)
                     if status == 200:
                         lines = raw.decode("utf-8", "replace").splitlines()
                         for line in lines[reported_lines:]:
@@ -248,7 +263,7 @@ class QualityCorpusPodRun(DipperPodRun):
             except Exception:
                 self._recover_checkpoint(base)
             try:
-                _, raw = _http_get(base + "/corpus-job.log", timeout=30)
+                _, raw = _http_get(base + "/corpus-job.log", timeout=30, token=self.control_token)
                 tail = raw.decode("utf-8", "replace")[-5_000:]
             except Exception:
                 tail = "unavailable"
@@ -262,6 +277,7 @@ class QualityCorpusPodRun(DipperPodRun):
         if existing:
             raise RuntimeError("refusing to start while another RunPod Pod exists")
         payload = build_pod_payload(
+            control_token=self.control_token,
             job_source_b64=base64.b64encode(self.job_path.read_bytes()).decode("ascii"),
             config_b64=base64.b64encode(self.input_path.read_bytes()).decode("ascii"),
         )
@@ -368,7 +384,12 @@ def _run(args: argparse.Namespace) -> int:
 
 def _delete(args: argparse.Namespace) -> int:
     client = RunPodClient(resolve_runpod_config())
-    status, _ = client.request("DELETE", f"/pods/{args.pod_id}")
+    try:
+        status, _ = client.request("DELETE", f"/pods/{args.pod_id}")
+    finally:
+        env_file = getattr(args, "env_file", None)
+        if env_file:
+            Path(env_file).unlink(missing_ok=True)
     return 0 if status in (200, 202, 204) else 1
 
 
@@ -383,6 +404,7 @@ def main(argv: list[str] | None = None) -> int:
     run.set_defaults(handler=_run)
     delete = commands.add_parser("delete")
     delete.add_argument("--pod-id", required=True)
+    delete.add_argument("--env-file", type=Path)
     delete.set_defaults(handler=_delete)
     args = parser.parse_args(argv)
     return int(args.handler(args))
