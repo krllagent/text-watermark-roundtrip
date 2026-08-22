@@ -37,8 +37,8 @@ Grok 4.20 засчитал пустому китайскому выводу 10/1
 - [x] `merge_single_candidate_panels` + CLI `merge-single-panel`; тест.
 - [x] `derive_curated_eval_v5.py` + тест; конфиг v5.
 - [x] Канарейка v1 (провал Haiku/Grok 4.20), v2 (Grok 4.6 400), v3 (4/4).
-- [ ] Полный одиночный прогон 200 вызовов.
-- [ ] `finalize` → `curated-percent-table-v2.json`; сравнить с v1.
-- [ ] Adjudication-артефакт по неединогласным голосам и materialErrors.
-- [ ] Обновить сайт: JSON (источники на новые артефакты), статья, Reddit.
-- [ ] Commit + push обоих репо.
+- [x] Полный одиночный прогон 200 вызовов.
+- [x] `finalize` → `curated-percent-table-v2.json`; сравнить с v1.
+- [x] Adjudication-артефакт по неединогласным голосам и materialErrors.
+- [x] Обновить сайт: JSON (источники на новые артефакты), статья, Reddit.
+- [x] Commit + push обоих репо.
