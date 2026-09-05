@@ -2,7 +2,8 @@
 
 Does a full paraphrase remove Google DeepMind's **SynthID Text** watermark, and
 what does it do to the facts? A small, fully logged experiment behind the
-painintheagent article on text-watermark removal.
+[Pain in the Agent article on text-watermark removal](https://painintheagent.com/blog/text-watermark-removal-retest/)
+and the [AI text watermark remover](https://painintheagent.com/tools/ai-text-watermark-remover/).
 
 **Result on ten coherent English reports (reference SynthID Text, our own key,
 one frozen detector threshold at 1% false positives):** a full paraphrase by a
@@ -17,6 +18,14 @@ evidence (`results/exp004-ngram-retention-v1.json`).
 This is **not** a detector for Claude, Gemini or any production watermark and
 it does not prove anything about Google's private key. It measures the
 published scheme under our key on this corpus.
+
+## Try it
+
+[AI text watermark remover](https://painintheagent.com/tools/ai-text-watermark-remover/)
+
+## Cite
+
+[CITATION.cff](CITATION.cff)
 
 ## What is in the box
 
