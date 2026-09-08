@@ -5,19 +5,41 @@ what does it do to the facts? A small, fully logged experiment behind the
 [Pain in the Agent article on text-watermark removal](https://painintheagent.com/blog/text-watermark-removal-retest/)
 and the [AI text watermark remover](https://painintheagent.com/tools/ai-text-watermark-remover/).
 
-**Result on ten coherent English reports (reference SynthID Text, our own key,
-one frozen detector threshold at 1% false positives):** a full paraphrase by a
-model that carries no such watermark removed the mark in **10/10** texts and
-kept **100/100** of the pre-registered fact claims; the DIPPER-11B paraphraser
-removed it in 10/10 but lost 23/100 claims; German and Chinese round-trip
-translation removed it in **0/10**; light synonym edits in 2/10. An earlier
-attempt on an incoherent corpus had produced the opposite conclusion because the
-rewriters copied source spans verbatim; that failure is kept in the repo as
-evidence (`results/exp004-ngram-retention-v1.json`).
+**Follow-up review:** the main result remains useful, with a substantive
+correction to the generator order. The original implementation placed SynthID
+before temperature/top-k/top-p. Standard Transformers 5.15.1 places it after
+those transforms and before the token is sampled.
 
-This is **not** a detector for Claude, Gemini or any production watermark and
-it does not prove anything about Google's private key. It measures the
-published scheme under our key on this corpus.
+| Workflow | Original A | Repeat B | New corpus C, original order | Standard-order control |
+|---|---:|---:|---:|---:|
+| Protected single-pass LLM paraphrase | 10/10 | 8/10 | 10/10 | 10/10 |
+| DIPPER as configured | 10/10 | 10/10 | 10/10 | 9/10 |
+| Light synonyms | 2/10 | 0/10 | 1/10 | 1/10 |
+| Translation via German | 0/10 | 0/10 | 0/10 | 0/10 |
+| Translation via Chinese | 0/10 | 0/10 | 1/10 | 5/10 |
+
+These are outputs below a prespecified local-key threshold, out of ten attempts
+per method. A and B each contain one failed Chinese translation. The accepted
+original threshold stays 0.5095383054287164; C and its control share
+0.509656862745098, fixed before transformations. Their sources differ despite
+matching briefs, key and seed schedule. They are not forty independent documents.
+
+The original four-model panel credited the LLM workflow with 100/100 selected
+claims. The later unblinded review, including three documented author
+adjudications, retains 97/100 for paraphrase and 74/100 for DIPPER in the
+standard-order control. Input protection differs: API methods mask and restore
+selected spans, while DIPPER receives whitespace-normalized raw text. This is
+a comparison of those workflows, not an isolated model-quality benchmark.
+
+The [updated article](https://painintheagent.com/blog/text-watermark-removal-retest/#revalidation-title)
+and [additional evidence](https://painintheagent.com/research/synthid-revalidation/v1/summary.json)
+carry the complete scope and source/candidate records. The historical
+`results/curated-percent-table-v2.json` and its exports remain unchanged.
+The first failed experiment is also retained in the repository.
+
+This measures a local reference SynthID configuration. It does not verify
+private Claude/Gemini keys or the current multistage web tool, which differs
+from the measured Qwen3.7 Plus single-pass workflow.
 
 ## Try it
 
@@ -32,7 +54,7 @@ published scheme under our key on this corpus.
 | Stage | Script | Where it ran | Cost |
 |---|---|---|---|
 | Corpus: 10 marked reports + 10 clean twins, `Qwen/Qwen2.5-14B-Instruct` fp16, SynthID via `transformers` | `gen_quality_synthid_corpus_gpu.py` driven by `run_quality_corpus_on_runpod.py`, curation `curate_synthid_corpus.py` | RunPod, NVIDIA A40, $0.44/h, two runs ≈ 32 min | < $0.25 |
-| Detector calibration: 100k random-table conditional nulls per text, pooled threshold 0.5095383 at 1% FPR | `calibrate_synthid_threshold.py` | CPU | $0 |
+| Detector calibration: 100k random-table conditional nulls per text, pooled threshold 0.5095383 at a 1% conditional-null target | `calibrate_synthid_threshold.py` | CPU | $0 |
 | Four transformations (synonyms, full paraphrase, DE and ZH round trip) with `qwen/qwen3.7-plus`, temperature 0 | `run_synthid_smoke.py` | OpenRouter | $0.07 |
 | DIPPER-11B paraphrase (`kalpeshk2011/dipper-paraphraser-xxl`, pinned revision, fp32) | `dipper_smoke.py` driven by `run_dipper_on_runpod_v2.py` | RunPod, A100 80GB, $1.39/h, ≈ 6 min | $0.13 |
 | Pairs, signal removal, exact 5-gram reuse, P-SP | `curated_percent_eval.py build-pairs`, `compute_curated_psp.py` | CPU | $0 |
@@ -67,8 +89,10 @@ diff <(python3 -c "import json;print(json.dumps(json.load(open('/tmp/curated-per
      <(python3 -c "import json;print(json.dumps(json.load(open('results/curated-percent-table-v2.json'))['summary'],sort_keys=True,indent=1))")
 ```
 
-`python3 -m unittest discover -s tests` runs everything, including slow
-recomputations of calibration and n-gram retention; expect several minutes.
+The complete legacy suite also expects historical prerequisites absent from
+the frozen source artifact, including `model-canary-terra-locked-final-v1.json`.
+Use the listed current-result checks to reproduce this table; the missing
+legacy files are not proof that the current numerical results failed.
 
 ## Re-run the paid and GPU stages
 
@@ -95,7 +119,8 @@ the watchdog through a 0600 `EnvironmentFile`, never argv).
 - **Detector.** Mean g-value over the exact SynthID sampling table with our
   key (ngram 5, table 65,536, depth 30); no language model runs at detection
   time. One pooled threshold for all texts, calibrated before any method ran;
-  a per-document length-aware threshold is also stored in the calibration
+  the 1% target is conditional on the simulated null, not a measured population
+  FPR. A per-document length-aware threshold is also stored in the calibration
   artifact. One paraphrase lies within 0.0002 of the pooled threshold.
 - **Signal removed %** is the share of the distance between the marked text's
   score and its clean twin's score that the candidate travelled. It is not a
@@ -107,8 +132,9 @@ the watchdog through a 0600 `EnvironmentFile`, never argv).
   that disqualified Claude Haiku 4.5 and Grok 4.20; the final judges are
   GPT-5.6 Luna, Claude Sonnet 5, Gemma 4 31B IT and Grok 4.6 (reasoning low).
   Both panels are kept; only the second feeds the published numbers.
-- **Scope.** Ten fictional English reports of 500–600 words, one key, one
-  corpus. Short texts carry less signal; production keys are private; the
+- **Scope.** The original marked corpus contains ten fictional English reports of
+  480–639 words, with a 450–700 word generation quality gate, one key and one
+  corpus. The follow-up batches above broaden that test but remain small. Short texts carry less signal; production keys are private; the
   repo says nothing about whether a specific Gemini output was cleaned.
 - **Rewriter choice.** Removal only works if the rewriting model does not add
   an equivalent watermark itself. The API model used here did not add this
