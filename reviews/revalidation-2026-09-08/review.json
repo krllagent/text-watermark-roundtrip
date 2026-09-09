@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-09-08T06:32:39.381392+00:00",
+  "methodology": "Author review in an isolated checkout: replay supplied scripts offline, verify integer decisions, counts, frozen-claim bindings, exact excerpts and internal chronology. Read all 30 disputed follow-up annotations and concrete failure examples. This is unblinded review and targeted adjudication, not another independent full semantic panel.",
+  "sources": [
+    {
+      "path": "/home/openclaw/projects/watermark-revalidation-a/audit/watermark-revalidation-complete-2026-09-07.tar.gz",
+      "sha256": "97c9dbfa8c0cb48d1ab00c3a10516621a5e5d88f756d2cbfb73d174aad8c19fd"
+    }
+  ],
+  "researchCommit": "f323239085a7b6e0cf800e153df70dc0f7c93960",
+  "manifestFilesVerified": 473,
+  "historicalSummaryMatches": true,
+  "newRows": 150,
+  "scoredRows": 149,
+  "failedRows": 1,
+  "factBindingsVerified": 1500,
+  "pspValuesMatch": 150,
+  "pinnedTransformersVersion": "5.15.1",
+  "nativeProcessorOrderMatch": true,
+  "countsBelowThreshold": {
+    "B": {
+      "dipper": 10,
+      "paraphrase": 8,
+      "roundtrip-de": 0,
+      "roundtrip-zh": 0,
+      "synonyms": 0
+    },
+    "C": {
+      "dipper": 10,
+      "paraphrase": 10,
+      "roundtrip-de": 0,
+      "roundtrip-zh": 1,
+      "synonyms": 1
+    },
+    "C-reference": {
+      "dipper": 9,
+      "paraphrase": 10,
+      "roundtrip-de": 0,
+      "roundtrip-zh": 5,
+      "synonyms": 1
+    }
+  },
+  "internalFreezeChronology": {
+    "C": {
+      "claimsFrozenAt": "2026-09-07T19:54:39.975923+00:00",
+      "firstApiReservationAt": "2026-09-07T19:57:30.499396+00:00"
+    },
+    "C-reference": {
+      "claimsFrozenAt": "2026-09-07T20:55:01.170065+00:00",
+      "firstApiReservationAt": "2026-09-07T20:55:12.117954+00:00"
+    }
+  },
+  "factsAfterAuthorReview": {
+    "B::paraphrase": {
+      "preserved": 98,
+      "uncertain": 2
+    },
+    "B::roundtrip-de": {
+      "preserved": 95,
+      "changed": 3,
+      "uncertain": 2
+    },
+    "B::roundtrip-zh": {
+      "preserved": 86,
+      "changed": 2,
+      "uncertain": 2,
+      "no_candidate": 10
+    },
+    "B::synonyms": {
+      "preserved": 100
+    },
+    "B::dipper": {
+      "preserved": 63,
+      "uncertain": 3,
+      "changed": 25,
+      "missing": 9
+    },
+    "C::paraphrase": {
+      "preserved": 97,
+      "uncertain": 3
+    },
+    "C::roundtrip-de": {
+      "preserved": 95,
+      "uncertain": 3,
+      "changed": 1,
+      "missing": 1
+    },
+    "C::roundtrip-zh": {
+      "changed": 2,
+      "preserved": 97,
+      "uncertain": 1
+    },
+    "C::synonyms": {
+      "preserved": 100
+    },
+    "C::dipper": {
+      "preserved": 53,
+      "missing": 16,
+      "changed": 27,
+      "uncertain": 4
+    },
+    "C-reference::paraphrase": {
+      "preserved": 97,
+      "changed": 2,
+      "uncertain": 1
+    },
+    "C-reference::roundtrip-de": {
+      "preserved": 99,
+      "uncertain": 1
+    },
+    "C-reference::roundtrip-zh": {
+      "changed": 4,
+      "preserved": 94,
+      "uncertain": 2
+    },
+    "C-reference::synonyms": {
+      "preserved": 100
+    },
+    "C-reference::dipper": {
+      "preserved": 74,
+      "missing": 14,
+      "changed": 9,
+      "uncertain": 3
+    }
+  },
+  "factAdjudications": [
+    {
+      "stage": "C-reference",
+      "pairId": "holdout-05::paraphrase",
+      "claimId": "c02",
+      "verdict": "changed",
+      "reason": "The source specifies a minimum commitment of two hours per shift; the candidate says most shifts last at least two hours. This weakens the universal minimum and changes a requirement to an observation. It is a qualification change, not evidence that any real shift lasted less than two hours.",
+      "originalVerdict": "uncertain",
+      "claim": "Roles included ushering, concessions and backstage work, with at least two-hour shifts and some longer backstage commitments.",
+      "sourceSha256": "701b4ca8e457a6454454fb638eba2adcd5c27d26bcb9ea96a28a81c8c703e810",
+      "candidateSha256": "d48f6fdc84f58dd61fa65afd32275e1b7b8d7a372afe3905bfa6292f6258053f",
+      "sourceExcerpts": [
+        "The online booking system was designed to allow volunteers to log in and select their preferred shifts based on availability and personal preference. Volunteers could choose from various roles such as ushering, concessions assistance, and backstage support. Each role required different levels of commitment, ranging from a minimum of two hours per shift to longer commitments for certain backstage positions. To ensure adequate coverage, the theater set a target of filling seventy percent of available slots through the online system by the end of June 2023."
+      ],
+      "candidateExcerpts": [
+        "The system was built to enable volunteers to access their accounts and pick shifts that aligned with their schedules and personal interests. Available positions included roles such as ushers, concession stand helpers, and backstage crew members. These positions varied in their time requirements, with most shifts lasting at least two hours, though some backstage duties demanded longer commitments. To guarantee sufficient staffing, the theater established a goal of having seventy percent of all open slots filled via the online portal by the close of June 2023."
+      ]
+    },
+    {
+      "stage": "C-reference",
+      "pairId": "holdout-07::paraphrase",
+      "claimId": "c09",
+      "verdict": "changed",
+      "reason": "In addition to resolving ambiguous rental rates as frequency, the candidate strengthens possibly due to customer satisfaction into likely stemming from it. The confidence qualification is not preserved.",
+      "originalVerdict": "uncertain",
+      "claim": "The report describes a slight increase in rental rates, possibly related to customer satisfaction.",
+      "sourceSha256": "b8ca4cb51a5ab77d619343ca0cfc5732dea450172908720ecfbfb2d450581b86",
+      "candidateSha256": "eb6a6c70db32f33e808a97dcb8f72390fd25e04c60912c0dfb40703d11d3f131",
+      "sourceExcerpts": [
+        "Measuring the outcomes of this initiative, Alex noted a 30% reduction in customer complaints related to helmet condition. Additionally, the shop experienced a slight increase in rental rates, possibly due to enhanced customer satisfaction. Overall, the investment in better maintenance and management practices appeared to be paying off, both in terms of customer trust and business performance."
+      ],
+      "candidateExcerpts": [
+        "When evaluating the results of this program, Alex observed a 30% drop in customer complaints linked to helmet condition. Moreover, the shop saw a modest rise in rental frequency, likely stemming from improved customer satisfaction. In general, the investment in superior maintenance and management practices seemed to be yielding returns, both in terms of building customer trust and enhancing business performance."
+      ]
+    },
+    {
+      "stage": "C-reference",
+      "pairId": "holdout-07::dipper",
+      "claimId": "c06",
+      "verdict": "preserved",
+      "reason": "The candidate explicitly prioritizes possible structural problems over cleaning, as the selected claim says. The apparently conflicting initial reference to minor damage is also in the source; it must not be counted as a new DIPPER defect.",
+      "originalVerdict": "uncertain",
+      "claim": "During the delay staff prioritized potential structural problems over helmets only needing cleaning.",
+      "sourceSha256": "b8ca4cb51a5ab77d619343ca0cfc5732dea450172908720ecfbfb2d450581b86",
+      "candidateSha256": "c777cb95d2f1c9a4322a8b126c9a78eb3ce48eb724bdca0ff64f8cd80c2b6dcb",
+      "sourceExcerpts": [
+        "To mitigate the impact of the delayed shipment, Alex and Jamie focused on identifying and replacing helmets with minor issues first. They prioritized helmets showing signs of potential structural problems over those merely needing a thorough cleaning. This strategy allowed them to maintain a sufficient supply of safe helmets while waiting for the new shipment."
+      ],
+      "candidateExcerpts": [
+        "In April 2023, the Blue Wheel bicycle rental shop in downtown Springfield introduced a new system of helmet inspection and replacement. This was prompted by an increase in the number of customer complaints about the cleanliness and safety of the helmets provided to each rental. The owner, Alex Thompson, introduced a rigorous maintenance schedule to ensure that every helmet was in perfect condition before being handed out to a customer. On April 15, 2023, Alex and his employee, Jamie, began by inspecting all 120 helmets in stock. They discovered that 15 of the helmets needed cleaning or repair, mainly due to cracked plastic and dirty foam. The shop decided to replace the damaged helmets immediately, which added an unexpected cost of $375 to the monthly budget. Alex and Jamie prepared a standard inspection procedure to be performed every two weeks, checking each helmet for damage, cleanliness, and proper fit. During the next week, they designed a detailed schedule of helmet inventory and replacement, including a new inventory of all 120 helmets and the cost of their replacement. On April 15, they found that 10 helmets needed immediate replacement, so they introduced a new color coded system to speed up the process, with green stickers for helmets that passed inspection, yellow for helmets that needed to be serviced, and red for helmets that needed to be replaced. By mid-May, the shop had completed three rounds of inspection, keeping all helmets in perfect condition. However, significant problems occurred when a delivery of replacement helmets, scheduled for delivery on May 27, was delayed due to unforeseen circumstances. This delayed shipment threatened to disrupt the schedule of helmet replacements, and the staff were forced to manage their supply more efficiently until the new supplies arrived. To handle the delay, Alex and Jamie concentrated on identifying and replacing the helmets with minor damage first. They replaced any helmets that looked as if they might have a structural problem, rather than those that just needed cleaning. This allowed them to maintain a sufficient supply of safe helmets until the new deliveries arrived on June 1. Over the two-month period, the shop replaced 25 helmets and cleaned or repaired 30 additional helmets, which exceeded their previous stock by 25. Customer satisfaction improved dramatically, with fewer customer complaints and more praise for the safety and comfort of the rental equipment. As a result of the new maintenance schedule, customer complaints about the condition of the helmets fell by 30%. In addition, the rental rates increased slightly, possibly due to greater customer satisfaction. In general, the new system improved the business in many ways. The report recommends that the shop continue with the two-weekly inspection schedule and retain the color coded system to ensure continued compliance with safety standards. It also recommends maintaining sufficient stock to deal with future deliveries and minimize disruption to the inspection process and customer service."
+      ]
+    }
+  ],
+  "preprocessingScope": {
+    "apiMethods": "Protected placeholders with exact restoration for amounts, percentages, quotes, URLs and other spans; not all numbers or facts are protected.",
+    "dipper": "Raw source text with whitespace normalization; no matching placeholder wrapper.",
+    "implication": "Fidelity comparisons describe these configured workflows, not an isolated intrinsic model-quality comparison or a test of DIPPER with the same protections."
+  },
+  "validationBudget": {
+    "paidHttpAttempts": 181,
+    "retainedProviderResponses": 179,
+    "knownApiUsd": 0.20515936,
+    "unknownHttpReserveUsd": 0.01011648,
+    "gpuLifecycleEstimatedUpperUsd": 1.0851759107589452,
+    "apiPlusGpuEstimatePlusUnknownReserveUsd": 1.3004517507589453,
+    "actualGpuJobsStarted": 4,
+    "gpuCapacityRejections": 2,
+    "hardCapUsd": 4,
+    "approvedMaxHttp": 181,
+    "approvedMaxGpuJobs": 4,
+    "billingNote": "API values from retained usage responses; GPU lifecycle estimate including disk and conservative delayed-cleanup bound, not provider invoice."
+  },
+  "newPaidCalls": 0,
+  "verdict": "VALIDATED_WITH_SCOPE; publication corrections required"
+}
